@@ -25,6 +25,8 @@ def generate_pcw_position_ids(attention_mask: torch.Tensor, max_window_size: int
                               past_key_values: Tuple[Tuple[torch.Tensor]],
                               sum_windows_size: int, windows_key_values: Tuple[Tuple[torch.Tensor]]) -> torch.Tensor:
     position_ids = attention_mask.long().cumsum(-1) - 1
+    # torch.set_printoptions(threshold=float('inf'))
+    # print("position_ids:{}".format(position_ids))
     # print("position_ids shape3:{}".format(position_ids.shape))
     # print("sum_windows_size:{}".format(sum_windows_size))
     # print("max_window_size:{}".format(max_window_size))
@@ -40,7 +42,7 @@ def generate_pcw_position_ids(attention_mask: torch.Tensor, max_window_size: int
     elif windows_key_values:  # i.e., we are in the first token generation
         #print("position_ids shape0:{}".format(position_ids.shape))
         position_ids = position_ids[:, sum_windows_size:]
-    #print("position_ids :{}".format(position_ids))
+    # print("position_ids :{}".format(position_ids))
     return position_ids
 
 
@@ -57,7 +59,7 @@ class PCWModelWrapper:
         self.model = model
         self.tokenizer = tokenizer
         self.prompt_method = prompt_method
-        if prompt_method == "complex_cot" or prompt_method == "complex_cot_pcw" or self.prompt_method =="complex_cot_pcw_pre_process_window_cache" or self.prompt_method == "complex_cot_pcw_multi_windows":
+        if prompt_method == "complex_cot" or prompt_method == "complex_cot_pcw" or self.prompt_method =="complex_cot_pcw_pre_process_window_cache" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
 
             self.tokenizer.pad_token = self.tokenizer.eos_token
             self.tokenizer.pad_token_id = self.tokenizer.eos_token_id
@@ -133,6 +135,45 @@ class PCWModelWrapper:
                     [windows[j]['attention_mask']] + [window['attention_mask'][:, 1:] for window in
                                                       windows[:j] + windows[j + 1:]], dim=1),
                 'sum_windows_size': sum(windows_sizes) - (len(windows) - 1)}
+
+    def get_contexts_cache_kv_cache_compression(self, contexts: List[str]) -> Dict:
+        """
+            contexts： 喂入的不同上下文 windows_few_shots
+            
+            分段处理输入上下文（_get_windows 函数）：
+
+            将多个上下文输入文本转化为模型的编码输入，同时生成模型的输出、历史状态（past_key_values）和注意力掩码。
+            支持右对齐功能，确保对齐后输入长度一致。
+            
+            
+            优化上下文处理和缓存（get_contexts_cache 函数）：
+
+            从上下文窗口中提取关键信息（如 past_key_values 和 attention_mask），用于后续高效推理。
+            合并上下文，避免重复的特殊标记（如 BOS token），并记录关键指标（如最大窗口大小）。
+        """
+        #print("len(contexts):{}".format(len(contexts)))
+        # 实际上是有多少个上下文快
+        windows = self._get_windows(contexts)
+        #print("len of windows in get_contexts_cache:{}".format(len(windows)))
+        windows_sizes = [window['window_size'] for window in windows]
+        #print("len of windows_sizes in get_contexts_cache:{}".format(len(windows_sizes)))
+        # 'sum_windows_size': sum(windows_sizes) - (len(windows) - 1)
+        j = np.argmax(windows_sizes)
+        
+        # print("windows[0][attention_mask].shape:{}".format(windows[0]['attention_mask'].shape))
+        # print("windows[0]['attention_mask]",windows[0]['attention_mask'])
+        # assert 1==0
+        #print("j:{}".format(j))
+        # Windows contain bos tokens, we remove all but one to avoid multiple bos
+        return {'past_key_values': combine_past_key_values([window['past'] for window in windows], j),
+                'max_window_size': max(windows_sizes),
+                'past_attention_mask': torch.cat(
+                    [windows[j]['attention_mask']] + [window['attention_mask'][:, 1:] for window in
+                                                      windows[:j] + windows[j + 1:]], dim=1),
+                'sum_windows_size': sum(windows_sizes) - (len(windows) - 1)}
+
+
+        
     def split_prompts_into_windows(self, prompts, n_windows, task_text=None):
         # 确保 n_windows > 0
         if n_windows <= 0:
@@ -163,10 +204,6 @@ class PCWModelWrapper:
                      **kwargs
                      ) -> str:
         """Note: Batching is not supported by PCW at the moment. """
-
-
-
-
         with torch.no_grad():
             if self.prompt_method == "other":
 
@@ -252,7 +289,9 @@ class PCWModelWrapper:
                 #print("len(prompts_avg):{}".format(len(prompts_avg)))
                 #print("len(prompts_avg):{}".format(len(prompts_avg)))
 #                assert 1==0
+                print("1111111111111111")
                 cache = self.get_contexts_cache(prompts_avg)
+                print("2222222222222222")
                 #assert 1==0
                 # task_text1 + quesiton==query (prefill  kv cache pruning   recent token = (1.input 2.query))  ->  input(generate) = "\nA: Let's think step by step"#task_text + "\nA: Let's think step by step"#"\nA: Let's think step by step" #task_text + "\nA: Let's think step by step\n"
                 # task_text2 + question==query
@@ -265,8 +304,54 @@ class PCWModelWrapper:
                 tokenized_inputs_attention_mask = tokenized_inputs.attention_mask.cuda()
                 #print("tokenized_inputs_attention_mask shape:{}".format(tokenized_inputs_attention_mask.shape))
                 combined_attention_mask = torch.cat((cache['past_attention_mask'], tokenized_inputs_attention_mask),dim=1)#tokenized_inputs.attention_mask.cuda() #torch.cat((cache['past_attention_mask'], tokenized_inputs.attention_mask.cuda()),dim=1)#.to(self.device)
-                #print("combined_attention_mask shape:{}".format(combined_attention_mask.shape))
-                #                assert 1==0
+                print("combined_attention_mask shape:{}".format(combined_attention_mask.shape))
+                # assert 1==0
+
+                res = self.model.generate(input_ids=tokenized_inputs.input_ids.cuda(),
+                                        attention_mask=combined_attention_mask,
+                                        windows_key_values=cache['past_key_values'],
+                                        max_window_size=cache['max_window_size'],
+                                        sum_windows_size=cache['sum_windows_size'],
+                                        eos_token_id=self.tokenizer.eos_token_id,
+                                        pad_token_id=self.tokenizer.pad_token_id,
+                                        **kwargs)[0]
+            elif self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":   # 进到这里, 申江涵
+                
+
+                prompts = few_shots_prompts.split("\n\n")
+                #print("len(prompts):{}".format(len(prompts)))
+                # assert 1==0
+                prompts_avg = self.split_prompts_into_windows(prompts, self.n_windows ,task_text=task_text)
+                #print("len(prompts_avg):{}".format(len(prompts_avg)))
+                #print("len(prompts_avg):{}".format(len(prompts_avg)))
+#                assert 1==0
+                # print("1111111111111111")
+                cache = self.get_contexts_cache_kv_cache_compression(prompts_avg)
+                # 512 + 511*(n_windows-1)
+                # capacity = 512
+                # cache['past_attention_mask'] = cache['past_attention_mask'][:, :capacity+(capacity-1)*(self.n_windows-1)]
+                print("2222222222222222")
+                #assert 1==0
+                # task_text1 + quesiton==query (prefill  kv cache pruning   recent token = (1.input 2.query))  ->  input(generate) = "\nA: Let's think step by step"#task_text + "\nA: Let's think step by step"#"\nA: Let's think step by step" #task_text + "\nA: Let's think step by step\n"
+                # task_text2 + question==query
+                # task_text3 + quesiton==query
+                
+                
+                input = "\nA: Let's think step by step"
+                
+                tokenized_inputs = self.tokenizer.encode_plus(input, truncation = True, return_tensors='pt', add_special_tokens=False)
+                tokenized_inputs_attention_mask = tokenized_inputs.attention_mask.cuda()
+                #print("tokenized_inputs_attention_mask shape:{}".format(tokenized_inputs_attention_mask.shape))
+                
+                combined_attention_mask = torch.cat((cache['past_attention_mask'], tokenized_inputs_attention_mask),dim=1)#tokenized_inputs.attention_mask.cuda() #torch.cat((cache['past_attention_mask'], tokenized_inputs.attention_mask.cuda()),dim=1)#.to(self.device)
+                # print("combined_attention_mask shape:{}".format(combined_attention_mask.shape))
+                # print("cache['past_attention_mask'].shape:{}".format(cache['past_attention_mask'].shape))
+                # print("tokenized_inputs_attention_mask.shape:{}".format(tokenized_inputs_attention_mask.shape))
+                # assert 1==0
+                
+                # 并行上下文窗口+input
+                # assert 1==0
+
                 res = self.model.generate(input_ids=tokenized_inputs.input_ids.cuda(),
                                         attention_mask=combined_attention_mask,
                                         windows_key_values=cache['past_key_values'],
@@ -302,7 +387,7 @@ class PCWModelWrapper:
                                         **kwargs)[0]
       
         
-        if res[-1] == self.tokenizer.eos_token_id or self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method =="complex_cot_pcw_pre_process_window_cache" or self.prompt_method == "complex_cot_pcw_multi_windows":
+        if res[-1] == self.tokenizer.eos_token_id or self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method =="complex_cot_pcw_pre_process_window_cache" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
             prompt_len = int(tokenized_inputs.attention_mask.shape[1])
             # generated:["Janet eats 3 eggs per day, so she has 16 - 3 = <<16-3=13>>13 eggs left for sale.\nShe sells each egg for $2, so she makes $2 x 13 = $<<2*13=26>>26 per day from selling eggs at the farmers' market.\nShe also bakes 4 muffins per day and sells each for $4, so she makes $4 x 4 = $<<4*4=16>>16 per day from muffins.\nIn total, Janet makes $26 + $16 = $<<26+16=42>>42 per day at the farmers' market.\nThe answer is 42</s>"]
             generated = [self.tokenizer.decode(res[prompt_len:])]

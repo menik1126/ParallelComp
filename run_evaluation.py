@@ -28,7 +28,10 @@ def get_dataset(dataset: str, tokenizer: PreTrainedTokenizerBase, prompt_method:
 #    print("da.labels.tolist():{}".format(list(da.labels)))
 #    assert 1==0
     print("LEN OF test_df2:{}".format(len(test_df)))
-    if prompt_method == "complex_cot" or prompt_method == "complex_cot_pcw" or prompt_method == "complex_cot_pcw_multi_windows" or prompt_method == "complex_cot_pcw_pre_process_window_cache":
+    if prompt_method == "complex_cot" or prompt_method == "complex_cot_pcw" or \
+        prompt_method == "complex_cot_pcw_multi_windows" or \
+            prompt_method == "complex_cot_pcw_pre_process_window_cache"\
+                or prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
         return test_df, train_df, None
     else:
         return test_df, train_df, da.labels

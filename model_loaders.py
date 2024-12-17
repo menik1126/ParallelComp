@@ -74,12 +74,17 @@ def load_pcw_wrapper(model_name: str, cache_dir: str = None,
         if prompt_method == "complex_cot":
             model_obj = AutoModelForCausalLM#LlamaForCausalLM
             model = model_obj.from_pretrained(model_name, **model_args).eval()
-        elif prompt_method == "complex_cot_pcw" or prompt_method == "complex_cot_pcw_multi_windows" or prompt_method == "complex_cot_pcw_pre_process_window_cache":
+        elif prompt_method == "complex_cot_pcw" or prompt_method == "complex_cot_pcw_multi_windows" \
+            or prompt_method == "complex_cot_pcw_pre_process_window_cache"\
+                or prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
             if model_class == "modeling_llama_with_pcw":
                from modeling_llama_with_pcw import LlamaForCausalLMPCW
                model_obj = LlamaForCausalLMPCW
             elif model_class == "modeling_llama_with_pcw_wo_max_pos":
                from modeling_llama_with_pcw_wo_max_pos import LlamaForCausalLMPCW
+               model_obj = LlamaForCausalLMPCW
+            elif model_class == "modeling_llama_with_pcw_kv_cache":
+               from modeling_llama_with_pcw_kv_cache import LlamaForCausalLMPCW
                model_obj = LlamaForCausalLMPCW
             elif model_class == "modeling_llama":
                from transformers.models.llama.modeling_llama import LlamaForCausalLM
@@ -107,5 +112,8 @@ def load_pcw_wrapper(model_name: str, cache_dir: str = None,
     
     if not multi_gpus:
         model = model.to(device)
+
+    # 给model添加属性
+    
 
     return PCWModelWrapper(model, tokenizer, device, context_window_size, right_indentation, prompt_method=prompt_method, n_windows=n_windows)

@@ -1,0 +1,22 @@
+Added key: store_based_barrier_key:1 to store for rank: 2
+Added key: store_based_barrier_key:1 to store for rank: 0
+Added key: store_based_barrier_key:1 to store for rank: 1
+Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 3 nodes.
+Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 3 nodes.
+Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 3 nodes.
+n_windows:[2]
+prompt_method:complex_cot_pcw_multi_windows_kv_cache
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():3
+n_windows:[2]
+prompt_method:complex_cot_pcw_multi_windows_kv_cache
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():3
+n_windows:[2]
+prompt_method:complex_cot_pcw_multi_windows_kv_cache
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():3
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.48s/it]

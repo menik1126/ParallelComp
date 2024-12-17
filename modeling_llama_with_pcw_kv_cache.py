@@ -1,7 +1,7 @@
 import math
 from abc import ABC
 from typing import Optional, Tuple, Dict
-
+import torch.nn.functional as F
 import torch
 from torch import nn
 from transformers import LlamaConfig
@@ -51,6 +51,7 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
              """
 
         # only last token for inputs_ids if past_key_values is defined in kwargs
+        new_length = input_ids.shape[-1]
         if past_key_values:
             input_ids = input_ids[:, -1:]
         attention_mask = kwargs.get("attention_mask")
@@ -70,9 +71,12 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
         if windows_key_values and not past_key_values:
             past_key_values = windows_key_values
 
-        
-        # assert 1==0
-        
+        # print("input_ids.shape:{}".format(input_ids.shape))
+        # print("position_ids.shape:{}".format(position_ids.shape))
+        # print("attention_mask.shape:{}".format(attention_mask.shape))
+        capacity = 512
+        n_windows = 2
+        attention_mask = attention_mask[:, :capacity+(capacity-1)*(n_windows-1)+new_length]
         return {
             "input_ids": input_ids,
             "past_key_values": past_key_values,
@@ -131,8 +135,6 @@ class LlamaAttentionPCW(LlamaAttention):
         value_states = self.v_proj(hidden_states).view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
 
         kv_seq_len = key_states.shape[-2]
-        # print("I am first in the forward function of LlamaAttentionPCW")
-        # assert 1==0
         if past_key_value is not None:
             kv_seq_len += past_key_value[0].shape[-2]
 
@@ -155,8 +157,6 @@ class LlamaAttentionPCW(LlamaAttention):
             key_states = torch.cat([past_key_value[0], key_states], dim=2)
             value_states = torch.cat([past_key_value[1], value_states], dim=2)
 
-        past_key_value = (key_states, value_states) if use_cache else None
-
         attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
 
         if attn_weights.size() != (bsz, self.num_heads, q_len, kv_seq_len):
@@ -175,6 +175,37 @@ class LlamaAttentionPCW(LlamaAttention):
 
         # upcast attention to fp32
         attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+        
+        
+        
+        
+        if past_key_value is not None : #generate阶段
+            past_key_value = (key_states, value_states) if use_cache else None
+        else: #prefill阶段
+            # 压缩kv
+            head_dim = self.head_dim
+            window_size = 8
+            kernel_size = 7
+            pooling = 'maxpool'
+            attn_weights_sum = attn_weights[:, :, -window_size:, :-window_size].sum(dim = -2)
+            if pooling == 'avgpool':
+                attn_cache = F.avg_pool1d(attn_weights_sum, kernel_size = kernel_size, padding=kernel_size//2, stride=1)
+            elif pooling == 'maxpool':
+                attn_cache = F.max_pool1d(attn_weights_sum, kernel_size = kernel_size, padding=kernel_size//2, stride=1)
+            else:
+                raise ValueError('Pooling method not supported')
+            top_k = 512 - window_size
+            indices = attn_cache.topk(top_k, dim=-1).indices
+            indices = indices.sort(dim=-1).values
+            indices_expanded  = indices.unsqueeze(-1).expand(-1, -1, -1, head_dim)  
+            k_past_compress = key_states[:, :, :-window_size, :].gather(dim = 2, index = indices_expanded)
+            v_past_compress = value_states[:, :, :-window_size, :].gather(dim = 2, index = indices_expanded)
+            k_cur = key_states[:, :, -window_size:, :]
+            v_cur = value_states[:, :, -window_size:, :]
+            revise_key_states = torch.cat([k_past_compress, k_cur], dim = 2)
+            revise_value_states = torch.cat([v_past_compress, v_cur], dim = 2)
+            past_key_value = (revise_key_states, revise_value_states) if use_cache else None
+            
         attn_output = torch.matmul(attn_weights, value_states).to(query_states.dtype)
 
         if attn_output.size() != (bsz, self.num_heads, q_len, self.head_dim):

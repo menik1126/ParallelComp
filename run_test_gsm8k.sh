@@ -1,6 +1,6 @@
 #!/bin/bash
 OUTPUT_DIR=output_complex_cot_pcw_test
-Model=meta-llama/Llama-2-7b-chat-hf #meta-llama/Llama-2-7b-chat-hf    gpt2-xl
+Model=/mnt/Data/xiongjing/llama2chat #meta-llama/Llama-2-7b-chat-hf    gpt2-xl
 Prompt_Method=complex_cot_pcw_multi_windows #complex_cot_pcw  #complex_cot_pcw      #complex_cot      #other   #complex_cot
 output_json="complex_cot_test_result_pcw_wo_window_cache_test6.json"
 model_class="modeling_llama_with_pcw" #"modeling_llama" #"modeling_llama_with_pcw_wo_max_pos"
