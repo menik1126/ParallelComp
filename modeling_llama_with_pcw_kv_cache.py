@@ -177,7 +177,7 @@ class LlamaAttentionPCW(LlamaAttention):
         attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
         
         
-        
+        # print("key_states.shape:{}".format(key_states.shape))
         
         if past_key_value is not None : #generate阶段
             past_key_value = (key_states, value_states) if use_cache else None

@@ -139,7 +139,7 @@ class ExperimentManager:
     def get_few_shots_acc(self, windows_few_shot: List[str], few_shots_prompts: str=None) -> float:
         returns = self.get_predicted_labels(windows_few_shot, few_shots_prompts=few_shots_prompts)
         if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method == "complex_cot_pcw_pre_process_window_cache" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache"\
-            or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
+            :
             if self.multi_gpus:
                 if self.accelerator.is_main_process:
                     with open(self.output_json, "w") as f:
@@ -253,7 +253,10 @@ class ExperimentManager:
 
             n_errors = 0
             for j in tqdm(range(n_runs), desc="Progress"):  # 重复n_run次实验
-                if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache" or self.prompt_method =="complex_cot_pcw_pre_process_window_cache":
+                if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or \
+                    self.prompt_method == "complex_cot_pcw_multi_windows" or \
+                        self.prompt_method =="complex_cot_pcw_pre_process_window_cache"\
+                            or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
                     if self.sample_method == "sample":
                        few_shots_prompts = "\n\n".join(list(self.train_df[PROMPTS]))
                        #print("few_shots_prompts:{}".format(few_shots_prompts))
@@ -285,7 +288,8 @@ class ExperimentManager:
                 
 
                 # windows_few_shots
-                if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache" or self.prompt_method == "complex_cot_pcw_pre_process_window_cache":
+                if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_pre_process_window_cache"\
+                    or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
                     self.get_few_shots_acc(windows_few_shots, few_shots_prompts=few_shots_prompts)
                 else:
                     if ((longest_window_n_tokens + n_tokens_between_shots + self.test_df[N_TOKENS].max() + self.max_n_tokens) > self.model.context_window_size) :

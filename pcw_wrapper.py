@@ -92,7 +92,8 @@ class PCWModelWrapper:
             if self.right_indentation:
                 shift = max_window_size - window_size
                 encoded_input_window["position_ids"] = encoded_input_window["attention_mask"].cumsum(-1) - 1 + shift
-                
+            # print("encoded_input_window[position_ids]:{}".format(encoded_input_window["position_ids"]))
+            # assert 1==0
             with torch.no_grad():
                 # 在这里完成上下文窗口的编码, prefill
                 output = self.model(**encoded_input_window)
@@ -289,9 +290,9 @@ class PCWModelWrapper:
                 #print("len(prompts_avg):{}".format(len(prompts_avg)))
                 #print("len(prompts_avg):{}".format(len(prompts_avg)))
 #                assert 1==0
-                print("1111111111111111")
+                # print("1111111111111111")
                 cache = self.get_contexts_cache(prompts_avg)
-                print("2222222222222222")
+                # print("2222222222222222")
                 #assert 1==0
                 # task_text1 + quesiton==query (prefill  kv cache pruning   recent token = (1.input 2.query))  ->  input(generate) = "\nA: Let's think step by step"#task_text + "\nA: Let's think step by step"#"\nA: Let's think step by step" #task_text + "\nA: Let's think step by step\n"
                 # task_text2 + question==query

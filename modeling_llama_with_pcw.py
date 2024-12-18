@@ -70,9 +70,6 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
         if windows_key_values and not past_key_values:
             past_key_values = windows_key_values
 
-        
-        # assert 1==0
-        
         return {
             "input_ids": input_ids,
             "past_key_values": past_key_values,
@@ -131,8 +128,6 @@ class LlamaAttentionPCW(LlamaAttention):
         value_states = self.v_proj(hidden_states).view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
 
         kv_seq_len = key_states.shape[-2]
-        # print("I am first in the forward function of LlamaAttentionPCW")
-        # assert 1==0
         if past_key_value is not None:
             kv_seq_len += past_key_value[0].shape[-2]
 
