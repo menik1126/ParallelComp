@@ -10,7 +10,7 @@ while [ "$#" -gt 0 ]; do
   esac
 done
 
-python3 eval.py \
+python3 eval_longbench.py \
     --results_dir ${results_dir} \
     --new_method ${new_method} \
     --switch ${switch}

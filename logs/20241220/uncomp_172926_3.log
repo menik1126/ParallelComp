@@ -1,0 +1,6 @@
+2024-12-20 17:31:16,695 - [Process 3/5] - INFO - loading datasets finished
+2024-12-20 17:31:16,695 - [Process 3/5] - INFO - model_max_len: 3950
+2024-12-20 17:31:16,695 - [Process 3/5] - INFO - output_max_len: 64
+2024-12-20 17:31:16,720 - [Process 3/5] - INFO - Max Length is 10337
+2024-12-20 17:31:16,720 - [Process 3/5] - INFO - Finish loading dataset
+2024-12-20 17:31:16,720 - [Process 3/5] - INFO - get_predicted begin

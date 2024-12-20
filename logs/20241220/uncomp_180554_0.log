@@ -1,0 +1,27 @@
+2024-12-20 18:06:53,872 - [Process 0/1] - INFO - loading datasets finished
+2024-12-20 18:06:53,873 - [Process 0/1] - INFO - model_max_len: 3950
+2024-12-20 18:06:53,873 - [Process 0/1] - INFO - output_max_len: 64
+2024-12-20 18:06:53,888 - [Process 0/1] - INFO - Max Length is 10337
+2024-12-20 18:06:53,888 - [Process 0/1] - INFO - Finish loading dataset
+2024-12-20 18:06:53,888 - [Process 0/1] - INFO - get_predicted begin
+2024-12-20 18:06:53,940 - [Process 0/1] - INFO - len(per_windows_prompt):2
+2024-12-20 18:06:56,152 - [Process 0/1] - INFO - tokenized_inputs_attention_mask.shape is :torch.Size([1, 2])
+2024-12-20 18:06:56,152 - [Process 0/1] - INFO - cache['past_attention_mask'].shape is :torch.Size([1, 1888])
+2024-12-20 18:06:56,385 - [Process 0/1] - INFO - res.shape is :torch.Size([8])
+2024-12-20 18:06:56,527 - [Process 0/1] - INFO - len(per_windows_prompt):2
+2024-12-20 18:07:04,676 - [Process 0/1] - INFO - tokenized_inputs_attention_mask.shape is :torch.Size([1, 2])
+2024-12-20 18:07:04,676 - [Process 0/1] - INFO - cache['past_attention_mask'].shape is :torch.Size([1, 7896])
+2024-12-20 18:07:08,168 - [Process 0/1] - INFO - res.shape is :torch.Size([66])
+2024-12-20 18:07:08,295 - [Process 0/1] - INFO - len(per_windows_prompt):2
+2024-12-20 18:07:11,853 - [Process 0/1] - INFO - tokenized_inputs_attention_mask.shape is :torch.Size([1, 2])
+2024-12-20 18:07:11,853 - [Process 0/1] - INFO - cache['past_attention_mask'].shape is :torch.Size([1, 3950])
+2024-12-20 18:07:12,867 - [Process 0/1] - INFO - res.shape is :torch.Size([27])
+2024-12-20 18:07:13,019 - [Process 0/1] - INFO - len(per_windows_prompt):2
+2024-12-20 18:07:21,092 - [Process 0/1] - INFO - tokenized_inputs_attention_mask.shape is :torch.Size([1, 2])
+2024-12-20 18:07:21,092 - [Process 0/1] - INFO - cache['past_attention_mask'].shape is :torch.Size([1, 7900])
+2024-12-20 18:07:24,374 - [Process 0/1] - INFO - res.shape is :torch.Size([66])
+2024-12-20 18:07:24,504 - [Process 0/1] - INFO - len(per_windows_prompt):2
+2024-12-20 18:07:27,982 - [Process 0/1] - INFO - tokenized_inputs_attention_mask.shape is :torch.Size([1, 2])
+2024-12-20 18:07:27,982 - [Process 0/1] - INFO - cache['past_attention_mask'].shape is :torch.Size([1, 3951])
+2024-12-20 18:07:28,477 - [Process 0/1] - INFO - res.shape is :torch.Size([14])
+2024-12-20 18:07:28,608 - [Process 0/1] - INFO - len(per_windows_prompt):2

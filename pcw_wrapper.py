@@ -23,13 +23,28 @@ def combine_past_key_values(past_lst: List[Tuple[Tuple[torch.Tensor]]], longest_
          torch.cat([longest_window[i][1]] + [c[i][1][:, :, 1:, :] for c in all_windows_except_longest], dim=2))
         for i in range(n_layers))
 
+def combine_past_key_values_longbench(past_lst: List[Tuple[Tuple[torch.Tensor]]], longest_window_id: int) -> \
+        Tuple[Tuple[torch.Tensor, torch.Tensor]]:
+    # We eliminate all but one bos token from windows to avoid multiple bos, which deterred our results.
+    n_layers = len(past_lst[0])
+    first_window = past_lst[0]
+    other_windows = past_lst[1:]
+    return tuple(
+        (torch.cat([first_window[i][0]] + [c[i][0][:, :, 1:, :] for c in other_windows], dim=2),
+         torch.cat([first_window[i][1]] + [c[i][1][:, :, 1:, :] for c in other_windows], dim=2))
+        for i in range(n_layers))
 
 def generate_pcw_position_ids(attention_mask: torch.Tensor, max_window_size: int,
                               past_key_values: Tuple[Tuple[torch.Tensor]],
                               sum_windows_size: int, windows_key_values: Tuple[Tuple[torch.Tensor]]) -> torch.Tensor:
     position_ids = attention_mask.long().cumsum(-1) - 1
+    
+    # contains_zero = (attention_mask == 0).any().item()
+    # print(f"Attention mask contains 0: {contains_zero}")
     # torch.set_printoptions(threshold=float('inf'))
-    # print("position_ids:{}".format(position_ids))
+    # print("position_ids: {}".format(position_ids))
+    
+    # assert 1==0
     # print("position_ids shape3:{}".format(position_ids.shape))
     # print("sum_windows_size:{}".format(sum_windows_size))
     # print("max_window_size:{}".format(max_window_size))
@@ -40,12 +55,16 @@ def generate_pcw_position_ids(attention_mask: torch.Tensor, max_window_size: int
        position_ids[0, -n_task_tokens:] = torch.arange(max_window_size, max_window_size + n_task_tokens, 1)
     #print("torch.arange(max_window_size, max_window_size + n_task_tokens, 1):{}".format(torch.arange(max_window_size, max_window_size + n_task_tokens, 1)))
     position_ids.masked_fill_(attention_mask == 0, 1)
+    # print("position_ids after 1:{}".format(position_ids))
     if past_key_values:  # i.e., first token is already generated
+        # logger.info(f"position_ids shape0:{position_ids.shape}")
         position_ids = position_ids[:, -1].unsqueeze(-1)
     elif windows_key_values:  # i.e., we are in the first token generation
         #print("position_ids shape0:{}".format(position_ids.shape))
+        # logger.info(f"position_ids shape1:{position_ids.shape}")
+        # logger.info(f"sum_windows_size:{sum_windows_size}")
         position_ids = position_ids[:, sum_windows_size:]
-    # print("position_ids :{}".format(position_ids))
+    # print("position_ids after :{}".format(position_ids))
     return position_ids
 
 
@@ -89,6 +108,8 @@ class PCWModelWrapper:
             max_window_size = max(n_tokens_in_prompt(self.tokenizer, t, add_special_tokens=True) for t in texts)
 
         for text in texts:
+            # logger.debug(f"text in _get_windows:{text}")
+            # logger.debug(f"len(text):{len(text)}")
             encoded_input_window = self.tokenizer(text, return_tensors='pt').to(self.device)
             window_size = encoded_input_window['input_ids'].shape[1]
             
@@ -126,6 +147,8 @@ class PCWModelWrapper:
         #print("len(contexts):{}".format(len(contexts)))
         # 实际上是有多少个上下文快
         windows = self._get_windows(contexts)
+        logger.debug(f"len of windows in get_contexts_cache:{len(windows)}")
+        
         #print("len of windows in get_contexts_cache:{}".format(len(windows)))
         windows_sizes = [window['window_size'] for window in windows]
         #print("len of windows_sizes in get_contexts_cache:{}".format(len(windows_sizes)))
@@ -140,6 +163,41 @@ class PCWModelWrapper:
                                                       windows[:j] + windows[j + 1:]], dim=1),
                 'sum_windows_size': sum(windows_sizes) - (len(windows) - 1)}
 
+    def get_contexts_cache_longbench(self, contexts: List[str]) -> Dict:
+        """
+            contexts： 喂入的不同上下文 windows_few_shots
+            
+            分段处理输入上下文（_get_windows 函数）：
+
+            将多个上下文输入文本转化为模型的编码输入，同时生成模型的输出、历史状态（past_key_values）和注意力掩码。
+            支持右对齐功能，确保对齐后输入长度一致。
+            
+            
+            优化上下文处理和缓存（get_contexts_cache 函数）：
+
+            从上下文窗口中提取关键信息（如 past_key_values 和 attention_mask），用于后续高效推理。
+            合并上下文，避免重复的特殊标记（如 BOS token），并记录关键指标（如最大窗口大小）。
+        """
+        #print("len(contexts):{}".format(len(contexts)))
+        # 实际上是有多少个上下文快
+        windows = self._get_windows(contexts)
+        logger.debug(f"len of windows in get_contexts_cache:{len(windows)}")
+        
+        #print("len of windows in get_contexts_cache:{}".format(len(windows)))
+        windows_sizes = [window['window_size'] for window in windows]
+        #print("len of windows_sizes in get_contexts_cache:{}".format(len(windows_sizes)))
+        # 'sum_windows_size': sum(windows_sizes) - (len(windows) - 1)
+        j = np.argmax(windows_sizes)
+        #print("j:{}".format(j))
+        # Windows contain bos tokens, we remove all but one to avoid multiple bos
+        return {'past_key_values': combine_past_key_values_longbench([window['past'] for window in windows], j),
+                'max_window_size': max(windows_sizes),
+                'past_attention_mask': torch.cat(
+                    [windows[j]['attention_mask']] + [window['attention_mask'][:, 1:] for window in
+                                                      windows[:j] + windows[j + 1:]], dim=1),
+                'sum_windows_size': sum(windows_sizes) - (len(windows) - 1)}
+
+    
     def get_contexts_cache_kv_cache_compression(self, contexts: List[str]) -> Dict:
         """
             contexts： 喂入的不同上下文 windows_few_shots
@@ -405,17 +463,25 @@ class PCWModelWrapper:
             return self.tokenizer.decode(res[encoded_task_text['input_ids'].shape[1]:])
 
     def pcw_generate_longbench(self,
-                               truncation_prompts: List[str],
+                               per_windows_prompt: List[str],
                                output_max_len: int,
+                               parallel_patterns:str,
+                               question="",
                                **kwargs,
                                ):
         if self.prompt_method=="complex_cot_pcw_multi_windows":
             # parallel windows
-            cache = self.get_contexts_cache(truncation_prompts)
-            input = "\nLet's think step by step:"
+            cache = self.get_contexts_cache_longbench(per_windows_prompt)
+            if parallel_patterns == "every_window_query_input_no_query":
+                input = "\n"
+            elif parallel_patterns == "every_window_no_query_input_query":
+                input = question
+            elif parallel_patterns == "every_window_query_input_query":
+                input = question
             tokenized_inputs = self.tokenizer.encode_plus(input, truncation = True, return_tensors='pt', add_special_tokens=False)
             tokenized_inputs_attention_mask = tokenized_inputs.attention_mask.cuda()
-            #print("tokenized_inputs_attention_mask shape:{}".format(tokenized_inputs_attention_mask.shape))
+            # logger.info(f"tokenized_inputs_attention_mask.shape is :{tokenized_inputs_attention_mask.shape}")
+            # logger.info(f"cache['past_attention_mask'].shape is :{cache['past_attention_mask'].shape}")
             combined_attention_mask = torch.cat((cache['past_attention_mask'], tokenized_inputs_attention_mask),dim=1)
             context_length = tokenized_inputs.input_ids.shape[1]
             res = self.model.generate(input_ids=tokenized_inputs.input_ids.cuda(),
@@ -432,7 +498,7 @@ class PCWModelWrapper:
                                         min_length=context_length+1,
                                         **kwargs)[0]
             
-            logger.info(f"res.shape is :{res.shape}")
+            logger.info(f"res.shape is :{res[context_length:].shape}")
             res = self.tokenizer.decode(res[context_length:], skip_special_tokens=True)
         return res
         

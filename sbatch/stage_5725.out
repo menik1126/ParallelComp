@@ -1,237 +1,0 @@
-Thu Dec 19 19:15:51 2024       
-+-----------------------------------------------------------------------------------------+
-| NVIDIA-SMI 550.54.15              Driver Version: 550.54.15      CUDA Version: 12.4     |
-|-----------------------------------------+------------------------+----------------------+
-| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
-| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
-|                                         |                        |               MIG M. |
-|=========================================+========================+======================|
-|   0  NVIDIA A100 80GB PCIe          Off |   00000000:4F:00.0 Off |                    0 |
-| N/A   27C    P0             41W /  300W |       4MiB /  81920MiB |      0%      Default |
-|                                         |                        |             Disabled |
-+-----------------------------------------+------------------------+----------------------+
-|   1  NVIDIA A100 80GB PCIe          Off |   00000000:52:00.0 Off |                    0 |
-| N/A   29C    P0             43W /  300W |       4MiB /  81920MiB |      0%      Default |
-|                                         |                        |             Disabled |
-+-----------------------------------------+------------------------+----------------------+
-|   2  NVIDIA A100 80GB PCIe          Off |   00000000:56:00.0 Off |                    0 |
-| N/A   26C    P0             43W /  300W |       4MiB /  81920MiB |      0%      Default |
-|                                         |                        |             Disabled |
-+-----------------------------------------+------------------------+----------------------+
-|   3  NVIDIA A100 80GB PCIe          Off |   00000000:57:00.0 Off |                    0 |
-| N/A   29C    P0             44W /  300W |       4MiB /  81920MiB |      0%      Default |
-|                                         |                        |             Disabled |
-+-----------------------------------------+------------------------+----------------------+
-|   4  NVIDIA A100 80GB PCIe          Off |   00000000:D5:00.0 Off |                    0 |
-| N/A   28C    P0             41W /  300W |       4MiB /  81920MiB |      0%      Default |
-|                                         |                        |             Disabled |
-+-----------------------------------------+------------------------+----------------------+
-                                                                                         
-+-----------------------------------------------------------------------------------------+
-| Processes:                                                                              |
-|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
-|        ID   ID                                                               Usage      |
-|=========================================================================================|
-|  No running processes found                                                             |
-+-----------------------------------------------------------------------------------------+
-Added key: store_based_barrier_key:1 to store for rank: 1
-Added key: store_based_barrier_key:1 to store for rank: 2
-Added key: store_based_barrier_key:1 to store for rank: 0
-Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 3 nodes.
-Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 3 nodes.
-Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 3 nodes.
-n_windows:[2]
-prompt_method:complex_cot_pcw_multi_windows_kv_cache
-model_name:/mnt/Data/xiongjing/llama2chat
-n_windows:[2]
-prompt_method:complex_cot_pcw_multi_windows_kv_cache
-model_name:/mnt/Data/xiongjing/llama2chat
-multi_gpus:True
-torch.cuda.device_count():3
-multi_gpus:True
-torch.cuda.device_count():3
-n_windows:[2]
-prompt_method:complex_cot_pcw_multi_windows_kv_cache
-model_name:/mnt/Data/xiongjing/llama2chat
-multi_gpus:True
-torch.cuda.device_count():3
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.32s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.38s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.65s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.71s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.95s/it]
-Loading checkpoint shards: 100%|██████████| 2/2 [00:06<00:00,  2.75s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:06<00:00,  3.03s/it]
-Loading checkpoint shards: 100%|██████████| 2/2 [00:06<00:00,  2.77s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:06<00:00,  3.01s/it]
-!!!!!!!!!!!!!!!!!!!!!!!! 这里
-dataset:gsm8k
-!!!!!!!!!!!!!!!!!!!!!!!! 这里
-dataset:gsm8k
-!!!!!!!!!!!!!!!!!!!!!!!! 这里
-dataset:gsm8k
-  0%|          | 0/7473 [00:00<?, ?it/s]  0%|          | 0/7473 [00:00<?, ?it/s]  0%|          | 0/7473 [00:00<?, ?it/s] 65%|██████▌   | 4866/7473 [00:00<00:00, 48651.46it/s] 66%|██████▋   | 4964/7473 [00:00<00:00, 49631.65it/s] 65%|██████▌   | 4883/7473 [00:00<00:00, 48817.36it/s]100%|██████████| 7473/7473 [00:00<00:00, 49534.87it/s]
-  0%|          | 0/1319 [00:00<?, ?it/s]100%|██████████| 7473/7473 [00:00<00:00, 48607.61it/s]
-  0%|          | 0/1319 [00:00<?, ?it/s]100%|██████████| 7473/7473 [00:00<00:00, 48785.40it/s]
-  0%|          | 0/1319 [00:00<?, ?it/s]100%|██████████| 1319/1319 [00:00<00:00, 51472.23it/s]
-sample_number:0
-trainset[0]:{'question': 'Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?', 'gold_reasoning': 'Natalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\n#### 72', 'answer': '72', 'prompts': "Q: Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?\nA: Let's think step by step\nNatalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\nThe answer is 72"}
-100%|██████████| 1319/1319 [00:00<00:00, 50477.53it/s]
-sample_number:0
-trainset[0]:{'question': 'Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?', 'gold_reasoning': 'Natalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\n#### 72', 'answer': '72', 'prompts': "Q: Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?\nA: Let's think step by step\nNatalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\nThe answer is 72"}
-100%|██████████| 1319/1319 [00:00<00:00, 50296.72it/s]
-sample_number:0
-trainset[0]:{'question': 'Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?', 'gold_reasoning': 'Natalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\n#### 72', 'answer': '72', 'prompts': "Q: Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?\nA: Let's think step by step\nNatalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\nThe answer is 72"}
-Trainset size: 7473
-Testset size: 1319
-da:<datasets_loader.GSM8K object at 0x7fe37421d520>
-Trainset size: 7473
-Testset size: 1319
-da:<datasets_loader.GSM8K object at 0x7fb2e46965b0>
-Trainset size: 7473
-Testset size: 1319
-da:<datasets_loader.GSM8K object at 0x7f7fec1dd610>
-da.train_df:                                               question  ...                                            prompts
-0     Natalia sold clips to 48 of her friends in Apr...  ...  Q: Natalia sold clips to 48 of her friends in ...
-1     Weng earns $12 an hour for babysitting. Yester...  ...  Q: Weng earns $12 an hour for babysitting. Yes...
-2     Betty is saving money for a new wallet which c...  ...  Q: Betty is saving money for a new wallet whic...
-3     Julie is reading a 120-page book. Yesterday, s...  ...  Q: Julie is reading a 120-page book. Yesterday...
-4     James writes a 3-page letter to 2 different fr...  ...  Q: James writes a 3-page letter to 2 different...
-...                                                 ...  ...                                                ...
-7468  Very early this morning, Elise left home in a ...  ...  Q: Very early this morning, Elise left home in...
-7469  Josh is saving up for a box of cookies. To rai...  ...  Q: Josh is saving up for a box of cookies. To ...
-7470  Colin can skip at six times the speed that Bra...  ...  Q: Colin can skip at six times the speed that ...
-7471  Janet, a third grade teacher, is picking up th...  ...  Q: Janet, a third grade teacher, is picking up...
-7472  At 30, Anika is 4/3 the age of Maddie. What wo...  ...  Q: At 30, Anika is 4/3 the age of Maddie. What...
-
-[7473 rows x 4 columns]
-filtering test set:
-da.train_df:                                               question  ...                                            prompts
-0     Natalia sold clips to 48 of her friends in Apr...  ...  Q: Natalia sold clips to 48 of her friends in ...
-1     Weng earns $12 an hour for babysitting. Yester...  ...  Q: Weng earns $12 an hour for babysitting. Yes...
-2     Betty is saving money for a new wallet which c...  ...  Q: Betty is saving money for a new wallet whic...
-3     Julie is reading a 120-page book. Yesterday, s...  ...  Q: Julie is reading a 120-page book. Yesterday...
-4     James writes a 3-page letter to 2 different fr...  ...  Q: James writes a 3-page letter to 2 different...
-...                                                 ...  ...                                                ...
-7468  Very early this morning, Elise left home in a ...  ...  Q: Very early this morning, Elise left home in...
-7469  Josh is saving up for a box of cookies. To rai...  ...  Q: Josh is saving up for a box of cookies. To ...
-7470  Colin can skip at six times the speed that Bra...  ...  Q: Colin can skip at six times the speed that ...
-7471  Janet, a third grade teacher, is picking up th...  ...  Q: Janet, a third grade teacher, is picking up...
-7472  At 30, Anika is 4/3 the age of Maddie. What wo...  ...  Q: At 30, Anika is 4/3 the age of Maddie. What...
-
-[7473 rows x 4 columns]
-filtering test set:
-da.train_df:                                               question  ...                                            prompts
-0     Natalia sold clips to 48 of her friends in Apr...  ...  Q: Natalia sold clips to 48 of her friends in ...
-1     Weng earns $12 an hour for babysitting. Yester...  ...  Q: Weng earns $12 an hour for babysitting. Yes...
-2     Betty is saving money for a new wallet which c...  ...  Q: Betty is saving money for a new wallet whic...
-3     Julie is reading a 120-page book. Yesterday, s...  ...  Q: Julie is reading a 120-page book. Yesterday...
-4     James writes a 3-page letter to 2 different fr...  ...  Q: James writes a 3-page letter to 2 different...
-...                                                 ...  ...                                                ...
-7468  Very early this morning, Elise left home in a ...  ...  Q: Very early this morning, Elise left home in...
-7469  Josh is saving up for a box of cookies. To rai...  ...  Q: Josh is saving up for a box of cookies. To ...
-7470  Colin can skip at six times the speed that Bra...  ...  Q: Colin can skip at six times the speed that ...
-7471  Janet, a third grade teacher, is picking up th...  ...  Q: Janet, a third grade teacher, is picking up...
-7472  At 30, Anika is 4/3 the age of Maddie. What wo...  ...  Q: At 30, Anika is 4/3 the age of Maddie. What...
-
-[7473 rows x 4 columns]
-filtering test set:
-prompt_method:complex_cot_pcw_multi_windows_kv_cache
-len of df0:1319
-filtering train set:
-prompt_method:complex_cot_pcw_multi_windows_kv_cache
-len of df0:1319
-filtering train set:
-prompt_method:complex_cot_pcw_multi_windows_kv_cache
-len of df0:1319
-filtering train set:
-prompt_method:complex_cot_pcw_multi_windows_kv_cache
-len of df0:7473
-LEN OF test_df2:1319
-=========pcw_model.context_window_size:2048
-longest_test_prompt = 192
-Found max n shot per window = 5
-n_windows:[2]
-len(n_windows):1
-n_shots_per_window:5
-n_shots:[10]
-LEN OF test_df3:1319
-self.prompt_method:complex_cot_pcw_multi_windows_kv_cache
-  0%|          | 0/1 [00:00<?, ?it/s]starting with n = 10
-
-Progress:   0%|          | 0/1 [00:00<?, ?it/s][Aself.n_shots_per_window:5
-prompt_method:complex_cot_pcw_multi_windows_kv_cache
-len of df0:7473
-LEN OF test_df2:1319
-=========pcw_model.context_window_size:2048
-longest_test_prompt = 192
-Found max n shot per window = 5
-n_windows:[2]
-len(n_windows):1
-n_shots_per_window:5
-n_shots:[10]
-LEN OF test_df3:1319
-self.prompt_method:complex_cot_pcw_multi_windows_kv_cache
-  0%|          | 0/1 [00:00<?, ?it/s]starting with n = 10
-
-Progress:   0%|          | 0/1 [00:00<?, ?it/s][Aself.n_shots_per_window:5
-prompt_method:complex_cot_pcw_multi_windows_kv_cache
-len of df0:7473
-LEN OF test_df2:1319
-=========pcw_model.context_window_size:2048
-longest_test_prompt = 192
-Found max n shot per window = 5
-n_windows:[2]
-len(n_windows):1
-n_shots_per_window:5
-n_shots:[10]
-LEN OF test_df3:1319
-self.prompt_method:complex_cot_pcw_multi_windows_kv_cache
-  0%|          | 0/1 [00:00<?, ?it/s]starting with n = 10
-
-Progress:   0%|          | 0/1 [00:00<?, ?it/s][Aself.n_shots_per_window:5
-
-
-  0%|          | 0/439 [00:00<?, ?it/s][A[A
-
-
-
-  0%|          | 0/440 [00:00<?, ?it/s][A[A  0%|          | 0/440 [00:00<?, ?it/s][A[A2222222222222222
-Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
-2222222222222222
-Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
-2222222222222222
-Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
-
-
-  0%|          | 1/440 [00:08<59:37,  8.15s/it][A[A
-
-  0%|          | 1/439 [00:09<1:12:28,  9.93s/it][A[A2222222222222222
-2222222222222222
-
-
-  0%|          | 1/440 [00:13<1:41:59, 13.94s/it][A[A
-
-  0%|          | 2/439 [00:16<56:58,  7.82s/it]  [A[A
-
-  0%|          | 2/440 [00:16<1:00:12,  8.25s/it][A[A2222222222222222
-2222222222222222
-2222222222222222
-
-
-  1%|          | 3/440 [00:24<58:47,  8.07s/it]  [A[A
-
-  1%|          | 3/439 [00:24<59:25,  8.18s/it][A[A
-
-  0%|          | 2/440 [00:27<1:38:34, 13.50s/it][A[A2222222222222222
-2222222222222222
-
-
-  1%|          | 4/439 [00:29<49:37,  6.84s/it][A[A2222222222222222
-2222222222222222
-
-
-  1%|          | 4/440 [00:37<1:13:46, 10.15s/it][A[A
-
-  1%|          | 3/440 [00:40<1:37:55, 13.44s/it][A[A2222222222222222
-
-
-  1%|          | 5/439 [00:43<1:06:39,  9.21s/it][A[A2222222222222222
-
-
-  1%|          | 4/440 [00:45<1:13:16, 10.08s/it][A[A2222222222222222
-slurmstepd-nwonga100: error: *** JOB 5725 ON nwonga100 CANCELLED AT 2024-12-19T19:17:53 ***

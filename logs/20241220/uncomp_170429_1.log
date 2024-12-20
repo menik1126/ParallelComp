@@ -1,0 +1,36 @@
+2024-12-20 17:06:19,086 - [Process 1/5] - INFO - loading datasets finished
+2024-12-20 17:06:19,087 - [Process 1/5] - INFO - model_max_len: 3950
+2024-12-20 17:06:19,087 - [Process 1/5] - INFO - output_max_len: 64
+2024-12-20 17:06:19,107 - [Process 1/5] - INFO - Max Length is 10337
+2024-12-20 17:06:19,108 - [Process 1/5] - INFO - Finish loading dataset
+2024-12-20 17:06:19,108 - [Process 1/5] - INFO - get_predicted begin
+2024-12-20 17:06:29,498 - [Process 1/5] - INFO - res.shape is :torch.Size([33])
+2024-12-20 17:06:33,829 - [Process 1/5] - INFO - res.shape is :torch.Size([12])
+2024-12-20 17:06:38,828 - [Process 1/5] - INFO - res.shape is :torch.Size([28])
+2024-12-20 17:06:44,218 - [Process 1/5] - INFO - res.shape is :torch.Size([38])
+2024-12-20 17:06:49,458 - [Process 1/5] - INFO - res.shape is :torch.Size([34])
+2024-12-20 17:06:54,603 - [Process 1/5] - INFO - res.shape is :torch.Size([32])
+2024-12-20 17:06:56,768 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+2024-12-20 17:07:02,878 - [Process 1/5] - INFO - res.shape is :torch.Size([56])
+2024-12-20 17:07:06,997 - [Process 1/5] - INFO - res.shape is :torch.Size([6])
+2024-12-20 17:07:11,164 - [Process 1/5] - INFO - res.shape is :torch.Size([7])
+2024-12-20 17:07:15,366 - [Process 1/5] - INFO - res.shape is :torch.Size([8])
+2024-12-20 17:07:17,659 - [Process 1/5] - INFO - res.shape is :torch.Size([7])
+2024-12-20 17:07:24,177 - [Process 1/5] - INFO - res.shape is :torch.Size([66])
+2024-12-20 17:07:30,729 - [Process 1/5] - INFO - res.shape is :torch.Size([66])
+2024-12-20 17:07:35,014 - [Process 1/5] - INFO - res.shape is :torch.Size([9])
+2024-12-20 17:07:41,438 - [Process 1/5] - INFO - res.shape is :torch.Size([63])
+2024-12-20 17:07:45,829 - [Process 1/5] - INFO - res.shape is :torch.Size([12])
+2024-12-20 17:07:49,983 - [Process 1/5] - INFO - res.shape is :torch.Size([6])
+2024-12-20 17:07:53,878 - [Process 1/5] - INFO - res.shape is :torch.Size([14])
+2024-12-20 17:07:58,001 - [Process 1/5] - INFO - res.shape is :torch.Size([6])
+2024-12-20 17:08:01,634 - [Process 1/5] - INFO - res.shape is :torch.Size([13])
+2024-12-20 17:08:08,195 - [Process 1/5] - INFO - res.shape is :torch.Size([66])
+2024-12-20 17:08:13,989 - [Process 1/5] - INFO - res.shape is :torch.Size([47])
+2024-12-20 17:08:18,298 - [Process 1/5] - INFO - res.shape is :torch.Size([10])
+2024-12-20 17:08:22,160 - [Process 1/5] - INFO - res.shape is :torch.Size([9])
+2024-12-20 17:08:25,730 - [Process 1/5] - INFO - res.shape is :torch.Size([13])
+2024-12-20 17:08:30,237 - [Process 1/5] - INFO - res.shape is :torch.Size([15])
+2024-12-20 17:08:33,566 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+2024-12-20 17:08:35,759 - [Process 1/5] - INFO - res.shape is :torch.Size([29])
+2024-12-20 17:08:40,100 - [Process 1/5] - INFO - res.shape is :torch.Size([11])

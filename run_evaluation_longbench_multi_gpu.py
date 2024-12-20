@@ -47,36 +47,31 @@ def get_dataset(dataset: str, tokenizer: PreTrainedTokenizerBase, prompt_method:
     else:
         return test_df, train_df, da.labels
 
-
-def build_chat(prompt):
-    prompt = f"[INST] {prompt} [/INST]"
-    return prompt
-
 def run_pcw_experiment(dataset: str, model: str, cache_dir: str, subsample_test_set: int, output_dir: str,
                        n_windows: List[int], n_shots_per_window: Optional[int], n_runs: int,
-                       random_seed: int, right_indentation: bool, prompt_method: str, output_json: str, model_class: str, sample_method: str, sample_number: int, extra_sample_number: int, capacity:int) -> None:
+                       random_seed: int, right_indentation: bool, prompt_method: str, output_json: str, 
+                       model_class: str, sample_method: str, sample_number: int, extra_sample_number: int, 
+                       capacity:int, parallel_pattern:str) -> None:
     print("n_windows:{}".format(n_windows))
     # load model
     pcw_model = load_pcw_wrapper(model, cache_dir, right_indentation, max(n_windows), prompt_method=prompt_method, model_class=model_class, accelerator=accelerator, capacity=capacity)
     
     # # load config
-    model2prompt = json.load(open("longbench_config/dataset2prompt.json", "r"))
+    model2prompt = json.load(open("longbench_config/dataset2prompt_raw.json", "r"))
     dataset2maxlen = json.load(open("longbench_config/dataset2maxlen.json", "r"))
     model2maxlen = json.load(open("longbench_config/model2maxlen.json", "r"))
+    
+    model2prompt_question = json.load(open("longbench_config/dataset2prompt_quesiton.json", "r"))
+    model2prompt_context = json.load(open("longbench_config/dataset2prompt_context.json", "r"))
+    
+    questions = model2prompt_question[dataset]
+    context = model2prompt_context[dataset]
+    all_template = model2prompt[dataset]
+    
+    templates = {"question": questions, "context": context, "all": all_template }
     logger.info("loading datasets finished")
     
     # load dataset
-    test_data = []
-    prompts_all = []
-    inputs = []
-    contexts = []
-    answerss = []
-    lengths = []
-    datasets = []
-    languages = []
-    all_classess = []
-    _ids = []
-    input_max_len = 0
     model_path = model.lower()
     for key in model2maxlen:
         if key in model_path:
@@ -86,49 +81,15 @@ def run_pcw_experiment(dataset: str, model: str, cache_dir: str, subsample_test_
     output_max_len = dataset2maxlen[dataset]
     logger.info(f"output_max_len: {output_max_len}")
     data_file = f"datasets/LongBench/{dataset}.jsonl"
-    with open(data_file) as fp:
-        for line in fp:
-            example = json.loads(line)
-            length = example["length"]
-            if length > input_max_len: input_max_len = length
-            template = model2prompt[dataset]
-            prompt = template.format(**example)
-            if "llama2" in model_path or "llama-2" in model_path:
-                prompt = build_chat(prompt)
-            example["prompt"] = prompt
-            test_data.append(example)
-    logger.info(f"Max Length is {input_max_len}")
-    
-    for example in test_data:
-        prompts_all.append(example["prompt"])
-        inputs.append(example["input"])
-        contexts.append(example["context"])
-        answerss.append(example["answers"])
-        lengths.append(example["length"])
-        datasets.append(example["dataset"])
-        languages.append(example["language"])
-        all_classess.append(example["all_classes"])
-        _ids.append(example["_id"])
-    logger.info("Finish loading dataset")
-    
-    combined_data = [
-        {
-            "prompt": p, "input": i, "context": c, "answers": a, 
-            "length": l, "dataset": d, "language": lang, 
-            "all_classes": ac, "_id": id
-        }
-        for p, i, c, a, l, d, lang, ac, id in zip(
-            prompts_all, inputs, contexts, answerss, lengths, 
-            datasets, languages, all_classess, _ids
-        )
-    ]
     
     # windows_splits
-    em = ExperimentManager_longbench(combined_data, pcw_model,random_seed=random_seed,n_windows=max(n_windows),
+    em = ExperimentManager_longbench(data_file, pcw_model,random_seed=random_seed,
+                                     n_windows=max(n_windows),
                                      max_token_length=model_max_len,
                                      prompt_method=prompt_method,model_class=model_class,
-                                     model_name = "llama2",
+                                     model_name = "llama2",dataset=dataset,parallel_pattern=parallel_pattern,
                                      accelerator=accelerator,
+                                     model2prompt=model2prompt,templates=templates,
                                      )
     em.run_experiment(batch_size=1,output_max_len=output_max_len)
 
@@ -170,5 +131,7 @@ if __name__ == '__main__':
                         help="number of examples to fit in each window", type=int, default=None)
     parser.add_argument('--right-indentation', dest='right_indentation', help="ident all windows to the right",
                         action='store_true', default=False)
+    parser.add_argument('--parallel_pattern', required=False, help="decide what prompt method to use",
+                        default='',type=str)
     args = parser.parse_args()
     run_pcw_experiment(**vars(args))

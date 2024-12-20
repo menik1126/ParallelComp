@@ -26,12 +26,18 @@ logger.set_console_level(logging.DEBUG)
 STOP_SEQUENCE = '\n'
 
 class ExperimentManager_longbench:
-    def __init__(self, datas: List, model: PCWModelWrapper, random_seed: int = 42, n_windows: int = 1, 
+    def __init__(self, data_file: str, model: PCWModelWrapper, random_seed: int = 42, n_windows: int = 1, 
                  max_token_length: int = 1024,
-                 prompt_method:str=None,model_class:str=None,model_name:str=None,
+                 prompt_method:str=None,model_class:str=None,parallel_pattern:str=None,
+                 model_name:str=None,dataset:str=None,model2prompt=None,templates:Dict=None,
                  accelerator: Accelerator=None,
                  ):   
-        self.datas = datas
+        self.model_name = model_name
+        self.model2prompt = model2prompt
+        self.data_name=dataset
+        self.datas = self.load_datas(data_file)
+        self.templates = templates
+        
         self.model = model
         self.base_random_seed = random_seed
         self.n_windows = n_windows
@@ -40,15 +46,73 @@ class ExperimentManager_longbench:
         self.prompt_method = prompt_method
         self.accelerator = accelerator
         self.model_class = model_class
-        self.model_name = model_name
+        self.parallel_pattern = parallel_pattern
         
-    def truncate_text(self,batch_size,batch_prompts) -> str:
+    
+    def build_chat(self,prompt):
+        prompt = f"[INST] {prompt} [/INST]"
+        return prompt
+    
+    def load_datas(self, data_file: str) -> None:
+        test_data = []
+        prompts_all = []
+        inputs = []
+        contexts = []
+        answerss = []
+        lengths = []
+        datasets = []
+        languages = []
+        all_classess = []
+        _ids = []
+        input_max_len = 0
+        with open(data_file) as fp:
+            for line in fp:
+                example = json.loads(line)
+                length = example["length"]
+                if length > input_max_len: input_max_len = length
+                # template = self.model2prompt[self.data_name]
+                # prompt = template.format(**example)
+                # if "llama2" in self.model_name or "llama-2" in self.model_name:
+                #     prompt = self.build_chat(prompt)
+                # example["prompt"] = prompt
+                test_data.append(example)
+        logger.info(f"Max Length is {input_max_len}")
+        
+        for example in test_data:
+            # prompts_all.append(example["prompt"])
+            inputs.append(example["input"])
+            contexts.append(example["context"])
+            answerss.append(example["answers"])
+            lengths.append(example["length"])
+            datasets.append(example["dataset"])
+            languages.append(example["language"])
+            all_classess.append(example["all_classes"])
+            _ids.append(example["_id"])
+        logger.info("Finish loading dataset")
+        
+        combined_data = [
+            {#"prompt": p,
+                "input": i, "context": c, "answers": a, 
+                "length": l, "dataset": d, "language": lang, 
+                "all_classes": ac, "_id": id
+            }#p,prompts_all
+            for  i, c, a, l, d, lang, ac, id in zip(
+                inputs, contexts, answerss, lengths, 
+                datasets, languages, all_classess, _ids
+            )
+        ]
+
+        return combined_data
+        
+    def truncate_text(self,batch_size,batch_data) -> str:
         model_max_len = self.model_max_len
         tokenizer = self.tokenizer
-        n_windows = self.n_windows
-        window_size = model_max_len // n_windows
+        n_windows=self.n_windows
         
-        tokenized_prompts = self.tokenizer(batch_prompts,
+        batch_contexts = [item["context"] for item in batch_data]
+        batch_inputs = [item["input"] for item in batch_data]
+        
+        tokenized_prompts = self.tokenizer(batch_contexts,
                                           padding="longest", 
                                           return_tensors="pt", 
                                           add_special_tokens=True,
@@ -67,12 +131,53 @@ class ExperimentManager_longbench:
                           tokenizer.decode(batch_input_ids[i][-half:], skip_special_tokens=True) 
                           for i in range(len(batch_input_ids))]
                 
-                # per_windows_prompt = [prompt[i: i + window_size] for i in range(0, len(prompt), n_windows)]
-                # per_windows_prompt[-1]+=prompt[model_max_len-window_size*n_windows:]
             else:
-                truncation_prompts = batch_prompts
-        return truncation_prompts
+                truncation_prompts = [tokenizer.decode(batch_input_ids[i], skip_special_tokens=True) 
+                          for i in range(len(batch_input_ids))]
+            
+            window_size = int(len(truncation_prompts[0])/n_windows)
+            per_windows_prompt = [truncation_prompts[0][i: i + window_size] for i in range(0, len(truncation_prompts[0]), window_size)]
+            if len(truncation_prompts[0])-window_size*n_windows > 0:
+                per_windows_prompt[-2]=per_windows_prompt[-2]+truncation_prompts[0][-(len(truncation_prompts[0])-window_size*n_windows):]
+                per_windows_prompt = per_windows_prompt[:-1]
+        
 
+        per_windows_prompt = self.prompt_design(per_windows_prompt,batch_inputs*len(per_windows_prompt))
+        # logger.info(f"per_windows_prompt:{per_windows_prompt}")
+        # logger.debug(f"len(per_windows_prompt):{len(per_windows_prompt)}")
+        # logger.debug(f"len(per_windows_prompt[0]):{len(per_windows_prompt[0])}")
+        # logger.debug(f"per_windows_prompt[0]):{len(per_windows_prompt[0])}")
+        # assert 1==0
+        return per_windows_prompt
+
+    def prompt_design(self, raw_prompt:List[str], quesiton:List[str]):
+        revise_prompts = []
+        my_templates = self.templates
+        
+        for i in range(len(raw_prompt)):
+            if self.parallel_pattern == "every_window_query_input_no_query" :
+                raw_sample = {}
+                raw_sample["context"] = raw_prompt[i]
+                raw_sample["input"] = quesiton[i]
+                revise_prompt = my_templates["all"].format(**raw_sample)
+            elif self.parallel_pattern == "every_window_no_query_input_query":
+                raw_sample = {}
+                raw_sample["context"] = raw_prompt[i]
+                raw_sample["input"] = quesiton[i]
+                # logger.debug(f"{my_templates['context']}")
+                revise_prompt = my_templates["context"].format(**raw_sample)
+            elif self.parallel_pattern == "every_window_query_input_query":
+                raw_sample = {}
+                raw_sample["context"] = raw_prompt[i]
+                raw_sample["input"] = quesiton[i]
+                revise_prompt = my_templates["all"].format(**raw_sample)
+            else:
+                revise_prompt = raw_prompt[i]
+            
+            revise_prompts.append(revise_prompt)
+        
+        
+        return revise_prompts
     
     def get_predicted(self,eval_batch_size=1,output_max_len=32):
         accelerator = self.accelerator
@@ -85,7 +190,7 @@ class ExperimentManager_longbench:
             for i in tqdm(range(0, len(split_data), eval_batch_size)):
                 batch_data = split_data[i:i+eval_batch_size]
         
-                batch_prompts = [item["prompt"] for item in batch_data]
+                # batch_prompts = [item["prompt"] for item in batch_data]
                 batch_inputs = [item["input"] for item in batch_data]
                 batch_contexts = [item["context"] for item in batch_data]
                 batch_answerss = [item["answers"] for item in batch_data]
@@ -95,15 +200,17 @@ class ExperimentManager_longbench:
                 batch_all_classess = [item["all_classes"] for item in batch_data]
                 batch__ids = [item["_id"] for item in batch_data]
 
-                truncation_prompts = self.truncate_text(eval_batch_size,batch_prompts)
+                per_windows_prompt = self.truncate_text(eval_batch_size,batch_data)
+                logger.info(f"len(per_windows_prompt):{len(per_windows_prompt)}")
+                # assert 1==0
+                question = self.templates["question"].format(**batch_data[0])
                 
-                
-                output = self.model.pcw_generate_longbench(truncation_prompts,output_max_len)
+                output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,question=question)
                 print("results:{}".format(output))
                 batch_generations = [output]
-                for j in range(len(batch_prompts)):
+                for j in range(len(batch_contexts)):
                     example = {}
-                    example["prompt"] = batch_prompts[j]
+                    # example["prompt"] = batch_prompts[j]
                     example["input"] = batch_inputs[j]
                     example["context"] = batch_contexts[j]
                     example["answers"] = batch_answerss[j]
@@ -116,7 +223,6 @@ class ExperimentManager_longbench:
                     example["_id"] = batch__ids[j]
                     results["outputs"].append(example)
                     results["num_tokens"] += len(batch_generations[j])
-                    
                     
             results = [results]
         results_gathered = gather_object(results)
@@ -132,12 +238,12 @@ class ExperimentManager_longbench:
         if self.prompt_method == "complex_cot_pcw_multi_windows":
             results_gathered=self.get_predicted(eval_batch_size=batch_size,output_max_len=output_max_len)
         
-        
-        datasets_name = self.datas[0]["dataset"]
+        datasets_name = self.data_name
         if accelerator.is_main_process:
             import os
             os.makedirs(os.path.join("results/longbench", f"{model_name}", datasets_name), exist_ok=True)
-            fout = open(os.path.join("results/longbench", f"{model_name}", datasets_name, f"{model_class}.json"), "w")
+            fout = open(os.path.join("results/longbench", f"{model_name}", datasets_name,
+                                     f"{self.parallel_pattern}_windows_{self.n_windows}_{model_class}.json"), "w")
             for result_list in results_gathered:
                 for example in result_list["outputs"]:
                     fout.write(json.dumps(example) + "\n")

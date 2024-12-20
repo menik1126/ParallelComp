@@ -10,6 +10,11 @@ from transformers.models.llama.modeling_llama import LlamaAttention, apply_rotar
 
 from pcw_wrapper import generate_pcw_position_ids
 
+import logging
+from my_utils.logger import Logger
+logger = Logger()
+logger.set_console_level(logging.DEBUG)
+
 """
 The following code is mainly copy+paste from the original modelling_llama.py:
 LlamaAttention uses a caching mechanism for the positional rotation vectors (using LlamaRotaryEmbedding). 
@@ -67,6 +72,9 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
             # if past_key_values:
             #     position_ids = position_ids[:, -1].unsqueeze(-1)
 
+        # logger.debug(f"position_ids: {position_ids}")
+        
+        
         if windows_key_values and not past_key_values:
             past_key_values = windows_key_values
 
