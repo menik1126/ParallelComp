@@ -19,17 +19,129 @@ from accelerate.utils import gather_object
 import torch
 _logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO, format='%(message)s')
-
-# import torch.distributed as dist
-# from datetime import timedelta
-
-# dist.init_process_group(
-#     backend='nccl',
-#     timeout=timedelta(hours=2)
-# )
+from my_utils.logger import Logger
+logger = Logger()
+logger.set_console_level(logging.DEBUG)
 
 STOP_SEQUENCE = '\n'
 
+class ExperimentManager_longbench:
+    def __init__(self, datas: List, model: PCWModelWrapper, random_seed: int = 42, n_windows: int = 1, 
+                 max_token_length: int = 1024,
+                 prompt_method:str=None,model_class:str=None,model_name:str=None,
+                 accelerator: Accelerator=None,
+                 ):   
+        self.datas = datas
+        self.model = model
+        self.base_random_seed = random_seed
+        self.n_windows = n_windows
+        self.model_max_len= max_token_length
+        self.tokenizer = model.tokenizer
+        self.prompt_method = prompt_method
+        self.accelerator = accelerator
+        self.model_class = model_class
+        self.model_name = model_name
+        
+    def truncate_text(self,batch_size,batch_prompts) -> str:
+        model_max_len = self.model_max_len
+        tokenizer = self.tokenizer
+        n_windows = self.n_windows
+        window_size = model_max_len // n_windows
+        
+        tokenized_prompts = self.tokenizer(batch_prompts,
+                                          padding="longest", 
+                                          return_tensors="pt", 
+                                          add_special_tokens=True,
+                                          ).to('cuda')
+        batch_input_ids = tokenized_prompts.input_ids
+        # torch.set_printoptions(edgeitems=100000, linewidth=200)
+        # print(batch_input_ids)
+        attention_mask = tokenized_prompts.attention_mask
+        actual_lengths = attention_mask.sum(dim=1)
+        max_len = actual_lengths.max().item()
+        padding_len = max_len - actual_lengths
+        if batch_size == 1:
+            if len(batch_input_ids[0]) > model_max_len:
+                half = int(model_max_len/2)
+                truncation_prompts = [tokenizer.decode(batch_input_ids[i][padding_len[i]:padding_len[i]+half], skip_special_tokens=True)+
+                          tokenizer.decode(batch_input_ids[i][-half:], skip_special_tokens=True) 
+                          for i in range(len(batch_input_ids))]
+                
+                # per_windows_prompt = [prompt[i: i + window_size] for i in range(0, len(prompt), n_windows)]
+                # per_windows_prompt[-1]+=prompt[model_max_len-window_size*n_windows:]
+            else:
+                truncation_prompts = batch_prompts
+        return truncation_prompts
+
+    
+    def get_predicted(self,eval_batch_size=1,output_max_len=32):
+        accelerator = self.accelerator
+        tokenizer = self.tokenizer
+        
+        logger.info("get_predicted begin")
+        with accelerator.split_between_processes(self.datas) as split_data:
+            results=dict(outputs=[], num_tokens=0, first_token_time=0)
+            split_data = list(split_data)
+            for i in tqdm(range(0, len(split_data), eval_batch_size)):
+                batch_data = split_data[i:i+eval_batch_size]
+        
+                batch_prompts = [item["prompt"] for item in batch_data]
+                batch_inputs = [item["input"] for item in batch_data]
+                batch_contexts = [item["context"] for item in batch_data]
+                batch_answerss = [item["answers"] for item in batch_data]
+                batch_lengths = [item["length"] for item in batch_data]
+                batch_datasets = [item["dataset"] for item in batch_data]
+                batch_languages = [item["language"] for item in batch_data]
+                batch_all_classess = [item["all_classes"] for item in batch_data]
+                batch__ids = [item["_id"] for item in batch_data]
+
+                truncation_prompts = self.truncate_text(eval_batch_size,batch_prompts)
+                
+                
+                output = self.model.pcw_generate_longbench(truncation_prompts,output_max_len)
+                print("results:{}".format(output))
+                batch_generations = [output]
+                for j in range(len(batch_prompts)):
+                    example = {}
+                    example["prompt"] = batch_prompts[j]
+                    example["input"] = batch_inputs[j]
+                    example["context"] = batch_contexts[j]
+                    example["answers"] = batch_answerss[j]
+                    example["pred"] = batch_generations[j]
+                    example["length"] = batch_lengths[j]
+                    
+                    example["dataset"] = batch_datasets[j]
+                    example["language"] = batch_languages[j]
+                    example["all_classes"] = batch_all_classess[j]
+                    example["_id"] = batch__ids[j]
+                    results["outputs"].append(example)
+                    results["num_tokens"] += len(batch_generations[j])
+                    
+                    
+            results = [results]
+        results_gathered = gather_object(results)
+        self.accelerator.wait_for_everyone()
+        return results_gathered
+
+    # run_experiment
+    def run_experiment(self, batch_size: int = 1,output_max_len:int = 32):
+        accelerator = self.accelerator
+        model_name = self.model_name
+        model_class=self.model_class
+        
+        if self.prompt_method == "complex_cot_pcw_multi_windows":
+            results_gathered=self.get_predicted(eval_batch_size=batch_size,output_max_len=output_max_len)
+        
+        
+        datasets_name = self.datas[0]["dataset"]
+        if accelerator.is_main_process:
+            import os
+            os.makedirs(os.path.join("results/longbench", f"{model_name}", datasets_name), exist_ok=True)
+            fout = open(os.path.join("results/longbench", f"{model_name}", datasets_name, f"{model_class}.json"), "w")
+            for result_list in results_gathered:
+                for example in result_list["outputs"]:
+                    fout.write(json.dumps(example) + "\n")
+        
 
 class ExperimentManager:
     def __init__(self, test_df: pd.DataFrame, train_df: pd.DataFrame, model: PCWModelWrapper,
@@ -198,10 +310,6 @@ class ExperimentManager:
                assert set(predicted_labels).issubset(self.possible_labels)                
             return all_preds
             
-
-            
-
-
     def predict_label(self, task_text: str, windows_cache: str=None, few_shots_prompts: str=None) -> str:
         """
            这行代码的作用是检查 task_text 字符串的末尾是否有空格。如果末尾有空格，代码会抛出一个 AssertionError，并显示提示信息 "prompt ends with a space!"。

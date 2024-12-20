@@ -21,10 +21,16 @@ and model (so that the correct forward function would be called).
 class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
     _no_split_modules = ["LlamaDecoderLayerPCW"]
 
-    def __init__(self, config: LlamaConfig):
+    def __init__(self, config: LlamaConfig, capacity = 512, n_windows=1):
         super(LlamaForCausalLM, self).__init__(config)
+        # print("capacity:{}".format(capacity))
+        # assert 1==0
+        self.capacity =capacity
+        self.n_windows = n_windows
+        # print("self.n_windows:{}".format(self.n_windows))
+        # assert 1==0
         # using our Llama model variant:
-        self.model = LlamaModelPCW(config)
+        self.model = LlamaModelPCW(config, capacity = capacity, n_windows=n_windows)
 
         self.lm_head = nn.Linear(config.hidden_size, config.vocab_size, bias=False)
 
@@ -74,9 +80,8 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
         # print("input_ids.shape:{}".format(input_ids.shape))
         # print("position_ids.shape:{}".format(position_ids.shape))
         # print("attention_mask.shape:{}".format(attention_mask.shape))
-        capacity = 512
-        n_windows = 2
-        attention_mask = attention_mask[:, :capacity+(capacity-1)*(n_windows-1)+new_length]
+        #n_windows = 2
+        attention_mask = attention_mask[:, :self.capacity+(self.capacity-1)*(self.n_windows-1)+new_length]
         return {
             "input_ids": input_ids,
             "past_key_values": past_key_values,
@@ -94,14 +99,14 @@ class LlamaModelPCW(LlamaModel, ABC):
         config: LlamaConfig
     """
 
-    def __init__(self, config: LlamaConfig):
+    def __init__(self, config: LlamaConfig, capacity = 512, n_windows=1):
         super(LlamaModel, self).__init__(config)
         self.padding_idx = config.pad_token_id
         self.vocab_size = config.vocab_size
 
         self.embed_tokens = nn.Embedding(config.vocab_size, config.hidden_size, self.padding_idx)
         # using the alternative decoder layer:
-        self.layers = nn.ModuleList([LlamaDecoderLayerPCW(config) for _ in range(config.num_hidden_layers)])
+        self.layers = nn.ModuleList([LlamaDecoderLayerPCW(config, capacity = capacity, n_windows=n_windows) for _ in range(config.num_hidden_layers)])
         self.norm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
 
         self.gradient_checkpointing = False
@@ -110,13 +115,21 @@ class LlamaModelPCW(LlamaModel, ABC):
 
 
 class LlamaDecoderLayerPCW(LlamaDecoderLayer):
-    def __init__(self, config: LlamaConfig):
+    def __init__(self, config: LlamaConfig, capacity = 512, n_windows=1):
         super().__init__(config)
         # overriding attention:
-        self.self_attn = LlamaAttentionPCW(config=config)
+        self.self_attn = LlamaAttentionPCW(config=config, capacity = capacity, n_windows=n_windows)
 
 
 class LlamaAttentionPCW(LlamaAttention):
+    def __init__(self, config: LlamaConfig, capacity = 512, n_windows=1):
+        super().__init__(config)
+        # overriding attention:
+        self.capacity = capacity
+        # print("self.capacity:{}".format(self.capacity))
+        # assert 1==0
+        self.n_windows = n_windows
+
     # we have to override the forward attention due to the rotary embeddings caching mechanism
     # 在这里修改旋转位置编码
     def forward(
@@ -184,9 +197,9 @@ class LlamaAttentionPCW(LlamaAttention):
         else: #prefill阶段
             # 压缩kv
             head_dim = self.head_dim
-            window_size = 8
+            window_size = 4
             kernel_size = 7
-            pooling = 'maxpool'
+            pooling = 'avgpool'
             attn_weights_sum = attn_weights[:, :, -window_size:, :-window_size].sum(dim = -2)
             if pooling == 'avgpool':
                 attn_cache = F.avg_pool1d(attn_weights_sum, kernel_size = kernel_size, padding=kernel_size//2, stride=1)
@@ -194,7 +207,9 @@ class LlamaAttentionPCW(LlamaAttention):
                 attn_cache = F.max_pool1d(attn_weights_sum, kernel_size = kernel_size, padding=kernel_size//2, stride=1)
             else:
                 raise ValueError('Pooling method not supported')
-            top_k = 512 - window_size
+            #print("self.capacity0:{}".format(self.capacity))
+            #assert 1==0
+            top_k = self.capacity - window_size
             indices = attn_cache.topk(top_k, dim=-1).indices
             indices = indices.sort(dim=-1).values
             indices_expanded  = indices.unsqueeze(-1).expand(-1, -1, -1, head_dim)  

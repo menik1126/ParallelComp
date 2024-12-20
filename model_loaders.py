@@ -37,7 +37,7 @@ def load_tokenizer(model_name: str, prompt_method: str=None) -> PreTrainedTokeni
 
 
 def load_pcw_wrapper(model_name: str, cache_dir: str = None,
-                     right_indentation: bool = False, n_windows: int = 1, prompt_method: str = None, model_class: str = None, accelerator=None) -> PCWModelWrapper:
+                     right_indentation: bool = False, n_windows: int = 1, prompt_method: str = None, model_class: str = None, accelerator=None, capacity=None) -> PCWModelWrapper:
     print("model_name:{}".format(model_name))
 #    assert 1==0
     validate_model_name(model_name)
@@ -90,7 +90,11 @@ def load_pcw_wrapper(model_name: str, cache_dir: str = None,
                from transformers.models.llama.modeling_llama import LlamaForCausalLM
                model_obj = LlamaForCausalLM
             #print("accelerator.process_index:{}".format(accelerator.process_index))
-            model = model_obj.from_pretrained(model_name, **model_args).eval()
+            
+            if model_class == "modeling_llama_with_pcw_kv_cache":
+               model = model_obj.from_pretrained(model_name, capacity = capacity, n_windows=n_windows,**model_args).eval()
+            else:
+                model = model_obj.from_pretrained(model_name,**model_args).eval()
             if multi_gpus:
                
 

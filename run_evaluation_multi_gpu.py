@@ -47,12 +47,12 @@ def get_dataset(dataset: str, tokenizer: PreTrainedTokenizerBase, prompt_method:
 
 def run_pcw_experiment(dataset: str, model: str, cache_dir: str, subsample_test_set: int, output_dir: str,
                        n_windows: List[int], n_shots_per_window: Optional[int], n_runs: int,
-                       random_seed: int, right_indentation: bool, prompt_method: str, output_json: str, model_class: str, sample_method: str, sample_number: int, extra_sample_number: int) -> None:
+                       random_seed: int, right_indentation: bool, prompt_method: str, output_json: str, model_class: str, sample_method: str, sample_number: int, extra_sample_number: int, capacity:int) -> None:
     print("n_windows:{}".format(n_windows))
     print("prompt_method:{}".format(prompt_method))
 #    assert 1==0
     # 在这里传入模型的类
-    pcw_model = load_pcw_wrapper(model, cache_dir, right_indentation, max(n_windows), prompt_method=prompt_method, model_class=model_class, accelerator=accelerator)
+    pcw_model = load_pcw_wrapper(model, cache_dir, right_indentation, max(n_windows), prompt_method=prompt_method, model_class=model_class, accelerator=accelerator, capacity=capacity)
 
     test_df, train_df, labels = get_dataset(dataset, pcw_model.tokenizer, prompt_method, sample_method=sample_method, sample_number=sample_number)
     
@@ -101,6 +101,8 @@ if __name__ == '__main__':
     parser.add_argument('--sample_number', required=False, help="decide what prompt method to use",
                         default=64, type=int)
     
+    parser.add_argument('--capacity', required=False, help="decide what prompt method to use",
+                        default=512, type=int)
     parser.add_argument('--extra_sample_number', required=False, help="decide what prompt method to use",
                         default=1, type=int)
     parser.add_argument('--cache-dir', help="Hugging face cache dir", type=str, default=None, dest='cache_dir')

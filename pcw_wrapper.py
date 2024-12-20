@@ -7,7 +7,10 @@ from transformers import PreTrainedTokenizerBase, PreTrainedModel
 from logits_processor import RestrictiveTokensLogitsProcessor
 from utils import n_tokens_in_prompt
 from tqdm import tqdm 
-
+import logging
+from my_utils.logger import Logger
+logger = Logger()
+logger.set_console_level(logging.DEBUG)
 
 def combine_past_key_values(past_lst: List[Tuple[Tuple[torch.Tensor]]], longest_window_id: int) -> \
         Tuple[Tuple[torch.Tensor, torch.Tensor]]:
@@ -316,6 +319,7 @@ class PCWModelWrapper:
                                         eos_token_id=self.tokenizer.eos_token_id,
                                         pad_token_id=self.tokenizer.pad_token_id,
                                         **kwargs)[0]
+                
             elif self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":   # 进到这里, 申江涵
                 
 
@@ -399,3 +403,36 @@ class PCWModelWrapper:
         else:
         #res = res[:-1] if res[-1] == self.tokenizer.eos_token_id else res
             return self.tokenizer.decode(res[encoded_task_text['input_ids'].shape[1]:])
+
+    def pcw_generate_longbench(self,
+                               truncation_prompts: List[str],
+                               output_max_len: int,
+                               **kwargs,
+                               ):
+        if self.prompt_method=="complex_cot_pcw_multi_windows":
+            # parallel windows
+            cache = self.get_contexts_cache(truncation_prompts)
+            input = "\nLet's think step by step:"
+            tokenized_inputs = self.tokenizer.encode_plus(input, truncation = True, return_tensors='pt', add_special_tokens=False)
+            tokenized_inputs_attention_mask = tokenized_inputs.attention_mask.cuda()
+            #print("tokenized_inputs_attention_mask shape:{}".format(tokenized_inputs_attention_mask.shape))
+            combined_attention_mask = torch.cat((cache['past_attention_mask'], tokenized_inputs_attention_mask),dim=1)
+            context_length = tokenized_inputs.input_ids.shape[1]
+            res = self.model.generate(input_ids=tokenized_inputs.input_ids.cuda(),
+                                        attention_mask=combined_attention_mask,
+                                        windows_key_values=cache['past_key_values'],
+                                        max_window_size=cache['max_window_size'],
+                                        sum_windows_size=cache['sum_windows_size'],
+                                        eos_token_id=self.tokenizer.eos_token_id,
+                                        pad_token_id=self.tokenizer.pad_token_id,
+                                        max_new_tokens=output_max_len,
+                                        num_beams=1,
+                                        do_sample=False,
+                                        temperature=1.0,
+                                        min_length=context_length+1,
+                                        **kwargs)[0]
+            
+            logger.info(f"res.shape is :{res.shape}")
+            res = self.tokenizer.decode(res[context_length:], skip_special_tokens=True)
+        return res
+        

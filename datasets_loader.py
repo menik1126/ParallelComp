@@ -6,7 +6,7 @@ import pandas as pd
 from datasets import load_dataset
 
 from constants import PROMPTS
-import dspy
+
 import random
 from tqdm import tqdm
 import pandas as pd
@@ -320,8 +320,6 @@ class GSM8K:
 
         
 
-        # trainset = [dspy.Example(**x).with_inputs('question') for x in trainset]
-        # testset = [dspy.Example(**x).with_inputs('question') for x in testset]
         print("trainset[0]:{}".format(trainset[0]))
         # assert 1==0
         trainset_df = pd.DataFrame([x for x in trainset])  # 提取 trainset 的原始字典数据
@@ -395,11 +393,16 @@ class CLINIC150(BANKING77):
     x_prefix = UTTERANCE_PREFIX
     y_prefix = INTENT_PREFIX
 
+class LONGBENCH:
+    def __init__(self) -> None:
+        super().__init__()
+        self.do_shuffle = False
+        
 
 DATASET_NAMES2LOADERS = {'sst5': SST5, 'sst2': SST2, 'agnews': AGNEWS, 'dbpedia': DBPEDIA, 'trec': TREC, 'cr': CR,
                          'cb': CB, 'rte': RTE, 'subj': SUBJ, 'yelp': YELP, 'banking77': BANKING77,
                          'nlu': NLU, 'nluscenario': NLUSCENARIO, 'trecfine': TRECFINE,
-                         'clinic150': CLINIC150, "gsm8k":GSM8K }
+                         'clinic150': CLINIC150, "gsm8k":GSM8K ,"longbench": LONGBENCH}
 
 if __name__ == '__main__':
     for ds_name, da in DATASET_NAMES2LOADERS.items():

@@ -1,0 +1,21 @@
+2024-12-20 16:37:06,159 - [Process 2/5] - INFO - loading datasets finished
+2024-12-20 16:37:06,159 - [Process 2/5] - INFO - model_max_len: 3950
+2024-12-20 16:37:06,160 - [Process 2/5] - INFO - output_max_len: 64
+2024-12-20 16:37:06,178 - [Process 2/5] - INFO - Max Length is 10337
+2024-12-20 16:37:06,178 - [Process 2/5] - INFO - Finish loading dataset
+2024-12-20 16:37:06,178 - [Process 2/5] - INFO - get_predicted begin
+2024-12-20 16:37:19,741 - [Process 2/5] - INFO - res.shape is :torch.Size([119])
+2024-12-20 16:37:24,924 - [Process 2/5] - INFO - res.shape is :torch.Size([40])
+2024-12-20 16:37:29,965 - [Process 2/5] - INFO - res.shape is :torch.Size([59])
+2024-12-20 16:37:37,734 - [Process 2/5] - INFO - res.shape is :torch.Size([122])
+2024-12-20 16:37:41,529 - [Process 2/5] - INFO - res.shape is :torch.Size([65])
+2024-12-20 16:37:50,469 - [Process 2/5] - INFO - res.shape is :torch.Size([134])
+2024-12-20 16:37:56,974 - [Process 2/5] - INFO - res.shape is :torch.Size([73])
+2024-12-20 16:38:03,662 - [Process 2/5] - INFO - res.shape is :torch.Size([78])
+2024-12-20 16:38:09,211 - [Process 2/5] - INFO - res.shape is :torch.Size([50])
+2024-12-20 16:38:14,313 - [Process 2/5] - INFO - res.shape is :torch.Size([39])
+2024-12-20 16:38:21,329 - [Process 2/5] - INFO - res.shape is :torch.Size([147])
+2024-12-20 16:38:24,680 - [Process 2/5] - INFO - res.shape is :torch.Size([60])
+2024-12-20 16:38:32,342 - [Process 2/5] - INFO - res.shape is :torch.Size([102])
+2024-12-20 16:38:49,319 - [Process 2/5] - INFO - res.shape is :torch.Size([318])
+2024-12-20 16:38:57,465 - [Process 2/5] - INFO - res.shape is :torch.Size([113])
