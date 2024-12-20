@@ -87,7 +87,7 @@ def run_pcw_experiment(dataset: str, model: str, cache_dir: str, subsample_test_
                                      n_windows=max(n_windows),
                                      max_token_length=model_max_len,
                                      prompt_method=prompt_method,model_class=model_class,
-                                     model_name = "llama2",dataset=dataset,parallel_pattern=parallel_pattern,
+                                     model_name = model,dataset=dataset,parallel_pattern=parallel_pattern,
                                      accelerator=accelerator,
                                      model2prompt=model2prompt,templates=templates,
                                      )

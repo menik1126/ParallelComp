@@ -1,0 +1,17 @@
+compute_environment: LOCAL_MACHINE
+distributed_type: NO
+mixed_precision: "no"
+use_cpu: False
+debug: False
+num_processes: 1
+machine_rank: 0
+num_machines: 1
+gpu_ids: "3"
+rdzv_backend: static
+same_network: True
+main_training_function: main
+enable_cpu_affinity: false
+downcast_bf16: no
+tpu_use_cluster: false
+tpu_use_sudo: false
+tpu_env: []

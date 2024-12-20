@@ -478,6 +478,8 @@ class PCWModelWrapper:
                 input = question
             elif parallel_patterns == "every_window_query_input_query":
                 input = question
+            else:
+                input = "\n"
             tokenized_inputs = self.tokenizer.encode_plus(input, truncation = True, return_tensors='pt', add_special_tokens=False)
             tokenized_inputs_attention_mask = tokenized_inputs.attention_mask.cuda()
             # logger.info(f"tokenized_inputs_attention_mask.shape is :{tokenized_inputs_attention_mask.shape}")

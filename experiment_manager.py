@@ -171,6 +171,12 @@ class ExperimentManager_longbench:
                 raw_sample["context"] = raw_prompt[i]
                 raw_sample["input"] = quesiton[i]
                 revise_prompt = my_templates["all"].format(**raw_sample)
+            elif self.parallel_pattern == "default":
+                assert len(raw_prompt) == 1
+                raw_sample = {}
+                raw_sample["context"] = raw_prompt[i]
+                raw_sample["input"] = quesiton[i]
+                revise_prompt = my_templates["all"].format(**raw_sample)
             else:
                 revise_prompt = raw_prompt[i]
             

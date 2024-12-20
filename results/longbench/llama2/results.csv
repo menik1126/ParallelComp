@@ -1,2 +1,2 @@
 dataset,narrativeqa,qasper,multifieldqa_en,hotpotqa,2wikimqa,musique,gov_report,qmsum,multi_news,trec,triviaqa,samsum,passage_count,passage_retrieval_en,lcc,repobench-p
-every_window_query_input_no_query_windows_2_modeling_llama_with_pcw,26.35
+every_window_no_query_input_query_windows_2_modeling_llama_with_pcw,18.03,37.13
