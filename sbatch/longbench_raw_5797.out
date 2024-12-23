@@ -1,0 +1,71 @@
+Mon Dec 23 11:26:30 2024       
++-----------------------------------------------------------------------------------------+
+| NVIDIA-SMI 550.54.15              Driver Version: 550.54.15      CUDA Version: 12.4     |
+|-----------------------------------------+------------------------+----------------------+
+| GPU  Name                 Persistence-M | Bus-Id          Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp   Perf          Pwr:Usage/Cap |           Memory-Usage | GPU-Util  Compute M. |
+|                                         |                        |               MIG M. |
+|=========================================+========================+======================|
+|   0  NVIDIA A100 80GB PCIe          Off |   00000000:4F:00.0 Off |                    0 |
+| N/A   28C    P0             41W /  300W |       4MiB /  81920MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   1  NVIDIA A100 80GB PCIe          Off |   00000000:52:00.0 Off |                    0 |
+| N/A   29C    P0             43W /  300W |       4MiB /  81920MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   2  NVIDIA A100 80GB PCIe          Off |   00000000:56:00.0 Off |                    0 |
+| N/A   26C    P0             43W /  300W |       4MiB /  81920MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   3  NVIDIA A100 80GB PCIe          Off |   00000000:57:00.0 Off |                    0 |
+| N/A   29C    P0             44W /  300W |       4MiB /  81920MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+|   4  NVIDIA A100 80GB PCIe          Off |   00000000:D5:00.0 Off |                    0 |
+| N/A   28C    P0             42W /  300W |       4MiB /  81920MiB |      0%      Default |
+|                                         |                        |             Disabled |
++-----------------------------------------+------------------------+----------------------+
+                                                                                         
++-----------------------------------------------------------------------------------------+
+| Processes:                                                                              |
+|  GPU   GI   CI        PID   Type   Process name                              GPU Memory |
+|        ID   ID                                                               Usage      |
+|=========================================================================================|
+|  No running processes found                                                             |
++-----------------------------------------------------------------------------------------+
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Running evaluation for dataset: narrativeqa
+Added key: store_based_barrier_key:1 to store for rank: 1
+Added key: store_based_barrier_key:1 to store for rank: 2
+Added key: store_based_barrier_key:1 to store for rank: 4
+Added key: store_based_barrier_key:1 to store for rank: 0
+Added key: store_based_barrier_key:1 to store for rank: 3
+Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 4: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+multi_gpus:True
+torch.cuda.device_count():5
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+slurmstepd-nwonga100: error: *** JOB 5797 ON nwonga100 CANCELLED AT 2024-12-23T11:28:58 ***

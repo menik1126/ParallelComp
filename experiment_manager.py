@@ -1,7 +1,7 @@
 import logging
 import random
 from typing import List, Dict
-
+import math
 from accelerate import Accelerator
 import numpy as np
 import numpy.typing as npt
@@ -30,7 +30,7 @@ class ExperimentManager_longbench:
                  max_token_length: int = 1024,
                  prompt_method:str=None,model_class:str=None,parallel_pattern:str=None,
                  model_name:str=None,dataset:str=None,model2prompt=None,templates:Dict=None,
-                 accelerator: Accelerator=None,
+                 accelerator: Accelerator=None, Truncation_Method:str=None,
                  ):   
         self.model_name = model_name
         self.model2prompt = model2prompt
@@ -47,6 +47,7 @@ class ExperimentManager_longbench:
         self.accelerator = accelerator
         self.model_class = model_class
         self.parallel_pattern = parallel_pattern
+        self.Truncation_Method = Truncation_Method
         
     
     def build_chat(self,prompt):
@@ -105,14 +106,25 @@ class ExperimentManager_longbench:
         return combined_data
         
     def truncate_text(self,batch_size,batch_data) -> str:
-        model_max_len = self.model_max_len
         tokenizer = self.tokenizer
-        n_windows=self.n_windows
+        
         
         batch_contexts = [item["context"] for item in batch_data]
         batch_inputs = [item["input"] for item in batch_data]
+        new_prompt = batch_contexts
         
-        tokenized_prompts = self.tokenizer(batch_contexts,
+        # 确定是否启用并行窗口，采取不同策略
+        if self.parallel_pattern == "default":
+            template = self.model2prompt[self.data_name]
+            prompt = template.format(**batch_data[0])
+            
+            # if "llama2" in self.model_name or "llama-2" in self.model_name:
+            #     prompt = self.build_chat(prompt)
+            
+            new_prompt = [prompt]
+        # logger.debug(f"new_prompt:{new_prompt}")
+        
+        tokenized_prompts = self.tokenizer(new_prompt,
                                           padding="longest", 
                                           return_tensors="pt", 
                                           add_special_tokens=True,
@@ -125,20 +137,38 @@ class ExperimentManager_longbench:
         max_len = actual_lengths.max().item()
         padding_len = max_len - actual_lengths
         if batch_size == 1:
-            if len(batch_input_ids[0]) > model_max_len:
-                half = int(model_max_len/2)
+            # print("self.Truncation_Method:{}".format(self.Truncation_Method))
+            # assert 1==0
+            if len(batch_input_ids[0]) > self.model_max_len and self.Truncation_Method!="WO_Truncation":
+                print("len(batch_input_ids):{}".format(len(batch_input_ids)))
+#                assert 1==0
+                half = int(self.model_max_len/2)
                 truncation_prompts = [tokenizer.decode(batch_input_ids[i][padding_len[i]:padding_len[i]+half], skip_special_tokens=True)+
                           tokenizer.decode(batch_input_ids[i][-half:], skip_special_tokens=True) 
                           for i in range(len(batch_input_ids))]
-                
+#                assert 1==0
             else:
                 truncation_prompts = [tokenizer.decode(batch_input_ids[i], skip_special_tokens=True) 
                           for i in range(len(batch_input_ids))]
+                #assert 1==0
+
+            total_len = len(truncation_prompts[0])
             
-            window_size = int(len(truncation_prompts[0])/n_windows)
+            window_size = int(total_len/self.n_windows) # 平均每个窗口长度
+            
+
+            if window_size>self.model_max_len and self.Truncation_Method=="WO_Truncation":
+                
+                adaptive_n_windows = math.ceil(total_len / self.model_max_len)
+                self.n_windows = adaptive_n_windows
+                window_size = int(total_len/self.n_windows) # 平均每个窗口长度
+                # print("self.n_windows:{}".format(self.n_windows))
+                
+                # assert 1==0
+
             per_windows_prompt = [truncation_prompts[0][i: i + window_size] for i in range(0, len(truncation_prompts[0]), window_size)]
-            if len(truncation_prompts[0])-window_size*n_windows > 0:
-                per_windows_prompt[-2]=per_windows_prompt[-2]+truncation_prompts[0][-(len(truncation_prompts[0])-window_size*n_windows):]
+            if len(truncation_prompts[0])-window_size*self.n_windows > 0:
+                per_windows_prompt[-2]=per_windows_prompt[-2]+truncation_prompts[0][-(len(truncation_prompts[0])-window_size*self.n_windows):]
                 per_windows_prompt = per_windows_prompt[:-1]
         
 
@@ -173,10 +203,7 @@ class ExperimentManager_longbench:
                 revise_prompt = my_templates["all"].format(**raw_sample)
             elif self.parallel_pattern == "default":
                 assert len(raw_prompt) == 1
-                raw_sample = {}
-                raw_sample["context"] = raw_prompt[i]
-                raw_sample["input"] = quesiton[i]
-                revise_prompt = my_templates["all"].format(**raw_sample)
+                revise_prompt = raw_prompt[i]
             else:
                 revise_prompt = raw_prompt[i]
             
@@ -205,13 +232,16 @@ class ExperimentManager_longbench:
                 batch_languages = [item["language"] for item in batch_data]
                 batch_all_classess = [item["all_classes"] for item in batch_data]
                 batch__ids = [item["_id"] for item in batch_data]
-
+                
+                # 在这里分配窗口
                 per_windows_prompt = self.truncate_text(eval_batch_size,batch_data)
                 logger.info(f"len(per_windows_prompt):{len(per_windows_prompt)}")
                 # assert 1==0
                 question = self.templates["question"].format(**batch_data[0])
-                
-                output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,question=question)
+                if self.Truncation_Method=="WO_Truncation":
+                   output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,question=question, adaptive_n_windows = self.n_windows)
+                else:
+                   output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,question=question)
                 print("results:{}".format(output))
                 batch_generations = [output]
                 for j in range(len(batch_contexts)):
@@ -241,15 +271,27 @@ class ExperimentManager_longbench:
         model_name = self.model_name
         model_class=self.model_class
         
-        if self.prompt_method == "complex_cot_pcw_multi_windows":
+        if self.prompt_method == "complex_cot_pcw_multi_windows" or \
+            self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
             results_gathered=self.get_predicted(eval_batch_size=batch_size,output_max_len=output_max_len)
         
+        
+        import os
         datasets_name = self.data_name
+        model_name = model_name.split('/')[-1]
+        logger.debug(f"datasets_name:{datasets_name}")
+        
+        kv_cache = ""
+        if "kv_cache" in self.prompt_method:
+            kv_cache = "_kv_cache"
+        
+        if self.Truncation_Method=="WO_Truncation":
+            self.n_windows = "adaptive"
+        
         if accelerator.is_main_process:
-            import os
             os.makedirs(os.path.join("results/longbench", f"{model_name}", datasets_name), exist_ok=True)
             fout = open(os.path.join("results/longbench", f"{model_name}", datasets_name,
-                                     f"{self.parallel_pattern}_windows_{self.n_windows}_{model_class}.json"), "w")
+                                     f"{self.parallel_pattern}_windows_{self.n_windows}_{model_class}{kv_cache}.json"), "w")
             for result_list in results_gathered:
                 for example in result_list["outputs"]:
                     fout.write(json.dumps(example) + "\n")
@@ -549,24 +591,7 @@ class ExperimentManager:
         # balance_windows_sizes  这个不知道干啥的
         return self.balance_windows_sizes(n_windows, few_shots_df)
     
-    def divide_n_windows(self, n_shots: int, n_windows: int) :
-        """
-            把多个上下文示例分到两个窗口里
-        """
-        print("n_shots:{}".format(n_shots))
-        few_shots_df = self.train_df.sample(n_shots)  # 从训练集里面采样示例, 而且是idx
-        # print("few_shots_df:{}".format(few_shots_df))
-        # print("len(few_shots_df):{}".format(len(few_shots_df)))
-        assert few_shots_df.index.is_unique, "few shots samples were not unique!"
-        window_size = self.n_shots_per_window or n_shots
-        print("window_size:{}".format(window_size))
-        n_windows = int(len(few_shots_df) / window_size)   # 总的窗口数量
-        print("n_windows:{}".format(n_windows))
-        
-        if not self.n_shots_per_window or n_windows == 1:
-            return few_shots_df.index
-        # balance_windows_sizes  这个不知道干啥的
-        return [2,3]
+
 
     def balance_windows_sizes(self, n_windows: int, few_shots_df: pd.DataFrame) -> npt.NDArray[int]:
         """

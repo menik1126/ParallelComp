@@ -1,0 +1,8 @@
+2024-12-23 10:41:05,182 - [Process 0/1] - INFO - loading datasets finished
+2024-12-23 10:41:05,182 - [Process 0/1] - INFO - model_max_len: 3950
+2024-12-23 10:41:05,182 - [Process 0/1] - INFO - output_max_len: 64
+2024-12-23 10:41:05,182 - [Process 0/1] - INFO - parallel_pattern: every_window_no_query_input_query
+2024-12-23 10:41:05,201 - [Process 0/1] - INFO - Max Length is 10029
+2024-12-23 10:41:05,202 - [Process 0/1] - INFO - Finish loading dataset
+2024-12-23 10:41:05,202 - [Process 0/1] - INFO - get_predicted begin
+2024-12-23 10:41:05,648 - [Process 0/1] - INFO - len(per_windows_prompt):4

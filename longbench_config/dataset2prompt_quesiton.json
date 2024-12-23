@@ -6,8 +6,10 @@
     "2wikimqa": "\n\nAnswer the question based on the given passages. Only give me the answer and do not output any other words.\n\nQuestion: {input}\nAnswer:",
     "musique": "\n\nAnswer the question based on the given passages. Only give me the answer and do not output any other words.\n\nQuestion: {input}\nAnswer:",
     "gov_report": "\n\nNow, write a one-page summary of the report.\n\nSummary:",
+    "multi_news": "\n\nNow, write a one-page summary of all the news.\n\nSummary:",
+
     "qmsum": "\n\nNow, answer the query based on the above meeting transcript in one or more sentences.\n\nQuery: {input}\nAnswer:",
-    "trec": "\n{input}",
+    "trec": "\nNow, answer the following questions{input}",
     "triviaqa": "\n\n{input}",
     "samsum": "\n\n{input}",
     "passage_count": "\n\nPlease enter the final count of unique paragraphs after removing duplicates. The output format should only contain the number, such as 1, 2, 3, and so on.\n\nThe final answer is: ",

@@ -10,6 +10,11 @@ import torch
 # accelerator = Accelerator()
 GPT2_WINDOW_SIZE = 1024
 LLAMA_WINDOW_SIZE = 2048
+import logging
+logging.basicConfig(level=logging.INFO, format='%(message)s')
+from my_utils.logger import Logger
+logger = Logger()
+logger.set_console_level(logging.DEBUG)
 
 
 def validate_model_name(model_name: str) -> None:
@@ -27,9 +32,11 @@ def load_tokenizer(model_name: str, prompt_method: str=None) -> PreTrainedTokeni
         else:
             if prompt_method =="complex_cot":
                #assert 1==0
-               tokenizer = AutoTokenizer.from_pretrained(model_name) #LlamaTokenizer.from_pretrained(model_name)
+                tokenizer = AutoTokenizer.from_pretrained(model_name) #LlamaTokenizer.from_pretrained(model_name)
             else:
-               tokenizer = LlamaTokenizer.from_pretrained(model_name)
+                tokenizer = LlamaTokenizer.from_pretrained(model_name)
+                tokenizer.pad_token = tokenizer.eos_token
+                tokenizer.pad_token_id = tokenizer.eos_token_id
     else:
         # In our experiments we have added bos token to gpt2:
         tokenizer = GPT2Tokenizer.from_pretrained('gpt2', add_bos_token=True)
@@ -37,7 +44,7 @@ def load_tokenizer(model_name: str, prompt_method: str=None) -> PreTrainedTokeni
 
 
 def load_pcw_wrapper(model_name: str, cache_dir: str = None,
-                     right_indentation: bool = False, n_windows: int = 1, prompt_method: str = None, model_class: str = None, accelerator=None, capacity=None) -> PCWModelWrapper:
+                     right_indentation: bool = False, n_windows: int = 1, prompt_method: str = None, model_class: str = None, accelerator=None, capacity=None, Truncation_Method=None) -> PCWModelWrapper:
     print("model_name:{}".format(model_name))
 #    assert 1==0
     validate_model_name(model_name)
@@ -84,15 +91,17 @@ def load_pcw_wrapper(model_name: str, cache_dir: str = None,
                from modeling_llama_with_pcw_wo_max_pos import LlamaForCausalLMPCW
                model_obj = LlamaForCausalLMPCW
             elif model_class == "modeling_llama_with_pcw_kv_cache":
-               from modeling_llama_with_pcw_kv_cache import LlamaForCausalLMPCW
-               model_obj = LlamaForCausalLMPCW
+                logger.info("modeling_llama_with_pcw_kv_cache is used")
+                from modeling_llama_with_pcw_kv_cache import LlamaForCausalLMPCW
+                model_obj = LlamaForCausalLMPCW
             elif model_class == "modeling_llama":
                from transformers.models.llama.modeling_llama import LlamaForCausalLM
                model_obj = LlamaForCausalLM
             #print("accelerator.process_index:{}".format(accelerator.process_index))
             
             if model_class == "modeling_llama_with_pcw_kv_cache":
-               model = model_obj.from_pretrained(model_name, capacity = capacity, n_windows=n_windows,**model_args).eval()
+               model = model_obj.from_pretrained(model_name, capacity = capacity, 
+                                                 n_windows=n_windows, **model_args).eval()
             else:
                 model = model_obj.from_pretrained(model_name,**model_args).eval()
             if multi_gpus:
@@ -120,4 +129,4 @@ def load_pcw_wrapper(model_name: str, cache_dir: str = None,
     # 给model添加属性
     
 
-    return PCWModelWrapper(model, tokenizer, device, context_window_size, right_indentation, prompt_method=prompt_method, n_windows=n_windows)
+    return PCWModelWrapper(model, tokenizer, device, context_window_size, right_indentation, prompt_method=prompt_method, n_windows=n_windows, Truncation_Method=Truncation_Method)

@@ -143,7 +143,8 @@ class LlamaAttentionPCW(LlamaAttention):
         # making sure that the model generates rotary embeddings in the correct length:
         # print("position_ids:{}".format(position_ids))
         # print("position_ids:{}".format(position_ids.shape))
-        # print("torch.max(position_ids):{}".format(torch.max(position_ids)))
+        #print("=====================================================")
+        #print("torch.max(position_ids):{}".format(torch.max(position_ids)))
         seq_len = kv_seq_len if position_ids is None else int(torch.max(position_ids) + 1)
         cos, sin = self.rotary_emb(value_states, seq_len=seq_len)
         # cos, sin = self.rotary_emb(value_states, seq_len=kv_seq_len)
@@ -155,7 +156,10 @@ class LlamaAttentionPCW(LlamaAttention):
 
         if past_key_value is not None :
             # reuse k, v, self_attention
+            # print("key_states shape1:{}".format(key_states.shape))
+            # print("past_key_value[0] shape1:{}".format(past_key_value[0].shape))
             key_states = torch.cat([past_key_value[0], key_states], dim=2)
+            #print("key_states shape2:{}".format(key_states.shape))
             value_states = torch.cat([past_key_value[1], value_states], dim=2)
 
         past_key_value = (key_states, value_states) if use_cache else None

@@ -51,10 +51,10 @@ def run_pcw_experiment(dataset: str, model: str, cache_dir: str, subsample_test_
                        n_windows: List[int], n_shots_per_window: Optional[int], n_runs: int,
                        random_seed: int, right_indentation: bool, prompt_method: str, output_json: str, 
                        model_class: str, sample_method: str, sample_number: int, extra_sample_number: int, 
-                       capacity:int, parallel_pattern:str) -> None:
+                       capacity:int, parallel_pattern:str, Truncation_Method:str) -> None:
     print("n_windows:{}".format(n_windows))
     # load model
-    pcw_model = load_pcw_wrapper(model, cache_dir, right_indentation, max(n_windows), prompt_method=prompt_method, model_class=model_class, accelerator=accelerator, capacity=capacity)
+    pcw_model = load_pcw_wrapper(model, cache_dir, right_indentation, max(n_windows), prompt_method=prompt_method, model_class=model_class, accelerator=accelerator, capacity=capacity, Truncation_Method=Truncation_Method)
     
     # # load config
     model2prompt = json.load(open("longbench_config/dataset2prompt_raw.json", "r"))
@@ -81,6 +81,7 @@ def run_pcw_experiment(dataset: str, model: str, cache_dir: str, subsample_test_
     output_max_len = dataset2maxlen[dataset]
     logger.info(f"output_max_len: {output_max_len}")
     data_file = f"datasets/LongBench/{dataset}.jsonl"
+    logger.info(f"parallel_pattern: {parallel_pattern}")
     
     # windows_splits
     em = ExperimentManager_longbench(data_file, pcw_model,random_seed=random_seed,
@@ -89,7 +90,7 @@ def run_pcw_experiment(dataset: str, model: str, cache_dir: str, subsample_test_
                                      prompt_method=prompt_method,model_class=model_class,
                                      model_name = model,dataset=dataset,parallel_pattern=parallel_pattern,
                                      accelerator=accelerator,
-                                     model2prompt=model2prompt,templates=templates,
+                                     model2prompt=model2prompt,templates=templates, Truncation_Method=Truncation_Method
                                      )
     em.run_experiment(batch_size=1,output_max_len=output_max_len)
 
@@ -133,5 +134,8 @@ if __name__ == '__main__':
                         action='store_true', default=False)
     parser.add_argument('--parallel_pattern', required=False, help="decide what prompt method to use",
                         default='',type=str)
+    parser.add_argument('--Truncation_Method', required=False, help="decide what Truncation_Method method to use",
+                        default='',type=str)
+                        
     args = parser.parse_args()
     run_pcw_experiment(**vars(args))

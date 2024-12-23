@@ -1,0 +1,143 @@
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Running evaluation for dataset: lcc
+n_windows:[3]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 138, in <module>
+[rank2]:     run_pcw_experiment(**vars(args))
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 57, in run_pcw_experiment
+[rank2]:     pcw_model = load_pcw_wrapper(model, cache_dir, right_indentation, max(n_windows), prompt_method=prompt_method, model_class=model_class, accelerator=accelerator, capacity=capacity)
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/model_loaders.py", line 99, in load_pcw_wrapper
+[rank2]:     model = model_obj.from_pretrained(model_name,**model_args).eval()
+[rank2]:   File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4130, in from_pretrained
+[rank2]:     model = cls(config, *model_args, **model_kwargs)
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 32, in __init__
+[rank2]:     self.model = LlamaModelPCW(config)
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 105, in __init__
+[rank2]:     self.layers = nn.ModuleList([LlamaDecoderLayerPCW(config) for _ in range(config.num_hidden_layers)])
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 105, in <listcomp>
+[rank2]:     self.layers = nn.ModuleList([LlamaDecoderLayerPCW(config) for _ in range(config.num_hidden_layers)])
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 115, in __init__
+[rank2]:     super().__init__(config)
+[rank2]: TypeError: LlamaDecoderLayer.__init__() missing 1 required positional argument: 'layer_idx'
+W1222 18:56:03.241362 140616892004160 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2411190 closing signal SIGTERM
+W1222 18:56:03.241869 140616892004160 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2411192 closing signal SIGTERM
+W1222 18:56:03.242219 140616892004160 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2411194 closing signal SIGTERM
+W1222 18:56:03.242459 140616892004160 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2411195 closing signal SIGTERM
+E1222 18:56:03.306347 140616892004160 torch/distributed/elastic/multiprocessing/api.py:833] failed (exitcode: 1) local_rank: 2 (pid: 2411193) of binary: /home/xiongjing/miniconda3/envs/sjh/bin/python
+Traceback (most recent call last):
+  File "/home/xiongjing/miniconda3/envs/sjh/bin/accelerate", line 8, in <module>
+    sys.exit(main())
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/accelerate/commands/accelerate_cli.py", line 48, in main
+    args.func(args)
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1159, in launch_command
+    multi_gpu_launcher(args)
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/accelerate/commands/launch.py", line 793, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 133, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 264, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+run_evaluation_longbench_multi_gpu.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-12-22_18:56:03
+  host      : nwonga100.local
+  rank      : 2 (local_rank: 2)
+  exitcode  : 1 (pid: 2411193)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================
+Running evaluation for dataset: repobench-p
+n_windows:[3]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+[rank3]: Traceback (most recent call last):
+[rank3]:   File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 138, in <module>
+[rank3]:     run_pcw_experiment(**vars(args))
+[rank3]:   File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 57, in run_pcw_experiment
+[rank3]:     pcw_model = load_pcw_wrapper(model, cache_dir, right_indentation, max(n_windows), prompt_method=prompt_method, model_class=model_class, accelerator=accelerator, capacity=capacity)
+[rank3]:   File "/home/xiongjing/sjh/parallel_window_size/model_loaders.py", line 99, in load_pcw_wrapper
+[rank3]:     model = model_obj.from_pretrained(model_name,**model_args).eval()
+[rank3]:   File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4130, in from_pretrained
+[rank3]:     model = cls(config, *model_args, **model_kwargs)
+[rank3]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 32, in __init__
+[rank3]:     self.model = LlamaModelPCW(config)
+[rank3]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 105, in __init__
+[rank3]:     self.layers = nn.ModuleList([LlamaDecoderLayerPCW(config) for _ in range(config.num_hidden_layers)])
+[rank3]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 105, in <listcomp>
+[rank3]:     self.layers = nn.ModuleList([LlamaDecoderLayerPCW(config) for _ in range(config.num_hidden_layers)])
+[rank3]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 115, in __init__
+[rank3]:     super().__init__(config)
+[rank3]: TypeError: LlamaDecoderLayer.__init__() missing 1 required positional argument: 'layer_idx'
+n_windows:[3]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+[rank2]: Traceback (most recent call last):
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 138, in <module>
+[rank2]:     run_pcw_experiment(**vars(args))
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 57, in run_pcw_experiment
+[rank2]:     pcw_model = load_pcw_wrapper(model, cache_dir, right_indentation, max(n_windows), prompt_method=prompt_method, model_class=model_class, accelerator=accelerator, capacity=capacity)
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/model_loaders.py", line 99, in load_pcw_wrapper
+[rank2]:     model = model_obj.from_pretrained(model_name,**model_args).eval()
+[rank2]:   File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/transformers/modeling_utils.py", line 4130, in from_pretrained
+[rank2]:     model = cls(config, *model_args, **model_kwargs)
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 32, in __init__
+[rank2]:     self.model = LlamaModelPCW(config)
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 105, in __init__
+[rank2]:     self.layers = nn.ModuleList([LlamaDecoderLayerPCW(config) for _ in range(config.num_hidden_layers)])
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 105, in <listcomp>
+[rank2]:     self.layers = nn.ModuleList([LlamaDecoderLayerPCW(config) for _ in range(config.num_hidden_layers)])
+[rank2]:   File "/home/xiongjing/sjh/parallel_window_size/modeling_llama_with_pcw.py", line 115, in __init__
+[rank2]:     super().__init__(config)
+[rank2]: TypeError: LlamaDecoderLayer.__init__() missing 1 required positional argument: 'layer_idx'
+W1222 18:56:13.653786 140259563513664 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2411246 closing signal SIGTERM
+W1222 18:56:13.654021 140259563513664 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2411247 closing signal SIGTERM
+W1222 18:56:13.654121 140259563513664 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2411248 closing signal SIGTERM
+W1222 18:56:13.654202 140259563513664 torch/distributed/elastic/multiprocessing/api.py:858] Sending process 2411250 closing signal SIGTERM
+E1222 18:56:13.982440 140259563513664 torch/distributed/elastic/multiprocessing/api.py:833] failed (exitcode: 1) local_rank: 3 (pid: 2411249) of binary: /home/xiongjing/miniconda3/envs/sjh/bin/python
+Traceback (most recent call last):
+  File "/home/xiongjing/miniconda3/envs/sjh/bin/accelerate", line 8, in <module>
+    sys.exit(main())
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/accelerate/commands/accelerate_cli.py", line 48, in main
+    args.func(args)
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/accelerate/commands/launch.py", line 1159, in launch_command
+    multi_gpu_launcher(args)
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/accelerate/commands/launch.py", line 793, in multi_gpu_launcher
+    distrib_run.run(args)
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/torch/distributed/run.py", line 892, in run
+    elastic_launch(
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 133, in __call__
+    return launch_agent(self._config, self._entrypoint, list(args))
+  File "/home/xiongjing/miniconda3/envs/sjh/lib/python3.10/site-packages/torch/distributed/launcher/api.py", line 264, in launch_agent
+    raise ChildFailedError(
+torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
+============================================================
+run_evaluation_longbench_multi_gpu.py FAILED
+------------------------------------------------------------
+Failures:
+  <NO_OTHER_FAILURES>
+------------------------------------------------------------
+Root Cause (first observed failure):
+[0]:
+  time      : 2024-12-22_18:56:13
+  host      : nwonga100.local
+  rank      : 3 (local_rank: 3)
+  exitcode  : 1 (pid: 2411249)
+  error_file: <N/A>
+  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
+============================================================

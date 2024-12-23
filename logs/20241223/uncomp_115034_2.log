@@ -1,0 +1,107 @@
+2024-12-23 11:54:31,774 - [Process 2/4] - INFO - loading datasets finished
+2024-12-23 11:54:31,774 - [Process 2/4] - INFO - model_max_len: 3950
+2024-12-23 11:54:31,774 - [Process 2/4] - INFO - output_max_len: 128
+2024-12-23 11:54:31,774 - [Process 2/4] - INFO - parallel_pattern: every_window_no_query_input_query
+2024-12-23 11:54:31,824 - [Process 2/4] - INFO - Max Length is 14660
+2024-12-23 11:54:31,824 - [Process 2/4] - INFO - Finish loading dataset
+2024-12-23 11:54:31,825 - [Process 2/4] - INFO - get_predicted begin
+2024-12-23 11:54:35,517 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:54:41,511 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+2024-12-23 11:54:41,919 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:54:56,991 - [Process 2/4] - INFO - res.shape is :torch.Size([128])
+2024-12-23 11:54:57,313 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:01,191 - [Process 2/4] - INFO - res.shape is :torch.Size([2])
+2024-12-23 11:55:01,399 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:04,181 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+2024-12-23 11:55:04,432 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:07,794 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:55:08,145 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:14,169 - [Process 2/4] - INFO - res.shape is :torch.Size([22])
+2024-12-23 11:55:14,571 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:19,104 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:55:19,335 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:22,159 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:55:22,568 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:26,984 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+2024-12-23 11:55:27,357 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:31,926 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:55:32,296 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:37,053 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:55:37,444 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:41,938 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:55:42,361 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:47,753 - [Process 2/4] - INFO - res.shape is :torch.Size([13])
+2024-12-23 11:55:48,242 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:52,938 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:55:53,271 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:55:57,312 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:55:57,668 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:02,598 - [Process 2/4] - INFO - res.shape is :torch.Size([7])
+2024-12-23 11:56:02,975 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:07,900 - [Process 2/4] - INFO - res.shape is :torch.Size([9])
+2024-12-23 11:56:08,202 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:11,995 - [Process 2/4] - INFO - res.shape is :torch.Size([2])
+2024-12-23 11:56:12,434 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:16,866 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+2024-12-23 11:56:17,255 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:21,955 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+2024-12-23 11:56:22,331 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:27,065 - [Process 2/4] - INFO - res.shape is :torch.Size([7])
+2024-12-23 11:56:27,451 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:31,979 - [Process 2/4] - INFO - res.shape is :torch.Size([5])
+2024-12-23 11:56:32,340 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:37,086 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:56:37,456 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:42,175 - [Process 2/4] - INFO - res.shape is :torch.Size([5])
+2024-12-23 11:56:42,594 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:47,078 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:56:47,471 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:56:56,202 - [Process 2/4] - INFO - res.shape is :torch.Size([52])
+2024-12-23 11:56:56,510 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:00,955 - [Process 2/4] - INFO - res.shape is :torch.Size([9])
+2024-12-23 11:57:01,345 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:06,001 - [Process 2/4] - INFO - res.shape is :torch.Size([5])
+2024-12-23 11:57:06,409 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:11,503 - [Process 2/4] - INFO - res.shape is :torch.Size([10])
+2024-12-23 11:57:11,857 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:18,354 - [Process 2/4] - INFO - res.shape is :torch.Size([26])
+2024-12-23 11:57:18,680 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:22,727 - [Process 2/4] - INFO - res.shape is :torch.Size([5])
+2024-12-23 11:57:23,050 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:27,282 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:57:27,695 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:32,204 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+2024-12-23 11:57:32,640 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:37,050 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+2024-12-23 11:57:37,423 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:41,916 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:57:42,304 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:46,736 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:57:47,131 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:51,947 - [Process 2/4] - INFO - res.shape is :torch.Size([5])
+2024-12-23 11:57:52,227 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:57:55,795 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+2024-12-23 11:57:56,114 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:58:00,147 - [Process 2/4] - INFO - res.shape is :torch.Size([2])
+2024-12-23 11:58:00,504 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:58:05,002 - [Process 2/4] - INFO - res.shape is :torch.Size([5])
+2024-12-23 11:58:05,404 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:58:10,679 - [Process 2/4] - INFO - res.shape is :torch.Size([11])
+2024-12-23 11:58:11,067 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:58:15,439 - [Process 2/4] - INFO - res.shape is :torch.Size([2])
+2024-12-23 11:58:15,835 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:58:20,230 - [Process 2/4] - INFO - res.shape is :torch.Size([2])
+2024-12-23 11:58:20,629 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:58:25,213 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+2024-12-23 11:58:25,597 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:58:40,780 - [Process 2/4] - INFO - res.shape is :torch.Size([128])
+2024-12-23 11:58:41,182 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:58:45,773 - [Process 2/4] - INFO - res.shape is :torch.Size([2])
+2024-12-23 11:58:46,025 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:58:50,568 - [Process 2/4] - INFO - res.shape is :torch.Size([21])
+2024-12-23 11:58:50,931 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:58:55,215 - [Process 2/4] - INFO - res.shape is :torch.Size([5])
+2024-12-23 11:58:55,625 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:59:00,247 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+2024-12-23 11:59:00,563 - [Process 2/4] - INFO - len(per_windows_prompt):2
+2024-12-23 11:59:05,266 - [Process 2/4] - INFO - res.shape is :torch.Size([12])

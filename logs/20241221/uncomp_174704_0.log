@@ -1,0 +1,8 @@
+2024-12-21 17:49:02,418 - [Process 0/5] - INFO - loading datasets finished
+2024-12-21 17:49:02,418 - [Process 0/5] - INFO - model_max_len: 3950
+2024-12-21 17:49:02,418 - [Process 0/5] - INFO - output_max_len: 32
+2024-12-21 17:49:02,491 - [Process 0/5] - INFO - Max Length is 16633
+2024-12-21 17:49:02,492 - [Process 0/5] - INFO - Finish loading dataset
+2024-12-21 17:49:02,492 - [Process 0/5] - INFO - get_predicted begin
+2024-12-21 17:49:07,263 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 17:49:12,042 - [Process 0/5] - INFO - res.shape is :torch.Size([4])

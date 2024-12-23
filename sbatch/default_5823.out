@@ -1,0 +1,42 @@
+no change     /home/xiongjing/miniconda3/condabin/conda
+no change     /home/xiongjing/miniconda3/bin/conda
+no change     /home/xiongjing/miniconda3/bin/conda-env
+no change     /home/xiongjing/miniconda3/bin/activate
+no change     /home/xiongjing/miniconda3/bin/deactivate
+no change     /home/xiongjing/miniconda3/etc/profile.d/conda.sh
+no change     /home/xiongjing/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/xiongjing/miniconda3/shell/condabin/Conda.psm1
+no change     /home/xiongjing/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/xiongjing/miniconda3/lib/python3.12/site-packages/xontrib/conda.xsh
+no change     /home/xiongjing/miniconda3/etc/profile.d/conda.csh
+no change     /home/xiongjing/.bashrc
+No action taken.
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Running evaluation for dataset: trec
+Added key: store_based_barrier_key:1 to store for rank: 2
+Added key: store_based_barrier_key:1 to store for rank: 0
+Added key: store_based_barrier_key:1 to store for rank: 3
+Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+Added key: store_based_barrier_key:1 to store for rank: 1
+Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():4
+multi_gpus:True
+torch.cuda.device_count():4
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:Truemulti_gpus:True
+
+torch.cuda.device_count():4torch.cuda.device_count():4
+
+slurmstepd-nwonga100: error: *** JOB 5823 ON nwonga100 CANCELLED AT 2024-12-23T16:40:51 ***

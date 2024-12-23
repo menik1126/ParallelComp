@@ -6,7 +6,7 @@ debug: False
 num_processes: 1
 machine_rank: 0
 num_machines: 1
-gpu_ids: "1"
+gpu_ids: "0"
 rdzv_backend: static
 same_network: True
 main_training_function: main

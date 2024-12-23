@@ -1,0 +1,2304 @@
+no change     /home/xiongjing/miniconda3/condabin/conda
+no change     /home/xiongjing/miniconda3/bin/conda
+no change     /home/xiongjing/miniconda3/bin/conda-env
+no change     /home/xiongjing/miniconda3/bin/activate
+no change     /home/xiongjing/miniconda3/bin/deactivate
+no change     /home/xiongjing/miniconda3/etc/profile.d/conda.sh
+no change     /home/xiongjing/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/xiongjing/miniconda3/shell/condabin/Conda.psm1
+no change     /home/xiongjing/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/xiongjing/miniconda3/lib/python3.12/site-packages/xontrib/conda.xsh
+no change     /home/xiongjing/miniconda3/etc/profile.d/conda.csh
+no change     /home/xiongjing/.bashrc
+No action taken.
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Running evaluation for dataset: trec
+Added key: store_based_barrier_key:1 to store for rank: 0
+Added key: store_based_barrier_key:1 to store for rank: 4
+Added key: store_based_barrier_key:1 to store for rank: 1
+Added key: store_based_barrier_key:1 to store for rank: 3
+Added key: store_based_barrier_key:1 to store for rank: 2
+Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 4: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+n_windows:[1]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+n_windows:[1]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+n_windows:[1]n_windows:[1]
+
+model_name:/mnt/Data/xiongjing/llama2chat
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:Truemulti_gpus:True
+
+torch.cuda.device_count():5torch.cuda.device_count():5
+
+n_windows:[1]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.63s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.43s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.51s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.58s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.17s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.37s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.19s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.40s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.43s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.53s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.13s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.32s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.16s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.37s/it]
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-23 15:54:46,334 - [Process 4/5] - INFO - loading datasets finished
+2024-12-23 15:54:46,334 - [Process 4/5] - INFO - model_max_len: 3950
+2024-12-23 15:54:46,334 - [Process 4/5] - INFO - output_max_len: 64
+2024-12-23 15:54:46,334 - [Process 4/5] - INFO - parallel_pattern: default
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-23 15:54:46,343 - [Process 3/5] - INFO - loading datasets finished
+2024-12-23 15:54:46,343 - [Process 3/5] - INFO - model_max_len: 3950
+2024-12-23 15:54:46,343 - [Process 3/5] - INFO - output_max_len: 64
+2024-12-23 15:54:46,343 - [Process 3/5] - INFO - parallel_pattern: default
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-23 15:54:46,347 - [Process 0/5] - INFO - loading datasets finished
+2024-12-23 15:54:46,347 - [Process 0/5] - INFO - model_max_len: 3950
+2024-12-23 15:54:46,347 - [Process 0/5] - INFO - output_max_len: 64
+2024-12-23 15:54:46,347 - [Process 0/5] - INFO - parallel_pattern: default
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-23 15:54:46,350 - [Process 2/5] - INFO - loading datasets finished
+2024-12-23 15:54:46,351 - [Process 2/5] - INFO - model_max_len: 3950
+2024-12-23 15:54:46,351 - [Process 2/5] - INFO - output_max_len: 64
+2024-12-23 15:54:46,351 - [Process 2/5] - INFO - parallel_pattern: default
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-23 15:54:46,351 - [Process 4/5] - INFO - Max Length is 8714
+2024-12-23 15:54:46,352 - [Process 4/5] - INFO - Finish loading dataset
+2024-12-23 15:54:46,352 - [Process 1/5] - INFO - loading datasets finished
+2024-12-23 15:54:46,352 - [Process 1/5] - INFO - model_max_len: 3950
+2024-12-23 15:54:46,352 - [Process 1/5] - INFO - output_max_len: 64
+2024-12-23 15:54:46,352 - [Process 4/5] - INFO - get_predicted begin
+2024-12-23 15:54:46,352 - [Process 1/5] - INFO - parallel_pattern: default
+  0%|          | 0/40 [00:00<?, ?it/s]2024-12-23 15:54:46,369 - [Process 3/5] - INFO - Max Length is 8714
+2024-12-23 15:54:46,370 - [Process 3/5] - INFO - Finish loading dataset
+2024-12-23 15:54:46,371 - [Process 3/5] - INFO - get_predicted begin
+  0%|          | 0/40 [00:00<?, ?it/s]2024-12-23 15:54:46,373 - [Process 0/5] - INFO - Max Length is 8714
+2024-12-23 15:54:46,374 - [Process 0/5] - INFO - Finish loading dataset
+2024-12-23 15:54:46,374 - [Process 0/5] - INFO - get_predicted begin
+  0%|          | 0/40 [00:00<?, ?it/s]2024-12-23 15:54:46,377 - [Process 2/5] - INFO - Max Length is 8714
+2024-12-23 15:54:46,377 - [Process 2/5] - INFO - Finish loading dataset
+2024-12-23 15:54:46,378 - [Process 2/5] - INFO - get_predicted begin
+2024-12-23 15:54:46,378 - [Process 1/5] - INFO - Max Length is 8714
+2024-12-23 15:54:46,379 - [Process 1/5] - INFO - Finish loading dataset
+  0%|          | 0/40 [00:00<?, ?it/s]2024-12-23 15:54:46,379 - [Process 1/5] - INFO - get_predicted begin
+  0%|          | 0/40 [00:00<?, ?it/s]len(batch_input_ids):1
+len(batch_input_ids):1
+len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:54:51,109 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:54:51,160 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:54:51,192 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:54:51,197 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:54:51,197 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:54:54,745 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-23 15:54:55,312 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-23 15:54:55,591 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-23 15:54:55,640 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-23 15:54:55,667 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-23 15:54:57,499 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the difference between a cactus and a succulent ?
+Type: Definition of something
+Question: What is the difference between a cougar and a puma ?
+Type: Definition of something
+Question: What is the difference between a tiger and a lion ?
+  2%|▎         | 1/40 [00:11<07:14, 11.13s/it]len(batch_input_ids):1
+2024-12-23 15:54:57,727 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:54:57,967 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Location
+Question: What is the name of the largest city in the world ?
+Type: Location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+  2%|▎         | 1/40 [00:11<07:33, 11.62s/it]len(batch_input_ids):1
+2024-12-23 15:54:58,105 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:54:58,495 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the highest mountain in the solar system ?
+Type: Other location
+Question: How many times does the word love appear in the Bible ?
+Type: Number of something
+Question:
+  2%|▎         | 1/40 [00:12<07:52, 12.12s/it]len(batch_input_ids):1
+2024-12-23 15:54:58,642 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a cashier and a teller ?
+Type: Description of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a crop and a plant ?
+Type:
+  2%|▎         | 1/40 [00:12<07:58, 12.27s/it]2024-12-23 15:54:58,676 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Food
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of Mount Ever
+  2%|▎         | 1/40 [00:12<07:59, 12.30s/it]2024-12-23 15:54:58,694 - [Process 2/5] - INFO - len(per_windows_prompt):1
+len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:54:58,897 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:54:58,938 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:01,436 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:01,742 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:02,356 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:02,583 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:02,632 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:04,368 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type
+  5%|▌         | 2/40 [00:18<05:27,  8.62s/it]2024-12-23 15:55:04,404 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Disease and medicine
+Question: What is the difference between a cougar and a puma ?
+Type: Other entity
+Question: What is the difference between a tiger and a lion ?
+Type: Other entity
+Question: What is the difference between a lynx and a bobcat
+  5%|▌         | 2/40 [00:18<05:25,  8.57s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:55:04,515 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:04,632 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:05,283 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Continent
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Location
+Question: What is the difference between a cougar and a puma ?
+Type: Other entity
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+  5%|▌         | 2/40 [00:18<05:41,  8.98s/it]len(batch_input_ids):1
+2024-12-23 15:55:05,494 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:05,576 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the difference between a cello and a violin ?
+Type: Description of something
+Question: What is the difference between a cake and a pastry ?
+Type: Description of something
+Question: What is the difference between a candy apple and a caramel apple ?
+  5%|▌         | 2/40 [00:19<05:46,  9.13s/it]len(batch_input_ids):1
+2024-12-23 15:55:05,629 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Distance, linear measure
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the sum
+  5%|▌         | 2/40 [00:19<05:47,  9.15s/it]len(batch_input_ids):1
+2024-12-23 15:55:05,791 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:05,872 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:08,176 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:08,347 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:09,174 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:09,460 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:09,574 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:10,836 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a caterpillar and a butterfly ?
+Type: Other entity
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+
+  8%|▊         | 3/40 [00:24<04:40,  7.59s/it]len(batch_input_ids):1
+2024-12-23 15:55:10,965 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:11,277 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other
+  8%|▊         | 3/40 [00:24<04:50,  7.84s/it]len(batch_input_ids):1
+2024-12-23 15:55:11,515 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:12,107 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man-made satellite ?
+Type: Invention, book and other creative piece
+Question: What is the name of the first woman to fly solo across
+  8%|▊         | 3/40 [00:25<04:55,  8.00s/it]len(batch_input_ids):1
+2024-12-23 15:55:12,321 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:12,450 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Color
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first successful program to land on the moon ?
+Type: Event
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+
+  8%|▊         | 3/40 [00:26<04:59,  8.10s/it]len(batch_input_ids):1
+2024-12-23 15:55:12,571 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the first computer virus ?
+Type: Definition of something
+Question: What is the difference between a cougar and a puma ?
+Type: Other entity
+Question: What is the name of the largest city in the world ?
+Type: City
+Question
+  8%|▊         | 3/40 [00:26<05:01,  8.14s/it]len(batch_input_ids):1
+2024-12-23 15:55:12,692 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:12,770 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:14,630 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:15,232 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:16,009 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:16,358 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:16,476 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:17,290 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type:
+ 10%|█         | 4/40 [00:30<04:17,  7.14s/it]len(batch_input_ids):1
+2024-12-23 15:55:17,404 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:18,164 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cougar and a puma ?
+Type: Definition of something
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the difference between a cougar and a mountain lion ?
+Type
+ 10%|█         | 4/40 [00:31<04:28,  7.46s/it]len(batch_input_ids):1
+2024-12-23 15:55:18,369 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:18,944 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly solo across the Atlantic ?
+Type
+ 10%|█         | 4/40 [00:32<04:31,  7.54s/it]len(batch_input_ids):1
+2024-12-23 15:55:19,180 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:19,355 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type:
+ 10%|█         | 4/40 [00:32<04:34,  7.63s/it]len(batch_input_ids):1
+2024-12-23 15:55:19,481 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type: Individual
+Question: What is the most common cause of death in the United States ?
+Type: Lasting time of
+ 10%|█         | 4/40 [00:33<04:35,  7.66s/it]len(batch_input_ids):1
+2024-12-23 15:55:19,582 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:19,710 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:21,070 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:22,091 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:22,869 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:23,251 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:23,419 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:23,728 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the first permanent English settlement in North America ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+
+ 12%|█▎        | 5/40 [00:37<04:01,  6.89s/it]len(batch_input_ids):1
+2024-12-23 15:55:23,862 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:25,022 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Organ of body
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type:
+ 12%|█▎        | 5/40 [00:38<04:13,  7.25s/it]2024-12-23 15:55:25,165 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:25,805 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of Mount
+ 12%|█▎        | 5/40 [00:39<04:15,  7.29s/it]len(batch_input_ids):1
+2024-12-23 15:55:25,995 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:26,245 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Country
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+
+ 12%|█▎        | 5/40 [00:39<04:17,  7.36s/it]len(batch_input_ids):1
+2024-12-23 15:55:26,419 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+
+ 12%|█▎        | 5/40 [00:40<04:18,  7.40s/it]len(batch_input_ids):1
+2024-12-23 15:55:26,511 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:26,616 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:27,531 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:27,711 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:29,688 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:30,187 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:30,197 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cough and a sneeze ?
+Type: Reason
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the difference between a penguin and a seal ?
+Type: Definition of
+ 15%|█▌        | 6/40 [00:43<03:49,  6.75s/it]len(batch_input_ids):1
+2024-12-23 15:55:30,318 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:30,324 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+2024-12-23 15:55:30,327 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other
+ 15%|█▌        | 6/40 [00:43<03:43,  6.58s/it]len(batch_input_ids):1
+2024-12-23 15:55:30,569 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:32,515 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a cough and a sneeze ?
+Type: Description of something
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the most common color of a new car ?
+Type: Color
+Question: What
+ 15%|█▌        | 6/40 [00:46<04:01,  7.10s/it]len(batch_input_ids):1
+2024-12-23 15:55:32,754 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:33,178 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: Other location
+Question: What is the name of the first permanent English settlement in North America ?
+Type:
+ 15%|█▌        | 6/40 [00:46<04:05,  7.22s/it]2024-12-23 15:55:33,329 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+ 15%|█▌        | 6/40 [00:46<04:05,  7.23s/it]2024-12-23 15:55:33,338 - [Process 0/5] - INFO - len(per_windows_prompt):1
+len(batch_input_ids):1
+2024-12-23 15:55:33,557 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:33,990 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:34,298 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:36,142 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:36,447 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:36,654 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the largest city in the world ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type:
+ 18%|█▊        | 7/40 [00:50<03:39,  6.65s/it]len(batch_input_ids):1
+2024-12-23 15:55:36,788 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:37,137 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Description of a person
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the difference between a cougar and a puma ?
+Type: Definition of something
+Question: What is the name of the largest planet in our solar system ?
+Type:
+ 18%|█▊        | 7/40 [00:50<03:39,  6.66s/it]2024-12-23 15:55:37,275 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:37,283 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:38,890 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cough and a sneeze ?
+Type: Manner of an action
+Question: What is the name of the largest city in the world ?
+ 18%|█▊        | 7/40 [00:52<03:41,  6.72s/it]len(batch_input_ids):1
+2024-12-23 15:55:39,108 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:39,282 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Invention, book and other creative piece
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the
+ 18%|█▊        | 7/40 [00:52<03:50,  6.99s/it]len(batch_input_ids):1
+2024-12-23 15:55:39,514 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:39,876 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:40,175 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Definition of something
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+ 18%|█▊        | 7/40 [00:53<03:54,  7.11s/it]len(batch_input_ids):1
+2024-12-23 15:55:40,398 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:40,463 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:42,458 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Element and substance
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+
+ 20%|██        | 8/40 [00:56<03:19,  6.23s/it]len(batch_input_ids):1
+2024-12-23 15:55:42,683 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:42,786 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:43,126 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cactus and a succulent ?
+Type: Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+
+ 20%|██        | 8/40 [00:56<03:31,  6.59s/it]len(batch_input_ids):1
+2024-12-23 15:55:43,208 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:43,251 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:44,118 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:45,691 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+
+ 20%|██        | 8/40 [00:59<03:35,  6.75s/it]len(batch_input_ids):1
+2024-12-23 15:55:45,915 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:46,003 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+
+ 20%|██        | 8/40 [00:59<03:40,  6.90s/it]2024-12-23 15:55:46,165 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:46,412 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:46,930 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:47,029 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question:
+ 20%|██        | 8/40 [01:00<03:44,  7.03s/it]len(batch_input_ids):1
+2024-12-23 15:55:47,217 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:49,222 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the difference between a cougar and a puma ?
+Type: Other entity
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type:
+ 22%|██▎       | 9/40 [01:02<03:18,  6.40s/it]len(batch_input_ids):1
+2024-12-23 15:55:49,421 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:49,430 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:49,596 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+2024-12-23 15:55:49,597 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+results:Distance, linear measure
+Question: What is the difference between a cashmere and a pashmere ?
+Type: Definition of something
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the difference between a cashmere and a
+ 22%|██▎       | 9/40 [01:03<03:23,  6.56s/it]len(batch_input_ids):1
+2024-12-23 15:55:49,720 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:50,941 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:52,129 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to fly faster than the speed of sound ?
+Type: Individual
+Question: What is the name of the first woman to fly faster than the speed of sound ?
+Type: Individual
+Question: What is the name of the first person to
+ 22%|██▎       | 9/40 [01:05<03:26,  6.66s/it]len(batch_input_ids):1
+2024-12-23 15:55:52,313 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:52,500 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Currency
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+
+ 22%|██▎       | 9/40 [01:06<03:29,  6.77s/it]len(batch_input_ids):1
+2024-12-23 15:55:52,699 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:53,163 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:53,416 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:53,850 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Invention, book and other creative piece
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in
+ 22%|██▎       | 9/40 [01:07<03:35,  6.96s/it]2024-12-23 15:55:53,993 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:55,970 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Element and substance
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Other
+ 25%|██▌       | 10/40 [01:09<03:15,  6.51s/it]2024-12-23 15:55:56,013 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 15:55:56,086 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+
+ 25%|██▌       | 10/40 [01:09<03:16,  6.54s/it]len(batch_input_ids):1
+2024-12-23 15:55:56,207 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:56,210 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:56,382 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:57,018 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:58,806 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other
+ 25%|██▌       | 10/40 [01:12<03:19,  6.67s/it]len(batch_input_ids):1
+2024-12-23 15:55:59,017 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:59,313 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Description of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a cough and a sneeze ?
+Type: Disease and medicine
+Question: What is the name of the first woman to fly solo
+ 25%|██▌       | 10/40 [01:12<03:23,  6.78s/it]len(batch_input_ids):1
+2024-12-23 15:55:59,542 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:55:59,827 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the difference between a cougar and a puma ?
+Type: Description of something
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+ 25%|██▌       | 10/40 [01:13<03:19,  6.66s/it]len(batch_input_ids):1
+2024-12-23 15:55:59,911 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:55:59,946 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:00,017 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:02,580 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the largest living thing on Earth ?
+Type: Other location
+Question: What
+ 28%|██▊       | 11/40 [01:16<03:09,  6.52s/it]len(batch_input_ids):1
+2024-12-23 15:56:02,711 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:02,720 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:02,751 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Price
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question:
+ 28%|██▊       | 11/40 [01:16<03:11,  6.59s/it]2024-12-23 15:56:02,921 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:03,227 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:03,746 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:05,513 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cougar and a puma ?
+Type: Description of something
+Question: What is the name of the largest city in the world ?
+Type:
+ 28%|██▊       | 11/40 [01:19<03:13,  6.68s/it]len(batch_input_ids):1
+2024-12-23 15:56:05,707 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:06,190 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Holiday
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question
+ 28%|██▊       | 11/40 [01:19<03:17,  6.81s/it]len(batch_input_ids):1
+2024-12-23 15:56:06,415 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:06,417 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:06,558 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:06,719 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the difference between a cougar and a puma ?
+Type: Description of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: Other
+ 28%|██▊       | 11/40 [01:20<03:15,  6.73s/it]len(batch_input_ids):1
+2024-12-23 15:56:06,938 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:09,078 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type:
+ 30%|███       | 12/40 [01:22<03:02,  6.52s/it]len(batch_input_ids):1
+2024-12-23 15:56:09,215 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:09,309 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Country
+Question: What is the name of the largest city in the state of Michigan ?
+Type: City
+Question: What is the name of the largest city in the state of Texas ?
+Type: City
+Question: What is the name of the largest city in the state of California ?
+Type: City
+
+ 30%|███       | 12/40 [01:22<03:04,  6.58s/it]len(batch_input_ids):1
+2024-12-23 15:56:09,411 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:09,496 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:10,110 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:10,666 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:12,202 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Ind
+ 30%|███       | 12/40 [01:25<03:07,  6.68s/it]len(batch_input_ids):1
+2024-12-23 15:56:12,435 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:12,918 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:13,070 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of Mount Ever
+ 30%|███       | 12/40 [01:26<03:11,  6.83s/it]len(batch_input_ids):1
+2024-12-23 15:56:13,244 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:13,296 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:13,636 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+
+ 30%|███       | 12/40 [01:27<03:10,  6.79s/it]len(batch_input_ids):1
+2024-12-23 15:56:13,837 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:15,580 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Lasting time of somethin
+Question: What is the most popular sport in the world ?
+Type: Group or organization of person
+Question: What is the most expensive car in the world ?
+Type: Product
+Question: What is the most popular search engine ?
+Type: Product
+Question: What is
+ 32%|███▎      | 13/40 [01:29<02:55,  6.51s/it]len(batch_input_ids):1
+2024-12-23 15:56:15,690 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:16,045 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a cashier and a teller ?
+Type: Definition of something
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the difference between a candy cane and a candy stick ?
+Type: Definition
+ 32%|███▎      | 13/40 [01:29<02:58,  6.63s/it]len(batch_input_ids):1
+2024-12-23 15:56:16,142 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:16,229 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:16,990 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:17,566 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:18,933 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+
+ 32%|███▎      | 13/40 [01:32<03:00,  6.70s/it]len(batch_input_ids):1
+2024-12-23 15:56:19,149 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:19,398 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:19,953 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first permanent English settlement in North America ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest living thing on Earth ?
+Type: Other entity
+ 32%|███▎      | 13/40 [01:33<03:04,  6.85s/it]2024-12-23 15:56:19,978 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 15:56:20,206 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:20,538 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Animal
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+
+ 32%|███▎      | 13/40 [01:34<03:04,  6.82s/it]len(batch_input_ids):1
+2024-12-23 15:56:20,764 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:22,063 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the difference between a cough and a sneeze ?
+Type:
+ 35%|███▌      | 14/40 [01:35<02:49,  6.50s/it]len(batch_input_ids):1
+2024-12-23 15:56:22,201 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:22,776 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Other entity
+Question: What is the difference between a cashier and a teller ?
+Type: Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+ 35%|███▌      | 14/40 [01:36<02:53,  6.66s/it]len(batch_input_ids):1
+2024-12-23 15:56:22,868 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:22,990 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:23,902 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:24,492 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:25,659 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the largest living thing on Earth ?
+Type: Other location
+Question: What
+ 35%|███▌      | 14/40 [01:39<02:54,  6.71s/it]len(batch_input_ids):1
+2024-12-23 15:56:25,890 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:25,910 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:26,741 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:26,862 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest living thing on Earth ?
+Type: Other location
+ 35%|███▌      | 14/40 [01:40<02:58,  6.87s/it]len(batch_input_ids):1
+2024-12-23 15:56:27,088 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:27,463 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a cactus and a succulent ?
+Type: Definition of something
+Question: What is the name of the first woman to fly solo across the Atlantic
+ 35%|███▌      | 14/40 [01:41<02:58,  6.85s/it]len(batch_input_ids):1
+2024-12-23 15:56:27,659 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:28,574 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Currency
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type:
+ 38%|███▊      | 15/40 [01:42<02:42,  6.51s/it]len(batch_input_ids):1
+2024-12-23 15:56:28,695 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:29,540 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the difference between a cashier and a teller ?
+Type: Reason
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the difference between a cashier and a sales associate ?
+Type: Reason
+
+ 38%|███▊      | 15/40 [01:43<02:47,  6.69s/it]2024-12-23 15:56:29,610 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 15:56:29,762 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:30,784 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:31,388 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:32,401 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a cashier and a teller ?
+Type: Definition of something
+Question: What is the name of the largest planet in our solar system ?
+Type:
+ 38%|███▊      | 15/40 [01:46<02:47,  6.72s/it]2024-12-23 15:56:32,407 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 15:56:32,634 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:33,516 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:33,741 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type: Ind
+ 38%|███▊      | 15/40 [01:47<02:51,  6.87s/it]len(batch_input_ids):1
+2024-12-23 15:56:33,958 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:34,354 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Currency
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+ 38%|███▊      | 15/40 [01:47<02:51,  6.86s/it]2024-12-23 15:56:34,458 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:35,072 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a cashier and a teller ?
+Type: Manner of an action
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cashier and a sales associate
+ 40%|████      | 16/40 [01:48<02:36,  6.50s/it]len(batch_input_ids):1
+2024-12-23 15:56:35,182 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:36,313 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of
+ 40%|████      | 16/40 [01:49<02:41,  6.72s/it]2024-12-23 15:56:36,356 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 15:56:36,482 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:36,545 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:37,657 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:38,897 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:39,096 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the first computer virus ?
+Type: Other entity
+Question: What is the name of the first man-made satellite ?
+Type: Other entity
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type: Individual
+
+ 40%|████      | 16/40 [01:52<02:29,  6.23s/it]2024-12-23 15:56:39,153 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+len(batch_input_ids):1
+results:Individual
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Definition of something
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+
+ 40%|████      | 16/40 [01:52<02:41,  6.73s/it]len(batch_input_ids):1
+2024-12-23 15:56:39,317 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:39,375 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:40,302 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:40,550 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cougar and a puma ?
+Type: Definition of something
+ 40%|████      | 16/40 [01:54<02:44,  6.85s/it]len(batch_input_ids):1
+2024-12-23 15:56:40,754 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:41,559 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other
+ 42%|████▎     | 17/40 [01:55<02:29,  6.50s/it]len(batch_input_ids):1
+2024-12-23 15:56:41,696 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:43,051 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:43,096 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+2024-12-23 15:56:43,098 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+results:Reason
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the most expensive painting ever sold at auction ?
+Type: Invention, book and other creative piece
+Question: What is the most popular search engine ?
+Type: Search engine
+Question:
+ 42%|████▎     | 17/40 [01:56<02:34,  6.74s/it]len(batch_input_ids):1
+2024-12-23 15:56:43,341 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:44,448 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:45,410 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:45,899 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+Question:
+ 42%|████▎     | 17/40 [01:59<02:34,  6.73s/it]2024-12-23 15:56:45,952 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a caterpillar and a butterfly ?
+Type: Description of something
+Question: What is the origin of the name of the city of San Francisco ?
+Type: Description of something
+Question: What is the difference between a tsunami and a
+ 42%|████▎     | 17/40 [01:59<02:27,  6.42s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:56:46,137 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:46,152 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:47,097 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:47,358 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question
+ 42%|████▎     | 17/40 [02:00<02:37,  6.84s/it]len(batch_input_ids):1
+2024-12-23 15:56:47,568 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:48,071 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type:
+ 45%|████▌     | 18/40 [02:01<02:23,  6.50s/it]2024-12-23 15:56:48,142 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:49,861 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:49,892 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:49,896 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Title of a person
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+ 45%|████▌     | 18/40 [02:03<02:28,  6.75s/it]len(batch_input_ids):1
+2024-12-23 15:56:50,112 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:50,517 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:51,263 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:52,652 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a cough and a sneeze ?
+Type: Manner of an action
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the name of the largest city in the world ?
+Type: City
+
+ 45%|████▌     | 18/40 [02:06<02:28,  6.74s/it]len(batch_input_ids):1
+2024-12-23 15:56:52,792 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Distance, linear measure
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the difference between a cough and a sneeze ?
+Type: Other entity
+Question: What is the name of the first man to walk on the moon ?
+
+ 45%|████▌     | 18/40 [02:06<02:23,  6.54s/it]2024-12-23 15:56:52,882 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What
+ 48%|████▊     | 19/40 [02:06<02:05,  5.99s/it]2024-12-23 15:56:52,889 - [Process 2/5] - INFO - len(per_windows_prompt):1
+len(batch_input_ids):1
+2024-12-23 15:56:52,901 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:52,990 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:53,868 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:54,168 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the largest city in the world ?
+Type: Other location
+Question: What is the average lifespan of a blue whale ?
+Type: Number of something
+Question: What is the name of the largest planet in our solar system ?
+Type: Other
+ 45%|████▌     | 18/40 [02:07<02:30,  6.83s/it]2024-12-23 15:56:54,277 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:54,895 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:56,293 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:56,615 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:56:56,672 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the South Pole
+ 48%|████▊     | 19/40 [02:10<02:21,  6.76s/it]2024-12-23 15:56:56,709 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 15:56:56,901 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:57,489 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:County
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+
+ 48%|████▊     | 19/40 [02:11<02:05,  5.99s/it]len(batch_input_ids):1
+2024-12-23 15:56:57,741 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:58,911 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type
+ 48%|████▊     | 19/40 [02:12<02:10,  6.20s/it]2024-12-23 15:56:59,072 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:59,366 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cougar and a puma ?
+Type: Other entity
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the difference between a tsunami and a tidal wave ?
+Type: Reason
+ 50%|█████     | 20/40 [02:13<02:02,  6.14s/it]len(batch_input_ids):1
+2024-12-23 15:56:59,406 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Manner of an action
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+Question: What is the name of the first woman to fly solo across the Atlantic
+ 48%|████▊     | 19/40 [02:13<02:21,  6.74s/it]len(batch_input_ids):1
+2024-12-23 15:56:59,486 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:56:59,600 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:00,661 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:01,486 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:02,420 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:03,204 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:03,325 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:03,464 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Price
+Question: What is the difference between a cough and a sneeze ?
+Type: Description of something
+Question: What is the difference between a pencil and a pen ?
+Type: Description of something
+Question: What is the difference between a tiger and a lion ?
+Type
+ 50%|█████     | 20/40 [02:17<02:15,  6.77s/it]len(batch_input_ids):1
+2024-12-23 15:57:03,698 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:04,401 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+
+ 50%|█████     | 20/40 [02:18<02:05,  6.27s/it]2024-12-23 15:57:04,562 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:05,254 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cough and a sneeze ?
+Type: Description of something
+Question: What is the difference between a pencil and a pen ?
+Type: Description of something
+Question: What is the difference between a computer and a calculator ?
+
+ 50%|█████     | 20/40 [02:18<02:04,  6.24s/it]len(batch_input_ids):1
+2024-12-23 15:57:05,492 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:05,860 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man-made satellite launched into space ?
+Type: Invention, book and other creative piece
+Question: What is the name of the first woman
+ 52%|█████▎    | 21/40 [02:19<01:58,  6.25s/it]len(batch_input_ids):1
+2024-12-23 15:57:05,970 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:06,120 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question
+ 50%|█████     | 20/40 [02:19<02:14,  6.73s/it]len(batch_input_ids):1
+2024-12-23 15:57:06,356 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:07,457 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:07,697 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:09,189 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:09,693 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:10,083 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:10,265 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the
+ 52%|█████▎    | 21/40 [02:23<02:08,  6.78s/it]len(batch_input_ids):1
+2024-12-23 15:57:10,441 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first man to walk on the moon
+ 52%|█████▎    | 21/40 [02:24<01:57,  6.20s/it]2024-12-23 15:57:10,521 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:10,598 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:12,055 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Percent, fraction
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the difference between a cashier and a teller ?
+Type: Manner of an action
+Question: What is the name of the largest planet in our solar system ?
+
+ 52%|█████▎    | 21/40 [02:25<02:01,  6.41s/it]len(batch_input_ids):1
+2024-12-23 15:57:12,237 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:12,349 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly solo across the Atlantic ?
+Type
+ 55%|█████▌    | 22/40 [02:25<01:53,  6.32s/it]len(batch_input_ids):1
+2024-12-23 15:57:12,493 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:12,880 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the first permanent English settlement in North America ?
+Type: City
+Question: What is the difference between a cashier and a teller ?
+Type: Description of something
+Question: What is the name of the first man to walk on the moon ?
+Type
+ 52%|█████▎    | 21/40 [02:26<02:08,  6.74s/it]len(batch_input_ids):1
+2024-12-23 15:57:13,111 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:13,466 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:14,281 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:15,936 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:16,108 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the difference between a cougar and a puma ?
+Type: Animal
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type:
+ 55%|█████▌    | 22/40 [02:29<01:48,  6.04s/it]len(batch_input_ids):1
+2024-12-23 15:57:16,214 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:16,371 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:16,837 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:17,093 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type:
+ 55%|█████▌    | 22/40 [02:30<02:02,  6.79s/it]len(batch_input_ids):1
+2024-12-23 15:57:17,310 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:18,745 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the meaning of the word , ` schadenfreude ' ?
+Type: Definition of something
+Question: What is the name of the largest planet in our solar system ?
+Type:
+ 55%|█████▌    | 22/40 [02:32<01:56,  6.50s/it]len(batch_input_ids):1
+2024-12-23 15:57:18,869 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest living thing on Earth ?
+Type: Definition of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type:
+ 57%|█████▊    | 23/40 [02:32<01:48,  6.38s/it]len(batch_input_ids):1
+2024-12-23 15:57:18,935 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:19,010 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:19,637 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the difference between a caterpillar and a butterfly ?
+Type: Description of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: City
+Question: What is the difference between a tsunami and a tidal wave
+ 55%|█████▌    | 22/40 [02:33<02:01,  6.75s/it]2024-12-23 15:57:19,744 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:20,114 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:21,072 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:21,771 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:22,633 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:22,733 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:22,929 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the difference between a cashier and a teller ?
+Type: Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a cougar and a puma ?
+ 57%|█████▊    | 23/40 [02:36<01:46,  6.27s/it]2024-12-23 15:57:23,081 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:23,993 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Other number
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of Mount
+ 57%|█████▊    | 23/40 [02:37<01:56,  6.83s/it]len(batch_input_ids):1
+2024-12-23 15:57:24,246 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:24,476 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the difference between a cough and a sneeze ?
+Type: Reason
+Question: What is the most popular search engine on the internet ?
+Type: Product
+Question: What
+ 57%|█████▊    | 23/40 [02:38<01:44,  6.17s/it]len(batch_input_ids):1
+2024-12-23 15:57:24,698 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:25,392 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Language
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the difference between a cougar and a puma ?
+Type: Other entity
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the difference between
+ 60%|██████    | 24/40 [02:39<01:42,  6.42s/it]len(batch_input_ids):1
+2024-12-23 15:57:25,452 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Distance, linear measure
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first permanent English settlement in North America ?
+Question: What is the name of the first permanent English settlement in North America ?
+Question: What
+ 57%|█████▊    | 23/40 [02:39<01:51,  6.56s/it]len(batch_input_ids):1
+2024-12-23 15:57:25,516 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:25,645 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:26,115 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:28,007 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:28,425 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:28,737 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first permanent English settlement in North America ?
+Type:
+ 60%|██████    | 24/40 [02:42<01:38,  6.13s/it]len(batch_input_ids):1
+2024-12-23 15:57:28,975 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:29,243 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:29,346 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:30,970 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the average lifespan of a blue whale ?
+Type: Number of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the most popular sport in the world ?
+Type: Sport
+
+ 60%|██████    | 24/40 [02:44<01:49,  6.87s/it]2024-12-23 15:57:31,124 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:31,393 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Other entity
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type:
+ 60%|██████    | 24/40 [02:45<01:42,  6.40s/it]len(batch_input_ids):1
+2024-12-23 15:57:31,577 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:31,899 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a cougar and a puma ?
+Type: Definition of something
+Question: What is the average lifespan of a chimpanzee in captivity ?
+Type: Number of something
+Question: What is the name of the first man to walk on
+ 62%|██████▎   | 25/40 [02:45<01:36,  6.45s/it]len(batch_input_ids):1
+2024-12-23 15:57:32,017 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:32,142 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the most common blood type ?
+Type: Number of something
+Question: What is the
+ 60%|██████    | 24/40 [02:45<01:45,  6.60s/it]2024-12-23 15:57:32,273 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:32,712 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:33,984 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:34,797 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:35,304 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:35,556 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Event
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of Mount Ever
+ 62%|██████▎   | 25/40 [02:49<01:35,  6.34s/it]2024-12-23 15:57:35,672 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:35,742 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:36,694 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the largest living thing on Earth ?
+Type: Other location
+Question: What
+ 62%|██████▎   | 25/40 [02:50<01:37,  6.53s/it]len(batch_input_ids):1
+2024-12-23 15:57:36,924 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:37,425 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a cashmere and a pashmere ?
+Type: Description of something
+Question: What is the name of the first woman to fly across the Atlantic
+ 62%|██████▎   | 25/40 [02:51<01:33,  6.20s/it]len(batch_input_ids):1
+2024-12-23 15:57:37,647 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:37,707 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:38,169 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the largest planet in our solar system ?
+Type: Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+ 62%|██████▎   | 25/40 [02:51<01:37,  6.51s/it]len(batch_input_ids):1
+2024-12-23 15:57:38,387 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:38,399 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Location
+Question: What is the name of the largest city in the world ?
+Type: Location
+Question: What is the name of the highest mountain in the solar system ?
+Type: Location
+Question:
+ 65%|██████▌   | 26/40 [02:52<01:30,  6.46s/it]len(batch_input_ids):1
+2024-12-23 15:57:38,527 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:40,156 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: City
+Question: What is the average lifespan of a blue whale ?
+Type: Number of something
+Question: What is the name of the first man to walk on the moon ?
+Type
+ 65%|██████▌   | 26/40 [02:53<01:21,  5.82s/it]len(batch_input_ids):1
+2024-12-23 15:57:40,348 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:40,684 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:41,347 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:42,116 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:42,255 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:43,569 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of Mount
+ 65%|██████▌   | 26/40 [02:57<01:32,  6.63s/it]len(batch_input_ids):1
+2024-12-23 15:57:43,787 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:44,085 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:44,146 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cougar and a puma ?
+Type: Definition of something
+Question: What is the average lifespan of a blue whale ?
+Type: Number of something
+Question: What is the name of the largest planet in our solar system ?
+
+ 65%|██████▌   | 26/40 [02:57<01:29,  6.36s/it]len(batch_input_ids):1
+2024-12-23 15:57:44,387 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:44,911 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first permanent English settlement in North America ?
+Type: City
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What
+ 68%|██████▊   | 27/40 [02:58<01:24,  6.48s/it]len(batch_input_ids):1
+2024-12-23 15:57:45,002 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+ 65%|██████▌   | 26/40 [02:58<01:32,  6.61s/it]2024-12-23 15:57:45,027 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:45,125 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:46,890 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cashier and a teller ?
+Type: Manner of an action
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a cashier and a sales
+ 68%|██████▊   | 27/40 [03:00<01:19,  6.09s/it]len(batch_input_ids):1
+2024-12-23 15:57:47,106 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:47,533 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:47,549 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:48,092 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:48,756 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:50,292 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the meaning of the word `sophistry ' ?
+Type: Definition of something
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question
+ 68%|██████▊   | 27/40 [03:03<01:20,  6.21s/it]len(batch_input_ids):1
+2024-12-23 15:57:50,490 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:50,498 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Group or organization of person
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+ 68%|██████▊   | 27/40 [03:04<01:27,  6.72s/it]len(batch_input_ids):1
+2024-12-23 15:57:50,730 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:50,847 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:50,890 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cashier and a teller ?
+Type: Manner of an action
+Question: What is the name of the first permanent English settlement in North
+ 68%|██████▊   | 27/40 [03:04<01:24,  6.47s/it]len(batch_input_ids):1
+2024-12-23 15:57:51,100 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:51,413 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first successful heart transplant patient ?
+Type: Individual
+Question: What is the name of the first successful kidney transplant patient ?
+Type: Individual
+Question: What is the name of the first successful liver transplant patient ?
+Type:
+ 70%|███████   | 28/40 [03:05<01:17,  6.49s/it]2024-12-23 15:57:51,514 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:53,651 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Color
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+ 70%|███████   | 28/40 [03:07<01:15,  6.29s/it]len(batch_input_ids):1
+2024-12-23 15:57:53,835 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:54,221 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:54,487 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:54,806 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:54,967 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:57,185 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Expression abbreviated
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type:
+ 70%|███████   | 28/40 [03:10<01:16,  6.42s/it]len(batch_input_ids):1
+2024-12-23 15:57:57,388 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:57,461 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cougar and a puma ?
+Type: Definition of something
+Question: What is the average lifespan of a chimpanzee in captivity ?
+Type: Number of something
+Question: What is the name of the largest city in the
+ 70%|███████   | 28/40 [03:11<01:21,  6.79s/it]len(batch_input_ids):1
+2024-12-23 15:57:57,569 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Sport
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of Mount Ever
+ 72%|███████▎  | 29/40 [03:11<01:10,  6.39s/it]2024-12-23 15:57:57,576 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:57:57,601 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+len(batch_input_ids):1
+results:Planet
+Question: What is the name of the first successful steamboat ?
+Type: Other entity
+Question: What is the difference between a cougar and a puma ?
+Type: Description of something
+Question: What is the name of the largest city in the world ?
+Type: City
+Question
+ 70%|███████   | 28/40 [03:11<01:18,  6.55s/it]len(batch_input_ids):1
+2024-12-23 15:57:57,679 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:57,693 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:57:57,803 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:00,379 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the most popular sport in the world ?
+Type: Other location
+Question: What is the average lifespan of a computer ?
+Type: Lasting time of somethin
+Question: What is the most popular search engine on the internet ?
+Type: Other location
+Question
+ 72%|███████▎  | 29/40 [03:14<01:10,  6.42s/it]len(batch_input_ids):1
+2024-12-23 15:58:00,577 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:01,121 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:01,425 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:01,436 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:01,508 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:04,081 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+2024-12-23 15:58:04,081 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Expression abbreviated
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+
+ 75%|███████▌  | 30/40 [03:17<01:04,  6.42s/it]results:Title of a person
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cougar and a puma ?
+Type: Other entity
+Question: What is the name of the largest city in the world ?
+Type
+ 72%|███████▎  | 29/40 [03:17<01:12,  6.56s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:58:04,227 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:04,275 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:04,301 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first permanent English settlement in North America ?
+Type: City
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question:
+ 72%|███████▎  | 29/40 [03:17<01:12,  6.59s/it]2024-12-23 15:58:04,319 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 15:58:04,409 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a cough and a sneeze ?
+Type: Reason
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the difference between a tiger and a lion ?
+Type: Description of
+ 72%|███████▎  | 29/40 [03:18<01:15,  6.84s/it]len(batch_input_ids):1
+2024-12-23 15:58:04,521 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:04,624 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:07,119 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Country
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a cougar and a puma ?
+Type: Description of something
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+ 75%|███████▌  | 30/40 [03:20<01:05,  6.52s/it]len(batch_input_ids):1
+2024-12-23 15:58:07,342 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:07,957 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:08,007 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:08,227 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:08,381 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:10,612 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Ind
+ 78%|███████▊  | 31/40 [03:24<00:58,  6.46s/it]len(batch_input_ids):1
+2024-12-23 15:58:10,732 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:10,969 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+ 75%|███████▌  | 30/40 [03:24<01:06,  6.66s/it]2024-12-23 15:58:11,022 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the largest city in the world ?
+Type: Other location
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+Question: What is the name of the largest living thing on Earth ?
+Type: Other location
+Question:
+ 75%|███████▌  | 30/40 [03:24<01:06,  6.63s/it]len(batch_input_ids):1
+2024-12-23 15:58:11,084 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:11,196 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:11,220 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:11,355 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:State
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: Other location
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+ 75%|███████▌  | 30/40 [03:24<01:08,  6.87s/it]len(batch_input_ids):1
+2024-12-23 15:58:11,577 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:13,881 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Country
+Question: What is the difference between a caterpillar and a butterfly ?
+Type: Description of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a tiger and a lion ?
+ 78%|███████▊  | 31/40 [03:27<00:59,  6.59s/it]len(batch_input_ids):1
+2024-12-23 15:58:14,117 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:14,463 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:14,667 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:14,955 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:15,335 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:17,120 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: City
+Question
+ 80%|████████  | 32/40 [03:30<00:51,  6.47s/it]len(batch_input_ids):1
+2024-12-23 15:58:17,256 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:17,433 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the largest living thing on Earth ?
+Type: Other location
+Question: What
+ 78%|███████▊  | 31/40 [03:31<00:59,  6.56s/it]len(batch_input_ids):1
+2024-12-23 15:58:17,653 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:17,861 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:17,912 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the difference between a cougar and a puma ?
+Type: Description of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a cappuccino and a latte
+ 78%|███████▊  | 31/40 [03:31<01:00,  6.74s/it]len(batch_input_ids):1
+2024-12-23 15:58:18,134 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:18,308 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:State
+Question: What is the average lifespan of a cat ?
+Type: Number of something
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is
+ 78%|███████▊  | 31/40 [03:31<01:02,  6.90s/it]len(batch_input_ids):1
+2024-12-23 15:58:18,536 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:20,658 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cashier and a teller ?
+Type: Description of something
+Question: What is the name of the largest city in the world located entirely below sea level ?
+Type: City
+Question: What is the difference between a cashier and a sales
+ 80%|████████  | 32/40 [03:34<00:53,  6.65s/it]len(batch_input_ids):1
+2024-12-23 15:58:20,860 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:20,987 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:21,355 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:21,870 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:22,295 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:23,643 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the difference between a cashier and a teller ?
+Type: Description of something
+Question: What is the name of the largest city in the world ?
+Type
+ 82%|████████▎ | 33/40 [03:37<00:45,  6.49s/it]len(batch_input_ids):1
+2024-12-23 15:58:23,782 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:24,156 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Definition of something
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean
+ 80%|████████  | 32/40 [03:37<00:52,  6.61s/it]2024-12-23 15:58:24,315 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:24,605 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:24,824 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the largest city in the world ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+ 80%|████████  | 32/40 [03:38<00:54,  6.79s/it]2024-12-23 15:58:25,018 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:25,261 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Location
+ 80%|████████  | 32/40 [03:38<00:55,  6.91s/it]2024-12-23 15:58:25,423 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:27,377 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:27,406 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a cashier and a teller ?
+Type: Title of a person
+Question: What is the name of the first computer virus ?
+Type: Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type:
+ 82%|████████▎ | 33/40 [03:41<00:46,  6.68s/it]len(batch_input_ids):1
+2024-12-23 15:58:27,515 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:27,648 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:28,724 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:28,745 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:30,072 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the difference between a cough and a hack ?
+Type: Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+
+ 82%|████████▎ | 33/40 [03:43<00:44,  6.40s/it]len(batch_input_ids):1
+2024-12-23 15:58:30,174 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of
+ 85%|████████▌ | 34/40 [03:43<00:39,  6.50s/it]len(batch_input_ids):1
+2024-12-23 15:58:30,294 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:30,300 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:31,397 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:31,618 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the meaning of the word `sophistry' ?
+Type: Definition of something
+Question: What is the origin of the word `sophistry' ?
+Type: Origin of something
+Question: What is the difference between a sophomore and a junior ?
+Type
+ 82%|████████▎ | 33/40 [03:45<00:47,  6.75s/it]len(batch_input_ids):1
+2024-12-23 15:58:31,658 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the largest living thing on Earth ?
+Type: Other location
+Question: What
+ 82%|████████▎ | 33/40 [03:45<00:47,  6.81s/it]len(batch_input_ids):1
+2024-12-23 15:58:31,820 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:31,889 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:34,001 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:34,029 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:34,197 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type:
+ 85%|████████▌ | 34/40 [03:47<00:40,  6.71s/it]2024-12-23 15:58:34,371 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:35,584 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:35,621 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:36,689 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Other entity
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first permanent English settlement in North America ?
+Question: What is the name of the first permanent English settlement in North America ?
+Question: What is the name
+ 88%|████████▊ | 35/40 [03:50<00:32,  6.50s/it]len(batch_input_ids):1
+2024-12-23 15:58:36,806 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:36,813 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+ 85%|████████▌ | 34/40 [03:50<00:39,  6.51s/it]2024-12-23 15:58:36,944 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:37,785 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:38,571 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Other number
+Question: What is the difference between a cashier and a teller ?
+Type: Other number
+Question: What is the difference between a cashier and a sales associate ?
+Type: Other number
+Question: What is the difference between a cashier and a salesperson ?
+Type
+ 85%|████████▌ | 34/40 [03:52<00:40,  6.81s/it]2024-12-23 15:58:38,609 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the largest city in the world ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type:
+ 85%|████████▌ | 34/40 [03:52<00:41,  6.85s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:58:38,795 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:38,827 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:39,454 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:40,541 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:40,550 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Country
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the state of Michigan ?
+Type: City
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type
+ 88%|████████▊ | 35/40 [03:54<00:33,  6.60s/it]len(batch_input_ids):1
+2024-12-23 15:58:40,750 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:42,125 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a cougar and a puma ?
+Type: Animal
+Question: What is the difference between a tiger and a lion ?
+Type: Animal
+Question: What is the difference between a fox and a wolverine ?
+Type: Animal
+
+ 88%|████████▊ | 35/40 [03:55<00:30,  6.15s/it]len(batch_input_ids):1
+2024-12-23 15:58:42,318 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:42,558 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:42,559 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:43,205 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the largest living thing on Earth ?
+Type: Other location
+Question: What is
+ 90%|█████████ | 36/40 [03:56<00:26,  6.51s/it]len(batch_input_ids):1
+2024-12-23 15:58:43,337 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:44,499 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:45,551 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+2024-12-23 15:58:45,551 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cashier and a teller ?
+Type: Description of something
+Question: What is the difference between a cashier and a sales associate ?
+Type: Description of something
+Question: What is the difference between a cashier and a salesperson
+ 88%|████████▊ | 35/40 [03:59<00:34,  6.88s/it]results:Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type:
+ 88%|████████▊ | 35/40 [03:59<00:34,  6.86s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:58:45,771 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:45,807 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:46,022 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:47,073 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:47,388 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the difference between a cashier and a teller ?
+Type: Description of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cashier and a sales associate ?
+ 90%|█████████ | 36/40 [04:01<00:26,  6.67s/it]len(batch_input_ids):1
+2024-12-23 15:58:47,644 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:48,924 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man-made satellite ?
+Type: Other location
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type:
+ 90%|█████████ | 36/40 [04:02<00:25,  6.34s/it]2024-12-23 15:58:49,059 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:49,534 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:49,536 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:49,734 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first woman to fly solo across the Atlantic ?
+Type:
+ 92%|█████████▎| 37/40 [04:03<00:19,  6.51s/it]2024-12-23 15:58:49,824 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:51,391 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:51,632 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:52,527 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+2024-12-23 15:58:52,529 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type
+ 90%|█████████ | 36/40 [04:06<00:27,  6.89s/it]results:Number of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cashier and a teller ?
+Type: Description of something
+Question: What is the name of the first permanent English settlement in North America ?
+ 90%|█████████ | 36/40 [04:06<00:27,  6.91s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:58:52,793 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:52,799 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:52,891 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:54,345 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Disease and medicine
+Question: What is the difference between a cougar and a puma ?
+Type: Animal
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type
+ 92%|█████████▎| 37/40 [04:07<00:20,  6.76s/it]len(batch_input_ids):1
+2024-12-23 15:58:54,447 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Musical instrument
+Question: What is the difference between a cashier and a teller ?
+Type: Manner of an action
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+
+ 92%|█████████▎| 37/40 [04:08<00:18,  6.10s/it]len(batch_input_ids):1
+2024-12-23 15:58:54,612 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:54,672 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:55,422 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:State
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the most widely spoken language in the world ?
+Type: Language
+Question: What is the highest mountain in the
+ 95%|█████████▌| 38/40 [04:09<00:12,  6.27s/it]len(batch_input_ids):1
+2024-12-23 15:58:55,542 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:56,531 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:56,556 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:58,360 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:58,377 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:59,280 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:58:59,514 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the difference between a cougar and a puma ?
+Type: Animal
+Question: What is the most popular sport in the world ?
+Type: Sport
+Question: What is the meaning of the word `sophistry ' ?
+Type: Definition of something
+Question:
+ 92%|█████████▎| 37/40 [04:13<00:20,  6.93s/it]2024-12-23 15:58:59,542 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the difference between a cappella and barbershop music ?
+Type: Description of something
+Question: What is the name of the first computer virus ?
+Type: Other entity
+Question: What is the difference between a candy apple and a caramel apple ?
+ 92%|█████████▎| 37/40 [04:13<00:20,  6.93s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:58:59,731 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:58:59,791 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:59:01,365 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of Mount
+ 95%|█████████▌| 38/40 [04:14<00:13,  6.84s/it]2024-12-23 15:59:01,378 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Question: What is the name of the largest city in the world that is not a capital ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the largest living thing on Earth ?
+Type
+ 95%|█████████▌| 38/40 [04:15<00:12,  6.35s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:59:01,573 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:59:01,589 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:59:01,940 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Finance
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cashier and a teller ?
+Type: Description of something
+Question: What is the name of the largest city in the world ?
+Type:
+ 98%|█████████▊| 39/40 [04:15<00:06,  6.34s/it]len(batch_input_ids):1
+2024-12-23 15:59:02,054 - [Process 4/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:59:03,467 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:03,552 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:05,296 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:05,319 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:05,792 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:06,450 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type
+ 95%|█████████▌| 38/40 [04:20<00:13,  6.93s/it]len(batch_input_ids):1
+2024-12-23 15:59:06,541 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:City
+Question: What is the name of the first permanent English settlement in North America ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Question: What is the name of the first permanent English settlement in North America ?
+Question: What is the name of the
+ 95%|█████████▌| 38/40 [04:20<00:13,  6.95s/it]2024-12-23 15:59:06,678 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:59:06,698 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:59:08,295 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Time, duration
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cougar and a puma ?
+Type: Definition of something
+Question: What is the name of the first man to walk on the moon ?
+ 98%|█████████▊| 39/40 [04:21<00:06,  6.52s/it]2024-12-23 15:59:08,320 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the difference between a cougar and a puma ?
+Type: Animal
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+
+ 98%|█████████▊| 39/40 [04:21<00:06,  6.87s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 15:59:08,451 - [Process 4/5] - INFO - res.shape is :torch.Size([64])
+results:Other number
+Question: What is the average lifespan of a blue whale ?
+Type: Lasting time of somethin
+Question: What is the most popular sport in Brazil ?
+Type: Other location
+Question: What is the difference between a cougar and a puma ?
+Type:
+100%|██████████| 40/40 [04:22<00:00,  6.39s/it]100%|██████████| 40/40 [04:22<00:00,  6.55s/it]
+2024-12-23 15:59:08,527 - [Process 0/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:59:08,548 - [Process 1/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:59:09,093 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:10,429 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:11,701 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Number of something
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+
+ 98%|█████████▊| 39/40 [04:25<00:06,  6.41s/it]len(batch_input_ids):1
+2024-12-23 15:59:11,927 - [Process 3/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:59:12,236 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:12,295 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:13,289 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest planet in our solar system ?
+Type
+ 98%|█████████▊| 39/40 [04:26<00:06,  6.90s/it]2024-12-23 15:59:13,424 - [Process 2/5] - INFO - len(per_windows_prompt):1
+2024-12-23 15:59:15,234 - [Process 0/5] - INFO - res.shape is :torch.Size([64])
+results:Disease and medicine
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first permanent English settlement in North America ?
+Type
+100%|██████████| 40/40 [04:28<00:00,  6.64s/it]100%|██████████| 40/40 [04:28<00:00,  6.72s/it]
+2024-12-23 15:59:15,293 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the largest city in the world ?
+Type: City
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type:
+100%|██████████| 40/40 [04:28<00:00,  6.90s/it]100%|██████████| 40/40 [04:28<00:00,  6.72s/it]
+2024-12-23 15:59:15,692 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:16,010 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 15:59:18,626 - [Process 3/5] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the first man to fly solo across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first woman to fly solo across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to fly faster than the
+100%|██████████| 40/40 [04:32<00:00,  6.57s/it]100%|██████████| 40/40 [04:32<00:00,  6.81s/it]
+2024-12-23 15:59:18,775 - [Process 2/5] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the name of the first woman to fly across the Atlantic Ocean ?
+Type: Individual
+Question: What is the name of the first person to reach the summit of
+100%|██████████| 40/40 [04:32<00:00,  6.48s/it]100%|██████████| 40/40 [04:32<00:00,  6.81s/it]
+2024-12-23 15:59:18,793 - [Process 4/5] - DEBUG - datasets_name:trec
+2024-12-23 15:59:18,793 - [Process 3/5] - DEBUG - datasets_name:trec
+2024-12-23 15:59:18,793 - [Process 2/5] - DEBUG - datasets_name:trec
+2024-12-23 15:59:18,793 - [Process 1/5] - DEBUG - datasets_name:trec
+2024-12-23 15:59:18,793 - [Process 0/5] - DEBUG - datasets_name:trec
+Running evaluation for dataset: passage_count
+Added key: store_based_barrier_key:1 to store for rank: 3
+Added key: store_based_barrier_key:1 to store for rank: 2
+Added key: store_based_barrier_key:1 to store for rank: 0
+Added key: store_based_barrier_key:1 to store for rank: 1
+Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Added key: store_based_barrier_key:1 to store for rank: 4
+Rank 4: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+n_windows:[1]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+n_windows:[1]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+n_windows:[1]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+n_windows:[1]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+n_windows:[1]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+slurmstepd-nwonga100: error: *** JOB 5813 ON nwonga100 CANCELLED AT 2024-12-23T16:00:07 ***

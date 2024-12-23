@@ -197,7 +197,7 @@ class LlamaAttentionPCW(LlamaAttention):
         else: #prefill阶段
             # 压缩kv
             head_dim = self.head_dim
-            window_size = 4
+            window_size = 8
             kernel_size = 7
             pooling = 'avgpool'
             attn_weights_sum = attn_weights[:, :, -window_size:, :-window_size].sum(dim = -2)

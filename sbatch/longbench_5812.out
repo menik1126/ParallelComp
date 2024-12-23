@@ -1,0 +1,100 @@
+no change     /home/xiongjing/miniconda3/condabin/conda
+no change     /home/xiongjing/miniconda3/bin/conda
+no change     /home/xiongjing/miniconda3/bin/conda-env
+no change     /home/xiongjing/miniconda3/bin/activate
+no change     /home/xiongjing/miniconda3/bin/deactivate
+no change     /home/xiongjing/miniconda3/etc/profile.d/conda.sh
+no change     /home/xiongjing/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/xiongjing/miniconda3/shell/condabin/Conda.psm1
+no change     /home/xiongjing/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/xiongjing/miniconda3/lib/python3.12/site-packages/xontrib/conda.xsh
+no change     /home/xiongjing/miniconda3/etc/profile.d/conda.csh
+no change     /home/xiongjing/.bashrc
+No action taken.
+
+CondaError: Run 'conda init' before 'conda activate'
+
+n_windows:[2]
+prompt_method:complex_cot_pcw_multi_windows
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:False
+torch.cuda.device_count():1
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.90s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.30s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.54s/it]
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+dataset:gsm8k
+  0%|          | 0/7473 [00:00<?, ?it/s] 68%|██████▊   | 5063/7473 [00:00<00:00, 50624.01it/s]100%|██████████| 7473/7473 [00:00<00:00, 50565.66it/s]
+  0%|          | 0/1319 [00:00<?, ?it/s]100%|██████████| 1319/1319 [00:00<00:00, 52184.00it/s]
+filtering test set:
+filtering train set:
+longest_test_prompt = 192
+Found max n shot per window = 5
+sample_number:0
+trainset[0]:{'question': 'Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?', 'gold_reasoning': 'Natalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\n#### 72', 'answer': '72', 'prompts': "Q: Natalia sold clips to 48 of her friends in April, and then she sold half as many clips in May. How many clips did Natalia sell altogether in April and May?\nA: Let's think step by step\nNatalia sold 48/2 = <<48/2=24>>24 clips in May.\nNatalia sold 48+24 = <<48+24=72>>72 clips altogether in April and May.\nThe answer is 72"}
+Trainset size: 7473
+Testset size: 1319
+da:<datasets_loader.GSM8K object at 0x7f59086b8790>
+da.train_df:                                               question  ...                                            prompts
+0     Natalia sold clips to 48 of her friends in Apr...  ...  Q: Natalia sold clips to 48 of her friends in ...
+1     Weng earns $12 an hour for babysitting. Yester...  ...  Q: Weng earns $12 an hour for babysitting. Yes...
+2     Betty is saving money for a new wallet which c...  ...  Q: Betty is saving money for a new wallet whic...
+3     Julie is reading a 120-page book. Yesterday, s...  ...  Q: Julie is reading a 120-page book. Yesterday...
+4     James writes a 3-page letter to 2 different fr...  ...  Q: James writes a 3-page letter to 2 different...
+...                                                 ...  ...                                                ...
+7468  Very early this morning, Elise left home in a ...  ...  Q: Very early this morning, Elise left home in...
+7469  Josh is saving up for a box of cookies. To rai...  ...  Q: Josh is saving up for a box of cookies. To ...
+7470  Colin can skip at six times the speed that Bra...  ...  Q: Colin can skip at six times the speed that ...
+7471  Janet, a third grade teacher, is picking up th...  ...  Q: Janet, a third grade teacher, is picking up...
+7472  At 30, Anika is 4/3 the age of Maddie. What wo...  ...  Q: At 30, Anika is 4/3 the age of Maddie. What...
+
+[7473 rows x 4 columns]
+prompt_method:complex_cot_pcw_multi_windows
+len of df0:1319
+prompt_method:complex_cot_pcw_multi_windows
+len of df0:7473
+LEN OF test_df2:1319
+=========pcw_model.context_window_size:2048
+n_windows:[2]
+len(n_windows):1
+n_shots_per_window:5
+n_shots:[10]
+LEN OF test_df3:1319
+self.prompt_method:complex_cot_pcw_multi_windows
+  0%|          | 0/1 [00:00<?, ?it/s]starting with n = 10
+
+Progress:   0%|          | 0/1 [00:00<?, ?it/s][Aself.n_shots_per_window:5
+
+
+  0%|          | 0/1319 [00:00<?, ?it/s][A[A2024-12-23 15:51:59,292 - [Process 0/1] - DEBUG - len of windows in get_contexts_cache:2
+  0%|          | 0/1319 [00:03<?, ?it/s]
+Progress:   0%|          | 0/1 [00:03<?, ?it/s]
+  0%|          | 0/1 [00:03<?, ?it/s]
+Traceback (most recent call last):
+  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_multi_gpu.py", line 121, in <module>
+    run_pcw_experiment(**vars(args))
+  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_multi_gpu.py", line 78, in run_pcw_experiment
+    accuracies = em.run_experiment_across_shots(n_shots, n_runs)
+  File "/home/xiongjing/sjh/parallel_window_size/experiment_manager.py", line 545, in run_experiment_across_shots
+    self.get_few_shots_acc(windows_few_shots, few_shots_prompts=few_shots_prompts)
+  File "/home/xiongjing/sjh/parallel_window_size/experiment_manager.py", line 396, in get_few_shots_acc
+    returns = self.get_predicted_labels(windows_few_shot, few_shots_prompts=few_shots_prompts)
+  File "/home/xiongjing/sjh/parallel_window_size/experiment_manager.py", line 444, in get_predicted_labels
+    cot = self.predict_label(q, few_shots_prompts=few_shots_prompts)
+  File "/home/xiongjing/sjh/parallel_window_size/experiment_manager.py", line 467, in predict_label
+    res = self.model.pcw_generate(task_text=task_text,
+  File "/home/xiongjing/sjh/parallel_window_size/pcw_wrapper.py", line 374, in pcw_generate
+    cache = self.get_contexts_cache(prompts_avg)
+  File "/home/xiongjing/sjh/parallel_window_size/pcw_wrapper.py", line 171, in get_contexts_cache
+    return {'past_key_values': combine_past_key_values([window['past'] for window in windows], j),
+  File "/home/xiongjing/sjh/parallel_window_size/pcw_wrapper.py", line 17, in combine_past_key_values
+    assert 1==0
+AssertionError
+Traceback (most recent call last):
+  File "/home/xiongjing/miniconda3/envs/parallel/bin/accelerate", line 8, in <module>
+    sys.exit(main())
+  File "/home/xiongjing/miniconda3/envs/parallel/lib/python3.9/site-packages/accelerate/commands/accelerate_cli.py", line 48, in main
+    args.func(args)
+  File "/home/xiongjing/miniconda3/envs/parallel/lib/python3.9/site-packages/accelerate/commands/launch.py", line 1168, in launch_command
+    simple_launcher(args)
+  File "/home/xiongjing/miniconda3/envs/parallel/lib/python3.9/site-packages/accelerate/commands/launch.py", line 763, in simple_launcher
+    raise subprocess.CalledProcessError(returncode=process.returncode, cmd=cmd)
+subprocess.CalledProcessError: Command '['/home/xiongjing/miniconda3/envs/parallel/bin/python', 'run_evaluation_multi_gpu.py', '--dataset', 'gsm8k', '--n-windows', '2', '--subsample-test-set', '2000', '--n-runs', '1', '--output-dir', 'output_complex_cot_pcw_test', '--model', '/mnt/Data/xiongjing/llama2chat', '--prompt_method', 'complex_cot_pcw_multi_windows', '--output_json', 'results_jsons/test1.json', '--model_class', 'modeling_llama_with_pcw', '--sample_number', '0', '--sample_method', '8-shot', '--extra_sample_number', '0']' returned non-zero exit status 1.

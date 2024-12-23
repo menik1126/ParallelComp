@@ -1,0 +1,1316 @@
+no change     /home/xiongjing/miniconda3/condabin/conda
+no change     /home/xiongjing/miniconda3/bin/conda
+no change     /home/xiongjing/miniconda3/bin/conda-env
+no change     /home/xiongjing/miniconda3/bin/activate
+no change     /home/xiongjing/miniconda3/bin/deactivate
+no change     /home/xiongjing/miniconda3/etc/profile.d/conda.sh
+no change     /home/xiongjing/miniconda3/etc/fish/conf.d/conda.fish
+no change     /home/xiongjing/miniconda3/shell/condabin/Conda.psm1
+no change     /home/xiongjing/miniconda3/shell/condabin/conda-hook.ps1
+no change     /home/xiongjing/miniconda3/lib/python3.12/site-packages/xontrib/conda.xsh
+no change     /home/xiongjing/miniconda3/etc/profile.d/conda.csh
+no change     /home/xiongjing/.bashrc
+No action taken.
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Running evaluation for dataset: trec
+Added key: store_based_barrier_key:1 to store for rank: 3
+Added key: store_based_barrier_key:1 to store for rank: 0
+Added key: store_based_barrier_key:1 to store for rank: 2
+Added key: store_based_barrier_key:1 to store for rank: 1
+Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 4 nodes.
+n_windows:[1]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():4
+n_windows:[1]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():4
+n_windows:[1]n_windows:[1]
+
+model_name:/mnt/Data/xiongjing/llama2chatmodel_name:/mnt/Data/xiongjing/llama2chat
+
+multi_gpus:Truemulti_gpus:True
+
+torch.cuda.device_count():4torch.cuda.device_count():4
+
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:05<00:05,  5.63s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:05<00:05,  5.63s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:05<00:05,  5.76s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:05<00:05,  5.82s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.56s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.87s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.56s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.87s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.62s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.94s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.64s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.97s/it]
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-23 16:43:07,258 - [Process 1/4] - INFO - loading datasets finished
+2024-12-23 16:43:07,258 - [Process 1/4] - INFO - model_max_len: 3950
+2024-12-23 16:43:07,258 - [Process 1/4] - INFO - output_max_len: 64
+2024-12-23 16:43:07,258 - [Process 1/4] - INFO - parallel_pattern: default
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-23 16:43:07,260 - [Process 0/4] - INFO - loading datasets finished
+2024-12-23 16:43:07,260 - [Process 0/4] - INFO - model_max_len: 3950
+2024-12-23 16:43:07,260 - [Process 0/4] - INFO - output_max_len: 64
+2024-12-23 16:43:07,260 - [Process 0/4] - INFO - parallel_pattern: default
+2024-12-23 16:43:07,260 - [Process 3/4] - INFO - loading datasets finished
+2024-12-23 16:43:07,260 - [Process 3/4] - INFO - model_max_len: 3950
+2024-12-23 16:43:07,260 - [Process 3/4] - INFO - output_max_len: 64
+2024-12-23 16:43:07,260 - [Process 3/4] - INFO - parallel_pattern: default
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-23 16:43:07,268 - [Process 2/4] - INFO - loading datasets finished
+2024-12-23 16:43:07,268 - [Process 2/4] - INFO - model_max_len: 3950
+2024-12-23 16:43:07,268 - [Process 2/4] - INFO - output_max_len: 64
+2024-12-23 16:43:07,268 - [Process 2/4] - INFO - parallel_pattern: default
+2024-12-23 16:43:07,285 - [Process 1/4] - INFO - Max Length is 8714
+2024-12-23 16:43:07,286 - [Process 1/4] - INFO - Finish loading dataset
+2024-12-23 16:43:07,287 - [Process 1/4] - INFO - get_predicted begin
+2024-12-23 16:43:07,287 - [Process 0/4] - INFO - Max Length is 8714
+2024-12-23 16:43:07,287 - [Process 3/4] - INFO - Max Length is 8714
+2024-12-23 16:43:07,287 - [Process 0/4] - INFO - Finish loading dataset
+2024-12-23 16:43:07,288 - [Process 3/4] - INFO - Finish loading dataset
+  0%|          | 0/50 [00:00<?, ?it/s]2024-12-23 16:43:07,288 - [Process 0/4] - INFO - get_predicted begin
+2024-12-23 16:43:07,288 - [Process 3/4] - INFO - get_predicted begin
+  0%|          | 0/50 [00:00<?, ?it/s]  0%|          | 0/50 [00:00<?, ?it/s]2024-12-23 16:43:07,295 - [Process 2/4] - INFO - Max Length is 8714
+2024-12-23 16:43:07,296 - [Process 2/4] - INFO - Finish loading dataset
+2024-12-23 16:43:07,296 - [Process 2/4] - INFO - get_predicted begin
+  0%|          | 0/50 [00:00<?, ?it/s]len(batch_input_ids):1
+len(batch_input_ids):1len(batch_input_ids):1
+
+len(batch_input_ids):1
+2024-12-23 16:43:10,877 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:10,879 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:10,881 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:10,885 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:15,305 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-23 16:43:15,325 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:15,326 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-23 16:43:15,345 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-23 16:43:15,553 - [Process 3/4] - INFO - res.shape is :torch.Size([2])
+results:Other location
+  2%|▏         | 1/50 [00:08<06:44,  8.26s/it]len(batch_input_ids):1
+2024-12-23 16:43:15,799 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:15,866 - [Process 2/4] - INFO - res.shape is :torch.Size([8])
+results:Individual
+Please answer the question.
+  2%|▏         | 1/50 [00:08<06:59,  8.57s/it]len(batch_input_ids):1
+2024-12-23 16:43:16,123 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:16,433 - [Process 0/4] - INFO - res.shape is :torch.Size([22])
+results:Other location
+Answer: The first golf course in the United States was in Yonkers, New York.
+  2%|▏         | 1/50 [00:09<07:28,  9.15s/it]len(batch_input_ids):1
+2024-12-23 16:43:16,667 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:18,150 - [Process 1/4] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the largest city in the world ?
+Type: Other location
+Question: What is the difference between a cashier and a teller ?
+Type: Definition of something
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+  2%|▏         | 1/50 [00:10<08:52, 10.87s/it]len(batch_input_ids):1
+2024-12-23 16:43:18,378 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:19,462 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:19,842 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:19,990 - [Process 3/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+  4%|▍         | 2/50 [00:12<04:48,  6.01s/it]2024-12-23 16:43:20,148 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:20,365 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:20,713 - [Process 2/4] - INFO - res.shape is :torch.Size([17])
+results:Date
+Please answer the question by typing the date of Rosa Parks' birth.
+  4%|▍         | 2/50 [00:13<05:06,  6.38s/it]2024-12-23 16:43:20,832 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:20,871 - [Process 0/4] - INFO - res.shape is :torch.Size([8])
+results:Individual
+Please answer the question.
+  4%|▍         | 2/50 [00:13<05:06,  6.38s/it]len(batch_input_ids):1
+2024-12-23 16:43:21,066 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:22,071 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:22,521 - [Process 1/4] - INFO - res.shape is :torch.Size([7])
+results:Date
+Please answer the question.
+  4%|▍         | 2/50 [00:15<05:38,  7.04s/it]len(batch_input_ids):1
+2024-12-23 16:43:22,720 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:22,852 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:23,378 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:23,598 - [Process 3/4] - INFO - res.shape is :torch.Size([2])
+results:Individual
+  6%|▌         | 3/50 [00:16<03:50,  4.91s/it]len(batch_input_ids):1
+2024-12-23 16:43:23,778 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:24,775 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:25,020 - [Process 0/4] - INFO - res.shape is :torch.Size([2])
+results:Color
+
+  6%|▌         | 3/50 [00:17<04:11,  5.36s/it]len(batch_input_ids):1
+2024-12-23 16:43:25,255 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:25,300 - [Process 2/4] - INFO - res.shape is :torch.Size([63])
+results:Definition of something
+
+Answer: Polymers are a type of material that is made up of many repeating units, called monomers, that are linked together through chemical bonds. They are found in many natural and synthetic materials, including plastics, fibers, and biological molecules.
+  6%|▌         | 3/50 [00:18<04:21,  5.56s/it]len(batch_input_ids):1
+2024-12-23 16:43:25,533 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:26,410 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:27,144 - [Process 1/4] - INFO - res.shape is :torch.Size([14])
+results:Other entity
+
+Please answer the question based on the type provided.
+  6%|▌         | 3/50 [00:19<04:39,  5.94s/it]len(batch_input_ids):1
+2024-12-23 16:43:27,367 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:27,464 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:27,744 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+  8%|▊         | 4/50 [00:20<03:32,  4.61s/it]len(batch_input_ids):1
+2024-12-23 16:43:27,940 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:28,971 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:29,249 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:29,806 - [Process 2/4] - INFO - res.shape is :torch.Size([9])
+results:Other entity
+Answer: Caffeine
+  8%|▊         | 4/50 [00:22<03:56,  5.14s/it]2024-12-23 16:43:29,816 - [Process 0/4] - INFO - res.shape is :torch.Size([16])
+results:Date
+Please answer the question by typing the date when President Kennedy was shot.
+  8%|▊         | 4/50 [00:22<03:56,  5.14s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 16:43:30,008 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:30,044 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:31,056 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:31,336 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+  8%|▊         | 4/50 [00:24<04:01,  5.25s/it]len(batch_input_ids):1
+2024-12-23 16:43:31,531 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:31,629 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:32,117 - [Process 3/4] - INFO - res.shape is :torch.Size([8])
+results:Other location
+Please answer the question.
+ 10%|█         | 5/50 [00:24<03:23,  4.53s/it]len(batch_input_ids):1
+2024-12-23 16:43:32,309 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:33,731 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:33,754 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:34,065 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+results:Other location
+
+
+ 10%|█         | 5/50 [00:26<03:37,  4.82s/it]len(batch_input_ids):1
+2024-12-23 16:43:34,215 - [Process 0/4] - INFO - res.shape is :torch.Size([7])
+results:Country
+Please answer the question.
+ 10%|█         | 5/50 [00:26<03:39,  4.87s/it]2024-12-23 16:43:34,302 - [Process 2/4] - INFO - len(per_windows_prompt):1
+len(batch_input_ids):1
+2024-12-23 16:43:34,462 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:35,222 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:36,000 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:36,383 - [Process 1/4] - INFO - res.shape is :torch.Size([24])
+results:Currency
+Answer: The currency used in Algeria is the Algerian dinar (DZD).
+ 10%|█         | 5/50 [00:29<03:52,  5.18s/it]2024-12-23 16:43:36,495 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:36,549 - [Process 3/4] - INFO - res.shape is :torch.Size([9])
+results:Number of something
+Please answer the question.
+ 12%|█▏        | 6/50 [00:29<03:17,  4.49s/it]len(batch_input_ids):1
+2024-12-23 16:43:36,781 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:38,029 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:38,178 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:38,270 - [Process 2/4] - INFO - res.shape is :torch.Size([2])
+results:Individual
+ 12%|█▏        | 6/50 [00:30<03:23,  4.61s/it]2024-12-23 16:43:38,401 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:38,445 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:38,462 - [Process 0/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 12%|█▏        | 6/50 [00:31<03:24,  4.66s/it]2024-12-23 16:43:38,607 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:39,082 - [Process 1/4] - INFO - res.shape is :torch.Size([15])
+results:Individual
+
+Answer: The type of the question is Individual.
+ 12%|█▏        | 6/50 [00:31<03:10,  4.33s/it]len(batch_input_ids):1
+2024-12-23 16:43:39,284 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:40,472 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:40,753 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 14%|█▍        | 7/50 [00:33<03:09,  4.40s/it]2024-12-23 16:43:40,814 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 16:43:40,978 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:41,458 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:41,685 - [Process 2/4] - INFO - res.shape is :torch.Size([20])
+results:University
+The oldest university in the US is Harvard University, established in 1636.
+ 14%|█▍        | 7/50 [00:34<03:01,  4.22s/it]len(batch_input_ids):1
+2024-12-23 16:43:41,888 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:42,224 - [Process 0/4] - INFO - res.shape is :torch.Size([16])
+results:Other location
+
+Please answer the question based on the type of question provided.
+ 14%|█▍        | 7/50 [00:34<03:07,  4.37s/it]len(batch_input_ids):1
+2024-12-23 16:43:42,423 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:42,978 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:44,536 - [Process 1/4] - INFO - res.shape is :torch.Size([34])
+results:Peninsula
+Answer: Iberian Peninsula
+
+Please let me know if you need more questions or if you want me to answer any of them.
+ 14%|█▍        | 7/50 [00:37<03:22,  4.70s/it]len(batch_input_ids):1
+2024-12-23 16:43:44,670 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:44,717 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:45,199 - [Process 3/4] - INFO - res.shape is :torch.Size([9])
+results:City
+Please let me know the answer.
+ 16%|█▌        | 8/50 [00:37<03:05,  4.41s/it]2024-12-23 16:43:45,314 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:45,619 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:46,146 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:46,189 - [Process 2/4] - INFO - res.shape is :torch.Size([10])
+results:Expression abbreviated
+Please answer the question.
+ 16%|█▌        | 8/50 [00:38<03:01,  4.31s/it]len(batch_input_ids):1
+2024-12-23 16:43:46,384 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:46,679 - [Process 0/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 16%|█▌        | 8/50 [00:39<03:04,  4.39s/it]len(batch_input_ids):1
+2024-12-23 16:43:46,882 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:47,679 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:48,413 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:48,964 - [Process 1/4] - INFO - res.shape is :torch.Size([9])
+results:Number of something
+Please answer the question.
+ 16%|█▌        | 8/50 [00:41<03:13,  4.61s/it]2024-12-23 16:43:49,072 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:49,228 - [Process 3/4] - INFO - res.shape is :torch.Size([37])
+results:Number of something
+The human adult female brain weighs approximately 1,300-1,400 grams (2.9-3.1 pounds).
+ 18%|█▊        | 9/50 [00:41<02:56,  4.29s/it]len(batch_input_ids):1
+2024-12-23 16:43:49,428 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:50,120 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:50,606 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:50,649 - [Process 2/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 18%|█▊        | 9/50 [00:43<02:58,  4.36s/it]len(batch_input_ids):1
+2024-12-23 16:43:50,837 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:51,055 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:51,511 - [Process 0/4] - INFO - res.shape is :torch.Size([18])
+results:Currency
+Answer: The currency they use in Brazil is the Real (BRL).
+ 18%|█▊        | 9/50 [00:44<03:05,  4.53s/it]len(batch_input_ids):1
+2024-12-23 16:43:51,691 - [Process 1/4] - INFO - res.shape is :torch.Size([15])
+2024-12-23 16:43:51,691 - [Process 0/4] - INFO - len(per_windows_prompt):1
+results:County
+
+Please select the type of the question from the options provided.
+ 18%|█▊        | 9/50 [00:44<02:44,  4.02s/it]len(batch_input_ids):1
+2024-12-23 16:43:51,918 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:53,127 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:53,368 - [Process 3/4] - INFO - res.shape is :torch.Size([2])
+results:Date
+
+ 20%|██        | 10/50 [00:46<02:49,  4.25s/it]len(batch_input_ids):1
+2024-12-23 16:43:53,588 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:54,582 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:54,987 - [Process 2/4] - INFO - res.shape is :torch.Size([6])
+results:City
+Answer: Belgrade
+ 20%|██        | 10/50 [00:47<02:54,  4.35s/it]len(batch_input_ids):1
+2024-12-23 16:43:55,220 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:55,418 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:55,620 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:55,901 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 20%|██        | 10/50 [00:48<02:43,  4.08s/it]2024-12-23 16:43:56,047 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:57,289 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:57,821 - [Process 3/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 22%|██▏       | 11/50 [00:50<02:48,  4.31s/it]len(batch_input_ids):1
+2024-12-23 16:43:58,046 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:58,214 - [Process 0/4] - INFO - res.shape is :torch.Size([64])
+results:Description of something
+Please answer the question by selecting one of the following options:
+1. Other location
+2. Definition of something
+3. Other entity
+4. Lasting time of something
+5. Other number
+6. Title of a person
+7. Other location
+8. Description of something
+9
+ 20%|██        | 10/50 [00:50<03:28,  5.20s/it]len(batch_input_ids):1
+2024-12-23 16:43:58,424 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:58,967 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:59,141 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:43:59,209 - [Process 2/4] - INFO - res.shape is :torch.Size([2])
+results:Individual
+ 22%|██▏       | 11/50 [00:51<02:48,  4.31s/it]len(batch_input_ids):1
+2024-12-23 16:43:59,419 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:43:59,865 - [Process 1/4] - INFO - res.shape is :torch.Size([15])
+results:Definition of something
+
+Please answer the question based on the type provided.
+ 22%|██▏       | 11/50 [00:52<02:37,  4.05s/it]2024-12-23 16:44:00,009 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:01,753 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:02,153 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:02,436 - [Process 0/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 22%|██▏       | 11/50 [00:55<03:11,  4.90s/it]len(batch_input_ids):1
+2024-12-23 16:44:02,645 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:02,697 - [Process 3/4] - INFO - res.shape is :torch.Size([19])
+results:Definition of something
+Please answer the question by providing a word or phrase that describes the answer.
+ 24%|██▍       | 12/50 [00:55<02:50,  4.48s/it]len(batch_input_ids):1
+2024-12-23 16:44:02,853 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:02,878 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:03,169 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:03,524 - [Process 1/4] - INFO - res.shape is :torch.Size([14])
+results:Number of something
+
+Please answer the question with the appropriate type.
+ 24%|██▍       | 12/50 [00:56<02:29,  3.93s/it]len(batch_input_ids):1
+2024-12-23 16:44:03,659 - [Process 2/4] - INFO - res.shape is :torch.Size([8])
+results:Individual
+Please answer the question.
+ 24%|██▍       | 12/50 [00:56<02:45,  4.35s/it]2024-12-23 16:44:03,762 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:03,839 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:06,378 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:06,589 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:07,121 - [Process 3/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 26%|██▌       | 13/50 [00:59<02:45,  4.46s/it]2024-12-23 16:44:07,156 - [Process 0/4] - INFO - res.shape is :torch.Size([15])
+results:Date
+
+Please answer the question based on the type of question provided.
+ 24%|██▍       | 12/50 [00:59<03:04,  4.85s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 16:44:07,327 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:07,362 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:07,482 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:07,589 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:07,872 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Other location
+
+ 26%|██▌       | 13/50 [01:00<02:39,  4.31s/it]len(batch_input_ids):1
+2024-12-23 16:44:08,086 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:09,288 - [Process 1/4] - INFO - res.shape is :torch.Size([40])
+results:Number of something
+Please answer the question by typing the type of the question followed by the answer. For example, if the question is an "Other location," you would answer "Britain."
+ 26%|██▌       | 13/50 [01:02<02:45,  4.48s/it]2024-12-23 16:44:09,428 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:11,037 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:11,099 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:11,276 - [Process 3/4] - INFO - res.shape is :torch.Size([2])
+results:Individual
+ 28%|██▊       | 14/50 [01:03<02:37,  4.37s/it]len(batch_input_ids):1
+2024-12-23 16:44:11,463 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:11,586 - [Process 0/4] - INFO - res.shape is :torch.Size([8])
+results:Other location
+Please answer the question.
+ 26%|██▌       | 13/50 [01:04<02:54,  4.72s/it]len(batch_input_ids):1
+2024-12-23 16:44:11,819 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:11,839 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:12,368 - [Process 2/4] - INFO - res.shape is :torch.Size([9])
+results:Number of something
+Please answer the question.
+ 28%|██▊       | 14/50 [01:05<02:37,  4.37s/it]len(batch_input_ids):1
+2024-12-23 16:44:12,443 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:12,566 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:12,688 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Number of something
+ 28%|██▊       | 14/50 [01:05<02:29,  4.16s/it]len(batch_input_ids):1
+2024-12-23 16:44:12,921 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:15,179 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:15,554 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:16,251 - [Process 0/4] - INFO - res.shape is :torch.Size([13])
+results:Individual
+Please let me know the type of the question.
+ 28%|██▊       | 14/50 [01:08<02:49,  4.70s/it]len(batch_input_ids):1
+2024-12-23 16:44:16,320 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:16,458 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:16,604 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 30%|███       | 15/50 [01:09<02:31,  4.33s/it]2024-12-23 16:44:16,646 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 16:44:16,841 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:17,291 - [Process 1/4] - INFO - res.shape is :torch.Size([11])
+results:Other location
+Answer: Sputnik 1.
+ 30%|███       | 15/50 [01:10<02:30,  4.29s/it]2024-12-23 16:44:17,405 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:18,032 - [Process 3/4] - INFO - res.shape is :torch.Size([64])
+results:Individual
+Answer: Steve Jobs
+Question: What is the name of the first permanent English settlement in North America ?
+Type: City
+Answer: Jamestown
+Question: What is the name of the famous painting by Leonardo da Vinci ?
+Type: Invention, book and other creative piece
+ 30%|███       | 15/50 [01:10<02:58,  5.09s/it]len(batch_input_ids):1
+2024-12-23 16:44:18,252 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:19,422 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:20,026 - [Process 1/4] - INFO - res.shape is :torch.Size([14])
+results:Definition of something
+
+Please answer the question with the appropriate type.
+ 32%|███▏      | 16/50 [01:12<02:09,  3.82s/it]len(batch_input_ids):1
+2024-12-23 16:44:20,198 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:20,215 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:20,595 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:21,211 - [Process 0/4] - INFO - res.shape is :torch.Size([20])
+results:Date
+Answer: Abraham Lincoln was born on February 12, 1809.
+ 30%|███       | 15/50 [01:13<02:47,  4.78s/it]len(batch_input_ids):1
+2024-12-23 16:44:21,413 - [Process 2/4] - INFO - res.shape is :torch.Size([15])
+results:Number of something
+
+Please answer the question based on the type provided.
+ 32%|███▏      | 16/50 [01:14<02:32,  4.47s/it]2024-12-23 16:44:21,428 - [Process 0/4] - INFO - len(per_windows_prompt):1
+len(batch_input_ids):1
+2024-12-23 16:44:21,661 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:21,969 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:22,292 - [Process 3/4] - INFO - res.shape is :torch.Size([4])
+results:Definition of something
+
+ 32%|███▏      | 16/50 [01:15<02:44,  4.84s/it]len(batch_input_ids):1
+2024-12-23 16:44:22,488 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:23,943 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:24,472 - [Process 1/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 34%|███▍      | 17/50 [01:17<02:12,  4.01s/it]len(batch_input_ids):1
+2024-12-23 16:44:24,686 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:25,169 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:25,417 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:25,708 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Other location
+
+ 34%|███▍      | 17/50 [01:18<02:25,  4.42s/it]len(batch_input_ids):1
+2024-12-23 16:44:25,928 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:26,207 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:26,209 - [Process 0/4] - INFO - res.shape is :torch.Size([21])
+results:Date
+Please answer the question by typing the date in the format of "mm/dd/yyyy".
+ 32%|███▏      | 16/50 [01:18<02:44,  4.85s/it]len(batch_input_ids):1
+2024-12-23 16:44:26,409 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:27,521 - [Process 3/4] - INFO - res.shape is :torch.Size([28])
+results:Definition of something
+The answer is: Phi Beta Kappa is a Greek phrase that means "Friend of the Muses."
+ 34%|███▍      | 17/50 [01:20<02:43,  4.96s/it]len(batch_input_ids):1
+2024-12-23 16:44:27,737 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:28,413 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:29,688 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:30,142 - [Process 1/4] - INFO - res.shape is :torch.Size([38])
+results:Color
+Please answer the question by selecting one of the following options:
+Red
+Green
+Yellow
+Blue
+Please select one of the options from the list to answer the question.
+ 36%|███▌      | 18/50 [01:22<02:24,  4.51s/it]2024-12-23 16:44:30,149 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 16:44:30,327 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:30,440 - [Process 0/4] - INFO - res.shape is :torch.Size([3])
+results:Other location
+
+ 34%|███▍      | 17/50 [01:23<02:33,  4.66s/it]len(batch_input_ids):1
+2024-12-23 16:44:30,666 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:31,456 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:31,739 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 36%|███▌      | 18/50 [01:24<02:31,  4.73s/it]len(batch_input_ids):1
+2024-12-23 16:44:31,941 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:32,503 - [Process 2/4] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Please answer the question by typing the type of the question followed by the answer. For example, if the question is an example of a question, type "Example of a question" followed by the answer. If the question is a definition, type "Definition" followed by the answer, and so on.
+ 36%|███▌      | 18/50 [01:25<02:44,  5.13s/it]len(batch_input_ids):1
+2024-12-23 16:44:32,731 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:34,054 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:34,411 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:34,583 - [Process 1/4] - INFO - res.shape is :torch.Size([9])
+results:Number of something
+Please answer the question.
+ 38%|███▊      | 19/50 [01:27<02:19,  4.49s/it]len(batch_input_ids):1
+2024-12-23 16:44:34,777 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:34,941 - [Process 0/4] - INFO - res.shape is :torch.Size([9])
+results:Number of something
+Please answer the question.
+ 36%|███▌      | 18/50 [01:27<02:27,  4.61s/it]2024-12-23 16:44:35,049 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:35,669 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:36,200 - [Process 3/4] - INFO - res.shape is :torch.Size([9])
+results:Number of something
+Please answer the question.
+ 38%|███▊      | 19/50 [01:28<02:24,  4.65s/it]len(batch_input_ids):1
+2024-12-23 16:44:36,402 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:36,488 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:36,812 - [Process 2/4] - INFO - res.shape is :torch.Size([4])
+results:Definition of something
+
+ 38%|███▊      | 19/50 [01:29<02:31,  4.89s/it]2024-12-23 16:44:36,946 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:37,095 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:37,884 - [Process 0/4] - INFO - res.shape is :torch.Size([19])
+results:Location
+
+Please let me know if you need more information or if you have any questions.
+ 38%|███▊      | 19/50 [01:30<02:07,  4.11s/it]2024-12-23 16:44:38,043 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:38,507 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:38,748 - [Process 1/4] - INFO - res.shape is :torch.Size([2])
+results:Other entity
+ 40%|████      | 20/50 [01:31<02:11,  4.39s/it]len(batch_input_ids):1
+2024-12-23 16:44:38,969 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:39,557 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:40,140 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:40,244 - [Process 2/4] - INFO - res.shape is :torch.Size([15])
+results:Definition of something
+
+Please answer the question based on the type provided.
+ 40%|████      | 20/50 [01:32<02:13,  4.45s/it]2024-12-23 16:44:40,390 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:40,919 - [Process 3/4] - INFO - res.shape is :torch.Size([15])
+results:Date
+Please determine the type of the question based on the given information.
+ 40%|████      | 20/50 [01:33<02:20,  4.67s/it]len(batch_input_ids):1
+2024-12-23 16:44:41,117 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:41,453 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:42,233 - [Process 0/4] - INFO - res.shape is :torch.Size([16])
+results:Definition of something
+Please answer the question based on the type of question provided.
+ 40%|████      | 20/50 [01:34<02:05,  4.18s/it]len(batch_input_ids):1
+2024-12-23 16:44:42,471 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:42,701 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:43,274 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:43,767 - [Process 1/4] - INFO - res.shape is :torch.Size([22])
+results:Country
+Answer: Addis Ababa
+
+Please select the type of the question from the options provided.
+ 42%|████▏     | 21/50 [01:36<02:12,  4.58s/it]2024-12-23 16:44:43,792 - [Process 2/4] - INFO - res.shape is :torch.Size([10])
+results:Individual
+The answer is:
+Rex
+ 42%|████▏     | 21/50 [01:36<02:01,  4.18s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 16:44:44,001 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:44,002 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:44,855 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:45,344 - [Process 3/4] - INFO - res.shape is :torch.Size([8])
+results:Individual
+Please answer the question.
+ 42%|████▏     | 21/50 [01:38<02:13,  4.60s/it]len(batch_input_ids):1
+2024-12-23 16:44:45,557 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:46,214 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:46,782 - [Process 0/4] - INFO - res.shape is :torch.Size([10])
+results:Percent, fraction
+Please answer the question.
+ 42%|████▏     | 21/50 [01:39<02:04,  4.29s/it]len(batch_input_ids):1
+2024-12-23 16:44:46,961 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:47,733 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:47,762 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:48,016 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 44%|████▍     | 22/50 [01:40<02:05,  4.48s/it]2024-12-23 16:44:48,046 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Number of something
+ 44%|████▍     | 22/50 [01:40<01:57,  4.20s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 16:44:48,217 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:48,286 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:49,300 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:49,583 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 44%|████▍     | 22/50 [01:42<02:05,  4.49s/it]len(batch_input_ids):1
+2024-12-23 16:44:49,806 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:50,705 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:50,987 - [Process 0/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 44%|████▍     | 22/50 [01:43<01:59,  4.27s/it]len(batch_input_ids):1
+2024-12-23 16:44:51,176 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:51,950 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:52,048 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:52,191 - [Process 1/4] - INFO - res.shape is :torch.Size([2])
+results:Other location
+ 46%|████▌     | 23/50 [01:44<01:58,  4.39s/it]len(batch_input_ids):1
+2024-12-23 16:44:52,331 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 46%|████▌     | 23/50 [01:45<01:54,  4.23s/it]len(batch_input_ids):1
+2024-12-23 16:44:52,419 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:52,549 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:53,550 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:54,081 - [Process 3/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 46%|████▌     | 23/50 [01:46<02:01,  4.49s/it]len(batch_input_ids):1
+2024-12-23 16:44:54,262 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:54,921 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:55,203 - [Process 0/4] - INFO - res.shape is :torch.Size([3])
+results:Number of something
+ 46%|████▌     | 23/50 [01:47<01:54,  4.25s/it]len(batch_input_ids):1
+2024-12-23 16:44:55,393 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:56,153 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:56,312 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:56,477 - [Process 1/4] - INFO - res.shape is :torch.Size([4])
+results:Definition of something
+
+ 48%|████▊     | 24/50 [01:49<01:53,  4.36s/it]2024-12-23 16:44:56,595 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 48%|████▊     | 24/50 [01:49<01:50,  4.24s/it]len(batch_input_ids):1
+2024-12-23 16:44:56,635 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:56,783 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:58,007 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:58,290 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 48%|████▊     | 24/50 [01:51<01:54,  4.41s/it]len(batch_input_ids):1
+2024-12-23 16:44:58,515 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:44:59,137 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:44:59,871 - [Process 0/4] - INFO - res.shape is :torch.Size([14])
+results:Definition of something
+Answer: Cardiopulmonary Resuscitation
+ 48%|████▊     | 24/50 [01:52<01:53,  4.38s/it]2024-12-23 16:44:59,999 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:00,027 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:00,489 - [Process 1/4] - INFO - res.shape is :torch.Size([8])
+results:Other location
+Please answer the question.
+ 50%|█████     | 25/50 [01:53<01:46,  4.25s/it]len(batch_input_ids):1
+2024-12-23 16:45:00,546 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:00,670 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:01,981 - [Process 2/4] - INFO - res.shape is :torch.Size([31])
+results:Organ of body
+Please answer the question by typing the type of the question (e.g. "Definition of something") and then providing the answer.
+ 50%|█████     | 25/50 [01:54<01:54,  4.58s/it]2024-12-23 16:45:02,113 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:02,261 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:02,552 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:02,752 - [Process 3/4] - INFO - res.shape is :torch.Size([8])
+results:Currency
+Please answer the question.
+ 50%|█████     | 25/50 [01:55<01:50,  4.42s/it]len(batch_input_ids):1
+2024-12-23 16:45:02,950 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:03,272 - [Process 0/4] - INFO - res.shape is :torch.Size([16])
+results:Date
+The answer is: February 15, 1820
+ 50%|█████     | 25/50 [01:55<01:42,  4.08s/it]len(batch_input_ids):1
+2024-12-23 16:45:03,493 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:04,407 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:04,685 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:04,911 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 52%|█████▏    | 26/50 [01:57<01:38,  4.09s/it]2024-12-23 16:45:04,938 - [Process 1/4] - INFO - res.shape is :torch.Size([9])
+results:Number of something
+Please answer the question.
+ 52%|█████▏    | 26/50 [01:57<01:43,  4.31s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 16:45:05,135 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:05,175 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:06,699 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:06,981 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Other location
+
+ 52%|█████▏    | 26/50 [01:59<01:44,  4.37s/it]len(batch_input_ids):1
+2024-12-23 16:45:07,160 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:07,237 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:08,217 - [Process 0/4] - INFO - res.shape is :torch.Size([20])
+results:Definition of something
+Please answer the question by selecting the appropriate type of question from the list above.
+ 52%|█████▏    | 26/50 [02:00<01:44,  4.34s/it]len(batch_input_ids):1
+2024-12-23 16:45:08,445 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:08,898 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:08,913 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:09,195 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 54%|█████▍    | 27/50 [02:01<01:38,  4.30s/it]len(batch_input_ids):1
+2024-12-23 16:45:09,429 - [Process 2/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 54%|█████▍    | 27/50 [02:02<01:36,  4.22s/it]2024-12-23 16:45:09,433 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:09,563 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:10,910 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:11,400 - [Process 3/4] - INFO - res.shape is :torch.Size([8])
+results:Other location
+Please answer the question.
+ 54%|█████▍    | 27/50 [02:04<01:40,  4.38s/it]len(batch_input_ids):1
+2024-12-23 16:45:11,621 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:12,190 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:12,246 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:13,123 - [Process 2/4] - INFO - res.shape is :torch.Size([18])
+results:Element and substance
+
+Please answer the question by providing the type of the question.
+ 56%|█████▌    | 28/50 [02:05<01:29,  4.06s/it]2024-12-23 16:45:13,172 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 16:45:13,368 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:13,804 - [Process 0/4] - INFO - res.shape is :torch.Size([34])
+results:Definition of something
+Please answer the question by typing the type of the question (e.g. Individual, Definition of something, etc.) followed by the answer.
+ 54%|█████▍    | 27/50 [02:06<01:48,  4.72s/it]len(batch_input_ids):1
+2024-12-23 16:45:14,009 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:15,372 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:16,003 - [Process 1/4] - INFO - res.shape is :torch.Size([64])
+results:Other location
+Answer: Kansas City
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Answer: Neil Armstrong
+Question: What is the name of the largest planet in our solar system ?
+Type: Other location
+Answer: Jupiter
+Question: What
+ 56%|█████▌    | 28/50 [02:08<01:51,  5.05s/it]len(batch_input_ids):1
+2024-12-23 16:45:16,207 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:17,136 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:17,379 - [Process 2/4] - INFO - res.shape is :torch.Size([2])
+results:Individual
+ 58%|█████▊    | 29/50 [02:10<01:26,  4.12s/it]len(batch_input_ids):1
+2024-12-23 16:45:17,588 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:17,726 - [Process 3/4] - INFO - res.shape is :torch.Size([52])
+results:Definition of something
+Answer: Dianetics is a book written by L. Ron Hubbard, the founder of Scientology, that describes his theory of the human mind and how to achieve spiritual enlightenment through a process called auditing.
+ 56%|█████▌    | 28/50 [02:10<01:49,  4.97s/it]2024-12-23 16:45:17,751 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:17,844 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:18,157 - [Process 0/4] - INFO - res.shape is :torch.Size([6])
+results:Planet
+Answer: Jupiter
+ 56%|█████▌    | 28/50 [02:10<01:41,  4.61s/it]len(batch_input_ids):1
+2024-12-23 16:45:18,349 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:19,950 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:20,249 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:20,400 - [Process 1/4] - INFO - res.shape is :torch.Size([7])
+results:Date
+Please answer the question.
+ 58%|█████▊    | 29/50 [02:13<01:41,  4.85s/it]len(batch_input_ids):1
+2024-12-23 16:45:20,472 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 58%|█████▊    | 29/50 [02:13<01:30,  4.30s/it]len(batch_input_ids):1
+2024-12-23 16:45:20,626 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:20,670 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:21,352 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:22,093 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:22,251 - [Process 2/4] - INFO - res.shape is :torch.Size([18])
+results:Element and substance
+
+Please answer the question by providing the type of the question.
+ 60%|██████    | 30/50 [02:14<01:26,  4.34s/it]len(batch_input_ids):1
+2024-12-23 16:45:22,502 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:23,002 - [Process 0/4] - INFO - res.shape is :torch.Size([18])
+results:Location
+Answer: The major fault line near Kentucky is the New Madrid Fault Line.
+ 58%|█████▊    | 29/50 [02:15<01:38,  4.68s/it]len(batch_input_ids):1
+2024-12-23 16:45:23,215 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:24,369 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:24,421 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:24,656 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Other location
+
+ 60%|██████    | 30/50 [02:17<01:33,  4.67s/it]2024-12-23 16:45:24,711 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 60%|██████    | 30/50 [02:17<01:25,  4.28s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 16:45:24,916 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:24,930 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:26,271 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:26,554 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Number of something
+ 62%|██████▏   | 31/50 [02:19<01:22,  4.33s/it]2024-12-23 16:45:26,722 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:26,960 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:27,489 - [Process 0/4] - INFO - res.shape is :torch.Size([9])
+results:Date
+Thank you for answering the question.
+ 60%|██████    | 30/50 [02:20<01:32,  4.62s/it]2024-12-23 16:45:27,659 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:28,656 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:28,684 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:28,976 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Individual
+
+ 62%|██████▏   | 31/50 [02:21<01:21,  4.28s/it]len(batch_input_ids):1
+2024-12-23 16:45:29,172 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:29,819 - [Process 1/4] - INFO - res.shape is :torch.Size([24])
+results:Date
+Answer: William Shakespeare 's twins were born on February 24, 1583.
+ 62%|██████▏   | 31/50 [02:22<01:31,  4.82s/it]len(batch_input_ids):1
+2024-12-23 16:45:30,014 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:30,199 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:30,629 - [Process 2/4] - INFO - res.shape is :torch.Size([7])
+results:Country
+Please answer the question.
+ 64%|██████▍   | 32/50 [02:23<01:16,  4.25s/it]len(batch_input_ids):1
+2024-12-23 16:45:30,816 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:31,184 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:31,416 - [Process 0/4] - INFO - res.shape is :torch.Size([2])
+results:Individual
+ 62%|██████▏   | 31/50 [02:24<01:23,  4.41s/it]len(batch_input_ids):1
+2024-12-23 16:45:31,633 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:32,930 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:33,750 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:33,997 - [Process 1/4] - INFO - res.shape is :torch.Size([2])
+results:Other location
+ 64%|██████▍   | 32/50 [02:26<01:23,  4.63s/it]len(batch_input_ids):1
+2024-12-23 16:45:34,227 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:34,584 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:34,869 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Other location
+
+ 66%|██████▌   | 33/50 [02:27<01:12,  4.25s/it]len(batch_input_ids):1
+2024-12-23 16:45:35,052 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:35,377 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:35,757 - [Process 3/4] - INFO - res.shape is :torch.Size([64])
+results:Date
+Question: What is the name of the largest planet in our solar system ?
+Type: Planet
+Question: Who is the author of the book , `` The Catcher in the Rye '' ?
+Type: Individual
+Question: What is the name of the famous painting by Leonardo da Vinci
+ 64%|██████▍   | 32/50 [02:28<01:30,  5.03s/it]len(batch_input_ids):1
+2024-12-23 16:45:35,908 - [Process 0/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 64%|██████▍   | 32/50 [02:28<01:19,  4.44s/it]2024-12-23 16:45:35,994 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:36,066 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:37,970 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:38,416 - [Process 1/4] - INFO - res.shape is :torch.Size([7])
+results:City
+Please answer the question.
+ 66%|██████▌   | 33/50 [02:31<01:17,  4.57s/it]len(batch_input_ids):1
+2024-12-23 16:45:38,626 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:38,820 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:39,391 - [Process 2/4] - INFO - res.shape is :torch.Size([10])
+results:Other entity
+Answer: Ghirardelli.
+ 68%|██████▊   | 34/50 [02:32<01:09,  4.33s/it]len(batch_input_ids):1
+2024-12-23 16:45:39,476 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:39,606 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:39,747 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:39,990 - [Process 3/4] - INFO - res.shape is :torch.Size([2])
+results:Other location
+ 66%|██████▌   | 33/50 [02:32<01:21,  4.79s/it]len(batch_input_ids):1
+2024-12-23 16:45:40,216 - [Process 0/4] - INFO - res.shape is :torch.Size([15])
+results:Number of something
+
+Please answer the question based on the given information.
+ 66%|██████▌   | 33/50 [02:32<01:14,  4.40s/it]2024-12-23 16:45:40,218 - [Process 3/4] - INFO - len(per_windows_prompt):1
+len(batch_input_ids):1
+2024-12-23 16:45:40,440 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:42,365 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:43,347 - [Process 1/4] - INFO - res.shape is :torch.Size([20])
+results:Definition of something
+Please let me know if you need more information or if you have any questions.
+ 68%|██████▊   | 34/50 [02:36<01:14,  4.68s/it]2024-12-23 16:45:43,376 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 16:45:43,584 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:43,974 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:44,186 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:44,700 - [Process 0/4] - INFO - res.shape is :torch.Size([8])
+results:Other location
+Please answer the question.
+ 68%|██████▊   | 34/50 [02:37<01:10,  4.42s/it]2024-12-23 16:45:44,838 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:46,216 - [Process 2/4] - INFO - res.shape is :torch.Size([64])
+results:Date
+Answer: February 2, 1822
+Question: What is the origin of the word ` pallbearer ' ?
+Type: Description of something
+Answer: From the Middle English word ` pal-bearer ' , meaning ` one who bears a pall '
+Question
+ 70%|███████   | 35/50 [02:38<01:16,  5.08s/it]len(batch_input_ids):1
+2024-12-23 16:45:46,441 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:46,797 - [Process 3/4] - INFO - res.shape is :torch.Size([64])
+results:Language
+Answer: Icelandic
+Question: What is the most popular sport in Brazil ?
+Type: Sport
+Answer: Football (Soccer)
+Question: What is the highest mountain peak in North America ?
+Type: Location
+Answer: Denali (formerly known as Mount McKinley) in
+ 68%|██████▊   | 34/50 [02:39<01:26,  5.40s/it]len(batch_input_ids):1
+2024-12-23 16:45:47,000 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:47,323 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:47,396 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:47,565 - [Process 1/4] - INFO - res.shape is :torch.Size([2])
+results:Other location
+ 70%|███████   | 35/50 [02:40<01:08,  4.54s/it]len(batch_input_ids):1
+2024-12-23 16:45:47,756 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:48,039 - [Process 0/4] - INFO - res.shape is :torch.Size([14])
+results:Other location
+
+Please answer the question by providing the city name.
+ 70%|███████   | 35/50 [02:40<01:01,  4.10s/it]len(batch_input_ids):1
+2024-12-23 16:45:48,230 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:50,206 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:50,755 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:50,982 - [Process 2/4] - INFO - res.shape is :torch.Size([15])
+results:Definition of something
+
+Please answer the question based on the type provided.
+ 72%|███████▏  | 36/50 [02:43<01:09,  4.99s/it]len(batch_input_ids):1
+2024-12-23 16:45:51,212 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:51,493 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:51,785 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Other location
+
+ 72%|███████▏  | 36/50 [02:44<01:02,  4.44s/it]len(batch_input_ids):1
+2024-12-23 16:45:51,921 - [Process 3/4] - INFO - res.shape is :torch.Size([24])
+results:Other location
+Answer: The tallest roller coaster is located in Cedar Point, Ohio, USA.
+ 70%|███████   | 35/50 [02:44<01:19,  5.31s/it]len(batch_input_ids):1
+2024-12-23 16:45:51,976 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:52,046 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:52,131 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:54,687 - [Process 0/4] - INFO - res.shape is :torch.Size([62])
+results:Date
+Answer: The first successful liver transplant was performed by Dr. Joseph Murray on a 23-year-old man named Richard Herrick on November 10, 1967, at Brigham and Women's Hospital in Boston, Massachusetts, U.S.
+ 72%|███████▏  | 36/50 [02:47<01:08,  4.86s/it]2024-12-23 16:45:54,823 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:54,982 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:55,265 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 74%|███████▍  | 37/50 [02:47<01:02,  4.77s/it]len(batch_input_ids):1
+2024-12-23 16:45:55,501 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:55,790 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:55,886 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:56,622 - [Process 3/4] - INFO - res.shape is :torch.Size([13])
+results:Individual
+Answer: Franklin D. Roosevelt.
+ 72%|███████▏  | 36/50 [02:49<01:11,  5.13s/it]len(batch_input_ids):1
+2024-12-23 16:45:56,850 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:56,947 - [Process 1/4] - INFO - res.shape is :torch.Size([23])
+results:Invention, book and other creative piece
+
+Please answer the question by typing the type of the question.
+ 74%|███████▍  | 37/50 [02:49<01:00,  4.66s/it]len(batch_input_ids):1
+2024-12-23 16:45:57,178 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:57,493 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:57,954 - [Process 0/4] - INFO - res.shape is :torch.Size([9])
+results:Musical instrument
+The answer is: Trumpet
+ 74%|███████▍  | 37/50 [02:50<00:56,  4.38s/it]len(batch_input_ids):1
+2024-12-23 16:45:58,154 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:45:59,269 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:45:59,758 - [Process 2/4] - INFO - res.shape is :torch.Size([8])
+results:Individual
+Please answer the question.
+ 76%|███████▌  | 38/50 [02:52<00:56,  4.69s/it]len(batch_input_ids):1
+2024-12-23 16:45:59,964 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:00,610 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:00,918 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:01,059 - [Process 3/4] - INFO - res.shape is :torch.Size([7])
+results:Date
+Please answer the question.
+ 74%|███████▍  | 37/50 [02:53<01:03,  4.92s/it]len(batch_input_ids):1
+2024-12-23 16:46:01,161 - [Process 1/4] - INFO - res.shape is :torch.Size([2])
+results:Individual
+ 76%|███████▌  | 38/50 [02:53<00:54,  4.52s/it]2024-12-23 16:46:01,267 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:01,336 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:01,901 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:02,389 - [Process 0/4] - INFO - res.shape is :torch.Size([8])
+results:Individual
+Please answer the question.
+ 76%|███████▌  | 38/50 [02:55<00:52,  4.40s/it]len(batch_input_ids):1
+2024-12-23 16:46:02,575 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:03,732 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:04,629 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:04,891 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 78%|███████▊  | 39/50 [02:57<00:47,  4.29s/it]len(batch_input_ids):1
+2024-12-23 16:46:05,031 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:05,073 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:05,524 - [Process 3/4] - INFO - res.shape is :torch.Size([8])
+results:Other location
+The answer is: Moon
+ 76%|███████▌  | 38/50 [02:58<00:57,  4.78s/it]2024-12-23 16:46:05,689 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:06,322 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:06,535 - [Process 2/4] - INFO - res.shape is :torch.Size([64])
+results:Definition of something
+Question: What is the name of the first permanent English settlement in North America ?
+Type: Other location
+Question: What is the difference between a cough and a sneeze ?
+Type: Reason
+Question: What is the name of the largest planet in our solar system ?
+
+ 78%|███████▊  | 39/50 [02:59<00:58,  5.32s/it]len(batch_input_ids):1
+2024-12-23 16:46:06,775 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:07,070 - [Process 0/4] - INFO - res.shape is :torch.Size([14])
+results:Number of something
+Please let me know the type of the question.
+ 78%|███████▊  | 39/50 [02:59<00:49,  4.48s/it]len(batch_input_ids):1
+2024-12-23 16:46:07,279 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:08,814 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:09,097 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 80%|████████  | 40/50 [03:01<00:42,  4.26s/it]len(batch_input_ids):1
+2024-12-23 16:46:09,290 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:09,307 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:10,093 - [Process 3/4] - INFO - res.shape is :torch.Size([16])
+results:Country
+Answer: Japan 's most popular sport is sumo wrestling .
+ 78%|███████▊  | 39/50 [03:02<00:51,  4.72s/it]len(batch_input_ids):1
+2024-12-23 16:46:10,293 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:10,545 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:10,993 - [Process 2/4] - INFO - res.shape is :torch.Size([7])
+results:Price
+Please answer the question.
+ 80%|████████  | 40/50 [03:03<00:50,  5.06s/it]2024-12-23 16:46:11,026 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+len(batch_input_ids):1
+2024-12-23 16:46:11,214 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:11,311 - [Process 0/4] - INFO - res.shape is :torch.Size([3])
+results:Description of something
+ 80%|████████  | 40/50 [03:04<00:44,  4.41s/it]len(batch_input_ids):1
+2024-12-23 16:46:11,541 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:13,048 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:13,989 - [Process 1/4] - INFO - res.shape is :torch.Size([19])
+results:Other location
+Answer: The British crown jewels are kept in the Tower of London .
+ 82%|████████▏ | 41/50 [03:06<00:40,  4.45s/it]len(batch_input_ids):1
+2024-12-23 16:46:14,053 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:14,183 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:14,792 - [Process 3/4] - INFO - res.shape is :torch.Size([14])
+results:Expression abbreviated
+Answer: National Aeronautics and Space Administration
+ 80%|████████  | 40/50 [03:07<00:47,  4.71s/it]len(batch_input_ids):1
+2024-12-23 16:46:14,985 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:15,026 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:15,288 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:15,521 - [Process 2/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 82%|████████▏ | 41/50 [03:08<00:44,  4.90s/it]len(batch_input_ids):1
+2024-12-23 16:46:15,774 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:15,831 - [Process 0/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 82%|████████▏ | 41/50 [03:08<00:39,  4.44s/it]len(batch_input_ids):1
+2024-12-23 16:46:16,062 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:17,926 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:18,787 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:19,080 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 82%|████████▏ | 41/50 [03:11<00:41,  4.59s/it]len(batch_input_ids):1
+2024-12-23 16:46:19,293 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:19,546 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:19,807 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:20,085 - [Process 2/4] - INFO - res.shape is :torch.Size([9])
+results:Number of something
+Please answer the question.
+ 84%|████████▍ | 42/50 [03:12<00:38,  4.80s/it]len(batch_input_ids):1
+2024-12-23 16:46:20,299 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:20,372 - [Process 1/4] - INFO - res.shape is :torch.Size([55])
+results:Definition of something
+Please answer the question by selecting one of the following options:
+A. Description of something
+B. Number of something
+C. Definition of something
+D. Other location
+E. Other entity
+Please select the answer that best fits the question.
+ 84%|████████▍ | 42/50 [03:13<00:40,  5.03s/it]len(batch_input_ids):1
+2024-12-23 16:46:20,599 - [Process 0/4] - INFO - res.shape is :torch.Size([15])
+results:Number of something
+
+Please answer the question based on the type provided.
+ 84%|████████▍ | 42/50 [03:13<00:36,  4.54s/it]2024-12-23 16:46:20,606 - [Process 1/4] - INFO - len(per_windows_prompt):1
+len(batch_input_ids):1
+2024-12-23 16:46:20,820 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:23,059 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:23,507 - [Process 3/4] - INFO - res.shape is :torch.Size([7])
+results:Date
+Please answer the question.
+ 84%|████████▍ | 42/50 [03:16<00:36,  4.54s/it]len(batch_input_ids):1
+2024-12-23 16:46:23,726 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:24,073 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:24,348 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:24,583 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:25,082 - [Process 2/4] - INFO - res.shape is :torch.Size([20])
+results:Other number
+
+Please let me know if you need more information or if you have any questions.
+ 86%|████████▌ | 43/50 [03:17<00:34,  4.86s/it]2024-12-23 16:46:25,127 - [Process 1/4] - INFO - res.shape is :torch.Size([15])
+results:Definition of something
+
+Please answer the question based on the type provided.
+ 86%|████████▌ | 43/50 [03:17<00:34,  4.95s/it]len(batch_input_ids):1
+len(batch_input_ids):1
+2024-12-23 16:46:25,333 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:25,340 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:25,394 - [Process 0/4] - INFO - res.shape is :torch.Size([15])
+results:Number of something
+
+Please answer the question based on the type provided.
+ 86%|████████▌ | 43/50 [03:18<00:32,  4.62s/it]len(batch_input_ids):1
+2024-12-23 16:46:25,573 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:27,488 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:27,854 - [Process 3/4] - INFO - res.shape is :torch.Size([5])
+results:Number of something
+
+
+ 86%|████████▌ | 43/50 [03:20<00:31,  4.48s/it]len(batch_input_ids):1
+2024-12-23 16:46:28,081 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:29,081 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:29,105 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:29,336 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:29,363 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Other location
+
+ 88%|████████▊ | 44/50 [03:22<00:28,  4.73s/it]2024-12-23 16:46:29,390 - [Process 2/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 88%|████████▊ | 44/50 [03:22<00:28,  4.69s/it]len(batch_input_ids):1
+2024-12-23 16:46:29,536 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:29,595 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:30,033 - [Process 0/4] - INFO - res.shape is :torch.Size([13])
+results:Date
+
+Please answer the question based on the provided information.
+ 88%|████████▊ | 44/50 [03:22<00:27,  4.62s/it]len(batch_input_ids):1
+2024-12-23 16:46:30,246 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:31,843 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:32,404 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:32,499 - [Process 3/4] - INFO - res.shape is :torch.Size([12])
+results:Number of something
+Please select the type of the question.
+ 88%|████████▊ | 44/50 [03:25<00:27,  4.53s/it]len(batch_input_ids):1
+2024-12-23 16:46:32,699 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:33,073 - [Process 2/4] - INFO - res.shape is :torch.Size([14])
+results:Individual
+
+Please answer the question based on the given information.
+ 90%|█████████ | 45/50 [03:25<00:21,  4.39s/it]len(batch_input_ids):1
+2024-12-23 16:46:33,285 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:33,338 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:34,009 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:34,072 - [Process 1/4] - INFO - res.shape is :torch.Size([14])
+results:Date
+Please answer the question based on the type of question provided.
+ 90%|█████████ | 45/50 [03:26<00:23,  4.73s/it]len(batch_input_ids):1
+2024-12-23 16:46:34,292 - [Process 0/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 90%|█████████ | 45/50 [03:27<00:22,  4.51s/it]2024-12-23 16:46:34,307 - [Process 1/4] - INFO - len(per_windows_prompt):1
+len(batch_input_ids):1
+2024-12-23 16:46:34,476 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:36,462 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:36,787 - [Process 3/4] - INFO - res.shape is :torch.Size([4])
+results:Description of something
+
+ 90%|█████████ | 45/50 [03:29<00:22,  4.46s/it]len(batch_input_ids):1
+2024-12-23 16:46:36,976 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:37,052 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:37,542 - [Process 2/4] - INFO - res.shape is :torch.Size([8])
+results:Other location
+Please answer the question.
+ 92%|█████████▏| 46/50 [03:30<00:17,  4.41s/it]len(batch_input_ids):1
+2024-12-23 16:46:37,744 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:38,049 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:38,244 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:38,291 - [Process 1/4] - INFO - res.shape is :torch.Size([2])
+results:Individual
+ 92%|█████████▏| 46/50 [03:31<00:18,  4.57s/it]len(batch_input_ids):1
+2024-12-23 16:46:38,512 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:38,733 - [Process 0/4] - INFO - res.shape is :torch.Size([8])
+results:Individual
+Please answer the question.
+ 92%|█████████▏| 46/50 [03:31<00:17,  4.49s/it]len(batch_input_ids):1
+2024-12-23 16:46:38,956 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:40,739 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:41,512 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:41,934 - [Process 3/4] - INFO - res.shape is :torch.Size([25])
+results:Date
+Answer: Hurricane season in the Caribbean typically runs from June 1 to November 30.
+ 92%|█████████▏| 46/50 [03:34<00:18,  4.66s/it]len(batch_input_ids):1
+2024-12-23 16:46:42,152 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:42,254 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:42,414 - [Process 2/4] - INFO - res.shape is :torch.Size([18])
+results:Group or organization of person
+Please answer the question by typing the type of the question.
+ 94%|█████████▍| 47/50 [03:35<00:13,  4.55s/it]len(batch_input_ids):1
+2024-12-23 16:46:42,642 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:42,725 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:42,784 - [Process 1/4] - INFO - res.shape is :torch.Size([9])
+results:Individual
+Answer: Natalie Wood.
+ 94%|█████████▍| 47/50 [03:35<00:13,  4.55s/it]len(batch_input_ids):1
+2024-12-23 16:46:43,021 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:43,254 - [Process 0/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 94%|█████████▍| 47/50 [03:35<00:13,  4.50s/it]len(batch_input_ids):1
+2024-12-23 16:46:43,476 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:45,915 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:46,198 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 94%|█████████▍| 47/50 [03:38<00:13,  4.54s/it]2024-12-23 16:46:46,347 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:46,413 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:46,763 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:46,942 - [Process 2/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+ 96%|█████████▌| 48/50 [03:39<00:09,  4.54s/it]len(batch_input_ids):1
+2024-12-23 16:46:47,159 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:47,241 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:47,375 - [Process 1/4] - INFO - res.shape is :torch.Size([11])
+results:Mountain range
+Answer: The Appalachian Mountains
+ 96%|█████████▌| 48/50 [03:40<00:09,  4.56s/it]len(batch_input_ids):1
+2024-12-23 16:46:47,609 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:47,689 - [Process 0/4] - INFO - res.shape is :torch.Size([7])
+results:Date
+Please answer the question.
+ 96%|█████████▌| 48/50 [03:40<00:08,  4.48s/it]len(batch_input_ids):1
+2024-12-23 16:46:47,874 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:49,442 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:50,090 - [Process 3/4] - INFO - res.shape is :torch.Size([13])
+results:State
+
+Please answer the question based on the given information.
+ 96%|█████████▌| 48/50 [03:42<00:08,  4.35s/it]len(batch_input_ids):1
+2024-12-23 16:46:50,285 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:50,927 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:51,169 - [Process 2/4] - INFO - res.shape is :torch.Size([2])
+results:Other location
+ 98%|█████████▊| 49/50 [03:43<00:04,  4.45s/it]len(batch_input_ids):1
+2024-12-23 16:46:51,350 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:51,381 - [Process 2/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:51,641 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:51,962 - [Process 1/4] - INFO - res.shape is :torch.Size([11])
+results:Manner of an action
+Please answer the question.
+ 98%|█████████▊| 49/50 [03:44<00:04,  4.57s/it]len(batch_input_ids):1
+2024-12-23 16:46:52,156 - [Process 1/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:52,871 - [Process 0/4] - INFO - res.shape is :torch.Size([26])
+results:Invention, book and other creative piece
+Please let me know if you need more information or if you have any questions.
+ 98%|█████████▊| 49/50 [03:45<00:04,  4.69s/it]2024-12-23 16:46:53,013 - [Process 0/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:54,050 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:54,333 - [Process 3/4] - INFO - res.shape is :torch.Size([3])
+results:Definition of something
+ 98%|█████████▊| 49/50 [03:47<00:04,  4.32s/it]len(batch_input_ids):1
+2024-12-23 16:46:54,515 - [Process 3/4] - INFO - len(per_windows_prompt):1
+2024-12-23 16:46:55,149 - [Process 2/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:55,897 - [Process 1/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:56,074 - [Process 0/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:46:56,180 - [Process 1/4] - INFO - res.shape is :torch.Size([3])
+results:Other location
+
+100%|██████████| 50/50 [03:48<00:00,  4.46s/it]100%|██████████| 50/50 [03:48<00:00,  4.58s/it]
+2024-12-23 16:46:56,585 - [Process 0/4] - INFO - res.shape is :torch.Size([9])
+results:Definition of something
+Please answer the question.
+100%|██████████| 50/50 [03:49<00:00,  4.40s/it]100%|██████████| 50/50 [03:49<00:00,  4.59s/it]
+2024-12-23 16:46:57,964 - [Process 2/4] - INFO - res.shape is :torch.Size([64])
+results:State
+Answer: Kansas
+Question: What is the chemical symbol for gold ?
+Type: Element and substance
+Answer: Au
+Question: Who wrote the novel, The Grapes of Wrath ?
+Type: Individual
+Answer: John Steinbeck
+Question: What is the capital of Australia ?
+100%|██████████| 50/50 [03:50<00:00,  5.15s/it]100%|██████████| 50/50 [03:50<00:00,  4.61s/it]
+2024-12-23 16:46:58,277 - [Process 3/4] - DEBUG - len of windows in get_contexts_cache:1
+2024-12-23 16:47:01,078 - [Process 3/4] - INFO - res.shape is :torch.Size([64])
+results:Other number
+Question: What is the name of the first man to walk on the moon ?
+Type: Individual
+Question: What is the average lifespan of a blue whale ?
+Type: Other number
+Question: What is the chemical symbol for gold ?
+Type: Other number
+Question: What
+100%|██████████| 50/50 [03:53<00:00,  5.05s/it]100%|██████████| 50/50 [03:53<00:00,  4.68s/it]
+2024-12-23 16:47:01,097 - [Process 1/4] - DEBUG - datasets_name:trec
+2024-12-23 16:47:01,097 - [Process 3/4] - DEBUG - datasets_name:trec
+2024-12-23 16:47:01,097 - [Process 2/4] - DEBUG - datasets_name:trec
+2024-12-23 16:47:01,097 - [Process 0/4] - DEBUG - datasets_name:trec
+od: None: No such file or directory
+run_test_longbench_multi_gpu_window8.sh: line 48: syntax error near unexpected token `done'
+run_test_longbench_multi_gpu_window8.sh: line 48: `done'

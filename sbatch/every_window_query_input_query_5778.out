@@ -1,0 +1,1311 @@
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Running evaluation for dataset: hotpotqa
+Added key: store_based_barrier_key:1 to store for rank: 3
+Added key: store_based_barrier_key:1 to store for rank: 2
+Added key: store_based_barrier_key:1 to store for rank: 1
+Added key: store_based_barrier_key:1 to store for rank: 4
+Added key: store_based_barrier_key:1 to store for rank: 0
+Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+Rank 4: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+n_windows:[2]n_windows:[2]
+
+model_name:/mnt/Data/xiongjing/llama2chatmodel_name:/mnt/Data/xiongjing/llama2chat
+
+multi_gpus:True
+torch.cuda.device_count():5
+multi_gpus:True
+torch.cuda.device_count():5
+multi_gpus:Truemulti_gpus:True
+
+torch.cuda.device_count():5torch.cuda.device_count():5
+
+n_windows:[2]
+model_name:/mnt/Data/xiongjing/llama2chat
+multi_gpus:True
+torch.cuda.device_count():5
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:04<00:04,  4.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.47s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.73s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.72s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.76s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.33s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.54s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.34s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.55s/it]
+Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.71s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.82s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.31s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.52s/it]
+Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.37s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.59s/it]
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-21 18:12:04,746 - [Process 2/5] - INFO - loading datasets finished
+2024-12-21 18:12:04,746 - [Process 2/5] - INFO - model_max_len: 3950
+2024-12-21 18:12:04,746 - [Process 2/5] - INFO - output_max_len: 32
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-21 18:12:04,756 - [Process 4/5] - INFO - loading datasets finished
+2024-12-21 18:12:04,757 - [Process 4/5] - INFO - model_max_len: 3950
+2024-12-21 18:12:04,757 - [Process 4/5] - INFO - output_max_len: 32
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-21 18:12:04,770 - [Process 3/5] - INFO - loading datasets finished
+!!!!!!!!!!!!!!!!!!!!!!!! 这里
+2024-12-21 18:12:04,771 - [Process 3/5] - INFO - model_max_len: 3950
+2024-12-21 18:12:04,771 - [Process 3/5] - INFO - output_max_len: 32
+2024-12-21 18:12:04,771 - [Process 1/5] - INFO - loading datasets finished
+2024-12-21 18:12:04,771 - [Process 1/5] - INFO - model_max_len: 3950
+2024-12-21 18:12:04,771 - [Process 1/5] - INFO - output_max_len: 32
+2024-12-21 18:12:04,771 - [Process 0/5] - INFO - loading datasets finished
+2024-12-21 18:12:04,772 - [Process 0/5] - INFO - model_max_len: 3950
+2024-12-21 18:12:04,772 - [Process 0/5] - INFO - output_max_len: 32
+2024-12-21 18:12:04,792 - [Process 2/5] - INFO - Max Length is 12697
+2024-12-21 18:12:04,793 - [Process 2/5] - INFO - Finish loading dataset
+2024-12-21 18:12:04,793 - [Process 2/5] - INFO - get_predicted begin
+  0%|          | 0/40 [00:00<?, ?it/s]2024-12-21 18:12:04,834 - [Process 4/5] - INFO - Max Length is 12697
+2024-12-21 18:12:04,835 - [Process 4/5] - INFO - Finish loading dataset
+2024-12-21 18:12:04,835 - [Process 4/5] - INFO - get_predicted begin
+  0%|          | 0/40 [00:00<?, ?it/s]2024-12-21 18:12:04,847 - [Process 0/5] - INFO - Max Length is 12697
+2024-12-21 18:12:04,847 - [Process 0/5] - INFO - Finish loading dataset
+2024-12-21 18:12:04,848 - [Process 0/5] - INFO - get_predicted begin
+2024-12-21 18:12:04,848 - [Process 3/5] - INFO - Max Length is 12697
+2024-12-21 18:12:04,848 - [Process 3/5] - INFO - Finish loading dataset
+2024-12-21 18:12:04,848 - [Process 1/5] - INFO - Max Length is 12697
+2024-12-21 18:12:04,849 - [Process 3/5] - INFO - get_predicted begin
+  0%|          | 0/40 [00:00<?, ?it/s]2024-12-21 18:12:04,849 - [Process 1/5] - INFO - Finish loading dataset
+2024-12-21 18:12:04,849 - [Process 1/5] - INFO - get_predicted begin
+  0%|          | 0/40 [00:00<?, ?it/s]  0%|          | 0/40 [00:00<?, ?it/s]2024-12-21 18:12:09,536 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:09,620 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:09,621 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:09,622 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:09,623 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:13,657 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:13,657 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2111])
+2024-12-21 18:12:13,728 - [Process 2/5] - DEBUG - predict_token:tensor([[25281]], device='cuda:2')
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-21 18:12:13,923 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:13,924 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2011])
+2024-12-21 18:12:13,972 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:13,973 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2048])
+2024-12-21 18:12:13,996 - [Process 0/5] - DEBUG - predict_token:tensor([[16498]], device='cuda:0')
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-21 18:12:14,033 - [Process 2/5] - INFO - res.shape is :torch.Size([7])
+results:Pamela B. Green
+  2%|▎         | 1/40 [00:09<06:00,  9.24s/it]2024-12-21 18:12:14,042 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:14,042 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1962])
+2024-12-21 18:12:14,046 - [Process 3/5] - DEBUG - predict_token:tensor([[450]], device='cuda:3')
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-21 18:12:14,120 - [Process 4/5] - DEBUG - predict_token:tensor([[2610]], device='cuda:4')
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-21 18:12:14,134 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:14,135 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2000])
+2024-12-21 18:12:14,211 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:14,214 - [Process 1/5] - DEBUG - predict_token:tensor([[1317]], device='cuda:1')
+Asking to truncate to max_length but no maximum length is provided and the model has no predefined maximum length. Default to no truncation.
+2024-12-21 18:12:14,285 - [Process 4/5] - INFO - res.shape is :torch.Size([3])
+results:Saturday
+  2%|▎         | 1/40 [00:09<06:08,  9.45s/it]2024-12-21 18:12:14,332 - [Process 0/5] - INFO - res.shape is :torch.Size([7])
+results:Gates v. Collier
+  2%|▎         | 1/40 [00:09<06:09,  9.48s/it]2024-12-21 18:12:14,470 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:Nobel Prize
+  2%|▎         | 1/40 [00:09<06:15,  9.62s/it]2024-12-21 18:12:14,516 - [Process 3/5] - INFO - res.shape is :torch.Size([10])
+results:Medium sized version of ducks.
+  2%|▎         | 1/40 [00:09<06:17,  9.67s/it]2024-12-21 18:12:14,543 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:14,628 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:14,736 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:14,780 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:17,911 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:17,911 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2214])
+2024-12-21 18:12:17,980 - [Process 2/5] - DEBUG - predict_token:tensor([[10406]], device='cuda:2')
+2024-12-21 18:12:18,110 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:18,111 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2098])
+2024-12-21 18:12:18,182 - [Process 4/5] - DEBUG - predict_token:tensor([[24728]], device='cuda:4')
+2024-12-21 18:12:18,283 - [Process 2/5] - INFO - res.shape is :torch.Size([7])
+results:Long Khac Nguyen
+  5%|▌         | 2/40 [00:13<03:59,  6.30s/it]2024-12-21 18:12:18,307 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:18,307 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1954])
+2024-12-21 18:12:18,386 - [Process 0/5] - DEBUG - predict_token:tensor([[5322]], device='cuda:0')
+2024-12-21 18:12:18,409 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:18,409 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2076])
+2024-12-21 18:12:18,454 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:18,460 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:18,460 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2163])
+2024-12-21 18:12:18,463 - [Process 4/5] - INFO - res.shape is :torch.Size([6])
+results:Days of Our Lives
+  5%|▌         | 2/40 [00:13<04:01,  6.35s/it]2024-12-21 18:12:18,481 - [Process 1/5] - DEBUG - predict_token:tensor([[22303]], device='cuda:1')
+2024-12-21 18:12:18,529 - [Process 3/5] - DEBUG - predict_token:tensor([[341]], device='cuda:3')
+2024-12-21 18:12:18,632 - [Process 0/5] - INFO - res.shape is :torch.Size([5])
+results:Jules Verne
+  5%|▌         | 2/40 [00:13<04:04,  6.43s/it]2024-12-21 18:12:18,713 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:18,741 - [Process 3/5] - INFO - res.shape is :torch.Size([4])
+results:Mimosa
+  5%|▌         | 2/40 [00:13<04:05,  6.47s/it]2024-12-21 18:12:18,824 - [Process 1/5] - INFO - res.shape is :torch.Size([7])
+results:Stop-motion animation.
+  5%|▌         | 2/40 [00:13<04:07,  6.52s/it]2024-12-21 18:12:18,920 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:19,047 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:19,084 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:22,203 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:22,203 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2113])
+2024-12-21 18:12:22,275 - [Process 2/5] - DEBUG - predict_token:tensor([[26901]], device='cuda:2')
+2024-12-21 18:12:22,401 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:22,401 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1928])
+2024-12-21 18:12:22,481 - [Process 4/5] - DEBUG - predict_token:tensor([[3589]], device='cuda:4')
+2024-12-21 18:12:22,488 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:22,489 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2060])
+2024-12-21 18:12:22,561 - [Process 0/5] - DEBUG - predict_token:tensor([[19662]], device='cuda:0')
+2024-12-21 18:12:22,617 - [Process 2/5] - INFO - res.shape is :torch.Size([8])
+results:
+
+(Insert answer here)
+  8%|▊         | 3/40 [00:17<03:19,  5.41s/it]2024-12-21 18:12:22,637 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:22,637 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2261])
+2024-12-21 18:12:22,680 - [Process 4/5] - INFO - res.shape is :torch.Size([4])
+results:Holliday
+  8%|▊         | 3/40 [00:17<03:18,  5.38s/it]2024-12-21 18:12:22,701 - [Process 3/5] - DEBUG - predict_token:tensor([[16899]], device='cuda:3')
+2024-12-21 18:12:22,748 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:22,763 - [Process 0/5] - INFO - res.shape is :torch.Size([4])
+results:Lansing
+  8%|▊         | 3/40 [00:17<03:19,  5.38s/it]2024-12-21 18:12:22,788 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:22,789 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1963])
+2024-12-21 18:12:22,867 - [Process 1/5] - DEBUG - predict_token:tensor([[3375]], device='cuda:1')
+2024-12-21 18:12:22,977 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:22,986 - [Process 3/5] - INFO - res.shape is :torch.Size([6])
+results:Irrelevant.
+  8%|▊         | 3/40 [00:18<03:21,  5.45s/it]2024-12-21 18:12:23,069 - [Process 1/5] - INFO - res.shape is :torch.Size([4])
+results:Michelle Terry
+  8%|▊         | 3/40 [00:18<03:22,  5.48s/it]2024-12-21 18:12:23,076 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:23,278 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:23,370 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:26,314 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:26,314 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2041])
+2024-12-21 18:12:26,388 - [Process 2/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:2')
+2024-12-21 18:12:26,610 - [Process 2/5] - INFO - res.shape is :torch.Size([5])
+results:100m
+ 10%|█         | 4/40 [00:21<02:54,  4.85s/it]2024-12-21 18:12:26,631 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:26,632 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2046])
+2024-12-21 18:12:26,670 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:26,670 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1973])
+2024-12-21 18:12:26,704 - [Process 0/5] - DEBUG - predict_token:tensor([[27441]], device='cuda:0')
+2024-12-21 18:12:26,750 - [Process 4/5] - DEBUG - predict_token:tensor([[678]], device='cuda:4')
+2024-12-21 18:12:26,781 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:26,907 - [Process 0/5] - INFO - res.shape is :torch.Size([4])
+results:Jupiter
+ 10%|█         | 4/40 [00:22<02:56,  4.89s/it]2024-12-21 18:12:26,997 - [Process 4/5] - INFO - res.shape is :torch.Size([5])
+results:Saginaw
+ 10%|█         | 4/40 [00:22<02:58,  4.96s/it]2024-12-21 18:12:27,018 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:27,018 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2154])
+2024-12-21 18:12:27,086 - [Process 3/5] - DEBUG - predict_token:tensor([[315]], device='cuda:3')
+2024-12-21 18:12:27,159 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:27,159 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2123])
+2024-12-21 18:12:27,191 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:27,231 - [Process 1/5] - DEBUG - predict_token:tensor([[17457]], device='cuda:1')
+2024-12-21 18:12:27,289 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:27,437 - [Process 1/5] - INFO - res.shape is :torch.Size([4])
+results:Nepal
+ 10%|█         | 4/40 [00:22<03:01,  5.04s/it]2024-12-21 18:12:27,552 - [Process 3/5] - INFO - res.shape is :torch.Size([10])
+results:Coca-Cola FEMSA
+ 10%|█         | 4/40 [00:22<03:03,  5.10s/it]2024-12-21 18:12:27,748 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:27,844 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:30,358 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:30,358 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2105])
+2024-12-21 18:12:30,429 - [Process 2/5] - DEBUG - predict_token:tensor([[4121]], device='cuda:2')
+2024-12-21 18:12:30,611 - [Process 2/5] - INFO - res.shape is :torch.Size([4])
+results:Pat Bowlen
+ 12%|█▎        | 5/40 [00:25<02:38,  4.54s/it]2024-12-21 18:12:30,725 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:30,790 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:30,790 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2080])
+2024-12-21 18:12:30,861 - [Process 0/5] - DEBUG - predict_token:tensor([[1551]], device='cuda:0')
+2024-12-21 18:12:30,913 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:30,913 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2238])
+2024-12-21 18:12:30,978 - [Process 4/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:4')
+2024-12-21 18:12:31,012 - [Process 0/5] - INFO - res.shape is :torch.Size([3])
+results:On film
+ 12%|█▎        | 5/40 [00:26<02:41,  4.61s/it]2024-12-21 18:12:31,294 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:31,308 - [Process 4/5] - INFO - res.shape is :torch.Size([7])
+results:94,903
+ 12%|█▎        | 5/40 [00:26<02:45,  4.72s/it]2024-12-21 18:12:31,474 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:31,474 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2069])
+2024-12-21 18:12:31,485 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:31,536 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:31,536 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2024])
+2024-12-21 18:12:31,547 - [Process 3/5] - DEBUG - predict_token:tensor([[11001]], device='cuda:3')
+2024-12-21 18:12:31,616 - [Process 1/5] - DEBUG - predict_token:tensor([[323]], device='cuda:1')
+2024-12-21 18:12:31,869 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:Kwanzaa
+ 12%|█▎        | 5/40 [00:27<02:48,  4.82s/it]2024-12-21 18:12:31,886 - [Process 3/5] - INFO - res.shape is :torch.Size([7])
+results:Ellie Kemper
+ 12%|█▎        | 5/40 [00:27<02:48,  4.82s/it]2024-12-21 18:12:32,153 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:32,157 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:34,420 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:34,420 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1979])
+2024-12-21 18:12:34,501 - [Process 2/5] - DEBUG - predict_token:tensor([[3869]], device='cuda:2')
+2024-12-21 18:12:34,603 - [Process 2/5] - INFO - res.shape is :torch.Size([2])
+results:Yes
+ 15%|█▌        | 6/40 [00:29<02:28,  4.35s/it]2024-12-21 18:12:34,774 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:34,983 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:34,983 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1954])
+2024-12-21 18:12:35,062 - [Process 0/5] - DEBUG - predict_token:tensor([[13212]], device='cuda:0')
+2024-12-21 18:12:35,067 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:35,067 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2008])
+2024-12-21 18:12:35,141 - [Process 4/5] - DEBUG - predict_token:tensor([[14328]], device='cuda:4')
+2024-12-21 18:12:35,345 - [Process 4/5] - INFO - res.shape is :torch.Size([4])
+results:The Atlantic Ocean
+ 15%|█▌        | 6/40 [00:30<02:32,  4.49s/it]2024-12-21 18:12:35,397 - [Process 0/5] - INFO - res.shape is :torch.Size([7])
+results:Brian Henry Mulholland
+ 15%|█▌        | 6/40 [00:30<02:34,  4.53s/it]2024-12-21 18:12:35,636 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:35,677 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:35,740 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:35,740 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1815])
+2024-12-21 18:12:35,755 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:35,755 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2013])
+2024-12-21 18:12:35,821 - [Process 3/5] - DEBUG - predict_token:tensor([[3869]], device='cuda:3')
+2024-12-21 18:12:35,829 - [Process 1/5] - DEBUG - predict_token:tensor([[27179]], device='cuda:1')
+2024-12-21 18:12:35,935 - [Process 3/5] - INFO - res.shape is :torch.Size([2])
+results:Yes
+ 15%|█▌        | 6/40 [00:31<02:35,  4.56s/it]2024-12-21 18:12:36,030 - [Process 1/5] - INFO - res.shape is :torch.Size([4])
+results:Keith Morris
+ 15%|█▌        | 6/40 [00:31<02:36,  4.60s/it]2024-12-21 18:12:36,139 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:36,269 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:38,518 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:38,518 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2002])
+2024-12-21 18:12:38,598 - [Process 2/5] - DEBUG - predict_token:tensor([[951]], device='cuda:2')
+2024-12-21 18:12:38,861 - [Process 2/5] - INFO - res.shape is :torch.Size([6])
+results:Leucippus
+ 18%|█▊        | 7/40 [00:34<02:22,  4.32s/it]2024-12-21 18:12:39,029 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:39,226 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:39,226 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2010])
+2024-12-21 18:12:39,299 - [Process 0/5] - DEBUG - predict_token:tensor([[476]], device='cuda:0')
+2024-12-21 18:12:39,343 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:39,344 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1966])
+2024-12-21 18:12:39,424 - [Process 4/5] - DEBUG - predict_token:tensor([[4643]], device='cuda:4')
+2024-12-21 18:12:39,495 - [Process 0/5] - INFO - res.shape is :torch.Size([4])
+results:Kerala
+ 18%|█▊        | 7/40 [00:34<02:24,  4.39s/it]2024-12-21 18:12:39,611 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:39,846 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:39,847 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1836])
+2024-12-21 18:12:39,928 - [Process 1/5] - DEBUG - predict_token:tensor([[612]], device='cuda:1')
+2024-12-21 18:12:39,950 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:39,950 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2021])
+2024-12-21 18:12:40,031 - [Process 3/5] - DEBUG - predict_token:tensor([[6379]], device='cuda:3')
+2024-12-21 18:12:40,127 - [Process 1/5] - INFO - res.shape is :torch.Size([4])
+results:YIVO
+ 18%|█▊        | 7/40 [00:35<02:26,  4.43s/it]2024-12-21 18:12:40,135 - [Process 4/5] - INFO - res.shape is :torch.Size([16])
+results:Raj Kapoor and Mike Cahill are both film directors.
+ 18%|█▊        | 7/40 [00:35<02:31,  4.59s/it]2024-12-21 18:12:40,233 - [Process 3/5] - INFO - res.shape is :torch.Size([4])
+results:Umina Beach
+ 18%|█▊        | 7/40 [00:35<02:27,  4.48s/it]2024-12-21 18:12:40,316 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:40,383 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:40,460 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:41,814 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:41,814 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1393])
+2024-12-21 18:12:41,855 - [Process 0/5] - DEBUG - predict_token:tensor([[19777]], device='cuda:0')
+2024-12-21 18:12:42,144 - [Process 0/5] - INFO - res.shape is :torch.Size([7])
+results:Pleiospilos
+ 20%|██        | 8/40 [00:37<02:02,  3.84s/it]2024-12-21 18:12:42,388 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:42,649 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:42,649 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2210])
+2024-12-21 18:12:42,714 - [Process 2/5] - DEBUG - predict_token:tensor([[23740]], device='cuda:2')
+2024-12-21 18:12:42,936 - [Process 2/5] - INFO - res.shape is :torch.Size([5])
+results:Miami Gardens
+ 20%|██        | 8/40 [00:38<02:15,  4.24s/it]2024-12-21 18:12:43,097 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:44,085 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:44,085 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2042])
+2024-12-21 18:12:44,099 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:44,099 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2111])
+2024-12-21 18:12:44,133 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:44,133 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1939])
+2024-12-21 18:12:44,164 - [Process 4/5] - DEBUG - predict_token:tensor([[7745]], device='cuda:4')
+2024-12-21 18:12:44,172 - [Process 3/5] - DEBUG - predict_token:tensor([[315]], device='cuda:3')
+2024-12-21 18:12:44,215 - [Process 1/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:1')
+2024-12-21 18:12:44,273 - [Process 4/5] - INFO - res.shape is :torch.Size([2])
+results:Start
+ 20%|██        | 8/40 [00:39<02:22,  4.44s/it]2024-12-21 18:12:44,375 - [Process 3/5] - INFO - res.shape is :torch.Size([4])
+results:Cebu
+ 20%|██        | 8/40 [00:39<02:19,  4.37s/it]2024-12-21 18:12:44,462 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:1826
+ 20%|██        | 8/40 [00:39<02:20,  4.40s/it]2024-12-21 18:12:44,553 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:44,692 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:44,709 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:45,933 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:45,934 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1864])
+2024-12-21 18:12:46,014 - [Process 0/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:0')
+2024-12-21 18:12:46,250 - [Process 0/5] - INFO - res.shape is :torch.Size([5])
+results:2013
+ 22%|██▎       | 9/40 [00:41<02:01,  3.92s/it]2024-12-21 18:12:46,465 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:46,677 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:46,677 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2031])
+2024-12-21 18:12:46,751 - [Process 2/5] - DEBUG - predict_token:tensor([[9134]], device='cuda:2')
+2024-12-21 18:12:47,013 - [Process 2/5] - INFO - res.shape is :torch.Size([6])
+results:555 Water Street
+ 22%|██▎       | 9/40 [00:42<02:09,  4.19s/it]2024-12-21 18:12:47,154 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:48,147 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:48,148 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1806])
+2024-12-21 18:12:48,230 - [Process 4/5] - DEBUG - predict_token:tensor([[7646]], device='cuda:4')
+2024-12-21 18:12:48,315 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:48,315 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2092])
+2024-12-21 18:12:48,339 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:48,339 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2055])
+2024-12-21 18:12:48,387 - [Process 1/5] - DEBUG - predict_token:tensor([[379]], device='cuda:1')
+2024-12-21 18:12:48,413 - [Process 3/5] - DEBUG - predict_token:tensor([[450]], device='cuda:3')
+2024-12-21 18:12:48,466 - [Process 4/5] - INFO - res.shape is :torch.Size([5])
+results:Green and Yellow
+ 22%|██▎       | 9/40 [00:43<02:15,  4.37s/it]2024-12-21 18:12:48,665 - [Process 3/5] - INFO - res.shape is :torch.Size([5])
+results:NASA.
+ 22%|██▎       | 9/40 [00:43<02:14,  4.34s/it]2024-12-21 18:12:48,732 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:48,766 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:48,770 - [Process 1/5] - INFO - res.shape is :torch.Size([8])
+results:Tongshanjiabu
+ 22%|██▎       | 9/40 [00:43<02:15,  4.37s/it]2024-12-21 18:12:49,053 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:50,169 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:50,169 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1950])
+2024-12-21 18:12:50,249 - [Process 0/5] - DEBUG - predict_token:tensor([[1939]], device='cuda:0')
+2024-12-21 18:12:50,442 - [Process 0/5] - INFO - res.shape is :torch.Size([4])
+results:The Rebirth
+ 25%|██▌       | 10/40 [00:45<02:00,  4.00s/it]2024-12-21 18:12:50,721 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:50,754 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:50,754 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2064])
+2024-12-21 18:12:50,811 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:50,812 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1107])
+2024-12-21 18:12:50,828 - [Process 2/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:2')
+2024-12-21 18:12:50,852 - [Process 3/5] - DEBUG - predict_token:tensor([[660]], device='cuda:3')
+2024-12-21 18:12:50,985 - [Process 3/5] - INFO - res.shape is :torch.Size([3])
+results:Suining
+ 25%|██▌       | 10/40 [00:46<01:51,  3.72s/it]2024-12-21 18:12:51,131 - [Process 2/5] - INFO - res.shape is :torch.Size([7])
+results:191943
+ 25%|██▌       | 10/40 [00:46<02:05,  4.17s/it]2024-12-21 18:12:51,244 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:51,273 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:52,504 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:52,505 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2022])
+2024-12-21 18:12:52,584 - [Process 4/5] - DEBUG - predict_token:tensor([[4451]], device='cuda:4')
+2024-12-21 18:12:52,777 - [Process 4/5] - INFO - res.shape is :torch.Size([4])
+results:Outlander
+ 25%|██▌       | 10/40 [00:47<02:10,  4.35s/it]2024-12-21 18:12:52,837 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:52,838 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1990])
+2024-12-21 18:12:52,918 - [Process 1/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:1')
+2024-12-21 18:12:53,059 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:53,154 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:1791
+ 25%|██▌       | 10/40 [00:48<02:11,  4.38s/it]2024-12-21 18:12:53,339 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:54,433 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:54,433 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1932])
+2024-12-21 18:12:54,513 - [Process 0/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:0')
+2024-12-21 18:12:54,749 - [Process 0/5] - INFO - res.shape is :torch.Size([5])
+results:2003
+ 28%|██▊       | 11/40 [00:49<01:58,  4.10s/it]2024-12-21 18:12:55,004 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:55,005 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2165])
+2024-12-21 18:12:55,026 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:55,045 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:55,045 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2117])
+2024-12-21 18:12:55,074 - [Process 3/5] - DEBUG - predict_token:tensor([[2088]], device='cuda:3')
+2024-12-21 18:12:55,117 - [Process 2/5] - DEBUG - predict_token:tensor([[315]], device='cuda:2')
+2024-12-21 18:12:55,181 - [Process 3/5] - INFO - res.shape is :torch.Size([2])
+results:
+
+ 28%|██▊       | 11/40 [00:50<01:52,  3.87s/it]2024-12-21 18:12:55,299 - [Process 2/5] - INFO - res.shape is :torch.Size([4])
+results:BC Lions
+ 28%|██▊       | 11/40 [00:50<02:00,  4.17s/it]2024-12-21 18:12:55,421 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:55,471 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:56,778 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:56,778 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1984])
+2024-12-21 18:12:56,859 - [Process 4/5] - DEBUG - predict_token:tensor([[11319]], device='cuda:4')
+2024-12-21 18:12:57,084 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:57,085 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2168])
+2024-12-21 18:12:57,154 - [Process 1/5] - DEBUG - predict_token:tensor([[1085]], device='cuda:1')
+2024-12-21 18:12:57,390 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:Pope John X
+ 28%|██▊       | 11/40 [00:52<02:05,  4.33s/it]2024-12-21 18:12:57,648 - [Process 4/5] - INFO - res.shape is :torch.Size([18])
+results:The commentator serves as associate director of the Centre for Social Cohesion.
+ 28%|██▊       | 11/40 [00:52<02:10,  4.51s/it]2024-12-21 18:12:57,664 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:57,918 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:58,607 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:58,607 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2019])
+2024-12-21 18:12:58,680 - [Process 0/5] - DEBUG - predict_token:tensor([[7169]], device='cuda:0')
+2024-12-21 18:12:59,001 - [Process 0/5] - INFO - res.shape is :torch.Size([7])
+results:Warner Bros.
+ 30%|███       | 12/40 [00:54<01:56,  4.14s/it]2024-12-21 18:12:59,043 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:59,044 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2261])
+2024-12-21 18:12:59,061 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:12:59,061 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2036])
+2024-12-21 18:12:59,109 - [Process 3/5] - DEBUG - predict_token:tensor([[1939]], device='cuda:3')
+2024-12-21 18:12:59,135 - [Process 2/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:2')
+2024-12-21 18:12:59,217 - [Process 3/5] - INFO - res.shape is :torch.Size([2])
+results:No
+ 30%|███       | 12/40 [00:54<01:49,  3.92s/it]2024-12-21 18:12:59,273 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:59,317 - [Process 2/5] - INFO - res.shape is :torch.Size([4])
+results:Monday
+ 30%|███       | 12/40 [00:54<01:55,  4.12s/it]2024-12-21 18:12:59,486 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:12:59,494 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:01,404 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:01,404 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1963])
+2024-12-21 18:13:01,484 - [Process 1/5] - DEBUG - predict_token:tensor([[19659]], device='cuda:1')
+2024-12-21 18:13:01,635 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:01,635 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1943])
+2024-12-21 18:13:01,678 - [Process 1/5] - INFO - res.shape is :torch.Size([4])
+results:Manchester United
+ 30%|███       | 12/40 [00:56<02:00,  4.32s/it]2024-12-21 18:13:01,714 - [Process 4/5] - DEBUG - predict_token:tensor([[18341]], device='cuda:4')
+2024-12-21 18:13:01,907 - [Process 4/5] - INFO - res.shape is :torch.Size([4])
+results:Baghda
+ 30%|███       | 12/40 [00:57<02:04,  4.43s/it]2024-12-21 18:13:01,947 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:02,168 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:02,886 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:02,886 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2058])
+2024-12-21 18:13:02,960 - [Process 0/5] - DEBUG - predict_token:tensor([[5202]], device='cuda:0')
+2024-12-21 18:13:03,061 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:03,062 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1995])
+2024-12-21 18:13:03,134 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:03,135 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2092])
+2024-12-21 18:13:03,136 - [Process 2/5] - DEBUG - predict_token:tensor([[1939]], device='cuda:2')
+2024-12-21 18:13:03,196 - [Process 0/5] - INFO - res.shape is :torch.Size([5])
+results:Marisa Prado
+ 32%|███▎      | 13/40 [00:58<01:52,  4.16s/it]2024-12-21 18:13:03,208 - [Process 3/5] - DEBUG - predict_token:tensor([[450]], device='cuda:3')
+2024-12-21 18:13:03,237 - [Process 2/5] - INFO - res.shape is :torch.Size([2])
+results:Yes
+ 32%|███▎      | 13/40 [00:58<01:49,  4.06s/it]2024-12-21 18:13:03,358 - [Process 3/5] - INFO - res.shape is :torch.Size([3])
+results:Morton
+ 32%|███▎      | 13/40 [00:58<01:47,  3.98s/it]2024-12-21 18:13:03,408 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:03,422 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:03,576 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:05,687 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:05,687 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2152])
+2024-12-21 18:13:05,756 - [Process 1/5] - DEBUG - predict_token:tensor([[3869]], device='cuda:1')
+2024-12-21 18:13:05,792 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:05,792 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2066])
+2024-12-21 18:13:05,864 - [Process 1/5] - INFO - res.shape is :torch.Size([2])
+results:Yes
+ 32%|███▎      | 13/40 [01:01<01:55,  4.28s/it]2024-12-21 18:13:05,866 - [Process 4/5] - DEBUG - predict_token:tensor([[16092]], device='cuda:4')
+2024-12-21 18:13:06,058 - [Process 4/5] - INFO - res.shape is :torch.Size([4])
+results:Allen Wolf
+ 32%|███▎      | 13/40 [01:01<01:57,  4.35s/it]2024-12-21 18:13:06,069 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:06,336 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:07,052 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:07,052 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2033])
+2024-12-21 18:13:07,121 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:07,122 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1931])
+2024-12-21 18:13:07,128 - [Process 2/5] - DEBUG - predict_token:tensor([[399]], device='cuda:2')
+2024-12-21 18:13:07,201 - [Process 0/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:0')
+2024-12-21 18:13:07,223 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:07,223 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2032])
+2024-12-21 18:13:07,298 - [Process 3/5] - DEBUG - predict_token:tensor([[1260]], device='cuda:3')
+2024-12-21 18:13:07,309 - [Process 0/5] - INFO - res.shape is :torch.Size([2])
+results:5
+ 35%|███▌      | 14/40 [01:02<01:47,  4.15s/it]2024-12-21 18:13:07,534 - [Process 3/5] - INFO - res.shape is :torch.Size([5])
+results:1957
+ 35%|███▌      | 14/40 [01:02<01:45,  4.04s/it]2024-12-21 18:13:07,589 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:07,631 - [Process 2/5] - INFO - res.shape is :torch.Size([12])
+results:Marge Piercy and Aldington are both writers.
+ 35%|███▌      | 14/40 [01:02<01:48,  4.16s/it]2024-12-21 18:13:07,777 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:07,813 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:09,721 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:09,722 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2065])
+2024-12-21 18:13:09,795 - [Process 1/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:1')
+2024-12-21 18:13:09,930 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:09,930 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2280])
+2024-12-21 18:13:09,995 - [Process 4/5] - DEBUG - predict_token:tensor([[22487]], device='cuda:4')
+2024-12-21 18:13:10,031 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:8530
+ 35%|███▌      | 14/40 [01:05<01:50,  4.25s/it]2024-12-21 18:13:10,247 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:10,271 - [Process 4/5] - INFO - res.shape is :torch.Size([6])
+results:Luigi Cherubini
+ 35%|███▌      | 14/40 [01:05<01:51,  4.31s/it]2024-12-21 18:13:10,528 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:11,243 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:11,244 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2077])
+2024-12-21 18:13:11,316 - [Process 0/5] - DEBUG - predict_token:tensor([[6978]], device='cuda:0')
+2024-12-21 18:13:11,372 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:11,372 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2001])
+2024-12-21 18:13:11,446 - [Process 2/5] - DEBUG - predict_token:tensor([[1939]], device='cuda:2')
+2024-12-21 18:13:11,456 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:11,456 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2100])
+2024-12-21 18:13:11,529 - [Process 3/5] - DEBUG - predict_token:tensor([[11733]], device='cuda:3')
+2024-12-21 18:13:11,548 - [Process 2/5] - INFO - res.shape is :torch.Size([2])
+results:No
+ 38%|███▊      | 15/40 [01:06<01:42,  4.09s/it]2024-12-21 18:13:11,719 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:12,192 - [Process 3/5] - INFO - res.shape is :torch.Size([15])
+results:Camp Courtney was named after Major Hugh Boyd Casey.
+ 38%|███▊      | 15/40 [01:07<01:45,  4.23s/it]2024-12-21 18:13:12,430 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:12,704 - [Process 0/5] - INFO - res.shape is :torch.Size([32])
+results:Passage 2 mentions that the moose (Alces alces) is found in areas such as Canada, Alaska, New England, New York State
+ 38%|███▊      | 15/40 [01:07<01:53,  4.52s/it]2024-12-21 18:13:12,950 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:14,053 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:14,053 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2010])
+2024-12-21 18:13:14,120 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:14,120 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1841])
+2024-12-21 18:13:14,134 - [Process 1/5] - DEBUG - predict_token:tensor([[7824]], device='cuda:1')
+2024-12-21 18:13:14,202 - [Process 4/5] - DEBUG - predict_token:tensor([[11681]], device='cuda:4')
+2024-12-21 18:13:14,371 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:IndyCar Series
+ 38%|███▊      | 15/40 [01:09<01:46,  4.27s/it]2024-12-21 18:13:14,437 - [Process 4/5] - INFO - res.shape is :torch.Size([5])
+results:Babylon
+ 38%|███▊      | 15/40 [01:09<01:46,  4.26s/it]2024-12-21 18:13:14,630 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:14,636 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:15,327 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:15,328 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2095])
+2024-12-21 18:13:15,400 - [Process 2/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:2')
+2024-12-21 18:13:15,742 - [Process 2/5] - INFO - res.shape is :torch.Size([8])
+results:250,000
+ 40%|████      | 16/40 [01:10<01:38,  4.12s/it]2024-12-21 18:13:15,918 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:16,080 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:16,080 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1795])
+2024-12-21 18:13:16,164 - [Process 3/5] - DEBUG - predict_token:tensor([[4522]], device='cuda:3')
+2024-12-21 18:13:16,272 - [Process 3/5] - INFO - res.shape is :torch.Size([2])
+results:Sa
+ 40%|████      | 16/40 [01:11<01:40,  4.18s/it]2024-12-21 18:13:16,469 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:16,715 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:16,715 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2131])
+2024-12-21 18:13:16,786 - [Process 0/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:0')
+2024-12-21 18:13:16,978 - [Process 0/5] - INFO - res.shape is :torch.Size([4])
+results:Sydney
+ 40%|████      | 16/40 [01:12<01:46,  4.45s/it]2024-12-21 18:13:17,173 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:18,278 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:18,278 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2089])
+2024-12-21 18:13:18,310 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:18,310 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2213])
+2024-12-21 18:13:18,351 - [Process 4/5] - DEBUG - predict_token:tensor([[6213]], device='cuda:4')
+2024-12-21 18:13:18,377 - [Process 1/5] - DEBUG - predict_token:tensor([[3869]], device='cuda:1')
+2024-12-21 18:13:18,485 - [Process 1/5] - INFO - res.shape is :torch.Size([2])
+results:Yes
+ 40%|████      | 16/40 [01:13<01:41,  4.23s/it]2024-12-21 18:13:18,741 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:18,758 - [Process 4/5] - INFO - res.shape is :torch.Size([9])
+results:
+
+
+(Insert answer here)
+ 40%|████      | 16/40 [01:13<01:42,  4.28s/it]2024-12-21 18:13:19,037 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:19,562 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:19,563 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2087])
+2024-12-21 18:13:19,637 - [Process 2/5] - DEBUG - predict_token:tensor([[341]], device='cuda:2')
+2024-12-21 18:13:19,780 - [Process 2/5] - INFO - res.shape is :torch.Size([3])
+results:Miami
+ 42%|████▎     | 17/40 [01:14<01:34,  4.10s/it]2024-12-21 18:13:19,940 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:20,120 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:20,121 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2043])
+2024-12-21 18:13:20,195 - [Process 3/5] - DEBUG - predict_token:tensor([[16552]], device='cuda:3')
+2024-12-21 18:13:20,474 - [Process 3/5] - INFO - res.shape is :torch.Size([6])
+results:Loïc Duval
+ 42%|████▎     | 17/40 [01:15<01:36,  4.19s/it]2024-12-21 18:13:20,752 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:20,752 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2088])
+2024-12-21 18:13:20,761 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:20,824 - [Process 0/5] - DEBUG - predict_token:tensor([[7942]], device='cuda:0')
+2024-12-21 18:13:20,974 - [Process 0/5] - INFO - res.shape is :torch.Size([3])
+results:López
+ 42%|████▎     | 17/40 [01:16<01:39,  4.31s/it]2024-12-21 18:13:21,269 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:22,496 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:22,496 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1962])
+2024-12-21 18:13:22,576 - [Process 1/5] - DEBUG - predict_token:tensor([[940]], device='cuda:1')
+2024-12-21 18:13:22,683 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:22,683 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1918])
+2024-12-21 18:13:22,764 - [Process 4/5] - DEBUG - predict_token:tensor([[20799]], device='cuda:4')
+2024-12-21 18:13:22,770 - [Process 1/5] - INFO - res.shape is :torch.Size([4])
+results:Washington State
+ 42%|████▎     | 17/40 [01:17<01:37,  4.24s/it]2024-12-21 18:13:23,044 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:23,127 - [Process 4/5] - INFO - res.shape is :torch.Size([8])
+results:How to Train Your Dragon 2
+ 42%|████▎     | 17/40 [01:18<01:39,  4.31s/it]2024-12-21 18:13:23,383 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:23,675 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:23,675 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1933])
+2024-12-21 18:13:23,756 - [Process 2/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:2')
+2024-12-21 18:13:23,979 - [Process 2/5] - INFO - res.shape is :torch.Size([5])
+results:1931
+ 45%|████▌     | 18/40 [01:19<01:30,  4.13s/it]2024-12-21 18:13:24,113 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:24,565 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:24,565 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1958])
+2024-12-21 18:13:24,648 - [Process 3/5] - DEBUG - predict_token:tensor([[317]], device='cuda:3')
+2024-12-21 18:13:24,802 - [Process 3/5] - INFO - res.shape is :torch.Size([3])
+results:Plato
+ 45%|████▌     | 18/40 [01:19<01:33,  4.23s/it]2024-12-21 18:13:24,978 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:24,978 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2159])
+2024-12-21 18:13:25,046 - [Process 0/5] - DEBUG - predict_token:tensor([[11546]], device='cuda:0')
+2024-12-21 18:13:25,093 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:25,324 - [Process 0/5] - INFO - res.shape is :torch.Size([6])
+results:Ronald Reagan
+ 45%|████▌     | 18/40 [01:20<01:35,  4.32s/it]2024-12-21 18:13:25,582 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:26,871 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:26,871 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2013])
+2024-12-21 18:13:26,953 - [Process 1/5] - DEBUG - predict_token:tensor([[383]], device='cuda:1')
+2024-12-21 18:13:27,105 - [Process 1/5] - INFO - res.shape is :torch.Size([3])
+results:San Diego
+ 45%|████▌     | 18/40 [01:22<01:33,  4.27s/it]2024-12-21 18:13:27,126 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:27,127 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1965])
+2024-12-21 18:13:27,206 - [Process 4/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:4')
+2024-12-21 18:13:27,384 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:27,569 - [Process 4/5] - INFO - res.shape is :torch.Size([8])
+results:
+Please provide the answer only.
+ 45%|████▌     | 18/40 [01:22<01:35,  4.35s/it]2024-12-21 18:13:27,779 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:27,839 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:27,839 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1961])
+2024-12-21 18:13:27,918 - [Process 2/5] - DEBUG - predict_token:tensor([[435]], device='cuda:2')
+2024-12-21 18:13:28,141 - [Process 2/5] - INFO - res.shape is :torch.Size([5])
+results:Marlon Brando
+ 48%|████▊     | 19/40 [01:23<01:26,  4.14s/it]2024-12-21 18:13:28,312 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:28,859 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:28,859 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1957])
+2024-12-21 18:13:28,940 - [Process 3/5] - DEBUG - predict_token:tensor([[20891]], device='cuda:3')
+2024-12-21 18:13:29,298 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:29,298 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1959])
+2024-12-21 18:13:29,378 - [Process 0/5] - DEBUG - predict_token:tensor([[379]], device='cuda:0')
+2024-12-21 18:13:29,517 - [Process 3/5] - INFO - res.shape is :torch.Size([13])
+results:Bear Grylls is originally from the UK.
+ 48%|████▊     | 19/40 [01:24<01:31,  4.38s/it]2024-12-21 18:13:29,700 - [Process 0/5] - INFO - res.shape is :torch.Size([7])
+results:
+Back to the Water Below
+ 48%|████▊     | 19/40 [01:24<01:31,  4.34s/it]2024-12-21 18:13:29,795 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:29,974 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:31,005 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:31,005 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1887])
+2024-12-21 18:13:31,086 - [Process 1/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:1')
+2024-12-21 18:13:31,322 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:2014
+ 48%|████▊     | 19/40 [01:26<01:29,  4.25s/it]2024-12-21 18:13:31,510 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:31,510 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1938])
+2024-12-21 18:13:31,568 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:31,590 - [Process 4/5] - DEBUG - predict_token:tensor([[7870]], device='cuda:4')
+2024-12-21 18:13:31,825 - [Process 4/5] - INFO - res.shape is :torch.Size([5])
+results:Georgia Brown
+ 48%|████▊     | 19/40 [01:26<01:30,  4.32s/it]2024-12-21 18:13:32,101 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:32,101 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2033])
+2024-12-21 18:13:32,102 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:32,182 - [Process 2/5] - DEBUG - predict_token:tensor([[8989]], device='cuda:2')
+2024-12-21 18:13:32,848 - [Process 2/5] - INFO - res.shape is :torch.Size([16])
+results:Major-General Sir Miles Dighton-Rayner
+ 50%|█████     | 20/40 [01:28<01:26,  4.31s/it]2024-12-21 18:13:33,014 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:33,455 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:33,456 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2049])
+2024-12-21 18:13:33,530 - [Process 3/5] - DEBUG - predict_token:tensor([[23052]], device='cuda:3')
+2024-12-21 18:13:33,738 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:33,738 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2009])
+2024-12-21 18:13:33,809 - [Process 3/5] - INFO - res.shape is :torch.Size([6])
+results:Jerry Garcia
+ 50%|█████     | 20/40 [01:28<01:27,  4.35s/it]2024-12-21 18:13:33,818 - [Process 0/5] - DEBUG - predict_token:tensor([[838]], device='cuda:0')
+2024-12-21 18:13:34,053 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:34,054 - [Process 0/5] - INFO - res.shape is :torch.Size([5])
+results:Bob Dylan
+ 50%|█████     | 20/40 [01:29<01:26,  4.34s/it]2024-12-21 18:13:34,291 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:35,207 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:35,208 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2068])
+2024-12-21 18:13:35,280 - [Process 1/5] - DEBUG - predict_token:tensor([[8317]], device='cuda:1')
+2024-12-21 18:13:35,752 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:35,752 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1878])
+2024-12-21 18:13:35,834 - [Process 4/5] - DEBUG - predict_token:tensor([[2864]], device='cuda:4')
+2024-12-21 18:13:35,984 - [Process 1/5] - INFO - res.shape is :torch.Size([16])
+results:Elephants are not connected to Gajabrishta.
+ 50%|█████     | 20/40 [01:31<01:27,  4.38s/it]2024-12-21 18:13:36,027 - [Process 4/5] - INFO - res.shape is :torch.Size([4])
+results:
+Editors
+ 50%|█████     | 20/40 [01:31<01:25,  4.28s/it]2024-12-21 18:13:36,271 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:36,300 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:36,628 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:36,629 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2083])
+2024-12-21 18:13:36,702 - [Process 2/5] - DEBUG - predict_token:tensor([[2726]], device='cuda:2')
+2024-12-21 18:13:36,884 - [Process 2/5] - INFO - res.shape is :torch.Size([4])
+results:Des Moines
+ 52%|█████▎    | 21/40 [01:32<01:20,  4.23s/it]2024-12-21 18:13:37,049 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:37,714 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:37,714 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1785])
+2024-12-21 18:13:37,798 - [Process 3/5] - DEBUG - predict_token:tensor([[2688]], device='cuda:3')
+2024-12-21 18:13:37,878 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:37,878 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2039])
+2024-12-21 18:13:37,952 - [Process 0/5] - DEBUG - predict_token:tensor([[21989]], device='cuda:0')
+2024-12-21 18:13:38,273 - [Process 0/5] - INFO - res.shape is :torch.Size([7])
+results:Cartoon Cartoon Fridays
+ 52%|█████▎    | 21/40 [01:33<01:21,  4.31s/it]2024-12-21 18:13:38,535 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:39,188 - [Process 3/5] - INFO - res.shape is :torch.Size([32])
+results:Lavinia Greenlaw and Nâzım Hikmet are both course tutors at the University of East Anglia's Creative Writing Cour
+ 52%|█████▎    | 21/40 [01:34<01:28,  4.66s/it]2024-12-21 18:13:39,459 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:39,914 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:39,914 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2098])
+2024-12-21 18:13:39,987 - [Process 1/5] - DEBUG - predict_token:tensor([[3082]], device='cuda:1')
+2024-12-21 18:13:40,094 - [Process 1/5] - INFO - res.shape is :torch.Size([2])
+results:American
+ 52%|█████▎    | 21/40 [01:35<01:21,  4.30s/it]2024-12-21 18:13:40,114 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:40,114 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2020])
+2024-12-21 18:13:40,194 - [Process 4/5] - DEBUG - predict_token:tensor([[405]], device='cuda:4')
+2024-12-21 18:13:40,284 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:40,388 - [Process 4/5] - INFO - res.shape is :torch.Size([4])
+results:Nanyue
+ 52%|█████▎    | 21/40 [01:35<01:21,  4.31s/it]2024-12-21 18:13:40,588 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:40,672 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:40,672 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1790])
+2024-12-21 18:13:40,756 - [Process 2/5] - DEBUG - predict_token:tensor([[5011]], device='cuda:2')
+2024-12-21 18:13:40,939 - [Process 2/5] - INFO - res.shape is :torch.Size([4])
+results:William III
+ 55%|█████▌    | 22/40 [01:36<01:15,  4.17s/it]2024-12-21 18:13:41,083 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:42,125 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:42,125 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2111])
+2024-12-21 18:13:42,196 - [Process 0/5] - DEBUG - predict_token:tensor([[22392]], device='cuda:0')
+2024-12-21 18:13:42,600 - [Process 0/5] - INFO - res.shape is :torch.Size([9])
+results:Rancho Cucamonga
+ 55%|█████▌    | 22/40 [01:37<01:17,  4.31s/it]2024-12-21 18:13:42,789 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:43,229 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:43,229 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1979])
+2024-12-21 18:13:43,310 - [Process 3/5] - DEBUG - predict_token:tensor([[13397]], device='cuda:3')
+2024-12-21 18:13:43,545 - [Process 3/5] - INFO - res.shape is :torch.Size([5])
+results:Franco Dragone
+ 55%|█████▌    | 22/40 [01:38<01:22,  4.57s/it]2024-12-21 18:13:43,832 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:43,919 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:43,919 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2068])
+2024-12-21 18:13:43,992 - [Process 1/5] - DEBUG - predict_token:tensor([[1939]], device='cuda:1')
+2024-12-21 18:13:44,100 - [Process 1/5] - INFO - res.shape is :torch.Size([2])
+results:No
+ 55%|█████▌    | 22/40 [01:39<01:15,  4.21s/it]2024-12-21 18:13:44,221 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:44,221 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1814])
+2024-12-21 18:13:44,305 - [Process 4/5] - DEBUG - predict_token:tensor([[26132]], device='cuda:4')
+2024-12-21 18:13:44,366 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:44,583 - [Process 4/5] - INFO - res.shape is :torch.Size([6])
+results:Gudmund Alfson
+ 55%|█████▌    | 22/40 [01:39<01:16,  4.27s/it]2024-12-21 18:13:44,775 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:44,775 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2075])
+2024-12-21 18:13:44,820 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:44,850 - [Process 2/5] - DEBUG - predict_token:tensor([[350]], device='cuda:2')
+2024-12-21 18:13:45,153 - [Process 2/5] - INFO - res.shape is :torch.Size([7])
+results:
+
+
+Baby Girl
+ 57%|█████▊    | 23/40 [01:40<01:11,  4.19s/it]2024-12-21 18:13:45,285 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:46,494 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:46,495 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1960])
+2024-12-21 18:13:46,574 - [Process 0/5] - DEBUG - predict_token:tensor([[10920]], device='cuda:0')
+2024-12-21 18:13:46,809 - [Process 0/5] - INFO - res.shape is :torch.Size([5])
+results:Jones Beach Island
+ 57%|█████▊    | 23/40 [01:41<01:12,  4.28s/it]2024-12-21 18:13:47,047 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:47,542 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:47,543 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2078])
+2024-12-21 18:13:47,615 - [Process 3/5] - DEBUG - predict_token:tensor([[15247]], device='cuda:3')
+2024-12-21 18:13:47,849 - [Process 3/5] - INFO - res.shape is :torch.Size([5])
+results:Purdue University
+ 57%|█████▊    | 23/40 [01:43<01:16,  4.49s/it]2024-12-21 18:13:48,126 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:48,141 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:48,142 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1922])
+2024-12-21 18:13:48,223 - [Process 1/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:1')
+2024-12-21 18:13:48,459 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:2005
+ 57%|█████▊    | 23/40 [01:43<01:12,  4.25s/it]2024-12-21 18:13:48,461 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:48,461 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2103])
+2024-12-21 18:13:48,534 - [Process 4/5] - DEBUG - predict_token:tensor([[26132]], device='cuda:4')
+2024-12-21 18:13:48,713 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:48,855 - [Process 4/5] - INFO - res.shape is :torch.Size([7])
+results:University of South Dakota
+ 57%|█████▊    | 23/40 [01:44<01:12,  4.27s/it]2024-12-21 18:13:48,972 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:48,972 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2062])
+2024-12-21 18:13:49,048 - [Process 2/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:2')
+2024-12-21 18:13:49,099 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:49,312 - [Process 2/5] - INFO - res.shape is :torch.Size([6])
+results:20006
+ 60%|██████    | 24/40 [01:44<01:06,  4.18s/it]2024-12-21 18:13:49,486 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:50,641 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:50,641 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2022])
+2024-12-21 18:13:50,715 - [Process 0/5] - DEBUG - predict_token:tensor([[4581]], device='cuda:0')
+2024-12-21 18:13:50,993 - [Process 0/5] - INFO - res.shape is :torch.Size([6])
+results:Jonathan Katz
+ 60%|██████    | 24/40 [01:46<01:08,  4.25s/it]2024-12-21 18:13:51,253 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:51,793 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:51,793 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2069])
+2024-12-21 18:13:51,868 - [Process 3/5] - DEBUG - predict_token:tensor([[2259]], device='cuda:3')
+2024-12-21 18:13:52,103 - [Process 3/5] - INFO - res.shape is :torch.Size([5])
+results:Philip Carlo
+ 60%|██████    | 24/40 [01:47<01:10,  4.42s/it]2024-12-21 18:13:52,390 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:52,497 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:52,497 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2127])
+2024-12-21 18:13:52,567 - [Process 1/5] - DEBUG - predict_token:tensor([[25281]], device='cuda:1')
+2024-12-21 18:13:52,778 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:52,779 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2038])
+2024-12-21 18:13:52,844 - [Process 1/5] - INFO - res.shape is :torch.Size([6])
+results:Pamela Adlon
+ 60%|██████    | 24/40 [01:47<01:08,  4.29s/it]2024-12-21 18:13:52,855 - [Process 4/5] - DEBUG - predict_token:tensor([[3869]], device='cuda:4')
+2024-12-21 18:13:52,963 - [Process 4/5] - INFO - res.shape is :torch.Size([2])
+results:Yes
+ 60%|██████    | 24/40 [01:48<01:07,  4.22s/it]2024-12-21 18:13:53,100 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:53,100 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2041])
+2024-12-21 18:13:53,123 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:53,174 - [Process 2/5] - DEBUG - predict_token:tensor([[438]], device='cuda:2')
+2024-12-21 18:13:53,205 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:53,357 - [Process 2/5] - INFO - res.shape is :torch.Size([4])
+results:Santería
+ 62%|██████▎   | 25/40 [01:48<01:02,  4.14s/it]2024-12-21 18:13:53,527 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:54,848 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:54,849 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2101])
+2024-12-21 18:13:54,921 - [Process 0/5] - DEBUG - predict_token:tensor([[450]], device='cuda:0')
+2024-12-21 18:13:55,327 - [Process 0/5] - INFO - res.shape is :torch.Size([9])
+results:It's Always Sunny in Philadelphia
+ 62%|██████▎   | 25/40 [01:50<01:04,  4.28s/it]2024-12-21 18:13:55,548 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:56,049 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:56,049 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2038])
+2024-12-21 18:13:56,124 - [Process 3/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:3')
+2024-12-21 18:13:56,317 - [Process 3/5] - INFO - res.shape is :torch.Size([4])
+results:351
+ 62%|██████▎   | 25/40 [01:51<01:05,  4.36s/it]2024-12-21 18:13:56,598 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:56,901 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:56,901 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1950])
+2024-12-21 18:13:56,965 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:56,966 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2146])
+2024-12-21 18:13:56,983 - [Process 1/5] - DEBUG - predict_token:tensor([[26182]], device='cuda:1')
+2024-12-21 18:13:57,035 - [Process 4/5] - DEBUG - predict_token:tensor([[22292]], device='cuda:4')
+2024-12-21 18:13:57,152 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:57,153 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2057])
+2024-12-21 18:13:57,177 - [Process 1/5] - INFO - res.shape is :torch.Size([4])
+results:British
+ 62%|██████▎   | 25/40 [01:52<01:04,  4.31s/it]2024-12-21 18:13:57,226 - [Process 2/5] - DEBUG - predict_token:tensor([[3082]], device='cuda:2')
+2024-12-21 18:13:57,312 - [Process 4/5] - INFO - res.shape is :torch.Size([6])
+results:Matthew Good Band
+ 62%|██████▎   | 25/40 [01:52<01:03,  4.26s/it]2024-12-21 18:13:57,328 - [Process 2/5] - INFO - res.shape is :torch.Size([2])
+results:American
+ 65%|██████▌   | 26/40 [01:52<00:57,  4.09s/it]2024-12-21 18:13:57,448 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:57,507 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:57,590 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:13:59,360 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:13:59,361 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2126])
+2024-12-21 18:13:59,434 - [Process 0/5] - DEBUG - predict_token:tensor([[10924]], device='cuda:0')
+2024-12-21 18:13:59,799 - [Process 0/5] - INFO - res.shape is :torch.Size([8])
+results:
+
+1500th
+ 65%|██████▌   | 26/40 [01:54<01:00,  4.34s/it]2024-12-21 18:14:00,080 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:00,445 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:00,445 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2142])
+2024-12-21 18:14:00,518 - [Process 3/5] - DEBUG - predict_token:tensor([[8432]], device='cuda:3')
+2024-12-21 18:14:00,839 - [Process 3/5] - INFO - res.shape is :torch.Size([7])
+results:
+(Insert answer here)
+ 65%|██████▌   | 26/40 [01:55<01:01,  4.41s/it]2024-12-21 18:14:01,116 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:01,206 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:01,206 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1944])
+2024-12-21 18:14:01,264 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:01,264 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1936])
+2024-12-21 18:14:01,286 - [Process 1/5] - DEBUG - predict_token:tensor([[13645]], device='cuda:1')
+2024-12-21 18:14:01,347 - [Process 2/5] - DEBUG - predict_token:tensor([[28267]], device='cuda:2')
+2024-12-21 18:14:01,358 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:01,358 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1942])
+2024-12-21 18:14:01,440 - [Process 4/5] - DEBUG - predict_token:tensor([[1939]], device='cuda:4')
+2024-12-21 18:14:01,548 - [Process 4/5] - INFO - res.shape is :torch.Size([2])
+results:No
+ 65%|██████▌   | 26/40 [01:56<00:59,  4.25s/it]2024-12-21 18:14:01,606 - [Process 1/5] - INFO - res.shape is :torch.Size([7])
+results:Vernon L. Smith
+ 65%|██████▌   | 26/40 [01:56<01:00,  4.34s/it]2024-12-21 18:14:01,816 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:01,858 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:02,052 - [Process 2/5] - INFO - res.shape is :torch.Size([17])
+results:Fredric Rieders testified against Randall D. Swango.
+ 68%|██████▊   | 27/40 [01:57<00:55,  4.28s/it]2024-12-21 18:14:02,216 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:03,848 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:03,849 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2012])
+2024-12-21 18:14:03,929 - [Process 0/5] - DEBUG - predict_token:tensor([[13899]], device='cuda:0')
+2024-12-21 18:14:04,207 - [Process 0/5] - INFO - res.shape is :torch.Size([6])
+results:Ribosomes
+ 68%|██████▊   | 27/40 [01:59<00:56,  4.36s/it]2024-12-21 18:14:04,425 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:04,775 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:04,775 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2044])
+2024-12-21 18:14:04,850 - [Process 3/5] - DEBUG - predict_token:tensor([[1939]], device='cuda:3')
+2024-12-21 18:14:04,958 - [Process 3/5] - INFO - res.shape is :torch.Size([2])
+results:No
+ 68%|██████▊   | 27/40 [02:00<00:56,  4.32s/it]2024-12-21 18:14:05,214 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:05,544 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:05,544 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1912])
+2024-12-21 18:14:05,572 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:05,572 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1982])
+2024-12-21 18:14:05,626 - [Process 1/5] - DEBUG - predict_token:tensor([[897]], device='cuda:1')
+2024-12-21 18:14:05,654 - [Process 4/5] - DEBUG - predict_token:tensor([[435]], device='cuda:4')
+2024-12-21 18:14:05,820 - [Process 1/5] - INFO - res.shape is :torch.Size([4])
+results:Deftones
+ 68%|██████▊   | 27/40 [02:00<00:55,  4.30s/it]2024-12-21 18:14:05,844 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:05,844 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1768])
+2024-12-21 18:14:05,890 - [Process 4/5] - INFO - res.shape is :torch.Size([5])
+results:Jake Kasdan
+ 68%|██████▊   | 27/40 [02:01<00:55,  4.28s/it]2024-12-21 18:14:05,928 - [Process 2/5] - DEBUG - predict_token:tensor([[2259]], device='cuda:2')
+2024-12-21 18:14:06,059 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:06,100 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:06,191 - [Process 2/5] - INFO - res.shape is :torch.Size([6])
+results:Juan Rulfo
+ 70%|███████   | 28/40 [02:01<00:50,  4.24s/it]2024-12-21 18:14:06,361 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:08,259 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:08,259 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1744])
+2024-12-21 18:14:08,349 - [Process 0/5] - DEBUG - predict_token:tensor([[349]], device='cuda:0')
+2024-12-21 18:14:08,542 - [Process 0/5] - INFO - res.shape is :torch.Size([4])
+results:Dracula
+ 70%|███████   | 28/40 [02:03<00:52,  4.35s/it]2024-12-21 18:14:08,711 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:09,005 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:09,005 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1932])
+2024-12-21 18:14:09,087 - [Process 3/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:3')
+2024-12-21 18:14:09,323 - [Process 3/5] - INFO - res.shape is :torch.Size([5])
+results:2008
+ 70%|███████   | 28/40 [02:04<00:52,  4.33s/it]2024-12-21 18:14:09,554 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:09,710 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:09,711 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2094])
+2024-12-21 18:14:09,734 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:09,734 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1999])
+2024-12-21 18:14:09,783 - [Process 1/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:1')
+2024-12-21 18:14:09,809 - [Process 4/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:4')
+2024-12-21 18:14:10,018 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:10,018 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2202])
+2024-12-21 18:14:10,020 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:3976
+ 70%|███████   | 28/40 [02:05<00:51,  4.27s/it]2024-12-21 18:14:10,085 - [Process 2/5] - DEBUG - predict_token:tensor([[4702]], device='cuda:2')
+2024-12-21 18:14:10,130 - [Process 4/5] - INFO - res.shape is :torch.Size([7])
+results:
+
+150 m
+ 70%|███████   | 28/40 [02:05<00:51,  4.27s/it]2024-12-21 18:14:10,270 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:10,346 - [Process 2/5] - INFO - res.shape is :torch.Size([6])
+results:Merck & Co.
+ 72%|███████▎  | 29/40 [02:05<00:46,  4.21s/it]2024-12-21 18:14:10,353 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:10,489 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:12,282 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:12,282 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1839])
+2024-12-21 18:14:12,361 - [Process 0/5] - DEBUG - predict_token:tensor([[5158]], device='cuda:0')
+2024-12-21 18:14:12,680 - [Process 0/5] - INFO - res.shape is :torch.Size([7])
+results:Band-e Amir
+ 72%|███████▎  | 29/40 [02:07<00:47,  4.29s/it]2024-12-21 18:14:12,960 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:13,209 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:13,210 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2039])
+2024-12-21 18:14:13,285 - [Process 3/5] - DEBUG - predict_token:tensor([[20290]], device='cuda:3')
+2024-12-21 18:14:13,690 - [Process 3/5] - INFO - res.shape is :torch.Size([9])
+results:Cortina d'Ampezzo
+ 72%|███████▎  | 29/40 [02:08<00:47,  4.34s/it]2024-12-21 18:14:13,930 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:13,930 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2055])
+2024-12-21 18:14:13,965 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:13,991 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:13,991 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2007])
+2024-12-21 18:14:14,004 - [Process 1/5] - DEBUG - predict_token:tensor([[7513]], device='cuda:1')
+2024-12-21 18:14:14,066 - [Process 4/5] - DEBUG - predict_token:tensor([[14320]], device='cuda:4')
+2024-12-21 18:14:14,155 - [Process 1/5] - INFO - res.shape is :torch.Size([3])
+results:India
+ 72%|███████▎  | 29/40 [02:09<00:46,  4.23s/it]2024-12-21 18:14:14,227 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:14,227 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1971])
+2024-12-21 18:14:14,308 - [Process 2/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:2')
+2024-12-21 18:14:14,434 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:14,530 - [Process 2/5] - INFO - res.shape is :torch.Size([5])
+results:1985
+ 75%|███████▌  | 30/40 [02:09<00:42,  4.20s/it]2024-12-21 18:14:14,705 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:14,813 - [Process 4/5] - INFO - res.shape is :torch.Size([17])
+results:Bangor Daily News is not talking about Sawin Millett.
+ 72%|███████▎  | 29/40 [02:09<00:48,  4.39s/it]2024-12-21 18:14:15,080 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:16,666 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:16,666 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1964])
+2024-12-21 18:14:16,745 - [Process 0/5] - DEBUG - predict_token:tensor([[3148]], device='cuda:0')
+2024-12-21 18:14:16,980 - [Process 0/5] - INFO - res.shape is :torch.Size([5])
+results:Utah State
+ 75%|███████▌  | 30/40 [02:12<00:42,  4.29s/it]2024-12-21 18:14:17,269 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:17,808 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:17,808 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1990])
+2024-12-21 18:14:17,890 - [Process 3/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:3')
+2024-12-21 18:14:18,079 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:18,079 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2047])
+2024-12-21 18:14:18,127 - [Process 3/5] - INFO - res.shape is :torch.Size([5])
+results:1970
+ 75%|███████▌  | 30/40 [02:13<00:43,  4.37s/it]2024-12-21 18:14:18,154 - [Process 1/5] - DEBUG - predict_token:tensor([[3869]], device='cuda:1')
+2024-12-21 18:14:18,265 - [Process 1/5] - INFO - res.shape is :torch.Size([2])
+results:Yes
+ 75%|███████▌  | 30/40 [02:13<00:41,  4.20s/it]2024-12-21 18:14:18,396 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:18,396 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2075])
+2024-12-21 18:14:18,406 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:18,470 - [Process 2/5] - DEBUG - predict_token:tensor([[15431]], device='cuda:2')
+2024-12-21 18:14:18,534 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:18,653 - [Process 2/5] - INFO - res.shape is :torch.Size([4])
+results:Governor
+ 78%|███████▊  | 31/40 [02:13<00:37,  4.18s/it]2024-12-21 18:14:18,823 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:18,843 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:18,843 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2168])
+2024-12-21 18:14:18,913 - [Process 4/5] - DEBUG - predict_token:tensor([[11546]], device='cuda:4')
+2024-12-21 18:14:19,190 - [Process 4/5] - INFO - res.shape is :torch.Size([6])
+results:Miranda Garrison
+ 75%|███████▌  | 30/40 [02:14<00:43,  4.39s/it]2024-12-21 18:14:19,460 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:20,985 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:20,985 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1931])
+2024-12-21 18:14:21,066 - [Process 0/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:0')
+2024-12-21 18:14:21,429 - [Process 0/5] - INFO - res.shape is :torch.Size([8])
+results:
+Please provide the answer only.
+ 78%|███████▊  | 31/40 [02:16<00:39,  4.34s/it]2024-12-21 18:14:21,697 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:22,080 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:22,081 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1776])
+2024-12-21 18:14:22,165 - [Process 3/5] - DEBUG - predict_token:tensor([[5176]], device='cuda:3')
+2024-12-21 18:14:22,180 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:22,180 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2000])
+2024-12-21 18:14:22,255 - [Process 1/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:1')
+2024-12-21 18:14:22,365 - [Process 3/5] - INFO - res.shape is :torch.Size([4])
+results:French.
+ 78%|███████▊  | 31/40 [02:17<00:38,  4.33s/it]2024-12-21 18:14:22,625 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:22,625 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2032])
+2024-12-21 18:14:22,661 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:22,676 - [Process 1/5] - INFO - res.shape is :torch.Size([9])
+results:13 October 1733
+ 78%|███████▊  | 31/40 [02:17<00:38,  4.26s/it]2024-12-21 18:14:22,707 - [Process 2/5] - DEBUG - predict_token:tensor([[17044]], device='cuda:2')
+2024-12-21 18:14:22,954 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:22,971 - [Process 2/5] - INFO - res.shape is :torch.Size([6])
+results:Alice in Wonderland
+ 80%|████████  | 32/40 [02:18<00:33,  4.22s/it]2024-12-21 18:14:23,097 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:23,097 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2014])
+2024-12-21 18:14:23,135 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:23,172 - [Process 4/5] - DEBUG - predict_token:tensor([[498]], device='cuda:4')
+2024-12-21 18:14:23,322 - [Process 4/5] - INFO - res.shape is :torch.Size([3])
+results:Thames
+ 78%|███████▊  | 31/40 [02:18<00:38,  4.31s/it]2024-12-21 18:14:23,513 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:25,410 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:25,410 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1970])
+2024-12-21 18:14:25,489 - [Process 0/5] - DEBUG - predict_token:tensor([[319]], device='cuda:0')
+2024-12-21 18:14:25,767 - [Process 0/5] - INFO - res.shape is :torch.Size([6])
+results:Henrik Fisker
+ 80%|████████  | 32/40 [02:20<00:34,  4.34s/it]2024-12-21 18:14:26,026 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:26,361 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:26,362 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1914])
+2024-12-21 18:14:26,445 - [Process 3/5] - DEBUG - predict_token:tensor([[3014]], device='cuda:3')
+2024-12-21 18:14:26,596 - [Process 3/5] - INFO - res.shape is :torch.Size([3])
+results:Michael Werner
+ 80%|████████  | 32/40 [02:21<00:34,  4.30s/it]2024-12-21 18:14:26,722 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:26,722 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1976])
+2024-12-21 18:14:26,782 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:26,782 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2069])
+2024-12-21 18:14:26,802 - [Process 1/5] - DEBUG - predict_token:tensor([[5845]], device='cuda:1')
+2024-12-21 18:14:26,856 - [Process 2/5] - DEBUG - predict_token:tensor([[5115]], device='cuda:2')
+2024-12-21 18:14:26,872 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:27,039 - [Process 2/5] - INFO - res.shape is :torch.Size([4])
+results:Mongolia
+ 82%|████████▎ | 33/40 [02:22<00:29,  4.18s/it]2024-12-21 18:14:27,126 - [Process 1/5] - INFO - res.shape is :torch.Size([7])
+results:Philip K. Dick
+ 80%|████████  | 32/40 [02:22<00:34,  4.32s/it]2024-12-21 18:14:27,202 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:27,296 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:27,296 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2185])
+2024-12-21 18:14:27,342 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:27,366 - [Process 4/5] - DEBUG - predict_token:tensor([[2178]], device='cuda:4')
+2024-12-21 18:14:27,516 - [Process 4/5] - INFO - res.shape is :torch.Size([3])
+results:Allure
+ 80%|████████  | 32/40 [02:22<00:34,  4.28s/it]2024-12-21 18:14:27,750 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:29,758 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:29,758 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2143])
+2024-12-21 18:14:29,826 - [Process 0/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:0')
+2024-12-21 18:14:30,147 - [Process 0/5] - INFO - res.shape is :torch.Size([7])
+results:12,982
+ 82%|████████▎ | 33/40 [02:25<00:30,  4.35s/it]2024-12-21 18:14:30,421 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:30,729 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:30,730 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2138])
+2024-12-21 18:14:30,802 - [Process 3/5] - DEBUG - predict_token:tensor([[15733]], device='cuda:3')
+2024-12-21 18:14:30,816 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:30,816 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2106])
+2024-12-21 18:14:30,889 - [Process 2/5] - DEBUG - predict_token:tensor([[3869]], device='cuda:2')
+2024-12-21 18:14:30,990 - [Process 2/5] - INFO - res.shape is :torch.Size([2])
+results:Yes
+ 85%|████████▌ | 34/40 [02:26<00:24,  4.11s/it]2024-12-21 18:14:31,081 - [Process 3/5] - INFO - res.shape is :torch.Size([6])
+results:Brian Stokes Mitchell
+ 82%|████████▎ | 33/40 [02:26<00:30,  4.36s/it]2024-12-21 18:14:31,102 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:31,114 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:31,114 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2149])
+2024-12-21 18:14:31,183 - [Process 1/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:1')
+2024-12-21 18:14:31,336 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:31,389 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:31,389 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2000])
+2024-12-21 18:14:31,424 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:7734
+ 82%|████████▎ | 33/40 [02:26<00:30,  4.31s/it]2024-12-21 18:14:31,464 - [Process 4/5] - DEBUG - predict_token:tensor([[435]], device='cuda:4')
+2024-12-21 18:14:31,673 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:31,698 - [Process 4/5] - INFO - res.shape is :torch.Size([5])
+results:Jaleel White
+ 82%|████████▎ | 33/40 [02:26<00:29,  4.25s/it]2024-12-21 18:14:31,903 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:34,202 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:34,202 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2038])
+2024-12-21 18:14:34,281 - [Process 0/5] - DEBUG - predict_token:tensor([[323]], device='cuda:0')
+2024-12-21 18:14:34,518 - [Process 0/5] - INFO - res.shape is :torch.Size([5])
+results:Taoiseach
+ 85%|████████▌ | 34/40 [02:29<00:26,  4.36s/it]2024-12-21 18:14:34,723 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:34,723 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2035])
+2024-12-21 18:14:34,771 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:34,797 - [Process 2/5] - DEBUG - predict_token:tensor([[10537]], device='cuda:2')
+2024-12-21 18:14:34,980 - [Process 2/5] - INFO - res.shape is :torch.Size([4])
+results:Albert Park
+ 88%|████████▊ | 35/40 [02:30<00:20,  4.07s/it]2024-12-21 18:14:35,128 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:35,199 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:35,199 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2143])
+2024-12-21 18:14:35,272 - [Process 3/5] - DEBUG - predict_token:tensor([[365]], device='cuda:3')
+2024-12-21 18:14:35,446 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:35,446 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2163])
+2024-12-21 18:14:35,466 - [Process 3/5] - INFO - res.shape is :torch.Size([4])
+results:Lionsgate
+ 85%|████████▌ | 34/40 [02:30<00:26,  4.37s/it]2024-12-21 18:14:35,516 - [Process 1/5] - DEBUG - predict_token:tensor([[25343]], device='cuda:1')
+2024-12-21 18:14:35,544 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:35,544 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2009])
+2024-12-21 18:14:35,619 - [Process 4/5] - DEBUG - predict_token:tensor([[9459]], device='cuda:4')
+2024-12-21 18:14:35,673 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:35,757 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:Capital Cities
+ 85%|████████▌ | 34/40 [02:30<00:25,  4.32s/it]2024-12-21 18:14:35,769 - [Process 4/5] - INFO - res.shape is :torch.Size([3])
+results:Perth
+ 85%|████████▌ | 34/40 [02:30<00:25,  4.19s/it]2024-12-21 18:14:35,994 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:36,041 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:38,339 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:38,339 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1866])
+2024-12-21 18:14:38,419 - [Process 0/5] - DEBUG - predict_token:tensor([[323]], device='cuda:0')
+2024-12-21 18:14:38,570 - [Process 0/5] - INFO - res.shape is :torch.Size([3])
+results:Troy
+ 88%|████████▊ | 35/40 [02:33<00:21,  4.27s/it]2024-12-21 18:14:38,749 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:38,750 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2085])
+2024-12-21 18:14:38,822 - [Process 2/5] - DEBUG - predict_token:tensor([[319]], device='cuda:2')
+2024-12-21 18:14:38,845 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:38,965 - [Process 2/5] - INFO - res.shape is :torch.Size([3])
+results:Singer
+ 90%|█████████ | 36/40 [02:34<00:16,  4.05s/it]2024-12-21 18:14:39,112 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:39,343 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:39,343 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2044])
+2024-12-21 18:14:39,418 - [Process 3/5] - DEBUG - predict_token:tensor([[3869]], device='cuda:3')
+2024-12-21 18:14:39,526 - [Process 3/5] - INFO - res.shape is :torch.Size([2])
+results:Yes
+ 88%|████████▊ | 35/40 [02:34<00:21,  4.27s/it]2024-12-21 18:14:39,666 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:39,666 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1756])
+2024-12-21 18:14:39,723 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:39,751 - [Process 1/5] - DEBUG - predict_token:tensor([[20549]], device='cuda:1')
+2024-12-21 18:14:39,873 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:39,874 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2115])
+2024-12-21 18:14:39,946 - [Process 4/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:4')
+2024-12-21 18:14:40,115 - [Process 1/5] - INFO - res.shape is :torch.Size([8])
+results:Morgan Llywelyn
+ 88%|████████▊ | 35/40 [02:35<00:21,  4.33s/it]2024-12-21 18:14:40,306 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:40,310 - [Process 4/5] - INFO - res.shape is :torch.Size([8])
+results:
+
+(Insert answer here)
+ 88%|████████▊ | 35/40 [02:35<00:21,  4.30s/it]2024-12-21 18:14:40,543 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:42,565 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:42,565 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1979])
+2024-12-21 18:14:42,645 - [Process 0/5] - DEBUG - predict_token:tensor([[341]], device='cuda:0')
+2024-12-21 18:14:42,772 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:42,772 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2240])
+2024-12-21 18:14:42,838 - [Process 2/5] - DEBUG - predict_token:tensor([[341]], device='cuda:2')
+2024-12-21 18:14:42,923 - [Process 0/5] - INFO - res.shape is :torch.Size([6])
+results:Mika Häkkinen
+ 90%|█████████ | 36/40 [02:38<00:17,  4.29s/it]2024-12-21 18:14:43,061 - [Process 2/5] - INFO - res.shape is :torch.Size([5])
+results:Middletown
+ 92%|█████████▎| 37/40 [02:38<00:12,  4.06s/it]2024-12-21 18:14:43,196 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:43,232 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:43,506 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:43,506 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1947])
+2024-12-21 18:14:43,587 - [Process 3/5] - DEBUG - predict_token:tensor([[5899]], device='cuda:3')
+2024-12-21 18:14:43,738 - [Process 3/5] - INFO - res.shape is :torch.Size([3])
+results:Louisville
+ 90%|█████████ | 36/40 [02:38<00:17,  4.26s/it]2024-12-21 18:14:44,024 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:44,091 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:44,091 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2073])
+2024-12-21 18:14:44,168 - [Process 1/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:1')
+2024-12-21 18:14:44,202 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:44,202 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2088])
+2024-12-21 18:14:44,277 - [Process 4/5] - DEBUG - predict_token:tensor([[7370]], device='cuda:4')
+2024-12-21 18:14:44,319 - [Process 1/5] - INFO - res.shape is :torch.Size([3])
+results:12
+ 90%|█████████ | 36/40 [02:39<00:17,  4.29s/it]2024-12-21 18:14:44,512 - [Process 4/5] - INFO - res.shape is :torch.Size([5])
+results:Live at the Electric
+ 90%|█████████ | 36/40 [02:39<00:17,  4.27s/it]2024-12-21 18:14:44,581 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:44,772 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:46,792 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:46,792 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2090])
+2024-12-21 18:14:46,864 - [Process 0/5] - DEBUG - predict_token:tensor([[4367]], device='cuda:0')
+2024-12-21 18:14:46,972 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:46,972 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2148])
+2024-12-21 18:14:47,042 - [Process 2/5] - DEBUG - predict_token:tensor([[9511]], device='cuda:2')
+2024-12-21 18:14:47,465 - [Process 2/5] - INFO - res.shape is :torch.Size([10])
+results:The answer is: Richard Eichberg.
+ 95%|█████████▌| 38/40 [02:42<00:08,  4.16s/it]2024-12-21 18:14:47,483 - [Process 0/5] - INFO - res.shape is :torch.Size([14])
+results:The Hunger Games: Mockingjay – Part 1
+ 92%|█████████▎| 37/40 [02:42<00:13,  4.37s/it]2024-12-21 18:14:47,617 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:47,685 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:47,685 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2029])
+2024-12-21 18:14:47,735 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:47,760 - [Process 3/5] - DEBUG - predict_token:tensor([[5670]], device='cuda:3')
+2024-12-21 18:14:47,996 - [Process 3/5] - INFO - res.shape is :torch.Size([5])
+results:Captain Comic
+ 92%|█████████▎| 37/40 [02:43<00:12,  4.26s/it]2024-12-21 18:14:48,230 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:48,230 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2048])
+2024-12-21 18:14:48,273 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:48,304 - [Process 1/5] - DEBUG - predict_token:tensor([[450]], device='cuda:1')
+2024-12-21 18:14:48,583 - [Process 1/5] - INFO - res.shape is :torch.Size([6])
+results:Oklahoma Sooners
+ 92%|█████████▎| 37/40 [02:43<00:12,  4.28s/it]2024-12-21 18:14:48,602 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:48,602 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2120])
+2024-12-21 18:14:48,675 - [Process 4/5] - DEBUG - predict_token:tensor([[29871]], device='cuda:4')
+2024-12-21 18:14:48,857 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:48,911 - [Process 4/5] - INFO - res.shape is :torch.Size([5])
+results:1970
+ 92%|█████████▎| 37/40 [02:44<00:12,  4.31s/it]2024-12-21 18:14:49,089 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:51,366 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:51,366 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2224])
+2024-12-21 18:14:51,423 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:51,423 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2123])
+2024-12-21 18:14:51,432 - [Process 0/5] - DEBUG - predict_token:tensor([[20708]], device='cuda:0')
+2024-12-21 18:14:51,495 - [Process 2/5] - DEBUG - predict_token:tensor([[399]], device='cuda:2')
+2024-12-21 18:14:51,668 - [Process 0/5] - INFO - res.shape is :torch.Size([5])
+results:Lev Ivanov
+ 95%|█████████▌| 38/40 [02:46<00:08,  4.32s/it]2024-12-21 18:14:51,678 - [Process 2/5] - INFO - res.shape is :torch.Size([4])
+results:WAMC
+ 98%|█████████▊| 39/40 [02:46<00:04,  4.18s/it]2024-12-21 18:14:51,844 - [Process 2/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:51,956 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:52,016 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:52,016 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2058])
+2024-12-21 18:14:52,093 - [Process 3/5] - DEBUG - predict_token:tensor([[4385]], device='cuda:3')
+2024-12-21 18:14:52,329 - [Process 3/5] - INFO - res.shape is :torch.Size([5])
+results:Mark Donohue
+ 95%|█████████▌| 38/40 [02:47<00:08,  4.28s/it]2024-12-21 18:14:52,563 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:52,644 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:52,644 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1931])
+2024-12-21 18:14:52,726 - [Process 1/5] - DEBUG - predict_token:tensor([[12126]], device='cuda:1')
+2024-12-21 18:14:52,937 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:52,937 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2129])
+2024-12-21 18:14:53,010 - [Process 4/5] - DEBUG - predict_token:tensor([[4114]], device='cuda:4')
+2024-12-21 18:14:53,246 - [Process 4/5] - INFO - res.shape is :torch.Size([5])
+results:Karl Bergmann
+ 95%|█████████▌| 38/40 [02:48<00:08,  4.32s/it]2024-12-21 18:14:53,528 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:53,559 - [Process 1/5] - INFO - res.shape is :torch.Size([19])
+results:Ireland, Scotland, Wales, Cornwall, Brittany, and the Netherlands.
+ 95%|█████████▌| 38/40 [02:48<00:08,  4.49s/it]2024-12-21 18:14:53,753 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:55,557 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:55,557 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2083])
+2024-12-21 18:14:55,569 - [Process 2/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:55,570 - [Process 2/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1722])
+2024-12-21 18:14:55,629 - [Process 0/5] - DEBUG - predict_token:tensor([[14234]], device='cuda:0')
+2024-12-21 18:14:55,662 - [Process 2/5] - DEBUG - predict_token:tensor([[3122]], device='cuda:2')
+2024-12-21 18:14:55,865 - [Process 0/5] - INFO - res.shape is :torch.Size([5])
+results:Southern Company
+ 98%|█████████▊| 39/40 [02:51<00:04,  4.28s/it]2024-12-21 18:14:56,005 - [Process 2/5] - INFO - res.shape is :torch.Size([8])
+results:
+Please provide the answer only.
+100%|██████████| 40/40 [02:51<00:00,  4.22s/it]100%|██████████| 40/40 [02:51<00:00,  4.28s/it]
+2024-12-21 18:14:56,134 - [Process 0/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:56,408 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:56,409 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1986])
+2024-12-21 18:14:56,490 - [Process 3/5] - DEBUG - predict_token:tensor([[21987]], device='cuda:3')
+2024-12-21 18:14:56,684 - [Process 3/5] - INFO - res.shape is :torch.Size([4])
+results:Mass Effect
+ 98%|█████████▊| 39/40 [02:51<00:04,  4.30s/it]2024-12-21 18:14:56,902 - [Process 3/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:57,146 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:57,146 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 1832])
+2024-12-21 18:14:57,228 - [Process 4/5] - DEBUG - predict_token:tensor([[2259]], device='cuda:4')
+2024-12-21 18:14:57,406 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:57,406 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2026])
+2024-12-21 18:14:57,481 - [Process 1/5] - DEBUG - predict_token:tensor([[390]], device='cuda:1')
+2024-12-21 18:14:57,549 - [Process 4/5] - INFO - res.shape is :torch.Size([7])
+results:
+(Insert answer here)
+ 98%|█████████▊| 39/40 [02:52<00:04,  4.31s/it]2024-12-21 18:14:57,632 - [Process 1/5] - INFO - res.shape is :torch.Size([3])
+results:BNC
+ 98%|█████████▊| 39/40 [02:52<00:04,  4.37s/it]2024-12-21 18:14:57,744 - [Process 4/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:57,853 - [Process 1/5] - INFO - len(per_windows_prompt):2
+2024-12-21 18:14:59,736 - [Process 0/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:14:59,736 - [Process 0/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2083])
+2024-12-21 18:14:59,808 - [Process 0/5] - DEBUG - predict_token:tensor([[826]], device='cuda:0')
+2024-12-21 18:15:00,256 - [Process 0/5] - INFO - res.shape is :torch.Size([10])
+results:Around the World in 80 Days
+100%|██████████| 40/40 [02:55<00:00,  4.31s/it]100%|██████████| 40/40 [02:55<00:00,  4.39s/it]
+2024-12-21 18:15:00,589 - [Process 3/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:15:00,589 - [Process 3/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2061])
+2024-12-21 18:15:00,664 - [Process 3/5] - DEBUG - predict_token:tensor([[450]], device='cuda:3')
+2024-12-21 18:15:00,899 - [Process 3/5] - INFO - res.shape is :torch.Size([5])
+results:Vetrimaaran
+100%|██████████| 40/40 [02:56<00:00,  4.28s/it]100%|██████████| 40/40 [02:56<00:00,  4.40s/it]
+2024-12-21 18:15:01,412 - [Process 4/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:15:01,412 - [Process 4/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2060])
+2024-12-21 18:15:01,487 - [Process 4/5] - DEBUG - predict_token:tensor([[1939]], device='cuda:4')
+2024-12-21 18:15:01,499 - [Process 1/5] - DEBUG - len of windows in get_contexts_cache:2
+2024-12-21 18:15:01,500 - [Process 1/5] - DEBUG - predict_token[0].shape:torch.Size([1, 2047])
+2024-12-21 18:15:01,574 - [Process 1/5] - DEBUG - predict_token:tensor([[2443]], device='cuda:1')
+2024-12-21 18:15:01,594 - [Process 4/5] - INFO - res.shape is :torch.Size([2])
+results:No
+100%|██████████| 40/40 [02:56<00:00,  4.23s/it]100%|██████████| 40/40 [02:56<00:00,  4.42s/it]
+2024-12-21 18:15:01,808 - [Process 1/5] - INFO - res.shape is :torch.Size([5])
+results:Wicked Twister
+100%|██████████| 40/40 [02:56<00:00,  4.31s/it]100%|██████████| 40/40 [02:56<00:00,  4.42s/it]
+2024-12-21 18:15:01,845 - [Process 2/5] - DEBUG - datasets_name:hotpotqa
+2024-12-21 18:15:01,845 - [Process 0/5] - DEBUG - datasets_name:hotpotqa
+2024-12-21 18:15:01,845 - [Process 4/5] - DEBUG - datasets_name:hotpotqa
+2024-12-21 18:15:01,845 - [Process 3/5] - DEBUG - datasets_name:hotpotqa
+2024-12-21 18:15:01,845 - [Process 1/5] - DEBUG - datasets_name:hotpotqa

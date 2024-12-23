@@ -1,0 +1,7 @@
+2024-12-21 18:00:11,701 - [Process 4/5] - INFO - loading datasets finished
+2024-12-21 18:00:11,701 - [Process 4/5] - INFO - model_max_len: 3950
+2024-12-21 18:00:11,701 - [Process 4/5] - INFO - output_max_len: 64
+2024-12-21 18:00:11,723 - [Process 4/5] - INFO - Max Length is 10029
+2024-12-21 18:00:11,724 - [Process 4/5] - INFO - Finish loading dataset
+2024-12-21 18:00:11,724 - [Process 4/5] - INFO - get_predicted begin
+2024-12-21 18:00:16,496 - [Process 4/5] - INFO - len(per_windows_prompt):2

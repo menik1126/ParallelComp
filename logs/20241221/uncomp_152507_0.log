@@ -1,0 +1,27 @@
+2024-12-21 15:26:06,829 - [Process 0/1] - INFO - loading datasets finished
+2024-12-21 15:26:06,829 - [Process 0/1] - INFO - model_max_len: 3950
+2024-12-21 15:26:06,829 - [Process 0/1] - INFO - output_max_len: 32
+2024-12-21 15:26:06,867 - [Process 0/1] - INFO - Max Length is 12697
+2024-12-21 15:26:06,867 - [Process 0/1] - INFO - Finish loading dataset
+2024-12-21 15:26:06,867 - [Process 0/1] - INFO - get_predicted begin
+2024-12-21 15:26:07,019 - [Process 0/1] - INFO - len(per_windows_prompt):1
+2024-12-21 15:26:11,506 - [Process 0/1] - INFO - res.shape is :torch.Size([4])
+2024-12-21 15:26:11,678 - [Process 0/1] - INFO - len(per_windows_prompt):1
+2024-12-21 15:26:15,722 - [Process 0/1] - INFO - res.shape is :torch.Size([6])
+2024-12-21 15:26:15,896 - [Process 0/1] - INFO - len(per_windows_prompt):1
+2024-12-21 15:26:19,826 - [Process 0/1] - INFO - res.shape is :torch.Size([3])
+2024-12-21 15:26:20,005 - [Process 0/1] - INFO - len(per_windows_prompt):1
+2024-12-21 15:26:23,907 - [Process 0/1] - INFO - res.shape is :torch.Size([2])
+2024-12-21 15:26:24,068 - [Process 0/1] - INFO - len(per_windows_prompt):1
+2024-12-21 15:26:27,970 - [Process 0/1] - INFO - res.shape is :torch.Size([2])
+2024-12-21 15:26:28,127 - [Process 0/1] - INFO - len(per_windows_prompt):1
+2024-12-21 15:26:32,110 - [Process 0/1] - INFO - res.shape is :torch.Size([4])
+2024-12-21 15:26:32,265 - [Process 0/1] - INFO - len(per_windows_prompt):1
+2024-12-21 15:26:36,892 - [Process 0/1] - INFO - res.shape is :torch.Size([20])
+2024-12-21 15:26:36,959 - [Process 0/1] - INFO - len(per_windows_prompt):1
+2024-12-21 15:26:39,388 - [Process 0/1] - INFO - res.shape is :torch.Size([5])
+2024-12-21 15:26:39,534 - [Process 0/1] - INFO - len(per_windows_prompt):1
+2024-12-21 15:26:43,566 - [Process 0/1] - INFO - res.shape is :torch.Size([5])
+2024-12-21 15:26:43,693 - [Process 0/1] - INFO - len(per_windows_prompt):1
+2024-12-21 15:26:47,727 - [Process 0/1] - INFO - res.shape is :torch.Size([5])
+2024-12-21 15:26:47,897 - [Process 0/1] - INFO - len(per_windows_prompt):1

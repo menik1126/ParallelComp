@@ -1,0 +1,14 @@
+2024-12-23 11:09:38,468 - [Process 1/5] - INFO - loading datasets finished
+2024-12-23 11:09:38,468 - [Process 1/5] - INFO - model_max_len: 3950
+2024-12-23 11:09:38,468 - [Process 1/5] - INFO - output_max_len: 64
+2024-12-23 11:09:38,468 - [Process 1/5] - INFO - parallel_pattern: every_window_no_query_input_query
+2024-12-23 11:09:38,488 - [Process 1/5] - INFO - Max Length is 10029
+2024-12-23 11:09:38,489 - [Process 1/5] - INFO - Finish loading dataset
+2024-12-23 11:09:38,489 - [Process 1/5] - INFO - get_predicted begin
+2024-12-23 11:09:43,232 - [Process 1/5] - INFO - len(per_windows_prompt):3
+2024-12-23 11:09:48,913 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+2024-12-23 11:09:49,025 - [Process 1/5] - INFO - len(per_windows_prompt):3
+2024-12-23 11:09:55,299 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+2024-12-23 11:09:55,410 - [Process 1/5] - INFO - len(per_windows_prompt):3
+2024-12-23 11:10:01,488 - [Process 1/5] - INFO - res.shape is :torch.Size([64])
+2024-12-23 11:10:01,574 - [Process 1/5] - INFO - len(per_windows_prompt):3
