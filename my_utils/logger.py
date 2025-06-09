@@ -3,7 +3,8 @@ import os
 from datetime import datetime
 from accelerate import Accelerator
 import multiprocessing
-
+from accelerate.utils import InitProcessGroupKwargs
+from datetime import timedelta
 class Logger:
     _instance = None
 
@@ -17,8 +18,8 @@ class Logger:
         if self._initialized:
             return
         self._initialized = True
-
-        self.accelerator = accelerator or Accelerator()
+        kwargs = InitProcessGroupKwargs(timeout=timedelta(hours=2),backend="nccl")
+        self.accelerator = accelerator or Accelerator(kwargs_handlers=[kwargs])
         self.logger = logging.getLogger('uncomp_logger')
         self.logger.setLevel(logging.DEBUG)
         self.logger.propagate = False

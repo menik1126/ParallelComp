@@ -1,6 +1,6 @@
 #!/bin/bash
 task=gsm8k
-response_file="/home/xiongjing/sjh/parallel_window_size/test_kv_cache_avgpool.json"  #test_kv_cache_avgpool.json"
+response_file="/home/xiongjing/sjh/ProactiveAgent/parallel_window_size/test_kv_cache_avgpool.json"  #test_kv_cache_avgpool.json"
 # pred_RGER_RGER_rerank32_kernel_method_sp_new_bs16_perdevice_4_lr_1e-6.json
 file_name=$(basename ${response_file})
 echo file_name: ${file_name}

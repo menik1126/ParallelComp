@@ -29,5 +29,18 @@
     "passage_retrieval_zh": 32,
     "lcc": 64,
     "repobench-p": 64,
-    "repobench-p_new": 64
+    "repobench-p_new": 64,
+
+    "passkey": 32,
+    "number_string": 32,
+    "kv_retrieval": 100, 
+    "longbook_qa_eng": 32, 
+    "longbook_choice_eng": 32,
+    "longbook_sum_eng": 1536,
+    "longbook_qa_chn": 32,
+    "math_find": 32,
+    "math_calc": 64000,
+    "code_run": 32,
+    "code_debug": 32, 
+    "longdialogue_qa_eng": 32
 }

@@ -1,83 +1,232 @@
-# Parallel Context Windows (PCW)
+# ParallelComp: Parallel Long-Context Compressor for Length Extrapolation
 
-This repo contains the code for reproducing the classification experiments from [AI21 Labs](https://www.ai21.com/)' paper [Parallel Context Windows for Large Language Models
-](https://arxiv.org/abs/2212.10947).  
-The code was tested with python 3.10, for CPU, GPU and multiple GPU runs. Currently, the code supports using GPT2 and LLaMa model families.
+[![arXiv](https://img.shields.io/badge/arXiv-2502.14317-b31b1b.svg)](https://arxiv.org/abs/2502.14317)
+[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 
-## Setup
+This repository contains the official implementation of **ParallelComp**, a novel training-free method for long-context extrapolation that extends Large Language Models' (LLMs) context length from 8K to 128K while maintaining high throughput and preserving perplexity.
 
-To install the required libraries in our repo, run:
+## 📄 Paper
+
+**ParallelComp: Parallel Long-Context Compressor for Length Extrapolation**  
+*Jing Xiong, Jianghan Shen, Chuanyang Zheng, Zhongwei Wan, Chenyang Zhao, Chiwun Yang, Fanghua Ye, Hongxia Yang, Lingpeng Kong, Ngai Wong*
+
+📖 [Paper Link](https://arxiv.org/abs/2502.14317)
+
+## 🚀 Key Features
+
+- **Training-free**: No costly fine-tuning required for length extrapolation
+- **High Performance**: Achieves 91.17% of GPT-4's performance on long-context tasks using an 8B model
+- **Scalable**: Extends context length from 4K to 128K tokens
+- **Efficient**: Integrates seamlessly with Flash Attention
+- **Fast**: 23.50x acceleration in the prefilling stage with 1.76x improvement in chunk throughput
+- **Memory Efficient**: Manages ultra-long contexts on a single A100 80GB GPU
+
+## 🛠️ Installation
+
+### Requirements
+
+- Python 3.8+
+- PyTorch 2.0.1
+- CUDA compatible GPU(s)
+- 80GB A100 GPU memory for ultra-long contexts
+
+### Setup
+
+1. Clone the repository:
+```bash
+git clone https://github.com/your-username/ParallelComp.git
+cd ParallelComp
+```
+
+2. Install dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-To have a Pytorch version specific to your CUDA, [install](https://pytorch.org/) your version before running the above command.
 
-## Evaluation
-Due to the fact that the paper's results were based on an earlier implementation of PCW and not [HuggingFace Transformers](https://huggingface.co/docs/transformers/index), the results produced using this code may differ slightly from those shown in the paper.
-To reproduce similar results shown in the appendix for GPT2-XL for a specific dataset (for example SST2), simply run:
+3. For development, install from requirements.in:
+```bash
+pip-compile requirements.in
+pip install -r requirements.txt
+```
+
+## 📊 Usage
+
+### Quick Start
+
+#### Single GPU Evaluation
+
 ```bash
 python run_evaluation.py \
---dataset sst2 \
---model gpt2-xl \
---n-windows 1 \
---n-windows 3 \
---subsample-test-set 250 \
---n-runs 30 \
---output-dir $OUTPUT_DIR
+    --dataset sst2 \
+    --model microsoft/DialoGPT-medium \
+    --n-windows 1 \
+    --subsample-test-set 100 \
+    --output-dir ./results \
+    --prompt_method complex_cot
 ```
-In this run, PCW's performance is evaluated on a subsample (250 samples) of the full test set. 
-The experiment is repeated 30 times (with different random samples of training examples) for each number of windows (in this case - one and three). 
-As a default, the script uses as many examples per window as possible. 
-Note that using a single window is equivalent to regular ICL settings. Thus, this run should give similar results to those shown in Table 5 for SST2 with GPT2-XL.
 
-The evaluation output is a numpy file (shaped `[2,30]`) found in `$OUTPUT_DIR` with the mean accuracy for each repetition and number of windows.
-You could read the file directly with np.load, or use utils.py function to load and plot the results.
-See --help for further instructions.
+#### Multi-GPU Evaluation
 
-## PCW Usage examples
-In the evaluation code, only classification tasks are performed.
-The code snippet below shows how PCW can be used both for classification and generation:
+```bash
+export CUDA_VISIBLE_DEVICES=0,1,2,3
+accelerate launch --main_process_port 5326 --num_processes 4 --config_file scripts/gpu_4.yaml \
+    run_evaluation_longbench_multi_gpu.py \
+    --dataset narrativeqa \
+    --n-windows 2 \
+    --subsample-test-set 2000 \
+    --model /path/to/llama2chat \
+    --prompt_method complex_cot_pcw_multi_windows \
+    --model_class modeling_llama_with_pcw
+```
+
+### Supported Models
+
+- **GPT-2** family models
+- **LLaMA** family models  
+- **Gemma** models
+- **Qwen2** models
+
+### Supported Datasets
+
+#### Long Context Benchmarks
+- **LongBench**: narrativeqa, qasper, multifieldqa_en, hotpotqa, 2wikimqa, musique, gov_report, qmsum, multi_news, trec, triviaqa, samsum, passage_count, passage_retrieval_en, lcc, repobench-p
+- **Standard Benchmarks**: SST-2, GSM8K
+
+### Configuration Options
+
+#### Prompt Methods
+- `complex_cot`: Basic Chain-of-Thought prompting
+- `complex_cot_pcw`: Parallel Context Windows with CoT
+- `complex_cot_pcw_multi_windows`: Multi-window parallel processing
+- `complex_cot_pcw_multi_windows_kv_cache`: With KV cache optimization
+
+#### Model Classes
+- `modeling_llama_with_pcw`: LLaMA with Parallel Context Windows
+- `modeling_llama_with_pcw_kv_cache`: LLaMA with KV cache optimization
+- `modeling_gemma_with_pcw_kv_cache_FlashAttention_longbench`: Gemma with Flash Attention
+- `modeling_qwen2_with_pcw_kv_cache_FlashAttention_longbench`: Qwen2 with Flash Attention
+
+## 📈 Evaluation Scripts
+
+### LongBench Evaluation
+
+For comprehensive LongBench evaluation:
+
+```bash
+bash run_test_longbench_multi_gpu_window8.sh
+```
+
+For single GPU:
+
+```bash
+bash run_test_longbench_single_gpu_window8.sh
+```
+
+### GSM8K Evaluation
+
+```bash
+bash run_test_gsm8k_multi_gpu.sh
+```
+
+### Custom Evaluation
 
 ```python
-import numpy as np
-
 from model_loaders import load_pcw_wrapper
-from logits_processor import RestrictiveTokensLogitsProcessor
+from experiment_manager import ExperimentManager
 
-from utils import encode_labels
+# Load model
+model = load_pcw_wrapper(
+    model_name="microsoft/DialoGPT-medium",
+    cache_dir="./cache",
+    right_indentation=False,
+    n_windows=2,
+    prompt_method="complex_cot_pcw"
+)
 
-wrapper = load_pcw_wrapper('gpt2-large', n_windows=2)
-
-# use PCW with few shot for classification example:
-labels_input_ids = np.array(encode_labels(wrapper.tokenizer, ['positive', 'negative']))
-# using RestrictiveTokensLogitsProcessor forces the output to be one of the labels:
-logit_processor = RestrictiveTokensLogitsProcessor(labels_input_ids, eos_token_id=wrapper.tokenizer.eos_token_id)
-output = wrapper.pcw_generate(contexts=["Review: Great movie! Sentiment: positive\n",
-                                        "Review: Horrible film Sentiment: negative\n"],
-                              task_text="Review: I liked it Sentiment:",
-                              restrictive_logit_preprocessor=logit_processor,
-                              temperature=0,
-                              max_new_tokens=1)
-print(output.strip())
-# use PCW for generation:
-output = wrapper.pcw_generate(contexts=["Review: Great movie!\n", "Review: Horrible film\n"],
-                              task_text="Review:",
-                              temperature=1,
-                              do_sample=True,
-                              max_new_tokens=16)
-print(output)
+# Run experiments
+em = ExperimentManager(test_df, train_df, model, labels)
+accuracies = em.run_experiment_across_shots(n_shots=[4, 8], n_runs=3)
 ```
 
-## Citation
+## 🔧 Advanced Configuration
 
-If you find our paper or code helpful, please consider citing our paper:
+### Attention Calibration
+
+ParallelComp includes attention calibration strategies to mitigate attention sink issues:
+
+```python
+# Configure attention calibration in your model
+model = load_pcw_wrapper(
+    model_name="your_model",
+    calibration_strategy="attention_bias_reduction",
+    chunk_eviction=True
+)
 ```
-@misc{ratner2023parallel,
-      title={Parallel Context Windows for Large Language Models}, 
-      author={Nir Ratner and Yoav Levine and Yonatan Belinkov and Ori Ram and Inbal Magar and Omri Abend and Ehud Karpas and Amnon Shashua and Kevin Leyton-Brown and Yoav Shoham},
-      year={2023},
-      eprint={2212.10947},
-      archivePrefix={arXiv},
-      primaryClass={cs.CL}
+
+### Memory Management
+
+For ultra-long contexts, enable chunk eviction:
+
+```bash
+python run_evaluation.py \
+    --enable-chunk-eviction \
+    --max-memory-usage 0.8 \
+    --parallel-kv-cache
+```
+
+## 📁 Project Structure
+
+```
+ParallelComp/
+├── modeling_*.py              # Model implementations with PCW
+├── run_evaluation*.py         # Evaluation scripts
+├── experiment_manager*.py     # Experiment management
+├── pcw_wrapper*.py           # Parallel Context Window wrapper
+├── datasets_loader.py        # Dataset loading utilities
+├── eval_longbench.py         # LongBench evaluation
+├── metrics.py                # Evaluation metrics
+├── scripts/                  # Bash scripts and configs
+├── longbench_config/         # LongBench configurations
+├── results/                  # Output results
+└── requirements.txt          # Dependencies
+```
+
+## 📊 Results
+
+ParallelComp achieves significant improvements in long-context tasks:
+
+- **91.17%** of GPT-4's performance using 8B model trained on 8K context
+- **23.50x** acceleration in prefilling stage
+- **1.76x** improvement in chunk throughput
+- Outperforms Claude-2 and Kimi-Chat on long-context benchmarks
+
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+## 📄 License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
+
+## 📚 Citation
+
+If you find this work useful, please cite our paper:
+
+```bibtex
+@article{xiong2025parallelcomp,
+  title={ParallelComp: Parallel Long-Context Compressor for Length Extrapolation},
+  author={Xiong, Jing and Shen, Jianghan and Zheng, Chuanyang and Wan, Zhongwei and Zhao, Chenyang and Yang, Chiwun and Ye, Fanghua and Yang, Hongxia and Kong, Lingpeng and Wong, Ngai},
+  journal={arXiv preprint arXiv:2502.14317},
+  year={2025}
 }
 ```
+
+
+
+## 📞 Contact
+
+For questions and support, please open an issue in this repository or contact the authors.
+
+---
+
+**Note**: This implementation will be fully released soon. Stay tuned for updates!

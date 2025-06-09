@@ -1,7 +1,9 @@
 import logging
+from pathlib import Path
 import random
 from typing import List, Dict
 import math
+import re
 from accelerate import Accelerator
 import numpy as np
 import numpy.typing as npt
@@ -22,37 +24,295 @@ logging.basicConfig(level=logging.INFO, format='%(message)s')
 from my_utils.logger import Logger
 logger = Logger()
 logger.set_console_level(logging.DEBUG)
+import os
 
-STOP_SEQUENCE = '\n'
+
 
 class ExperimentManager_longbench:
     def __init__(self, data_file: str, model: PCWModelWrapper, random_seed: int = 42, n_windows: int = 1, 
-                 max_token_length: int = 1024,
-                 prompt_method:str=None,model_class:str=None,parallel_pattern:str=None,
+                 # kv cache parameters
+                 kv_cache_eviction:bool=False, kv_cache_dynamic:bool=False,recent_token:int=8,
+                 raw_position_select:bool=True,capacity:int=512,
+                 stage_eviction:bool=False,special_token:bool=True,
+                 ## calibration attn
+                 calibration_mode:int=0,calibration_stage:str=None,
+                 # window parameters
+                 rank_windows:bool=False,rank_cache:bool=False,topk_windows:int=1,
+                 dynamic_window:bool=False,window_ascend:bool=False,decomposition_factor:int=1,
+                 reduce_length:bool=False,reduce_factor:int=1,
+                 query_rank:bool=False,query_recent_tokens:int=0,
+                 get_recent_attn:bool=False,recent_top_num:int=0,
+                 key_no_rope:bool=False,delete_context_prompt:bool=False,
+                 # base parameters
+                 attn_avg:bool=False,
+                 attn_implementation:str=None,prompt_method:str=None,model_class:str=None,parallel_pattern:str=None,
                  model_name:str=None,dataset:str=None,model2prompt=None,templates:Dict=None,
+                 context_max_len: int = 1024, raw_model_max_len:int = 1024,
                  accelerator: Accelerator=None, Truncation_Method:str=None,
+                 data_name:str="longbench",
+                 # position shift
+                 position_shift:bool=False,shift_factor:int=0,interval_shift:int=0,
+                 # positional_sorting
+                 positional_sorting:str=None,rank_ascend:bool=False,
+                 # NTK
+                 NTK_aware:bool=False,
                  ):   
+        # calibration attn
+        self.calibration_mode = calibration_mode
+        self.calibration_stage = calibration_stage
+        # window parameters
+        self.dynamic_window = dynamic_window
+        self.rank_windows=rank_windows
+        self.rank_cache=rank_cache
+        self.topk_windows=topk_windows
+        self.window_ascend = window_ascend
+        self.recent_token = recent_token
+        self.decomposition_factor = decomposition_factor
+        
+        self.reduce_length = reduce_length
+        self.reduce_factor = reduce_factor
+        
+        self.get_recent_attn = get_recent_attn
+        self.recent_top_num=recent_top_num
+        
+        self.query_rank = query_rank
+        self.query_recent_tokens=query_recent_tokens
+        self.key_no_rope=key_no_rope
+        # kv cache parameters
+        self.kv_cache_dynamic = kv_cache_dynamic     
+        self.kv_cache_eviction = kv_cache_eviction  
+        self.stage_eviction=stage_eviction
+        self.capacity=capacity
+        self.raw_position_select = raw_position_select
+        # position shift parameters
+        self.position_shift = position_shift
+        self.shift_factor=shift_factor
+        self.interval_shift=interval_shift
+        # positional_sorting
+        self.positional_sorting=positional_sorting
+        self.rank_ascend=rank_ascend
+        # NTK
+        self.NTK_aware = NTK_aware
+        # base parameters
+        self.delete_context_prompt=delete_context_prompt
         self.model_name = model_name
+        self.data_name_full = data_name
+        self.special_token=special_token
+        self.attn_avg=attn_avg
+        self.attn_implementation = attn_implementation
         self.model2prompt = model2prompt
         self.data_name=dataset
-        self.datas = self.load_datas(data_file)
+        self.tokenizer = model.tokenizer 
+        self.parallel_pattern = parallel_pattern
+        if data_name == "longbench":
+            self.datas = self.load_datas(data_file)
+        elif data_name == "infinitebench":
+            self.datas = self.load_datas_infinitebench(data_file)
         self.templates = templates
-        
         self.model = model
         self.base_random_seed = random_seed
         self.n_windows = n_windows
-        self.model_max_len= max_token_length
-        self.tokenizer = model.tokenizer
+        self.context_max_len= context_max_len
+        self.revise_single = False
+        self.raw_model_max_len = raw_model_max_len
         self.prompt_method = prompt_method
         self.accelerator = accelerator
         self.model_class = model_class
-        self.parallel_pattern = parallel_pattern
         self.Truncation_Method = Truncation_Method
+        logger.info(f"Truncation_Method is {Truncation_Method}")
         
     
     def build_chat(self,prompt):
         prompt = f"[INST] {prompt} [/INST]"
         return prompt
+    
+    def load_datas_infinitebench(self, data_file: str) -> None:
+        logger.info("Loading data...")
+        prompts_all = []
+        inputs = []
+        contexts = []
+        answerss = []
+        ids = []
+        languages = []
+        datasets = []
+        optionss = []
+        input_max_len = 0
+        all_classess = []
+        lengths = []
+        
+        def iter_jsonl(fname, cnt=None):
+            i = 0
+            with open(fname, "r") as fin:
+                for line in fin:
+                    if i == cnt:
+                        break
+                    yield json.loads(line)
+                    i += 1
+        
+        def load_data(data_name: str, data_dir: str = "/home/avnet/xiongjing/sjh/parallel_window/"):
+            fname = Path(data_name)
+            return list(iter_jsonl(fname))
+        
+        examples = load_data(data_file)
+        logger.info(f"type(examples): {type(examples)}")
+        logger.info(f"len(examples): {len(examples)}")
+        logger.info(f"answer: {examples[4]['answer']}")
+        logger.info(f"examples[0].keys(): {examples[0].keys()}")
+        logger.info("Finish loading InfiniteBench")
+        
+        def get_answer(eg: dict, data_name: str):
+            if data_name in ["code_debug", "longbook_choice_eng"]:
+                OPTIONS = "ABCD"
+                if isinstance(eg["answer"], str):
+                    ret = [eg["answer"], OPTIONS[eg['options'].index(eg["answer"])]]
+                elif isinstance(eg["answer"], list):
+                    if len(eg["answer"]) == 1:
+                        ret = [eg["answer"][0], OPTIONS[eg['options'].index(eg["answer"][0])]]
+                    elif len(eg["answer"]) == 2 and eg["answer"][1] in ['A', 'B', 'C', 'D']:
+                        ret = eg['answer']
+                    else:
+                        raise ValueError
+                else:
+                    raise ValueError
+                return ret
+
+            return eg["answer"]
+        
+        def create_prompt(eg,data_name):
+            template = self.model2prompt[data_name]
+            if data_name == "code_run":
+                find_result = re.findall(r"func_[0-9]+\(\-?[0-9]+\)", eg['input'])
+                func_call = find_result[0]
+                func = func_call.split("(")[0]
+                return template.format(
+                    func=func,
+                    func_call=func_call,
+                    context=eg["context"],
+                )
+            elif data_name in ["code_debug", "code_debug_qa"]:
+                code = eg["context"]
+                if data_name == "code_debug":
+                    return template.format(
+                        context=code,
+                        OPTION_A=eg["options"][0],
+                        OPTION_B=eg["options"][1],
+                        OPTION_C=eg["options"][2],
+                        OPTION_D=eg["options"][3],
+                    )
+                return template.format(context=code)
+            elif data_name == "longdialogue_qa_eng":
+                script = eg["context"]
+                prompt = template.format(context=script)
+                return prompt
+            elif data_name in [
+                "longbook_choice_eng",
+                "longbook_qa_eng",
+                "longbook_sum_eng",
+                "longbook_qa_chn",
+            ]:
+                book = eg["context"]
+                if data_name == "longbook_choice_eng":
+                    return template.format(
+                        input=eg["input"],
+                        context=book,
+                        OPTION_A=eg["options"][0],
+                        OPTION_B=eg["options"][1],
+                        OPTION_C=eg["options"][2],
+                        OPTION_D=eg["options"][3],
+                    )
+                elif data_name == "longbook_qa_eng":
+                    return template.format(
+                        input=eg["input"],
+                        context=book,
+                    )
+                elif data_name == "longbook_sum_eng":
+                    return template.format(context=book)
+                elif data_name == "longbook_qa_chn":
+                    return template.format(
+                        input=eg["input"],
+                        context=book,
+                    )
+                else:
+                    raise ValueError
+            elif data_name == "math_calc":
+                return template.format(context=eg["context"])
+            elif data_name == "math_find":
+                prompt = eg['input']
+                context = eg['context']
+                find_result = re.findall(r"The .+ of", prompt)
+                assert find_result, f"Cannot find the target number in {prompt}"
+                target_number = find_result[0].lower()[:-3]
+                prefix = f"What is {target_number} in the following list?"
+                return template.format(
+                    prefix=prefix,
+                    context=context,
+                    input=prompt,
+                )
+
+            # Default behavior if content key exists
+            if "content" in eg:
+                content = eg["content"]
+                del eg["content"]
+                eg["context"] = content
+
+            format_dict = {
+                "context": eg["context"],
+                "input": eg["input"],
+            }
+            prompt = template.format(**format_dict)
+        
+        
+            return prompt
+
+        
+        for example in examples:
+            prompt = self.model2prompt[self.data_name]
+            example["prompt"] = create_prompt(example, self.data_name)
+            example["length"] = len(example["context"].split())
+            example["all_classes"] = None
+        
+        input_max_len_string, query_max_len, context_max_len, maxid = 0, 0, 0, 0
+        for i,example in enumerate(examples):
+            if i > 100:
+                continue
+            length_string = len(example["context"])
+            length_query = self.tokenizer(example["input"], return_tensors="pt")["input_ids"].shape[1]
+            length_context = self.tokenizer(example["context"], return_tensors="pt")["input_ids"].shape[1]
+            if length_string > input_max_len_string: input_max_len_string = length_string
+            if length_query > query_max_len: query_max_len = length_query
+            if length_context > context_max_len : 
+                context_max_len = length_context
+                maxid = i
+            
+            prompts_all.append(example["prompt"])
+            inputs.append(example["input"])
+            languages.append("None")
+            contexts.append(example["context"])
+            answerss.append(get_answer(example, self.data_name))
+            # print("get_answer(example, args.dataset)",get_answer(example, self.data_name))
+            optionss.append(example["options"])
+            datasets.append(self.data_name)
+            all_classess.append(example["all_classes"])
+            lengths.append(example["length"])
+            ids.append(example["id"])
+        logger.info(f"input_max_len_string: {input_max_len_string}")
+        logger.info(f"query_max_len: {query_max_len}")
+        logger.info(f"context_max_len: {context_max_len}")
+        logger.info(f"id: {maxid}")
+        # assert 1==0
+        combined_data = [
+            {
+                "prompt": p, "input": i, "context": c, "answers": a, 
+                "options": op, "_id": id, "dataset": dataset,
+                "all_classes": ac, "length":l,  "language": lang,
+            }
+            for p, i, c, a, op, id, dataset, ac,l, lang in zip(
+                prompts_all, inputs, contexts, answerss, optionss, ids,datasets,
+                all_classess,lengths,languages,
+            )
+        ]
+        # assert 1==0
+        return combined_data
     
     def load_datas(self, data_file: str) -> None:
         test_data = []
@@ -66,19 +326,45 @@ class ExperimentManager_longbench:
         all_classess = []
         _ids = []
         input_max_len = 0
+        input_max_len_string = 0
+        query_max_len = 0
+        context_max_len = 0
+        ids = 0
+        maxid = 0
         with open(data_file) as fp:
             for line in fp:
+                if "ppl" in self.parallel_pattern:
+                    if ids != 62:
+                        ids += 1
+                        continue
+                # if ids > 50:
+                #     ids+=1
+                #     continue
                 example = json.loads(line)
                 length = example["length"]
+                length_string = len(example["context"])
+                length_query = self.tokenizer(example["input"], return_tensors="pt")["input_ids"].shape[1]
+                length_context = self.tokenizer(example["context"], return_tensors="pt")["input_ids"].shape[1]
                 if length > input_max_len: input_max_len = length
+                if length_string > input_max_len_string: input_max_len_string = length_string
+                if length_query > query_max_len: query_max_len = length_query
+                if length_context > context_max_len : 
+                    context_max_len = length_context
+                    maxid = ids
                 # template = self.model2prompt[self.data_name]
                 # prompt = template.format(**example)
                 # if "llama2" in self.model_name or "llama-2" in self.model_name:
                 #     prompt = self.build_chat(prompt)
                 # example["prompt"] = prompt
                 test_data.append(example)
+                ids+=1
+        logger.info(f"Max ids is {maxid}")
         logger.info(f"Max Length is {input_max_len}")
-        
+        logger.info(f"Max Length string is {input_max_len_string}")
+        logger.info(f"query_max_len tokens is {query_max_len}")
+        logger.info(f"length_context_len tokens is {context_max_len}")
+        if self.parallel_pattern == "test":
+            assert 1==0
         for example in test_data:
             # prompts_all.append(example["prompt"])
             inputs.append(example["input"])
@@ -97,7 +383,7 @@ class ExperimentManager_longbench:
                 "length": l, "dataset": d, "language": lang, 
                 "all_classes": ac, "_id": id
             }#p,prompts_all
-            for  i, c, a, l, d, lang, ac, id in zip(
+            for i, c, a, l, d, lang, ac, id in zip(
                 inputs, contexts, answerss, lengths, 
                 datasets, languages, all_classess, _ids
             )
@@ -114,16 +400,15 @@ class ExperimentManager_longbench:
         new_prompt = batch_contexts
         
         # 确定是否启用并行窗口，采取不同策略
-        if self.parallel_pattern == "default":
+        if "default" in self.parallel_pattern:
             template = self.model2prompt[self.data_name]
             prompt = template.format(**batch_data[0])
-            
+            # prompt = batch_data[0]['prompt']
             # if "llama2" in self.model_name or "llama-2" in self.model_name:
             #     prompt = self.build_chat(prompt)
-            
             new_prompt = [prompt]
         # logger.debug(f"new_prompt:{new_prompt}")
-        
+        logger.info("context length string:{}".format(len(new_prompt[0])))
         tokenized_prompts = self.tokenizer(new_prompt,
                                           padding="longest", 
                                           return_tensors="pt", 
@@ -139,74 +424,203 @@ class ExperimentManager_longbench:
         if batch_size == 1:
             # print("self.Truncation_Method:{}".format(self.Truncation_Method))
             # assert 1==0
-            if len(batch_input_ids[0]) > self.model_max_len and self.Truncation_Method!="WO_Truncation":
-                print("len(batch_input_ids):{}".format(len(batch_input_ids)))
+            if len(batch_input_ids[0]) > self.raw_model_max_len and self.Truncation_Method!="WO_Truncation"\
+                and "default" in self.parallel_pattern:
+                logger.info("fullkv truncation")
+                print("raw context tokens length: {}".format(len(batch_input_ids[0])))
 #                assert 1==0
-                half = int(self.model_max_len/2)
-                truncation_prompts = [tokenizer.decode(batch_input_ids[i][padding_len[i]:padding_len[i]+half], skip_special_tokens=True)+
-                          tokenizer.decode(batch_input_ids[i][-half:], skip_special_tokens=True) 
-                          for i in range(len(batch_input_ids))]
+                if "ppl" not in self.parallel_pattern:
+                    if "NTK" in self.parallel_pattern :
+                        self.raw_model_max_len = 16000
+                    elif "PI" in self.parallel_pattern:
+                        self.raw_model_max_len = 16000
+                    elif "chunkllama" in self.parallel_pattern:
+                        self.raw_model_max_len = 16000
+                    if "all" in self.parallel_pattern:
+                        self.raw_model_max_len = 128000
+                        
+                    half = int(self.raw_model_max_len/2)
+                    truncation_prompts = [tokenizer.decode(batch_input_ids[i][padding_len[i]:padding_len[i]+half], skip_special_tokens=True)+
+                              tokenizer.decode(batch_input_ids[i][-half:], skip_special_tokens=True) 
+                              for i in range(len(batch_input_ids))]
+
+                    # before = int(self.raw_model_max_len/1.2)
+                    # after = self.raw_model_max_len - before
+                    # truncation_prompts = [tokenizer.decode(batch_input_ids[i][padding_len[i]:padding_len[i]+before], skip_special_tokens=True)+
+                    #           tokenizer.decode(batch_input_ids[i][-after:], skip_special_tokens=True) 
+                    #           for i in range(len(batch_input_ids))]
+                
+                
+                else:
+                    truncation_prompts = [tokenizer.decode(batch_input_ids[i][:self.raw_model_max_len], skip_special_tokens=True)
+                              for i in range(len(batch_input_ids))]
 #                assert 1==0
             else:
-                truncation_prompts = [tokenizer.decode(batch_input_ids[i], skip_special_tokens=True) 
-                          for i in range(len(batch_input_ids))]
-                #assert 1==0
-
-            total_len = len(truncation_prompts[0])
-            
-            window_size = int(total_len/self.n_windows) # 平均每个窗口长度
-            
-
-            if window_size>self.model_max_len and self.Truncation_Method=="WO_Truncation":
+                if self.Truncation_Method=="WO_Truncation" :
+                    # adaptive n windows
+                    critical_length = 37000
+                    
+                    query_long_datasets = ["repobench-p","triviaqa"]
+                    query_middle_datasets = ["samsum","passage_retrieval_en"]
+                    print("self.raw_model_max_len:{}".format(self.raw_model_max_len))
+                    if self.data_name in query_long_datasets:
+                        if "llama-3.1" in self.model_name.lower() or "qwen" in self.model_name.lower() :
+                            pass
+                            # self.context_max_len = 22000
+                        elif "llama3" in self.model_name.lower():
+                            if self.context_max_len > 6200:
+                                self.context_max_len = 6200
+                        else:
+                            if self.context_max_len > 2500:
+                                self.context_max_len = 2500
+                        logger.info(f"updata context_max_len: {self.context_max_len}")
+                    elif self.data_name in query_middle_datasets:
+                        if "llama-3.1" in self.model_name.lower() or "qwen" in self.model_name.lower():
+                            pass
+                            # self.context_max_len = 22000
+                        elif "llama3" in self.model_name.lower():
+                            if self.context_max_len > 7000:
+                                self.context_max_len = 7000
+                        else:
+                            if self.context_max_len > 2800:
+                                self.context_max_len = 2800
+                        logger.info(f"updata context_max_len: {self.context_max_len}")
+                    
+                    if self.kv_cache_eviction or self.stage_eviction or self.dynamic_window:
+                        critical_length = torch.iinfo(torch.long).max
+                        if "stream" in self.parallel_pattern:
+                            critical_length = 30000
+                    
+                    logger.info(f"raw context tokens length: {len(batch_input_ids[0])}")
+                    logger.info(f"critical_length: {critical_length}")
+                    
+                    if self.reduce_length and not self.revise_single: 
+                        self.revise_single = True
+                        if self.data_name not in query_long_datasets or self.data_name not in query_middle_datasets:
+                            if self.reduce_factor == 0:
+                                self.context_max_len = self.context_max_len // 2  # (1800)
+                            else:
+                                self.context_max_len = self.reduce_factor
+                        else:
+                            if self.context_max_len > self.reduce_factor:
+                                self.context_max_len = self.reduce_factor    
+                    logger.info(f"self.context_max_len: {self.context_max_len}")
+                    # 划分窗口截断 最大context token数目限制在37k
+                    if len(batch_input_ids[0]) <= critical_length:
+                        total_len = batch_input_ids[0].shape[0]
+                        adaptive_n_windows = math.ceil(total_len / self.context_max_len)
+                        logger.info(f"adaptive_n_windows in critical_length: {adaptive_n_windows}")
+                        self.n_windows = adaptive_n_windows
+                        truncation_prompts = [tokenizer.decode(batch_input_ids[i], skip_special_tokens=True) 
+                              for i in range(len(batch_input_ids))]
+                    else:
+                        half = int(critical_length/2)
+                        adaptive_n_windows = math.ceil(critical_length / self.context_max_len)
+                        logger.info(f"adaptive_n_windows in full length: {adaptive_n_windows}")
+                        self.n_windows = adaptive_n_windows
+                        truncation_prompts = [tokenizer.decode(batch_input_ids[i][padding_len[i]:padding_len[i]+half], skip_special_tokens=True)+
+                                  tokenizer.decode(batch_input_ids[i][-half:], skip_special_tokens=True) 
+                                  for i in range(len(batch_input_ids))]
+                    for layer in self.model.model.model.layers:
+                        if self.rank_windows:
+                            layer.self_attn.n_windows = min(self.n_windows,abs(self.topk_windows))
+                            self.model.model.n_windows = min(self.n_windows,abs(self.topk_windows))
+                        else:
+                            layer.self_attn.n_windows = adaptive_n_windows
+                            self.model.model.n_windows = adaptive_n_windows
+                    self.model.n_windows = adaptive_n_windows
+                else:
+                    truncation_prompts = [tokenizer.decode(batch_input_ids[i], skip_special_tokens=True)
+                                  for i in range(len(batch_input_ids))]
                 
-                adaptive_n_windows = math.ceil(total_len / self.model_max_len)
-                self.n_windows = adaptive_n_windows
-                window_size = int(total_len/self.n_windows) # 平均每个窗口长度
-                # print("self.n_windows:{}".format(self.n_windows))
-                
-                # assert 1==0
+        total_len = len(truncation_prompts[0])
+        logger.info("after truncation context length string:{}".format(total_len))
+        window_size = int(total_len/self.n_windows) # 平均每个窗口长度
+        logger.info(f"window_size string: {window_size}")
 
-            per_windows_prompt = [truncation_prompts[0][i: i + window_size] for i in range(0, len(truncation_prompts[0]), window_size)]
-            if len(truncation_prompts[0])-window_size*self.n_windows > 0:
-                per_windows_prompt[-2]=per_windows_prompt[-2]+truncation_prompts[0][-(len(truncation_prompts[0])-window_size*self.n_windows):]
-                per_windows_prompt = per_windows_prompt[:-1]
+        per_windows_prompt = [truncation_prompts[0][i: i + window_size] for i in range(0, len(truncation_prompts[0]), window_size)]
+        if len(truncation_prompts[0])-window_size*self.n_windows > 0:
+            per_windows_prompt[-2]=per_windows_prompt[-2]+truncation_prompts[0][-(len(truncation_prompts[0])-window_size*self.n_windows):]
+            per_windows_prompt = per_windows_prompt[:-1]
+  
+        # 添加检查
+        # if min(self.n_windows,abs(self.topk_windows)) * self.capacity < 384 :
+        #    self.model.capacity = 384//min(self.n_windows,abs(self.topk_windows))
         
+        # 对context加入prompt 根据pattern 确定添加哪些prompt
+        per_windows_prompt = self.prompt_design(per_windows_prompt,batch_inputs*len(per_windows_prompt),batch_data[0])
 
-        per_windows_prompt = self.prompt_design(per_windows_prompt,batch_inputs*len(per_windows_prompt))
+        # print("per_windows_prompt:{}".format(per_windows_prompt))
         # logger.info(f"per_windows_prompt:{per_windows_prompt}")
         # logger.debug(f"len(per_windows_prompt):{len(per_windows_prompt)}")
         # logger.debug(f"len(per_windows_prompt[0]):{len(per_windows_prompt[0])}")
         # logger.debug(f"per_windows_prompt[0]):{len(per_windows_prompt[0])}")
-        # assert 1==0
         return per_windows_prompt
 
-    def prompt_design(self, raw_prompt:List[str], quesiton:List[str]):
+    def create_prompt_new(self,raw_sample,batch_data):
+        if self.data_name == "math_find":
+            prompt = raw_sample["input"]
+            find_result = re.findall(r"The .+ of", prompt)
+            assert find_result, f"Cannot find the target number in {prompt}"
+            target_number = find_result[0].lower()[:-3]
+            prefix = f"What is {target_number} in the following list?"
+            raw_sample['prefix'] = prefix
+        elif self.data_name == "code_run":
+            find_result = re.findall(r"func_[0-9]+\(\-?[0-9]+\)", raw_sample['input'])
+            func_call = find_result[0]
+            func = func_call.split("(")[0]
+            raw_sample["func"] = func
+            raw_sample["func_call"] = func_call
+        elif self.data_name == "longbook_choice_eng" or self.data_name =="code_debug":
+            raw_sample["OPTION_A"]=batch_data["options"][0],
+            raw_sample["OPTION_B"]=batch_data["options"][1],
+            raw_sample["OPTION_C"]=batch_data["options"][2],
+            raw_sample["OPTION_D"]=batch_data["options"][3],
+        
+            
+    
+    def prompt_design(self, raw_prompt:List[str], quesiton:List[str], batch_data):
         revise_prompts = []
         my_templates = self.templates
         
         for i in range(len(raw_prompt)):
-            if self.parallel_pattern == "every_window_query_input_no_query" :
-                raw_sample = {}
+            # 处理特殊数据集
+            raw_sample = {}
+            if "every_window_query_input_no_query" in self.parallel_pattern and "anchor" not in self.parallel_pattern:
                 raw_sample["context"] = raw_prompt[i]
                 raw_sample["input"] = quesiton[i]
+                self.create_prompt_new(raw_sample,batch_data)
                 revise_prompt = my_templates["all"].format(**raw_sample)
-            elif self.parallel_pattern == "every_window_no_query_input_query":
-                raw_sample = {}
+            elif "every_window_no_query_input_query" in self.parallel_pattern:
                 raw_sample["context"] = raw_prompt[i]
                 raw_sample["input"] = quesiton[i]
-                # logger.debug(f"{my_templates['context']}")
+                self.create_prompt_new(raw_sample,batch_data)
                 revise_prompt = my_templates["context"].format(**raw_sample)
-            elif self.parallel_pattern == "every_window_query_input_query":
-                raw_sample = {}
+            elif "every_window_query_input_query" in self.parallel_pattern and "anchor" not in self.parallel_pattern:
+                
                 raw_sample["context"] = raw_prompt[i]
                 raw_sample["input"] = quesiton[i]
+                self.create_prompt_new(raw_sample,batch_data)
                 revise_prompt = my_templates["all"].format(**raw_sample)
-            elif self.parallel_pattern == "default":
+            elif "every_window_query_input_query_anchor" in self.parallel_pattern:
+                
+                raw_sample["context"] = raw_prompt[i]
+                raw_sample["input"] = quesiton[i]
+                self.create_prompt_new(raw_sample,batch_data)
+                if "new" in self.parallel_pattern: # 使用id
+                    revise_prompt = {}
+                    revise_prompt["context"] = my_templates["context"].format(**raw_sample)
+                    revise_prompt["input"] = my_templates["question"].format(**raw_sample)
+                else:
+                    revise_prompt = my_templates["all_anchor"].format(**raw_sample)
+            elif "default" in self.parallel_pattern:
+                logger.info("len(raw_prompt):{}".format(len(raw_prompt)))
                 assert len(raw_prompt) == 1
                 revise_prompt = raw_prompt[i]
             else:
                 revise_prompt = raw_prompt[i]
-            
+                
+            # logger.info("len(revise_prompt:){}".format(len(revise_prompt)))
             revise_prompts.append(revise_prompt)
         
         
@@ -215,6 +629,7 @@ class ExperimentManager_longbench:
     def get_predicted(self,eval_batch_size=1,output_max_len=32):
         accelerator = self.accelerator
         tokenizer = self.tokenizer
+        raw_position_select = self.raw_position_select
         
         logger.info("get_predicted begin")
         with accelerator.split_between_processes(self.datas) as split_data:
@@ -234,15 +649,30 @@ class ExperimentManager_longbench:
                 batch__ids = [item["_id"] for item in batch_data]
                 
                 # 在这里分配窗口
+                self.create_prompt_new(batch_data[0],batch_data[0])
                 per_windows_prompt = self.truncate_text(eval_batch_size,batch_data)
-                logger.info(f"len(per_windows_prompt):{len(per_windows_prompt)}")
+                # logger.info(f"window_num: {len(per_windows_prompt)}")
+                # assert 1==0
+                # print("per_windows_prompt",per_windows_prompt)
                 # assert 1==0
                 question = self.templates["question"].format(**batch_data[0])
                 if self.Truncation_Method=="WO_Truncation":
-                   output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,question=question, adaptive_n_windows = self.n_windows)
+                   output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,
+                                                              question=question, context_max_len=self.context_max_len,
+                                                              raw_model_max_len=self.raw_model_max_len,
+                                                              adaptive_n_windows = self.n_windows,
+                                                              raw_position_select=raw_position_select,
+                                                              recent_token=self.recent_token,
+                                                              )
                 else:
-                   output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,question=question)
-                print("results:{}".format(output))
+                   output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,
+                                                              question=question,  
+                                                              context_max_len=self.context_max_len,
+                                                              raw_model_max_len=self.raw_model_max_len,
+                                                              raw_position_select=raw_position_select,
+                                                              recent_token = self.recent_token,
+                                                             )
+                # print("results:{}".format(output))
                 batch_generations = [output]
                 for j in range(len(batch_contexts)):
                     example = {}
@@ -261,8 +691,10 @@ class ExperimentManager_longbench:
                     results["num_tokens"] += len(batch_generations[j])
                     
             results = [results]
-        results_gathered = gather_object(results)
         self.accelerator.wait_for_everyone()
+        results_gathered = gather_object(results)
+        
+        # self.accelerator.wait_for_everyone()
         return results_gathered
 
     # run_experiment
@@ -281,353 +713,68 @@ class ExperimentManager_longbench:
         model_name = model_name.split('/')[-1]
         logger.debug(f"datasets_name:{datasets_name}")
         
-        kv_cache = ""
-        if "kv_cache" in self.prompt_method:
-            kv_cache = "_kv_cache"
-        
         if self.Truncation_Method=="WO_Truncation":
             self.n_windows = "adaptive"
-        
+        if not self.kv_cache_eviction and not self.stage_eviction:
+            self.capacity = "full"
         if accelerator.is_main_process:
-            os.makedirs(os.path.join("results/longbench", f"{model_name}", datasets_name), exist_ok=True)
-            fout = open(os.path.join("results/longbench", f"{model_name}", datasets_name,
-                                     f"{self.parallel_pattern}_windows_{self.n_windows}_{model_class}{kv_cache}.json"), "w")
+            if self.data_name_full=="longbench":
+                output_path = os.path.join("results/longbench_0507", f"{model_name}", datasets_name)
+            elif self.data_name_full=="infinitebench":
+                output_path = os.path.join("results/infinitebench_0507", f"{model_name}", datasets_name)
+            else:
+                output_path = os.path.join("results/others", f"{model_name}", datasets_name)
+            os.makedirs(output_path, exist_ok=True)
+            if "every_window_query_input_query_anchor_new" in self.parallel_pattern:
+                parallel_pattern = "anchorNew"
+                if "label" in self.parallel_pattern:
+                    numbers = re.findall(r'\d+', self.parallel_pattern)
+                    if numbers:
+                        parallel_pattern = "anchorNew_label" + numbers[-1]
+                    else:
+                        parallel_pattern = "anchorNew_label"
+            else:
+                parallel_pattern = self.parallel_pattern
+            output_datapath = os.path.join(output_path,
+                                    # f"{self.parallel_pattern}_windows_{self.n_windows}_{model_class}"+\
+                                    f"{parallel_pattern}_"+\
+                                    # f"{kv_cache}_raw_position_{int(self.raw_position_select)}_"+\
+                                    # f"{kv_cache}_"+ \
+                                    # f"winDynamic_{int(self.dynamic_window)}_"+\
+                                    f"queryRank_{int(self.query_rank)}_" +\
+                                    # f"rectok_{int(self.query_recent_tokens)}_" +\
+                                    # f"rank_{int(self.rank_windows)}_" +\
+                                    # f"cache_{int(self.rank_cache)}_" +\
+                                    f"topk_{self.topk_windows}_" +\
+                                    # f"ascend_{int(self.window_ascend)}_" +\
+                                    # f"decom_{self.decomposition_factor}_" +\
+                                    # f"recem_{int(self.get_recent_attn)}_" +\
+                                    # f"num_{self.recent_top_num}_" +\
+                                    # f"reduce_{int(self.reduce_length)}_" +\
+                                    # f"tokenNum_{self.reduce_factor}_" +\
+                                    f"calibStage_{self.calibration_stage}_" +\
+                                    f"calibMode_{self.calibration_mode}_" +\
+                                    f"delPro_{int(self.delete_context_prompt)}_" +\
+                                    f"kv_pre_{int(self.kv_cache_eviction)}_"+\
+                                    f"stage_{int(self.stage_eviction)}_"+\
+                                    f"generate_{int(self.kv_cache_dynamic)}_" +\
+                                    f"winsize{self.recent_token}_" +\
+                                    f"cap_{self.capacity}_" +\
+                                    f"keyNR_{int(self.key_no_rope)}_" +\
+                                    f"poShift{int(self.position_shift)}_" +\
+                                    f"factor_{self.shift_factor}_" +\
+                                    f"interval_{self.interval_shift}_" +\
+                                    f"poSort_{self.positional_sorting}_" +\
+                                    f"ascend_{int(self.rank_ascend)}_" +\
+                                    # f"NTK_{int(self.NTK_aware)}" +\
+                                    f"spe_{int(self.special_token)}_" +\
+                                    f"atAvg_{int(self.attn_avg)}" +\
+                                    # f"_{self.attn_implementation}" +\
+                                    f".json"
+                                    )
+            logger.info(f"output_datapath: {output_datapath}")
+            fout = open(output_datapath,"w")
             for result_list in results_gathered:
                 for example in result_list["outputs"]:
                     fout.write(json.dumps(example) + "\n")
         
-
-class ExperimentManager:
-    def __init__(self, test_df: pd.DataFrame, train_df: pd.DataFrame, model: PCWModelWrapper,
-                 labels: List[str] = None, random_seed: int = 42, subsample_test_set: int = 2000,
-                 n_shots_per_window: int = None, prompt_method: str = None, output_json:str = None, n_windows: int = 1, accelerator=None, sample_method=None, sample_number=None, extra_sample_number=None):
-        if subsample_test_set < len(test_df):
-            np.random.seed(random_seed)
-            test_df = test_df.sample(subsample_test_set)
-        self.prompt_method = prompt_method
-        print("self.prompt_method:{}".format(self.prompt_method))
-        self.test_df = test_df
-        self.n_windows = n_windows  # 窗口数量
-
-        self.train_df = train_df
-        self.model = model
-        self.base_random_seed = random_seed
-        self.n_shots_per_window = n_shots_per_window
-        self.tokenizer = model.tokenizer
-        self.output_json = output_json
-        self.multi_gpus = torch.cuda.device_count() > 1
-        self.accelerator = accelerator
-        
-        self.sample_method = sample_method
-        self.sample_number = sample_number
-        self.extra_sample_number = extra_sample_number
-        
-
-        with open("datasets/gsm8k/complex_cot.txt", 'r', encoding='utf-8') as file:
-            prompt = file.read()
-            # prompts =  prompt.split("\n\n")
-            # print("prompts[0]:{}".format(prompts[0]))
-            # print("len(prompts):{}".format(len(prompts)))
-        self.complex_cot = prompt
-        #print("self.complex_cot:{}".format(self.complex_cot))
-        if self.prompt_method == "other" :
-            # self.max_n_tokens = self.tokenizer.model_max_length
-            self._initialize_labels_and_logit_processor(labels, self.prompt_method)
-
-
-    def _initialize_labels_and_logit_processor(self, labels: List[str], prompt_method: str) -> None:
-        """
-            函数的输入和用途
-                输入: labels (一个字符串列表)
-                表示分类任务的所有可能标签。
-                
-                用途:
-                编码标签为模型可以处理的格式。
-                优化标签的长度以减少生成复杂度。
-                为生成任务设置逻辑约束，限制模型输出为预定义的标签。
-        """
-        _logger.info(f"Provided labels: {labels}")
-        labels_tokens = encode_labels(self.tokenizer, labels)
-        labels_tokens_array = self.minimize_labels_tokens(labels_tokens)
-        _logger.info(f"Provided labels average n_tokens: {np.round(np.mean([len(lt) for lt in labels_tokens]), 3)}")
-        # we fix the labels accordingly in the test set:
-        shorten_label_tokens = [t[t != self.tokenizer.eos_token_id].tolist() for t in labels_tokens_array]
-        _logger.info(
-            f"shortened labels average n_tokens: {np.round(np.mean([len(lt) for lt in shorten_label_tokens]), 3)}")
-        # Moving the test set label tokens to their shorter version:
-        map_labels = {old_label: self.tokenizer.decode(t).lstrip() for old_label, t in
-                      zip(labels, shorten_label_tokens)}
-        self.test_df[LABEL_TOKENS] = self.test_df[LABEL_TOKENS].map(map_labels)
-        pad = len(max(shorten_label_tokens, key=len))
-        labels_tokens_array = np.array(
-            [i + [self.tokenizer.eos_token_id] * (pad - len(i)) for i in shorten_label_tokens])
-        self.max_n_tokens = pad
-        labels_tokens_array = self.pad_contained_labels_with_stop_seq(shorten_label_tokens, labels_tokens_array)
-        self.logit_processor = RestrictiveTokensLogitsProcessor(restrictive_token_ids=labels_tokens_array,
-                                                                eos_token_id=self.tokenizer.eos_token_id)
-        self.possible_labels = set(map_labels.values())
-
-    def minimize_labels_tokens(self, labels_tokens: List[List[int]]) -> npt.NDArray[int]:
-        """
-         Minimize the number of tokens per label to be the shortest possible unique one.
-        """
-        pad = len(max(labels_tokens, key=len))
-        labels_tokens_array = np.array([i + [self.tokenizer.eos_token_id] * (pad - len(i)) for i in labels_tokens])
-        for i, tokens in enumerate(labels_tokens):
-            for j in range(len(tokens)):
-                labels_with_shared_beginnings = np.sum(
-                    np.all(labels_tokens_array[:, :j] == np.array(tokens[:j]), axis=1))
-                if labels_with_shared_beginnings == 1:
-                    labels_tokens_array[i, j:] = self.tokenizer.eos_token_id
-                    break
-        return labels_tokens_array
-
-    def pad_contained_labels_with_stop_seq(self, labels_tokens: List, labels_tokens_array: npt.NDArray[int]) \
-            -> npt.NDArray[int]:
-        """
-        In case we have two labels, where one label contains the other label (for example: "A" and "A B") we need
-        to allow the restrictive decoding to produce the output "A". We support it by adding "\n" to the shorter label.
-        """
-        stop_seq_token_id = encode_stop_seq(self.tokenizer, STOP_SEQUENCE)
-        for i, tokens in enumerate(labels_tokens):
-            labels_with_shared_beginnings = np.sum(
-                np.all(labels_tokens_array[:, :len(tokens)] == np.array(tokens), axis=1))
-            if labels_with_shared_beginnings > 1:
-                _logger.info(f"label{self.tokenizer.decode(tokens)} is the beginning of one of the other labels,"
-                             f"adding stop sequence to its end")
-                labels_tokens_array[i, len(tokens)] = stop_seq_token_id
-        return labels_tokens_array
-
-    def _set_random_seed(self, random_seed: int) -> None:
-        np.random.seed(random_seed)
-        random.seed(random_seed)
-
-    def get_few_shots_acc(self, windows_few_shot: List[str], few_shots_prompts: str=None) -> float:
-        returns = self.get_predicted_labels(windows_few_shot, few_shots_prompts=few_shots_prompts)
-        if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method == "complex_cot_pcw_pre_process_window_cache" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache"\
-            :
-            if self.multi_gpus:
-                if self.accelerator.is_main_process:
-                    with open(self.output_json, "w") as f:
-                        json.dump(returns, f)
-            else:
-                with open(self.output_json, "w") as f:
-                    json.dump(returns, f)
-        else:
-            return self.calc_acc(returns)
-
-    def get_predicted_labels(self, windows_few_shots: List[str], few_shots_prompts: str=None) -> List[str]:
-                    
-        predicted_labels = []
-        all_preds = []
-        i = 0 
-        
-        
-        if self.multi_gpus:
-            self.accelerator.wait_for_everyone()
-            all_data = (self.test_df[[PROMPTS, "question", "gold_reasoning"]]).values.tolist() #question, gold_reasoning
-            #print("len of all_data:{}".format(len(all_data)))
-            with self.accelerator.split_between_processes(all_data) as prompts:
-                # print("len of test data:{}".format(len(prompts)))
-                # print(f"Hello this is GPU {self.accelerator.process_index}")
-
-                for q in tqdm(prompts):            
-                    if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
-                        cot = self.predict_label(q[0], few_shots_prompts=few_shots_prompts)
-                        all_preds.append({'question':q[1],'answer': q[2],'pred': cot})
-                    elif  self.prompt_method == "complex_cot_pcw_pre_process_window_cache":
-                        cot = self.predict_label(q[0], windows_cache=windows_cache)
-                        all_preds.append({'question':q[1],'answer': q[2],'pred': cot})
-                    else:
-                        predicted_label = self.predict_label(TEXT_BETWEEN_SHOTS + q[1], windows_cache=windows_cache)
-                        all_preds.append(predicted_label)
-                    i = i + 1
-                    # if i==5:
-                    #     break 
-            
-                all_preds = gather_object(all_preds)
-                return all_preds
-        else:
-            for q in tqdm(self.test_df[PROMPTS]):            
-                    if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
-                        # {'question':question,'answer': backup[i]['answer'],'pred': pred}
-                        cot = self.predict_label(q, few_shots_prompts=few_shots_prompts)
-                        all_preds.append({'question':self.test_df.loc[i, "question"],'answer': self.test_df.loc[i, "gold_reasoning"],'pred': cot})
-                    elif self.prompt_method == "complex_cot_pcw_pre_process_window_cache":
-                        cot = self.predict_label(q, few_shots_prompts=few_shots_prompts, windows_cache=windows_cache)
-                        all_preds.append({'question':self.test_df.loc[i, "question"],'answer': self.test_df.loc[i, "gold_reasoning"],'pred': cot})
-                    else:
-                        predicted_label = self.predict_label(TEXT_BETWEEN_SHOTS + q, windows_cache=windows_cache)
-                        all_preds.append(predicted_label)
-                    i = i + 1
-            if self.prompt_method == "other":        
-               assert set(predicted_labels).issubset(self.possible_labels)                
-            return all_preds
-            
-    def predict_label(self, task_text: str, windows_cache: str=None, few_shots_prompts: str=None) -> str:
-        """
-           这行代码的作用是检查 task_text 字符串的末尾是否有空格。如果末尾有空格，代码会抛出一个 AssertionError，并显示提示信息 "prompt ends with a space!"。
-           rstrip() 返回一个新的字符串，去掉了末尾的空格和换行符，结果是 'Hello, World!'。
-           
-           cache: 是返回的长下文编码
-        """
-
-        if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method == "complex_cot_pcw_pre_process_window_cache" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
-            
-            res = self.model.pcw_generate(task_text=task_text,
-                                          contexts_cache=windows_cache,
-                                          temperature=0.0,
-                                          max_new_tokens=300, 
-                                          few_shots_prompts=few_shots_prompts,
-                                          do_sample=False,
-                                          num_return_sequences=1
-                                         )
-            return res
-        else:
-            res = self.model.pcw_generate(task_text=task_text,
-                                        contexts_cache=windows_cache,
-                                        restrictive_logit_preprocessor=self.logit_processor,
-                                        temperature=0,
-                                        max_new_tokens=self.max_n_tokens)
-
-            return res.lstrip().strip(STOP_SEQUENCE)
-
-    def calc_acc(self, predicted_labels: List) -> float:
-        predicted_labels = pd.Series(predicted_labels, index=self.test_df.index)
-        acc = np.mean(predicted_labels == self.test_df[LABEL_TOKENS])
-        _logger.info(f"accuracy = {np.round(acc, 3)}")
-#        assert 1==0
-        return acc
-
-    def run_experiment_across_shots(self, n_shots_to_test: List[int], n_runs: int,
-                                    too_long_patience: float = 0.2):
-        """
-            n_shots_to_test：  n_shots = [i * n_shots_per_window for i in n_windows]
-            n_runs: Number of times experiments are repeated for every number of windows  重复实验次数
-        """
-        accuracies = np.zeros((len(n_shots_to_test), n_runs))
-        for i, n_shots in enumerate(tqdm(n_shots_to_test)):    # 分别在两种setting(两种不同上下文窗口长度)下做
-            """
-                n_shots： 代表所有数据的数量
-            """
-            _logger.info(f"starting with n = {n_shots}")
-            self._set_random_seed(self.base_random_seed + n_shots)
-
-            n_errors = 0
-            for j in tqdm(range(n_runs), desc="Progress"):  # 重复n_run次实验
-                if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or \
-                    self.prompt_method == "complex_cot_pcw_multi_windows" or \
-                        self.prompt_method =="complex_cot_pcw_pre_process_window_cache"\
-                            or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
-                    if self.sample_method == "sample":
-                       few_shots_prompts = "\n\n".join(list(self.train_df[PROMPTS]))
-                       #print("few_shots_prompts:{}".format(few_shots_prompts))
-                       #assert 1==0
-                    else: 
-                       
-                       few_shots_prompts = self.complex_cot #list(self.train_df.loc[few_shots_idx, PROMPTS])
-                       all_prompts = list(self.train_df[PROMPTS])
-                       if self.extra_sample_number>0:
-                          all_prompts = all_prompts[:self.extra_sample_number]
-                          few_shots_prompts = few_shots_prompts + "\n\n" + "\n\n".join(all_prompts)
-                          print("few_shots_prompts:{}".format(few_shots_prompts))
-                          #assert 1==0
-                    
-
-                else:
-                    few_shots_idx = self.sample_n_shots(n_shots)   # 采集上下文示例
-                    few_shots_prompts = list(self.train_df.loc[few_shots_idx, PROMPTS])
-       
-                # 上面都是在采集上下文示例, 包括根据token数量平衡窗口个数
-                # print("self.n_shots_per_window:{}".format(self.n_shots_per_window))
-                #print("len(few_shots_prompts) -2:{}".format(len(few_shots_prompts)))
-                windows_few_shots = self.build_windows_few_shots_text(few_shots_prompts, self.n_shots_per_window)
-                longest_window_n_tokens = max(n_tokens_in_prompt(self.tokenizer, window)
-                                              for window in windows_few_shots)
-
-                n_tokens_between_shots = n_tokens_in_prompt(self.tokenizer, TEXT_BETWEEN_SHOTS)
-                # 上面都是在组织窗口长度
-                
-
-                # windows_few_shots
-                if self.prompt_method == "complex_cot" or self.prompt_method == "complex_cot_pcw" or self.prompt_method == "complex_cot_pcw_multi_windows" or self.prompt_method == "complex_cot_pcw_pre_process_window_cache"\
-                    or self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
-                    self.get_few_shots_acc(windows_few_shots, few_shots_prompts=few_shots_prompts)
-                else:
-                    if ((longest_window_n_tokens + n_tokens_between_shots + self.test_df[N_TOKENS].max() + self.max_n_tokens) > self.model.context_window_size) :
-                        """
-                            这段代码的目的是检查当前生成的训练窗口（包含训练样本、分隔符、测试样本等内容）的总 token 数量是否超过了模型的上下文窗口大小（context_window_size）。
-                            如果超过，记录警告信息，并重新尝试生成一个符合要求的训练窗口。以下是逐步解析：
-                        """
-                            
-                        _logger.warning("Drawn training shots were too long, trying again")
-                        n_errors += 1
-                        print("n_errors:{}".format(n_errors))
-                        assert n_errors <= too_long_patience * n_runs, "too many long inputs were drawn!"
-                        continue
-                    accuracies[i, j] = self.get_few_shots_acc(windows_few_shots, few_shots_prompts=few_shots_prompts)
-
-        return accuracies
-
-    def sample_n_shots(self, n_shots: int) -> npt.NDArray[int]:
-        """
-           在这里晚上上下文示例采样
-           n_shots_per_window: 每个窗口最多可以容纳的样本数量
-           n_shots:  i * n_shots_per_window 即总的窗口数量*每个窗口的上下文示例数量   #[i * n_shots_per_window for i in n_windows]
-        """
-        print("n_shots:{}".format(n_shots))
-        few_shots_df = self.train_df.sample(n_shots)  # 从训练集里面采样示例, 而且是idx
-        # print("few_shots_df:{}".format(few_shots_df))
-        # print("len(few_shots_df):{}".format(len(few_shots_df)))
-        assert few_shots_df.index.is_unique, "few shots samples were not unique!"
-        window_size = self.n_shots_per_window or n_shots
-        print("window_size:{}".format(window_size))
-        #assert 1==0
-        n_windows = int(len(few_shots_df) / window_size)   # 总的窗口数量
-        print("n_windows:{}".format(n_windows))
-        
-        if not self.n_shots_per_window or n_windows == 1:
-            return few_shots_df.index
-        # balance_windows_sizes  这个不知道干啥的
-        return self.balance_windows_sizes(n_windows, few_shots_df)
-    
-
-
-    def balance_windows_sizes(self, n_windows: int, few_shots_df: pd.DataFrame) -> npt.NDArray[int]:
-        """
-           这是一个函数，用于平衡窗口大小和分布，从一个包含 token 数量（n_tokens）信息的 DataFrame 中选择样本，以优化分配到多个窗口的 token 总量。以下是逐步解释：
-        """
-        few_shots_df.sort_values(by=N_TOKENS, inplace=True, ascending=False)
-        shape = (self.n_shots_per_window, n_windows)
-        indexes = np.array(few_shots_df.index).reshape(shape)
-        sizes = few_shots_df.loc[indexes.flatten()].n_tokens.values.reshape(indexes.shape)
-        for i in range(1, self.n_shots_per_window):
-            order = np.argsort((np.sum(sizes[:i, :], axis=0)))
-            sizes[i, :] = sizes[i, order]
-            indexes[i, :] = indexes[i, order]
-        # shuffle the order in each window:
-        for i in range(n_windows):
-            np.random.shuffle(indexes[:, i])
-        indexes = indexes.T.flatten()
-        return indexes
-
-    def build_windows_few_shots_text(self, few_shots_prompts: List, window_size: int) -> List[str]:
-        """
-            self.n_shots_per_window: 每个窗口有多少shot数据
-        """
-        print("self.n_shots_per_window:{}".format(window_size))
-        if window_size is None:
-            window_size = len(few_shots_prompts)
-        if self.prompt_method == "other":
-           return [TEXT_BETWEEN_SHOTS.join(few_shots_prompts[i: i + window_size]) for i in
-                range(0, len(few_shots_prompts), window_size)]     # range(0, len(few_shots_prompts), window_size)：起点从 0 开始，每次步进 window_size，确保不遗漏元素。
-           
-        else: 
-           few_shots_prompts = few_shots_prompts.split("\n\n")
-           #print("few_shots_prompts list:{}".format(few_shots_prompts))
-           #assert 1==0
-           return [TEXT_BETWEEN_SHOTS_CoT.join(few_shots_prompts[i: i + window_size]) for i in
-                range(0, len(few_shots_prompts), window_size)]
-           
-          
-

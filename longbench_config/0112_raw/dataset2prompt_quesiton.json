@@ -1,0 +1,37 @@
+{
+    "multifieldqa_en":"\n\nNow, answer the following question based on the above text, only give me the answer and do not output any other words.\n\nQuestion: {input}\nAnswer:",
+    "narrativeqa": "\n\nNow, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.\n\nQuestion: {input}\n\nAnswer:",
+    "qasper": "\n\n Answer the question based on the above article as concisely as you can, using a single phrase or sentence if possible. If the question cannot be answered based on the information in the article, write \"unanswerable\". If the question is a yes/no question, answer \"yes\", \"no\", or \"unanswerable\". Do not provide any explanation.\n\nQuestion: {input}\n\nAnswer:",
+    "hotpotqa": "\n\nAnswer the question based on the given passages. Only give me the answer and do not output any other words.\n\nQuestion: {input}\nAnswer:",
+    "2wikimqa": "\n\nAnswer the question based on the given passages. Only give me the answer and do not output any other words.\n\nQuestion: {input}\nAnswer:",
+    "musique": "\n\nAnswer the question based on the given passages. Only give me the answer and do not output any other words.\n\nQuestion: {input}\nAnswer:",
+    "qmsum": "\n\nNow, answer the query based on the above meeting transcript in one or more sentences.\n\nQuery: {input}\nAnswer:",
+    "trec": "\nNow, answer the following questions{input}",
+    
+    "samsum": "\n\n{input}",
+    "passage_retrieval_en": "\n\nThe following is an abstract.\n\n{input}\n\nPlease enter the number of the paragraph that the abstract is from. The answer format must be like \"Paragraph 1\", \"Paragraph 2\", etc.\n\nThe answer is: ",
+    
+
+    "gov_report": "\n\nNow, write a one-page summary of the report.\n\nSummary:",
+    "multi_news": "\n\nNow, write a one-page summary of all the news.\n\nSummary:",
+    "lcc": "Next line of code:\n",
+    "passage_count": "\n\nPlease enter the final count of unique paragraphs after removing duplicates. The output format should only contain the number, such as 1, 2, 3, and so on.\n\nThe final answer is: ",
+    
+    "triviaqa": "\n\nNow, answer the following question based on the given passage:\n{input}",
+    "repobench-p": "{input}Next line of code:\n",
+
+
+    "passkey": "\nNow please retrieve: {input}",  
+    "number_string": "\nNow please retrieve: {input}",  
+    "kv_retrieval": "\nNow please retrieve: {input}",  
+    "longbook_sum_eng": "\n\n{input}",  
+    "longbook_qa_eng": "\n\n{input}\nPlease answer as short as possible. The answer is:",  
+    "longbook_qa_chn": "\n\n问题：{input}\n请尽量简短地回答。",  
+    "math_calc": "\nValues:",  
+    "longdialogue_qa_eng": "\n\nWhich character is most likely \"$$MASK$$\"? Just say the name used by the scriptwriter (before the colon marks) of one single character and nothing else.",
+    
+    "math_find": "\n\n{input}",
+    "code_run": "\n\nPlease give me the exact number of the return value of {func_call}. Your response should end with the sentence 'The return value is:'.",  
+    "longbook_choice_eng": "\n\nQuestion: {input}\n\nOnly one of the following options is correct, tell me the answer using one single letter (A, B, C, or D). Don't say anything else.\nA. {OPTION_A}\nB. {OPTION_B}\nC. {OPTION_C}\nD. {OPTION_D}",  
+    "code_debug": "\n\nWhich funtion has deliberate error?\nA. {OPTION_A}\nB. {OPTION_B}\nC. {OPTION_C}\nD. {OPTION_D}\n\nYou should first find the functions in the options. Repeat their content, inspect through code, and at last give me your answer for the function that has the deliberate and obvious error in A, B, C, or D."    
+}
