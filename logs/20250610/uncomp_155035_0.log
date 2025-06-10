@@ -1,5 +1,0 @@
-2025-06-10 15:50:35,661 - [Process 0/1] - INFO - loading datasets finished
-2025-06-10 15:50:35,661 - [Process 0/1] - INFO - context_max_len: 3600
-2025-06-10 15:50:35,662 - [Process 0/1] - INFO - raw_model_max_len: 3950
-2025-06-10 15:50:35,662 - [Process 0/1] - INFO - output_max_len: 128
-2025-06-10 15:50:35,662 - [Process 0/1] - INFO - parallel_pattern: default
