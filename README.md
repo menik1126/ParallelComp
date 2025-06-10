@@ -51,6 +51,24 @@ pip install -r requirements.txt
 
 ## 📊 Usage
 
+### Prerequisites & Dependencies
+
+Before running any evaluation scripts, make sure you have installed all required dependencies:
+
+```bash
+# Install dependencies from requirements.txt
+pip install -r requirements.txt
+```
+
+**Key Dependencies:**
+- `torch==2.0.1` - PyTorch for deep learning
+- `transformers==4.28.1` - Hugging Face transformers library
+- `accelerate==0.18.0` - For multi-GPU training and inference
+- `datasets==2.9.0` - For dataset loading and processing
+- `numpy`, `pandas` - Data manipulation
+- `sentencepiece==0.1.99` - For tokenization
+
+
 ### Quick Start
 
 #### Single GPU Evaluation
@@ -192,6 +210,7 @@ python run_evaluation.py \
 ## 🚧 TODO & Roadmap
 - [❎] **Code Organization**: Currently organizing and cleaning up the codebase for better usability
 - [❎] **Gemma Support**: Adding full support for Gemma model family
+- [❎] **Baselines**: Adding full support for Evaluation of Baselines
 - [❎] **SGLang Integration**: Adding support for SGLang inference engine for improved performance
 - [❎] **Documentation**: Expanding documentation with more detailed examples
 - [❎] **Quantization Support**: Adding support for model quantization (INT8/INT4) to reduce memory usage and accelerate inference
@@ -199,6 +218,7 @@ python run_evaluation.py \
 - [✅] **FlashAttention Support**
 - [✅] **Multi-GPU Inference Support**
 - [✅] **Batch Inference Support**
+- [✅] **AMD GPU Support**
 
 ## 📁 Project Structure
 
