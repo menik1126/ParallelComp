@@ -105,7 +105,7 @@ class ExperimentManager_longbench:
                     yield json.loads(line)
                     i += 1
         
-        def load_data(data_name: str, data_dir: str = "/home/avnet/xiongjing/sjh/parallel_window/"):
+        def load_data(data_name: str, data_dir: str = ""):
             fname = Path(data_name)
             return list(iter_jsonl(fname))
         

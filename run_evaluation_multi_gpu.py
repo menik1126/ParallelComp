@@ -38,14 +38,14 @@ accelerator = Accelerator(kwargs_handlers=[kwargs])
 
 NUM_HEAD_NUMS = {
     "meta-llama/Llama-2-7b-chat-hf": 32,
-    "/home/avnet/.cache/huggingface/hub/Meta-Llama-3-8B-Instruct": 32,
+    "~/.cache/huggingface/hub/Meta-Llama-3-8B-Instruct": 32,
     "Qwen/Qwen2.5-7B-Instruct": 28,
     "Qwen/Qwen3-8B": 32,
     "meta-llama/Llama-3.1-8B-Instruct": 32,
 }
 NUM_LAYER_NUMS = {
     "meta-llama/Llama-2-7b-chat-hf": 32,
-    "/home/avnet/.cache/huggingface/hub/Meta-Llama-3-8B-Instruct": 32,
+    "~/.cache/huggingface/hub/Meta-Llama-3-8B-Instruct": 32,
     "Qwen/Qwen2.5-7B-Instruct": 28,
     "Qwen/Qwen3-8B": 36,
     "meta-llama/Llama-3.1-8B-Instruct": 32,
@@ -130,9 +130,9 @@ def run_pcw_experiment(dataset: str, model: str, cache_dir: str,
     output_max_len = dataset2maxlen[dataset]
     logger.info(f"output_max_len: {output_max_len}")
     if data_name == "longbench":
-        data_file = f"../datasets/LongBench/{dataset}.jsonl"
+        data_file = f"./datasets/LongBench/{dataset}.jsonl"
     elif data_name =="infinitebench":
-        data_file = f"../datasets/InfiniteBench/{dataset}.jsonl"
+        data_file = f"./datasets/InfiniteBench/{dataset}.jsonl"
     logger.info(f"parallel_pattern: {parallel_pattern}")
     # 加载head信息
     if "uncomp" in calibration_stage:
@@ -144,13 +144,13 @@ def run_pcw_experiment(dataset: str, model: str, cache_dir: str,
         print("num_attention_heads:{}".format(num_hidden_layers))
         for i in range(num_hidden_layers):
             if "llama-2" in model.lower():            
-                filename = "/home/avnet/xiongjing/UNComp/search/512/llama2-chat/query/head_type_search_layer" + str(i) + ".csv"
+                filename = "~/UNComp/search/512/llama2-chat/query/head_type_search_layer" + str(i) + ".csv"
             elif "llama-3.1" in model.lower():
-                filename = "/home/avnet/xiongjing/UNComp/search/llama31/svd32/head_type_search_layer" + str(i) + ".csv"
+                filename = "~/UNComp/search/llama31/svd32/head_type_search_layer" + str(i) + ".csv"
             elif "llama-3" in model.lower():
-                filename = "/home/avnet/xiongjing/UNComp/search/llama3-instruct/2_groups/svd32/head_type_search_layer" + str(i) + ".csv"
+                filename = "~/UNComp/search/llama3-instruct/2_groups/svd32/head_type_search_layer" + str(i) + ".csv"
             elif "qwen2" in model.lower():
-                filename = "/home/avnet/xiongjing/UNComp/search/qwen2/svd32/head_type_search_layer" + str(i) + ".csv"
+                filename = "~/UNComp/search/qwen2/svd32/head_type_search_layer" + str(i) + ".csv"
             data_layers = []
             if os.path.isfile(filename):
                 import csv

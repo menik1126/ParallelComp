@@ -193,7 +193,7 @@ class Qwen2FlashAttention2PCW(Qwen2FlashAttention2):
         svdn = 32 
         head_pattern = get_head_pattern_attn_entropy(attn_weights,query_states,0,svdn,0,[0,select_topk])
         svdn = "svd" + str(svdn)
-        filename = f"/home/avnet/xiongjing/UNComp/search/qwen2/{svdn}/"
+        filename = f"./qwen2/{svdn}/"
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         filename = filename + "head_type_search_layer" + str(self.layer_idx) + ".csv"
         mode = 'a'
@@ -312,8 +312,6 @@ class Qwen2FlashAttention2PCW(Qwen2FlashAttention2):
         layer_idx: int,
         mode: int,
     ):  
-        # if layer_idx == 0: _seen_tokens没用到
-        #   self._seen_tokens += key_states.shape[-2]
         
         if len(past_key_value.key_cache) <= layer_idx:
             past_key_value.key_cache.append(key_states)

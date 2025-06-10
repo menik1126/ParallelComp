@@ -196,7 +196,7 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
         svdn = 32 
         head_pattern = get_head_pattern_attn_entropy(attn_weights,query_states,0,svdn,0,[0,select_topk])
         svdn = "svd" + str(svdn)
-        filename = f"/home/avnet/xiongjing/UNComp/search/llama31/{svdn}/"
+        filename = f"/{svdn}/"
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         filename = filename + "head_type_search_layer" + str(self.layer_idx) + ".csv"
         mode = 'a'
