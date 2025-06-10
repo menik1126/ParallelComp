@@ -190,12 +190,15 @@ python run_evaluation.py \
 ```
 
 ## 🚧 TODO & Roadmap
-
-- [ ] **Code Organization**: Currently organizing and cleaning up the codebase for better usability
-- [ ] **Gemma Support**: Adding full support for Gemma model family
-- [ ] **SGLang Integration**: Adding support for SGLang inference engine for improved performance
-- [ ] **Documentation**: Expanding documentation with more detailed examples
-- [ ] **Benchmarks**: Adding more comprehensive benchmark results
+- [❎] **Code Organization**: Currently organizing and cleaning up the codebase for better usability
+- [❎] **Gemma Support**: Adding full support for Gemma model family
+- [❎] **SGLang Integration**: Adding support for SGLang inference engine for improved performance
+- [❎] **Documentation**: Expanding documentation with more detailed examples
+- [❎] **Quantization Support**: Adding support for model quantization (INT8/INT4) to reduce memory usage and accelerate inference
+- [❎] **Benchmarks**: Adding more comprehensive benchmark results
+- [✅] **FlashAttention Support**
+- [✅] **Multi-GPU Inference Support**
+- [✅] **Batch Inference Support**
 
 ## 📁 Project Structure
 
