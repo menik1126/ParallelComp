@@ -1,21 +1,11 @@
 #!/bin/bash 
-
-# export NCCL_TIMEOUT=6000
-# export RCCL_TIMEOUT=6000
-# export TORCH_NCCL_BLOCKING_WAIT=1
-# export NCCL_SOCKET_TIMEOUT=6000
-# export NCCL_ASYNC_ERROR_HANDLING=1 
-#用到的参数如下：
 # meta-llama/Llama-3.1-8B-Instruct
 # meta-llama/Llama-2-7b-chat-hf meta-llama/Llama-3.1-8B-Instruct /home/avnet/.cache/huggingface/hub/Meta-Llama-3-8B-Instruct
 Model="/home/avnet/.cache/huggingface/hub/Meta-Llama-3-8B-Instruct" #
 parallel_pattern="parallel_comp" #"default"
 n_windows=2
 topk_windows=10
-# default
-
 gpu=5
-# 默认参数
 model_class="modeling_llama_with_pcw_kv_cache_FlashAttention_longbench"
 special_token=True
 while [[ "$#" -gt 0 ]]; do
@@ -52,10 +42,6 @@ datasets=("narrativeqa"
          "qasper" "multifieldqa_en" "hotpotqa" "2wikimqa" "musique" \
           "trec" "triviaqa" "passage_count" "passage_retrieval_en" \
           "qmsum" "samsum" "lcc"   "multi_news" "repobench-p" "gov_report" )
-
-# datasets=("qasper" "multifieldqa_en" "hotpotqa" )
-# unset datasets
-# datasets=("passage_retrieval_en" )
 
 for dataset in ${datasets[@]};do
     echo "Running evaluation for dataset: $dataset"

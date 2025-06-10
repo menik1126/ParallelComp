@@ -1,20 +1,9 @@
 #!/bin/bash
-
-# export NCCL_TIMEOUT=6000
-# export RCCL_TIMEOUT=6000
-# export TORCH_NCCL_BLOCKING_WAIT=1
-# export NCCL_SOCKET_TIMEOUT=6000
-# export NCCL_ASYNC_ERROR_HANDLING=1 
-
-#用到的参数如下：
 Model="Qwen/Qwen2.5-7B-Instruct" #
-parallel_pattern="every_window_query_input_query" #"default"
+parallel_pattern="default"
 n_windows=2
 topk_windows=10
-# default
-
 gpu=5
-# 默认参数
 model_class="modeling_qwen2_with_pcw_kv_cache_FlashAttention_longbench"
 special_token=True
 while [[ "$#" -gt 0 ]]; do
