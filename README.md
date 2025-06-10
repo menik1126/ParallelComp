@@ -92,28 +92,20 @@ accelerate launch --main_process_port 5326 --num_processes 4 --config_file scrip
 - **LongBench**: narrativeqa, qasper, multifieldqa_en, hotpotqa, 2wikimqa, musique, gov_report, qmsum, multi_news, trec, triviaqa, samsum, passage_count, passage_retrieval_en, lcc, repobench-p
 - **Standard Benchmarks**: SST-2, GSM8K
 
-### Configuration Options
 
-#### Prompt Methods
-- `complex_cot`: Basic Chain-of-Thought prompting
-- `complex_cot_pcw`: Parallel Context Windows with CoT
-- `complex_cot_pcw_multi_windows`: Multi-window parallel processing
-- `complex_cot_pcw_multi_windows_kv_cache`: With KV cache optimization
-
-#### Model Classes
-- `modeling_llama_with_pcw`: LLaMA with Parallel Context Windows
-- `modeling_llama_with_pcw_kv_cache`: LLaMA with KV cache optimization
-- `modeling_gemma_with_pcw_kv_cache_FlashAttention_longbench`: Gemma with Flash Attention
-- `modeling_qwen2_with_pcw_kv_cache_FlashAttention_longbench`: Qwen2 with Flash Attention
 
 ## 📈 Evaluation Scripts
 
 ### LongBench Evaluation
 
-For comprehensive LongBench evaluation:
+Evaluate on LongBench datasets using the provided scripts:
 
 ```bash
+# Multi-GPU evaluation 
 bash run_test_longbench_multi_gpu_window8.sh
+
+# Single GPU evaluation  
+bash run_test_longbench_single_gpu_window8.sh
 ```
 
 For single GPU:
@@ -122,11 +114,34 @@ For single GPU:
 bash run_test_longbench_single_gpu_window8.sh
 ```
 
-### GSM8K Evaluation
+### Evaluation Metrics
+
+Calculate metrics for evaluation results:
 
 ```bash
-bash run_test_gsm8k_multi_gpu.sh
+# For LongBench results
+bash scripts/longbench_metrics.sh --results_dir ./results --new_method your_method_name --switch true
+
+# For InfiniteBench results  
+bash scripts/infinitebench_metrics.sh --results_dir ./results --new_method your_method_name --switch true
+
+# For GSM8K or other tasks
+bash scripts/evaluate_per_result.sh
 ```
+
+### GPU Configuration
+
+Multi-GPU setups use accelerate with YAML configs in `scripts/`:
+
+```bash
+# 4 GPU setup
+accelerate launch --config_file scripts/gpu_4.yaml your_script.py
+
+# 8 GPU setup  
+accelerate launch --config_file scripts/gpu_8.yaml your_script.py
+```
+
+Available configurations: `gpu_1.yaml`, `gpu_2.yaml`, `gpu_3.yaml`, `gpu_4.yaml`, `gpu_5.yaml`, `gpu_6.yaml`, `gpu_7.yaml`, `gpu_8.yaml`
 
 ### Custom Evaluation
 
@@ -158,7 +173,7 @@ ParallelComp includes attention calibration strategies to mitigate attention sin
 # Configure attention calibration in your model
 model = load_pcw_wrapper(
     model_name="your_model",
-    calibration_strategy="attention_bias_reduction",
+    calibration_strategy="attention_bias_reduction", 
     chunk_eviction=True
 )
 ```
@@ -173,6 +188,14 @@ python run_evaluation.py \
     --max-memory-usage 0.8 \
     --parallel-kv-cache
 ```
+
+## 🚧 TODO & Roadmap
+
+- [ ] **Code Organization**: Currently organizing and cleaning up the codebase for better usability
+- [ ] **Gemma Support**: Adding full support for Gemma model family
+- [ ] **SGLang Integration**: Adding support for SGLang inference engine for improved performance
+- [ ] **Documentation**: Expanding documentation with more detailed examples
+- [ ] **Benchmarks**: Adding more comprehensive benchmark results
 
 ## 📁 Project Structure
 
