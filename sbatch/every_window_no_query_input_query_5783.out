@@ -1,113 +1,0 @@
-
-CondaError: Run 'conda init' before 'conda activate'
-
-Running evaluation for dataset: lcc,repobench-p,trec
-Added key: store_based_barrier_key:1 to store for rank: 4
-Added key: store_based_barrier_key:1 to store for rank: 2
-Added key: store_based_barrier_key:1 to store for rank: 0
-Added key: store_based_barrier_key:1 to store for rank: 1
-Added key: store_based_barrier_key:1 to store for rank: 3
-Rank 3: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
-Rank 4: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
-Rank 0: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
-Rank 2: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
-Rank 1: Completed store-based barrier for key:store_based_barrier_key:1 with 5 nodes.
-n_windows:[2]
-model_name:/mnt/Data/xiongjing/llama2chat
-multi_gpus:True
-torch.cuda.device_count():5
-n_windows:[2]
-model_name:/mnt/Data/xiongjing/llama2chat
-multi_gpus:True
-torch.cuda.device_count():5
-n_windows:[2]
-model_name:/mnt/Data/xiongjing/llama2chat
-multi_gpus:True
-torch.cuda.device_count():5
-n_windows:[2]
-model_name:/mnt/Data/xiongjing/llama2chat
-n_windows:[2]
-model_name:/mnt/Data/xiongjing/llama2chat
-multi_gpus:True
-torch.cuda.device_count():5
-multi_gpus:True
-torch.cuda.device_count():5
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.58s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.22s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:04<00:00,  2.42s/it]
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.73s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:03<00:03,  3.77s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.33s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.54s/it]
-Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.34s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:05<00:00,  2.56s/it]
-Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:   0%|          | 0/2 [00:00<?, ?it/s]Loading checkpoint shards:  50%|█████     | 1/2 [00:05<00:05,  5.23s/it]Loading checkpoint shards:  50%|█████     | 1/2 [00:05<00:05,  5.26s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.25s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.54s/it]
-Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.21s/it]Loading checkpoint shards: 100%|██████████| 2/2 [00:07<00:00,  3.52s/it]
-!!!!!!!!!!!!!!!!!!!!!!!! 这里
-Traceback (most recent call last):
-  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 138, in <module>
-    run_pcw_experiment(**vars(args))
-  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 67, in run_pcw_experiment
-    questions = model2prompt_question[dataset]
-KeyError: 'lcc,repobench-p,trec'
-!!!!!!!!!!!!!!!!!!!!!!!! 这里
-Traceback (most recent call last):
-  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 138, in <module>
-    run_pcw_experiment(**vars(args))
-  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 67, in run_pcw_experiment
-    questions = model2prompt_question[dataset]
-KeyError: 'lcc,repobench-p,trec'
-!!!!!!!!!!!!!!!!!!!!!!!! 这里
-Traceback (most recent call last):
-  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 138, in <module>
-    run_pcw_experiment(**vars(args))
-  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 67, in run_pcw_experiment
-    questions = model2prompt_question[dataset]
-KeyError: 'lcc,repobench-p,trec'
-!!!!!!!!!!!!!!!!!!!!!!!! 这里
-Traceback (most recent call last):
-  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 138, in <module>
-    run_pcw_experiment(**vars(args))
-  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 67, in run_pcw_experiment
-    questions = model2prompt_question[dataset]
-KeyError: 'lcc,repobench-p,trec'
-!!!!!!!!!!!!!!!!!!!!!!!! 这里
-Traceback (most recent call last):
-  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 138, in <module>
-    run_pcw_experiment(**vars(args))
-  File "/home/xiongjing/sjh/parallel_window_size/run_evaluation_longbench_multi_gpu.py", line 67, in run_pcw_experiment
-    questions = model2prompt_question[dataset]
-KeyError: 'lcc,repobench-p,trec'
-WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2372556 closing signal SIGTERM
-WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2372558 closing signal SIGTERM
-WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2372559 closing signal SIGTERM
-WARNING:torch.distributed.elastic.multiprocessing.api:Sending process 2372560 closing signal SIGTERM
-ERROR:torch.distributed.elastic.multiprocessing.api:failed (exitcode: 1) local_rank: 1 (pid: 2372557) of binary: /home/xiongjing/miniconda3/envs/parallel/bin/python
-Traceback (most recent call last):
-  File "/home/xiongjing/miniconda3/envs/parallel/bin/accelerate", line 8, in <module>
-    sys.exit(main())
-  File "/home/xiongjing/miniconda3/envs/parallel/lib/python3.9/site-packages/accelerate/commands/accelerate_cli.py", line 48, in main
-    args.func(args)
-  File "/home/xiongjing/miniconda3/envs/parallel/lib/python3.9/site-packages/accelerate/commands/launch.py", line 1159, in launch_command
-    multi_gpu_launcher(args)
-  File "/home/xiongjing/miniconda3/envs/parallel/lib/python3.9/site-packages/accelerate/commands/launch.py", line 793, in multi_gpu_launcher
-    distrib_run.run(args)
-  File "/home/xiongjing/miniconda3/envs/parallel/lib/python3.9/site-packages/torch/distributed/run.py", line 785, in run
-    elastic_launch(
-  File "/home/xiongjing/miniconda3/envs/parallel/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 134, in __call__
-    return launch_agent(self._config, self._entrypoint, list(args))
-  File "/home/xiongjing/miniconda3/envs/parallel/lib/python3.9/site-packages/torch/distributed/launcher/api.py", line 250, in launch_agent
-    raise ChildFailedError(
-torch.distributed.elastic.multiprocessing.errors.ChildFailedError: 
-============================================================
-run_evaluation_longbench_multi_gpu.py FAILED
-------------------------------------------------------------
-Failures:
-  <NO_OTHER_FAILURES>
-------------------------------------------------------------
-Root Cause (first observed failure):
-[0]:
-  time      : 2024-12-22_11:37:28
-  host      : nwonga100.local
-  rank      : 1 (local_rank: 1)
-  exitcode  : 1 (pid: 2372557)
-  error_file: <N/A>
-  traceback : To enable traceback see: https://pytorch.org/docs/stable/elastic/errors.html
-============================================================
-run_test_longbench_multi_gpu_window8.sh: line 42: ber: command not found
-run_test_longbench_multi_gpu_window8.sh: line 43: syntax error near unexpected token `done'
-run_test_longbench_multi_gpu_window8.sh: line 43: `done'

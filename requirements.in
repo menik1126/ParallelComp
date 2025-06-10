@@ -1,8 +1,8 @@
-numpy~=1.24.2
-transformers==4.28.1
-matplotlib
-pandas~=1.5.3
-datasets~=2.9.0
-tqdm
-accelerate==0.18.0
-sentencepiece==0.1.99
+numpy~=1.26.3
+transformers==4.43.2
+matplotlib==3.10.0
+pandas~=2.2.3
+datasets~=3.6.0
+tqdm==4.67.1
+accelerate==1.2.1
+sentencepiece==0.2.0

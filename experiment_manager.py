@@ -10,11 +10,7 @@ import numpy.typing as npt
 import pandas as pd
 from tqdm import tqdm
 import json
-from constants import TEXT_BETWEEN_SHOTS, N_TOKENS, PROMPTS, TEXT_BETWEEN_SHOTS_CoT
-from datasets_loader import LABEL_TOKENS
 from pcw_wrapper import PCWModelWrapper
-from logits_processor import RestrictiveTokensLogitsProcessor
-from utils import n_tokens_in_prompt, encode_labels, encode_stop_seq
 
 
 from accelerate.utils import gather_object
@@ -32,74 +28,38 @@ class ExperimentManager_longbench:
     def __init__(self, data_file: str, model: PCWModelWrapper, random_seed: int = 42, n_windows: int = 1, 
                  # kv cache parameters
                  kv_cache_eviction:bool=False, kv_cache_dynamic:bool=False,recent_token:int=8,
-                 raw_position_select:bool=True,capacity:int=512,
+                 capacity:int=512,
                  stage_eviction:bool=False,special_token:bool=True,
                  ## calibration attn
                  calibration_mode:int=0,calibration_stage:str=None,
                  # window parameters
-                 rank_windows:bool=False,rank_cache:bool=False,topk_windows:int=1,
-                 dynamic_window:bool=False,window_ascend:bool=False,decomposition_factor:int=1,
-                 reduce_length:bool=False,reduce_factor:int=1,
+                 topk_windows:int=1,
                  query_rank:bool=False,query_recent_tokens:int=0,
-                 get_recent_attn:bool=False,recent_top_num:int=0,
-                 key_no_rope:bool=False,delete_context_prompt:bool=False,
                  # base parameters
-                 attn_avg:bool=False,
-                 attn_implementation:str=None,prompt_method:str=None,model_class:str=None,parallel_pattern:str=None,
+                 model_class:str=None,parallel_pattern:str=None,
                  model_name:str=None,dataset:str=None,model2prompt=None,templates:Dict=None,
                  context_max_len: int = 1024, raw_model_max_len:int = 1024,
-                 accelerator: Accelerator=None, Truncation_Method:str=None,
+                 accelerator: Accelerator=None,
                  data_name:str="longbench",
-                 # position shift
-                 position_shift:bool=False,shift_factor:int=0,interval_shift:int=0,
-                 # positional_sorting
-                 positional_sorting:str=None,rank_ascend:bool=False,
-                 # NTK
-                 NTK_aware:bool=False,
                  ):   
         # calibration attn
         self.calibration_mode = calibration_mode
         self.calibration_stage = calibration_stage
         # window parameters
-        self.dynamic_window = dynamic_window
-        self.rank_windows=rank_windows
-        self.rank_cache=rank_cache
         self.topk_windows=topk_windows
-        self.window_ascend = window_ascend
         self.recent_token = recent_token
-        self.decomposition_factor = decomposition_factor
-        
-        self.reduce_length = reduce_length
-        self.reduce_factor = reduce_factor
-        
-        self.get_recent_attn = get_recent_attn
-        self.recent_top_num=recent_top_num
         
         self.query_rank = query_rank
         self.query_recent_tokens=query_recent_tokens
-        self.key_no_rope=key_no_rope
         # kv cache parameters
         self.kv_cache_dynamic = kv_cache_dynamic     
         self.kv_cache_eviction = kv_cache_eviction  
         self.stage_eviction=stage_eviction
         self.capacity=capacity
-        self.raw_position_select = raw_position_select
-        # position shift parameters
-        self.position_shift = position_shift
-        self.shift_factor=shift_factor
-        self.interval_shift=interval_shift
-        # positional_sorting
-        self.positional_sorting=positional_sorting
-        self.rank_ascend=rank_ascend
-        # NTK
-        self.NTK_aware = NTK_aware
         # base parameters
-        self.delete_context_prompt=delete_context_prompt
         self.model_name = model_name
         self.data_name_full = data_name
         self.special_token=special_token
-        self.attn_avg=attn_avg
-        self.attn_implementation = attn_implementation
         self.model2prompt = model2prompt
         self.data_name=dataset
         self.tokenizer = model.tokenizer 
@@ -113,13 +73,9 @@ class ExperimentManager_longbench:
         self.base_random_seed = random_seed
         self.n_windows = n_windows
         self.context_max_len= context_max_len
-        self.revise_single = False
         self.raw_model_max_len = raw_model_max_len
-        self.prompt_method = prompt_method
         self.accelerator = accelerator
         self.model_class = model_class
-        self.Truncation_Method = Truncation_Method
-        logger.info(f"Truncation_Method is {Truncation_Method}")
         
     
     def build_chat(self,prompt):
@@ -273,8 +229,8 @@ class ExperimentManager_longbench:
         
         input_max_len_string, query_max_len, context_max_len, maxid = 0, 0, 0, 0
         for i,example in enumerate(examples):
-            if i > 100:
-                continue
+            # if i > 100:
+            #     continue
             length_string = len(example["context"])
             length_query = self.tokenizer(example["input"], return_tensors="pt")["input_ids"].shape[1]
             length_context = self.tokenizer(example["context"], return_tensors="pt")["input_ids"].shape[1]
@@ -333,11 +289,7 @@ class ExperimentManager_longbench:
         maxid = 0
         with open(data_file) as fp:
             for line in fp:
-                if "ppl" in self.parallel_pattern:
-                    if ids != 62:
-                        ids += 1
-                        continue
-                # if ids > 50:
+                # if ids > 1:
                 #     ids+=1
                 #     continue
                 example = json.loads(line)
@@ -351,11 +303,6 @@ class ExperimentManager_longbench:
                 if length_context > context_max_len : 
                     context_max_len = length_context
                     maxid = ids
-                # template = self.model2prompt[self.data_name]
-                # prompt = template.format(**example)
-                # if "llama2" in self.model_name or "llama-2" in self.model_name:
-                #     prompt = self.build_chat(prompt)
-                # example["prompt"] = prompt
                 test_data.append(example)
                 ids+=1
         logger.info(f"Max ids is {maxid}")
@@ -366,7 +313,6 @@ class ExperimentManager_longbench:
         if self.parallel_pattern == "test":
             assert 1==0
         for example in test_data:
-            # prompts_all.append(example["prompt"])
             inputs.append(example["input"])
             contexts.append(example["context"])
             answerss.append(example["answers"])
@@ -378,11 +324,11 @@ class ExperimentManager_longbench:
         logger.info("Finish loading dataset")
         
         combined_data = [
-            {#"prompt": p,
+            { #"prompt": p,
                 "input": i, "context": c, "answers": a, 
                 "length": l, "dataset": d, "language": lang, 
                 "all_classes": ac, "_id": id
-            }#p,prompts_all
+            } #p,prompts_all
             for i, c, a, l, d, lang, ac, id in zip(
                 inputs, contexts, answerss, lengths, 
                 datasets, languages, all_classess, _ids
@@ -393,21 +339,13 @@ class ExperimentManager_longbench:
         
     def truncate_text(self,batch_size,batch_data) -> str:
         tokenizer = self.tokenizer
-        
-        
         batch_contexts = [item["context"] for item in batch_data]
         batch_inputs = [item["input"] for item in batch_data]
         new_prompt = batch_contexts
-        
-        # 确定是否启用并行窗口，采取不同策略
         if "default" in self.parallel_pattern:
             template = self.model2prompt[self.data_name]
             prompt = template.format(**batch_data[0])
-            # prompt = batch_data[0]['prompt']
-            # if "llama2" in self.model_name or "llama-2" in self.model_name:
-            #     prompt = self.build_chat(prompt)
             new_prompt = [prompt]
-        # logger.debug(f"new_prompt:{new_prompt}")
         logger.info("context length string:{}".format(len(new_prompt[0])))
         tokenized_prompts = self.tokenizer(new_prompt,
                                           padding="longest", 
@@ -415,124 +353,80 @@ class ExperimentManager_longbench:
                                           add_special_tokens=True,
                                           ).to('cuda')
         batch_input_ids = tokenized_prompts.input_ids
-        # torch.set_printoptions(edgeitems=100000, linewidth=200)
-        # print(batch_input_ids)
         attention_mask = tokenized_prompts.attention_mask
         actual_lengths = attention_mask.sum(dim=1)
         max_len = actual_lengths.max().item()
         padding_len = max_len - actual_lengths
         if batch_size == 1:
-            # print("self.Truncation_Method:{}".format(self.Truncation_Method))
-            # assert 1==0
-            if len(batch_input_ids[0]) > self.raw_model_max_len and self.Truncation_Method!="WO_Truncation"\
+            if len(batch_input_ids[0]) > self.raw_model_max_len \
                 and "default" in self.parallel_pattern:
                 logger.info("fullkv truncation")
                 print("raw context tokens length: {}".format(len(batch_input_ids[0])))
-#                assert 1==0
                 if "ppl" not in self.parallel_pattern:
-                    if "NTK" in self.parallel_pattern :
-                        self.raw_model_max_len = 16000
-                    elif "PI" in self.parallel_pattern:
-                        self.raw_model_max_len = 16000
-                    elif "chunkllama" in self.parallel_pattern:
-                        self.raw_model_max_len = 16000
-                    if "all" in self.parallel_pattern:
-                        self.raw_model_max_len = 128000
-                        
                     half = int(self.raw_model_max_len/2)
                     truncation_prompts = [tokenizer.decode(batch_input_ids[i][padding_len[i]:padding_len[i]+half], skip_special_tokens=True)+
                               tokenizer.decode(batch_input_ids[i][-half:], skip_special_tokens=True) 
                               for i in range(len(batch_input_ids))]
-
-                    # before = int(self.raw_model_max_len/1.2)
-                    # after = self.raw_model_max_len - before
-                    # truncation_prompts = [tokenizer.decode(batch_input_ids[i][padding_len[i]:padding_len[i]+before], skip_special_tokens=True)+
-                    #           tokenizer.decode(batch_input_ids[i][-after:], skip_special_tokens=True) 
-                    #           for i in range(len(batch_input_ids))]
-                
-                
                 else:
                     truncation_prompts = [tokenizer.decode(batch_input_ids[i][:self.raw_model_max_len], skip_special_tokens=True)
                               for i in range(len(batch_input_ids))]
-#                assert 1==0
-            else:
-                if self.Truncation_Method=="WO_Truncation" :
-                    # adaptive n windows
-                    critical_length = 37000
-                    
-                    query_long_datasets = ["repobench-p","triviaqa"]
-                    query_middle_datasets = ["samsum","passage_retrieval_en"]
-                    print("self.raw_model_max_len:{}".format(self.raw_model_max_len))
-                    if self.data_name in query_long_datasets:
-                        if "llama-3.1" in self.model_name.lower() or "qwen" in self.model_name.lower() :
-                            pass
-                            # self.context_max_len = 22000
-                        elif "llama3" in self.model_name.lower():
-                            if self.context_max_len > 6200:
-                                self.context_max_len = 6200
-                        else:
-                            if self.context_max_len > 2500:
-                                self.context_max_len = 2500
-                        logger.info(f"updata context_max_len: {self.context_max_len}")
-                    elif self.data_name in query_middle_datasets:
-                        if "llama-3.1" in self.model_name.lower() or "qwen" in self.model_name.lower():
-                            pass
-                            # self.context_max_len = 22000
-                        elif "llama3" in self.model_name.lower():
-                            if self.context_max_len > 7000:
-                                self.context_max_len = 7000
-                        else:
-                            if self.context_max_len > 2800:
-                                self.context_max_len = 2800
-                        logger.info(f"updata context_max_len: {self.context_max_len}")
-                    
-                    if self.kv_cache_eviction or self.stage_eviction or self.dynamic_window:
-                        critical_length = torch.iinfo(torch.long).max
-                        if "stream" in self.parallel_pattern:
-                            critical_length = 30000
-                    
-                    logger.info(f"raw context tokens length: {len(batch_input_ids[0])}")
-                    logger.info(f"critical_length: {critical_length}")
-                    
-                    if self.reduce_length and not self.revise_single: 
-                        self.revise_single = True
-                        if self.data_name not in query_long_datasets or self.data_name not in query_middle_datasets:
-                            if self.reduce_factor == 0:
-                                self.context_max_len = self.context_max_len // 2  # (1800)
-                            else:
-                                self.context_max_len = self.reduce_factor
-                        else:
-                            if self.context_max_len > self.reduce_factor:
-                                self.context_max_len = self.reduce_factor    
-                    logger.info(f"self.context_max_len: {self.context_max_len}")
-                    # 划分窗口截断 最大context token数目限制在37k
-                    if len(batch_input_ids[0]) <= critical_length:
-                        total_len = batch_input_ids[0].shape[0]
-                        adaptive_n_windows = math.ceil(total_len / self.context_max_len)
-                        logger.info(f"adaptive_n_windows in critical_length: {adaptive_n_windows}")
-                        self.n_windows = adaptive_n_windows
-                        truncation_prompts = [tokenizer.decode(batch_input_ids[i], skip_special_tokens=True) 
-                              for i in range(len(batch_input_ids))]
+            elif "default" not in self.parallel_pattern:
+                critical_length = 37000
+                query_long_datasets = ["repobench-p","triviaqa"]
+                query_middle_datasets = ["samsum","passage_retrieval_en"]
+                print("self.raw_model_max_len:{}".format(self.raw_model_max_len))
+                if self.data_name in query_long_datasets:
+                    if "llama-3.1" in self.model_name.lower() or "qwen" in self.model_name.lower() :
+                        if self.context_max_len > 6200:
+                            self.context_max_len = 6200
+                    elif "llama3" in self.model_name.lower():
+                        if self.context_max_len > 6200:
+                            self.context_max_len = 6200
                     else:
-                        half = int(critical_length/2)
-                        adaptive_n_windows = math.ceil(critical_length / self.context_max_len)
-                        logger.info(f"adaptive_n_windows in full length: {adaptive_n_windows}")
-                        self.n_windows = adaptive_n_windows
-                        truncation_prompts = [tokenizer.decode(batch_input_ids[i][padding_len[i]:padding_len[i]+half], skip_special_tokens=True)+
-                                  tokenizer.decode(batch_input_ids[i][-half:], skip_special_tokens=True) 
-                                  for i in range(len(batch_input_ids))]
-                    for layer in self.model.model.model.layers:
-                        if self.rank_windows:
-                            layer.self_attn.n_windows = min(self.n_windows,abs(self.topk_windows))
-                            self.model.model.n_windows = min(self.n_windows,abs(self.topk_windows))
-                        else:
-                            layer.self_attn.n_windows = adaptive_n_windows
-                            self.model.model.n_windows = adaptive_n_windows
-                    self.model.n_windows = adaptive_n_windows
-                else:
-                    truncation_prompts = [tokenizer.decode(batch_input_ids[i], skip_special_tokens=True)
-                                  for i in range(len(batch_input_ids))]
+                        if self.context_max_len > 2500:
+                            self.context_max_len = 2500
+                    logger.info(f"updata context_max_len: {self.context_max_len}")
+                elif self.data_name in query_middle_datasets:
+                    if "llama-3.1" in self.model_name.lower() or "qwen" in self.model_name.lower():
+                        if self.context_max_len > 6200:
+                            self.context_max_len = 6200
+                    elif "llama3" in self.model_name.lower():
+                        if self.context_max_len > 7000:
+                            self.context_max_len = 7000
+                    else:
+                        if self.context_max_len > 2800:
+                            self.context_max_len = 2800
+                    logger.info(f"updata context_max_len: {self.context_max_len}")
                 
+                # if self.kv_cache_eviction or self.stage_eviction:
+                critical_length = torch.iinfo(torch.long).max
+                logger.info(f"raw context tokens length: {len(batch_input_ids[0])}")
+                logger.info(f"critical_length: {critical_length}")
+                
+                logger.info(f"self.context_max_len: {self.context_max_len}")
+                if len(batch_input_ids[0]) <= critical_length:
+                    total_len = batch_input_ids[0].shape[0]
+                    adaptive_n_windows = math.ceil(total_len / self.context_max_len)
+                    logger.info(f"adaptive_n_windows in critical_length: {adaptive_n_windows}")
+                    self.n_windows = adaptive_n_windows
+                    truncation_prompts = [tokenizer.decode(batch_input_ids[i], skip_special_tokens=True) 
+                          for i in range(len(batch_input_ids))]
+                else:
+                    half = int(critical_length/2)
+                    adaptive_n_windows = math.ceil(critical_length / self.context_max_len)
+                    logger.info(f"adaptive_n_windows in full length: {adaptive_n_windows}")
+                    self.n_windows = adaptive_n_windows
+                    truncation_prompts = [tokenizer.decode(batch_input_ids[i][padding_len[i]:padding_len[i]+half], skip_special_tokens=True)+
+                              tokenizer.decode(batch_input_ids[i][-half:], skip_special_tokens=True) 
+                              for i in range(len(batch_input_ids))]
+                for layer in self.model.model.model.layers:
+                    layer.self_attn.n_windows = min(self.n_windows,abs(self.topk_windows))
+                    self.model.model.n_windows = min(self.n_windows,abs(self.topk_windows))
+                    
+                self.model.n_windows = adaptive_n_windows
+            else:
+                truncation_prompts = [tokenizer.decode(batch_input_ids[i], skip_special_tokens=True)
+                                  for i in range(len(batch_input_ids))]
         total_len = len(truncation_prompts[0])
         logger.info("after truncation context length string:{}".format(total_len))
         window_size = int(total_len/self.n_windows) # 平均每个窗口长度
@@ -543,18 +437,8 @@ class ExperimentManager_longbench:
             per_windows_prompt[-2]=per_windows_prompt[-2]+truncation_prompts[0][-(len(truncation_prompts[0])-window_size*self.n_windows):]
             per_windows_prompt = per_windows_prompt[:-1]
   
-        # 添加检查
-        # if min(self.n_windows,abs(self.topk_windows)) * self.capacity < 384 :
-        #    self.model.capacity = 384//min(self.n_windows,abs(self.topk_windows))
-        
-        # 对context加入prompt 根据pattern 确定添加哪些prompt
         per_windows_prompt = self.prompt_design(per_windows_prompt,batch_inputs*len(per_windows_prompt),batch_data[0])
 
-        # print("per_windows_prompt:{}".format(per_windows_prompt))
-        # logger.info(f"per_windows_prompt:{per_windows_prompt}")
-        # logger.debug(f"len(per_windows_prompt):{len(per_windows_prompt)}")
-        # logger.debug(f"len(per_windows_prompt[0]):{len(per_windows_prompt[0])}")
-        # logger.debug(f"per_windows_prompt[0]):{len(per_windows_prompt[0])}")
         return per_windows_prompt
 
     def create_prompt_new(self,raw_sample,batch_data):
@@ -586,33 +470,13 @@ class ExperimentManager_longbench:
         for i in range(len(raw_prompt)):
             # 处理特殊数据集
             raw_sample = {}
-            if "every_window_query_input_no_query" in self.parallel_pattern and "anchor" not in self.parallel_pattern:
+            if "parallel_comp" in self.parallel_pattern:
                 raw_sample["context"] = raw_prompt[i]
                 raw_sample["input"] = quesiton[i]
                 self.create_prompt_new(raw_sample,batch_data)
-                revise_prompt = my_templates["all"].format(**raw_sample)
-            elif "every_window_no_query_input_query" in self.parallel_pattern:
-                raw_sample["context"] = raw_prompt[i]
-                raw_sample["input"] = quesiton[i]
-                self.create_prompt_new(raw_sample,batch_data)
-                revise_prompt = my_templates["context"].format(**raw_sample)
-            elif "every_window_query_input_query" in self.parallel_pattern and "anchor" not in self.parallel_pattern:
-                
-                raw_sample["context"] = raw_prompt[i]
-                raw_sample["input"] = quesiton[i]
-                self.create_prompt_new(raw_sample,batch_data)
-                revise_prompt = my_templates["all"].format(**raw_sample)
-            elif "every_window_query_input_query_anchor" in self.parallel_pattern:
-                
-                raw_sample["context"] = raw_prompt[i]
-                raw_sample["input"] = quesiton[i]
-                self.create_prompt_new(raw_sample,batch_data)
-                if "new" in self.parallel_pattern: # 使用id
-                    revise_prompt = {}
-                    revise_prompt["context"] = my_templates["context"].format(**raw_sample)
-                    revise_prompt["input"] = my_templates["question"].format(**raw_sample)
-                else:
-                    revise_prompt = my_templates["all_anchor"].format(**raw_sample)
+                revise_prompt = {}
+                revise_prompt["context"] = my_templates["context"].format(**raw_sample)
+                revise_prompt["input"] = my_templates["question"].format(**raw_sample)
             elif "default" in self.parallel_pattern:
                 logger.info("len(raw_prompt):{}".format(len(raw_prompt)))
                 assert len(raw_prompt) == 1
@@ -628,17 +492,12 @@ class ExperimentManager_longbench:
     
     def get_predicted(self,eval_batch_size=1,output_max_len=32):
         accelerator = self.accelerator
-        tokenizer = self.tokenizer
-        raw_position_select = self.raw_position_select
-        
         logger.info("get_predicted begin")
         with accelerator.split_between_processes(self.datas) as split_data:
             results=dict(outputs=[], num_tokens=0, first_token_time=0)
             split_data = list(split_data)
             for i in tqdm(range(0, len(split_data), eval_batch_size)):
                 batch_data = split_data[i:i+eval_batch_size]
-        
-                # batch_prompts = [item["prompt"] for item in batch_data]
                 batch_inputs = [item["input"] for item in batch_data]
                 batch_contexts = [item["context"] for item in batch_data]
                 batch_answerss = [item["answers"] for item in batch_data]
@@ -651,32 +510,15 @@ class ExperimentManager_longbench:
                 # 在这里分配窗口
                 self.create_prompt_new(batch_data[0],batch_data[0])
                 per_windows_prompt = self.truncate_text(eval_batch_size,batch_data)
-                # logger.info(f"window_num: {len(per_windows_prompt)}")
-                # assert 1==0
-                # print("per_windows_prompt",per_windows_prompt)
-                # assert 1==0
                 question = self.templates["question"].format(**batch_data[0])
-                if self.Truncation_Method=="WO_Truncation":
-                   output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,
+                output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,
                                                               question=question, context_max_len=self.context_max_len,
                                                               raw_model_max_len=self.raw_model_max_len,
-                                                              adaptive_n_windows = self.n_windows,
-                                                              raw_position_select=raw_position_select,
                                                               recent_token=self.recent_token,
                                                               )
-                else:
-                   output = self.model.pcw_generate_longbench(per_windows_prompt,output_max_len,self.parallel_pattern,
-                                                              question=question,  
-                                                              context_max_len=self.context_max_len,
-                                                              raw_model_max_len=self.raw_model_max_len,
-                                                              raw_position_select=raw_position_select,
-                                                              recent_token = self.recent_token,
-                                                             )
-                # print("results:{}".format(output))
                 batch_generations = [output]
                 for j in range(len(batch_contexts)):
                     example = {}
-                    # example["prompt"] = batch_prompts[j]
                     example["input"] = batch_inputs[j]
                     example["context"] = batch_contexts[j]
                     example["answers"] = batch_answerss[j]
@@ -693,83 +535,56 @@ class ExperimentManager_longbench:
             results = [results]
         self.accelerator.wait_for_everyone()
         results_gathered = gather_object(results)
-        
-        # self.accelerator.wait_for_everyone()
         return results_gathered
 
     # run_experiment
     def run_experiment(self, batch_size: int = 1,output_max_len:int = 32):
         accelerator = self.accelerator
         model_name = self.model_name
-        model_class=self.model_class
-        
-        if self.prompt_method == "complex_cot_pcw_multi_windows" or \
-            self.prompt_method == "complex_cot_pcw_multi_windows_kv_cache":
-            results_gathered=self.get_predicted(eval_batch_size=batch_size,output_max_len=output_max_len)
-        
+        results_gathered=self.get_predicted(eval_batch_size=batch_size,output_max_len=output_max_len)
         
         import os
         datasets_name = self.data_name
         model_name = model_name.split('/')[-1]
         logger.debug(f"datasets_name:{datasets_name}")
         
-        if self.Truncation_Method=="WO_Truncation":
+        if "default" not in self.parallel_pattern:
             self.n_windows = "adaptive"
         if not self.kv_cache_eviction and not self.stage_eviction:
             self.capacity = "full"
         if accelerator.is_main_process:
             if self.data_name_full=="longbench":
-                output_path = os.path.join("results/longbench_0507", f"{model_name}", datasets_name)
+                output_path = os.path.join("results/longbench_0524", f"{model_name}", datasets_name)
             elif self.data_name_full=="infinitebench":
-                output_path = os.path.join("results/infinitebench_0507", f"{model_name}", datasets_name)
+                output_path = os.path.join("results/infinitebench_0524", f"{model_name}", datasets_name)
             else:
                 output_path = os.path.join("results/others", f"{model_name}", datasets_name)
             os.makedirs(output_path, exist_ok=True)
-            if "every_window_query_input_query_anchor_new" in self.parallel_pattern:
-                parallel_pattern = "anchorNew"
+            if "parallel_comp" in self.parallel_pattern:
+                parallel_pattern = "parallelNew"
                 if "label" in self.parallel_pattern:
                     numbers = re.findall(r'\d+', self.parallel_pattern)
                     if numbers:
-                        parallel_pattern = "anchorNew_label" + numbers[-1]
+                        parallel_pattern = "parallelNew_label" + numbers[-1]
                     else:
-                        parallel_pattern = "anchorNew_label"
+                        parallel_pattern = "parallelNew_label"
             else:
                 parallel_pattern = self.parallel_pattern
             output_datapath = os.path.join(output_path,
                                     # f"{self.parallel_pattern}_windows_{self.n_windows}_{model_class}"+\
                                     f"{parallel_pattern}_"+\
-                                    # f"{kv_cache}_raw_position_{int(self.raw_position_select)}_"+\
                                     # f"{kv_cache}_"+ \
-                                    # f"winDynamic_{int(self.dynamic_window)}_"+\
                                     f"queryRank_{int(self.query_rank)}_" +\
                                     # f"rectok_{int(self.query_recent_tokens)}_" +\
-                                    # f"rank_{int(self.rank_windows)}_" +\
-                                    # f"cache_{int(self.rank_cache)}_" +\
                                     f"topk_{self.topk_windows}_" +\
-                                    # f"ascend_{int(self.window_ascend)}_" +\
-                                    # f"decom_{self.decomposition_factor}_" +\
-                                    # f"recem_{int(self.get_recent_attn)}_" +\
-                                    # f"num_{self.recent_top_num}_" +\
-                                    # f"reduce_{int(self.reduce_length)}_" +\
-                                    # f"tokenNum_{self.reduce_factor}_" +\
                                     f"calibStage_{self.calibration_stage}_" +\
                                     f"calibMode_{self.calibration_mode}_" +\
-                                    f"delPro_{int(self.delete_context_prompt)}_" +\
                                     f"kv_pre_{int(self.kv_cache_eviction)}_"+\
                                     f"stage_{int(self.stage_eviction)}_"+\
                                     f"generate_{int(self.kv_cache_dynamic)}_" +\
                                     f"winsize{self.recent_token}_" +\
                                     f"cap_{self.capacity}_" +\
-                                    f"keyNR_{int(self.key_no_rope)}_" +\
-                                    f"poShift{int(self.position_shift)}_" +\
-                                    f"factor_{self.shift_factor}_" +\
-                                    f"interval_{self.interval_shift}_" +\
-                                    f"poSort_{self.positional_sorting}_" +\
-                                    f"ascend_{int(self.rank_ascend)}_" +\
-                                    # f"NTK_{int(self.NTK_aware)}" +\
                                     f"spe_{int(self.special_token)}_" +\
-                                    f"atAvg_{int(self.attn_avg)}" +\
-                                    # f"_{self.attn_implementation}" +\
                                     f".json"
                                     )
             logger.info(f"output_datapath: {output_datapath}")

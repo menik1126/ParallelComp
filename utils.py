@@ -50,7 +50,9 @@ def filter_extremely_long_samples(df: pd.DataFrame, tokenizer: PreTrainedTokeniz
 
 
 def n_tokens_in_prompt(tokenizer: PreTrainedTokenizerBase, prompt: str, add_special_tokens=False) -> int:
-    return len(tokenizer.encode(prompt, add_special_tokens=add_special_tokens))
+    return len(tokenizer.encode(prompt, 
+                                padding="longest", 
+                                add_special_tokens=add_special_tokens))
 
 
 def plot_results_graph(results, dataset_name, n_shots, model='') -> None:
