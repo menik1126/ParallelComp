@@ -9,12 +9,9 @@
 # meta-llama/Llama-3.1-8B-Instruct
 # meta-llama/Llama-2-7b-chat-hf meta-llama/Llama-3.1-8B-Instruct /home/avnet/.cache/huggingface/hub/Meta-Llama-3-8B-Instruct
 Model="/home/avnet/.cache/huggingface/hub/Meta-Llama-3-8B-Instruct" #
-parallel_pattern="every_window_query_input_query" #"default"
+parallel_pattern="parallel_comp" #"default"
 n_windows=2
 topk_windows=10
-## every_window_query_input_query_anchor
-# every_window_no_query_input_query
-### every_window_query_input_no_query
 # default
 
 gpu=5

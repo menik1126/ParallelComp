@@ -74,7 +74,7 @@ pip install -r requirements.txt
 #### Single GPU Evaluation
 
 ```bash
-bash run_test_longbench_multi_gpu_window8_llama2.sh \
+bash run_test_longbench_multi_gpu_window8_llama.sh \
     --parallel_pattern parallel_comp --gpu_nums 1_0 \
     --kv_cache_eviction false --capacity 512 \
     --kv_cache_dynamic false --stage_eviction false \
@@ -90,7 +90,7 @@ bash run_test_longbench_multi_gpu_window8_llama2.sh \
 
 ```bash
 export CUDA_VISIBLE_DEVICES=0,1,2,3
-bash run_test_longbench_multi_gpu_window8_llama2.sh \
+bash run_test_longbench_multi_gpu_window8_llama.sh \
     --parallel_pattern parallel_comp --gpu_nums 4 \
     --kv_cache_eviction false --capacity 512 \
     --kv_cache_dynamic false --stage_eviction false \
@@ -151,7 +151,7 @@ ParallelComp includes attention calibration strategies to mitigate attention sin
 #### Single GPU Evaluation
 
 ```bash
-bash run_test_longbench_multi_gpu_window8_llama2.sh \
+bash run_test_longbench_multi_gpu_window8_llama.sh \
     --parallel_pattern parallel_comp --gpu_nums 1_0 \
     --kv_cache_eviction false --capacity 512 \
     --kv_cache_dynamic false --stage_eviction false \

@@ -5,10 +5,9 @@ import torch.nn.functional as F
 import torch
 from torch import nn
 from transformers import LlamaConfig
-from transformers.models.llama.modeling_llama import LlamaAttention, LlamaRMSNorm,apply_rotary_pos_emb, \
-    LlamaDecoderLayer, LlamaModel, LlamaForCausalLM, repeat_kv, LlamaFlashAttention2, StaticCache, LlamaRotaryEmbedding, \
-        LlamaMLP
-from transformers.cache_utils import Cache,DynamicCache
+from transformers.models.qwen2.modeling_qwen2 import Qwen2ForCausalLM,Qwen2Model,Qwen2DecoderLayer,Qwen2MLP,\
+    Qwen2RMSNorm,Qwen2FlashAttention2,apply_rotary_pos_emb,repeat_kv
+from transformers.cache_utils import Cache,DynamicCache,HybridCache
 # from transformers.modeling_flash_attention_utils import _flash_attention_forward
 from transformers.utils import is_flash_attn_2_available, is_flash_attn_greater_or_equal
 from pcw_wrapper import generate_pcw_position_ids
@@ -145,7 +144,7 @@ RECENT_TOKENS = int(os.environ.get("RECENT_TOKENS", 1))
 class Manager:
     last_attn = None
     pass
-class LlamaFlashAttention2PCW(LlamaFlashAttention2):
+class Qwen2FlashAttention2PCW(Qwen2FlashAttention2):
     """
     Llama flash attention module. This module inherits from `LlamaAttention` as the weights of the module stays
     untouched. The only required change would be on the forward pass where it needs to correctly call the public API of
@@ -158,19 +157,17 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
                 head_datas=None,manager=None,
                  ):
         super().__init__(config, layer_idx)
-        # head_datas = None
         self.window_size = 8
         if head_datas is not None:
             self.head_datas = torch.tensor(head_datas)
             self.head_indices1 = self.head_datas[self.layer_idx]
             self.bsz = 1
-            num_attention_heads = 32
+            num_attention_heads = self.config.num_attention_heads
             self.recent_indices_generate = [torch.arange(-self.window_size,0,device='cuda').view(1, 1, -1).expand(self.bsz,num_attention_heads//2,-1),torch.arange(-self.window_size,0,device='cuda').view(1, 1, -1).expand(self.bsz,num_attention_heads//2,-1)]
-        self.manager = manager
-        # assert 1==0
+        
         self.capacity = capacity
         self.eviction_len = 0
-        
+        self.manager = manager
         self.kv_cache_eviction_prefill = kv_cache_eviction
         self.kv_cache_dynamic = kv_cache_dynamic
         self.query_len = self.window_size
@@ -196,7 +193,7 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
         svdn = 32 
         head_pattern = get_head_pattern_attn_entropy(attn_weights,query_states,0,svdn,0,[0,select_topk])
         svdn = "svd" + str(svdn)
-        filename = f"/home/avnet/xiongjing/UNComp/search/llama31/{svdn}/"
+        filename = f"/home/avnet/xiongjing/UNComp/search/qwen2/{svdn}/"
         os.makedirs(os.path.dirname(filename), exist_ok=True)
         filename = filename + "head_type_search_layer" + str(self.layer_idx) + ".csv"
         mode = 'a'
@@ -762,14 +759,11 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
         output_attentions: bool = False,
         use_cache: bool = False,
         cache_position: Optional[torch.LongTensor] = None,
-        position_embeddings: Optional[Tuple[torch.Tensor, torch.Tensor]] = None,  # will become mandatory in v4.45
-    ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[Tuple[torch.Tensor]]]:
-        if isinstance(past_key_value, StaticCache):
-            raise ValueError(
-                "`static` cache implementation is not compatible with `attn_implementation==flash_attention_2` "
-                "make sure to use `sdpa` in the mean time, and open an issue at https://github.com/huggingface/transformers"
-            )
-        raw_len_past_key_value = len(past_key_value) 
+        ) -> Tuple[torch.Tensor, Optional[torch.Tensor], Optional[Tuple[torch.Tensor]]]:
+        if not isinstance(past_key_value,List):
+            raw_len_past_key_value = len(past_key_value.key_cache)
+        else:
+            raw_len_past_key_value = self.layer_idx
         self.revise = False
         if "uncomp_stage" in self.calibration_stage and raw_len_past_key_value!=self.config.num_hidden_layers:
             manager = self.manager
@@ -793,11 +787,11 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
                 indices = attn_sum.topk(keep_seq_len,dim=-1).indices
                 indices = indices.sort(dim=-1).values
                 self.select_indices = indices
-                cos_revise = manager.last_position_embeddings[0].gather(-2,indices.unsqueeze(0).unsqueeze(-1).expand(-1,-1,position_embeddings[0].shape[-1]))
-                sin_revise = manager.last_position_embeddings[1].gather(-2,indices.unsqueeze(0).unsqueeze(-1).expand(-1,-1,position_embeddings[1].shape[-1]))
-                position_embeddings = (cos_revise,sin_revise)
+                raw_len = position_ids.size(-1)
+                position_ids = torch.arange(0,indices.size(-1),device=indices.device).unsqueeze(0)
+                position_ids = manager.last_position_ids.gather(-1,indices.unsqueeze(0))
                 hidden_states = hidden_states.gather(-2,indices.unsqueeze(-1).unsqueeze(0).expand(hidden_states.size(0),-1,hidden_states.size(-1)))
-            manager.last_position_embeddings = position_embeddings
+            manager.last_position_ids = position_ids
             
         bsz, q_len, _ = hidden_states.size()
         output_attentions = False
@@ -817,25 +811,50 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
         before_rope_key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
         value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
         
-        kv_seq_len = key_states.shape[-2]
-        if position_embeddings is None:
-            logger.warning_once(
-                "The attention layers in this model are transitioning from computing the RoPE embeddings internally "
-                "through `position_ids` (2D tensor with the indexes of the tokens), to using externally computed "
-                "`position_embeddings` (Tuple of tensors, containing cos and sin). In v4.45 `position_ids` will be "
-                "removed and `position_embeddings` will be mandatory."
-            )
-            cos, sin = self.rotary_emb(value_states, position_ids)
-        else:
-            cos, sin = position_embeddings
+        kv_seq_len = before_rope_key_states.shape[-2]
+        if past_key_value is not None:
+            if self.layer_idx is None:
+                raise ValueError(
+                    f"The cache structure has changed since version v4.36. If you are using {self.__class__.__name__} "
+                    "for auto-regressive decoding with k/v caching, please make sure to initialize the attention class "
+                    "with a layer index."
+                )
+            kv_seq_len += past_key_value.get_usable_length(kv_seq_len, self.layer_idx)
+        rotary_seq_len = max(kv_seq_len, position_ids[:, -1].max().item()) + 1
+        cos, sin = self.rotary_emb(value_states, seq_len=rotary_seq_len)
+
         
-        query_states, key_states = apply_rotary_pos_emb(query_states, before_rope_key_states, cos, sin)
+        query_states, key_states = apply_rotary_pos_emb(query_states, before_rope_key_states, cos, sin, position_ids)
         key_states = repeat_kv(key_states, self.num_key_value_groups)
         value_states = repeat_kv(value_states, self.num_key_value_groups)
-          
         if past_key_value is not None:
             # sin and cos are specific to RoPE models; cache_position needed for the static cache
-            cache_kwargs = {"sin": sin, "cos": cos, "cache_position": cache_position}
+            cache_has_contents = past_key_value.get_seq_length(self.layer_idx) > 0
+            if (
+                getattr(self.config, "sliding_window", None) is not None
+                and kv_seq_len > self.config.sliding_window
+                and cache_has_contents
+            ):
+                slicing_tokens = 1 - self.config.sliding_window
+
+                past_key = past_key_value[self.layer_idx][0]
+                past_value = past_key_value[self.layer_idx][1]
+
+                past_key = past_key[:, :, slicing_tokens:, :].contiguous()
+                past_value = past_value[:, :, slicing_tokens:, :].contiguous()
+
+                if past_key.shape[-2] != self.config.sliding_window - 1:
+                    raise ValueError(
+                        f"past key must have a shape of (`batch_size, num_heads, self.config.sliding_window-1, head_dim`), got"
+                        f" {past_key.shape}"
+                    )
+
+                if attention_mask is not None:
+                    attention_mask = attention_mask[:, slicing_tokens:]
+                    attention_mask = torch.cat([attention_mask, torch.ones_like(attention_mask[:, -1:])], dim=-1)
+
+            cache_kwargs = {"sin": sin, "cos": cos, "cache_position": cache_position}  # Specific to RoPE models
+            
             if raw_len_past_key_value == self.config.num_hidden_layers: # second prefill & generate
                 if isinstance(past_key_value[0][0], list):
                     key_states, value_states = self.update_past_key_value(past_key_value,key_states, value_states, self.layer_idx,0)
@@ -878,6 +897,15 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
                     query_state = query_state.to(target_dtype)
                     key_state = key_state.to(target_dtype)
                     value_state = value_state.to(target_dtype)
+                if (
+                    self.config.use_sliding_window
+                    and getattr(self.config, "sliding_window", None) is not None
+                    and self.layer_idx >= self.config.max_window_layers
+                ):
+                    sliding_window = self.config.sliding_window
+                else:
+                    sliding_window = None
+
                 attn_output = _flash_attention_forward(
                     query_state,
                     key_state,
@@ -976,6 +1004,15 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
                 key_states = key_states.to(target_dtype)
                 value_states = value_states.to(target_dtype)
 
+            if (
+                self.config.use_sliding_window
+                and getattr(self.config, "sliding_window", None) is not None
+                and self.layer_idx >= self.config.max_window_layers
+            ):
+                sliding_window = self.config.sliding_window
+            else:
+                sliding_window = None
+
             attn_output = _flash_attention_forward(
                 query_states,
                 key_states,
@@ -990,7 +1027,11 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
     
         if past_key_value is not None: 
             # sin and cos are specific to RoPE models; cache_position needed for the static cache
-            cache_kwargs = {"sin": sin, "cos": cos, "cache_position": cache_position}
+            cache_kwargs = {
+                "sin": sin,
+                "cos": cos,
+                "cache_position": cache_position,
+            }
             if raw_len_past_key_value!=self.config.num_hidden_layers: # 第一次prefill
                 self.recent_attn=self.get_attn(raw_query_states, raw_key_states)
                 if self.kv_cache_eviction_prefill and not self.stage_eviction:
@@ -1058,8 +1099,8 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
             
         return attn_output, attn_weights, past_key_value
 
-class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
-    _no_split_modules = ["LlamaDecoderLayerPCW"]
+class Qwen2ForCausalLMPCW(Qwen2ForCausalLM, ABC):
+    _no_split_modules = ["Qwen2DecoderLayer"]
     _tied_weights_keys = ["lm_head.weight"]
     
     def __init__(self, config: LlamaConfig, 
@@ -1069,7 +1110,7 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
                  calibration_mode=0,calibration_stage=None,
                  head_datas=None,
                  ):
-        super(LlamaForCausalLM, self).__init__(config)
+        super(Qwen2ForCausalLM, self).__init__(config)
         # super().__init__(config)
         self.capacity =capacity
         self.manager = Manager()
@@ -1080,7 +1121,7 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
         config.revise = False
         
         # raw code
-        self.model = LlamaModelPCW(config, capacity = capacity, n_windows=n_windows, 
+        self.model = Qwen2ModelPCW(config, capacity = capacity, n_windows=n_windows, 
                                    kv_cache_eviction=kv_cache_eviction,
                                    kv_cache_dynamic=kv_cache_dynamic,
                                    stage_eviction=stage_eviction,
@@ -1133,6 +1174,11 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
         >>> tokenizer.batch_decode(generate_ids, skip_special_tokens=True, clean_up_tokenization_spaces=False)[0]
         "Hey, are you conscious? Can you talk to me?\nI'm not conscious, but I can talk to you."
         ```"""
+        if self.training and self.config._attn_implementation != "eager":
+            logger.warning_once(
+                "It is strongly recommended to train Gemma2 models with the `eager` attention implementation "
+                f"instead of `{self.config._attn_implementation}`. Use `eager` with `AutoModelForCausalLM.from_pretrained('<path-to-checkpoint>', attn_implementation='eager')`."
+            )
         output_attentions = output_attentions if output_attentions is not None else self.config.output_attentions
         output_hidden_states = (
             output_hidden_states if output_hidden_states is not None else self.config.output_hidden_states
@@ -1153,13 +1199,8 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
         )
 
         hidden_states = outputs[0]
-        if self.config.pretraining_tp > 1:
-            lm_head_slices = self.lm_head.weight.split(self.vocab_size // self.config.pretraining_tp, dim=0)
-            logits = [F.linear(hidden_states, lm_head_slices[i]) for i in range(self.config.pretraining_tp)]
-            logits = torch.cat(logits, dim=-1)
-        else:
-            logits = self.lm_head(hidden_states)
-        # logits = logits.float()
+        logits = self.lm_head(hidden_states)
+        logits = logits.float()
 
         loss = None
         if "ppl" in self.parallel_pattern and "default" not in self.parallel_pattern and labels is not None:
@@ -1241,7 +1282,7 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
         }
         
 
-class LlamaModelPCW(LlamaModel, ABC):
+class Qwen2ModelPCW(Qwen2Model, ABC):
     
     def __init__(self, config: LlamaConfig, 
               capacity = 512, n_windows=1, kv_cache_eviction=False,
@@ -1249,12 +1290,12 @@ class LlamaModelPCW(LlamaModel, ABC):
                  calibration_mode=0,calibration_stage=None,
                  head_datas=None,manager=None,
                  ):
-        super(LlamaModel, self).__init__(config)
+        super(Qwen2Model, self).__init__(config)
         self.padding_idx = config.pad_token_id
         self.vocab_size = config.vocab_size
         self.embed_tokens = nn.Embedding(config.vocab_size, config.hidden_size, self.padding_idx)
         self.layers = nn.ModuleList(
-            [LlamaDecoderLayerPCW(config, layer_idx, 
+            [Qwen2DecoderLayerPCW(config, layer_idx, 
                                   capacity = capacity, n_windows=n_windows,
                                   kv_cache_eviction=kv_cache_eviction,
                                   head_datas=head_datas,
@@ -1265,28 +1306,34 @@ class LlamaModelPCW(LlamaModel, ABC):
                                     calibration_stage=calibration_stage,
                                   ) for layer_idx in range(config.num_hidden_layers)]
         )
-        self.norm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
-        self.rotary_emb = LlamaRotaryEmbedding(config=config)
+        self._attn_implementation = config._attn_implementation
+        self.norm = Qwen2RMSNorm(config.hidden_size, eps=config.rms_norm_eps)
         self.gradient_checkpointing = False
         self.post_init()
         
-LLAMA_ATTENTION_CLASSES = {
-    "eager": LlamaFlashAttention2PCW,
-    "flash_attention_2": LlamaFlashAttention2PCW,
+Qwen2_ATTENTION_CLASSES = {
+    "eager": Qwen2FlashAttention2PCW,
+    "flash_attention_2": Qwen2FlashAttention2PCW,
 }
 
-class LlamaDecoderLayerPCW(LlamaDecoderLayer):
+class Qwen2DecoderLayerPCW(Qwen2DecoderLayer):
     def __init__(self, config: LlamaConfig, layer_idx: Optional[int] = None,
                  capacity = 512, n_windows=1, kv_cache_eviction=False,
                  kv_cache_dynamic=False,stage_eviction=False,
                  calibration_mode=0,calibration_stage=None,
                  head_datas=None, manager=None,
                  ):
-        super(LlamaDecoderLayer, self).__init__()
+        super(Qwen2DecoderLayer, self).__init__()
+        # raw code 
         self.config = config
         self.manager = manager
         self.hidden_size = config.hidden_size
-        self.self_attn = LLAMA_ATTENTION_CLASSES[config._attn_implementation](config=config, layer_idx=layer_idx,
+        if config.sliding_window and config._attn_implementation != "flash_attention_2":
+            logger.warning_once(
+                f"Sliding Window Attention is enabled but not implemented for `{config._attn_implementation}`; "
+                "unexpected results may be encountered."
+            )
+        self.self_attn = Qwen2_ATTENTION_CLASSES[config._attn_implementation](config=config, layer_idx=layer_idx,
                                            capacity = capacity, n_windows=n_windows, 
                                            kv_cache_eviction=kv_cache_eviction,
                                            kv_cache_dynamic=kv_cache_dynamic,
@@ -1296,19 +1343,18 @@ class LlamaDecoderLayerPCW(LlamaDecoderLayer):
                                            manager=manager,
                                            head_datas=head_datas,
                                            )
-        self.mlp = LlamaMLP(config)
-        self.input_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
-        self.post_attention_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
+        self.mlp = Qwen2MLP(config)
+        self.input_layernorm = Qwen2RMSNorm(config.hidden_size, eps=config.rms_norm_eps)
+        self.post_attention_layernorm = Qwen2RMSNorm(config.hidden_size, eps=config.rms_norm_eps)
     def forward(
         self,
         hidden_states: torch.Tensor,
         attention_mask: Optional[torch.Tensor] = None,
         position_ids: Optional[torch.LongTensor] = None,
-        past_key_value: Optional[Cache] = None,
+        past_key_value: Optional[Tuple[torch.Tensor]] = None,
         output_attentions: Optional[bool] = False,
         use_cache: Optional[bool] = False,
         cache_position: Optional[torch.LongTensor] = None,
-        position_embeddings: Optional[Tuple[torch.Tensor, torch.Tensor]] = None,  # will become mandatory in v4.45
         **kwargs,
     ) -> Tuple[torch.FloatTensor, Optional[Tuple[torch.FloatTensor, torch.FloatTensor]]]:
         num_hidden_layers = self.config.num_hidden_layers
@@ -1325,8 +1371,6 @@ class LlamaDecoderLayerPCW(LlamaDecoderLayer):
             output_attentions=output_attentions,
             use_cache=use_cache,
             cache_position=cache_position,
-            position_embeddings=position_embeddings,
-            **kwargs,
         )
         manager = self.manager
         if manager.last_attn!=None and self.self_attn.revise:
