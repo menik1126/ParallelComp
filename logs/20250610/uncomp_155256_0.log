@@ -1,0 +1,116 @@
+2025-06-10 15:52:56,687 - [Process 0/1] - INFO - loading datasets finished
+2025-06-10 15:52:56,688 - [Process 0/1] - INFO - context_max_len: 3600
+2025-06-10 15:52:56,688 - [Process 0/1] - INFO - raw_model_max_len: 3950
+2025-06-10 15:52:56,688 - [Process 0/1] - INFO - output_max_len: 128
+2025-06-10 15:52:56,688 - [Process 0/1] - INFO - parallel_pattern: parallel_comp
+2025-06-10 15:53:42,370 - [Process 0/1] - INFO - success load tokenizer
+2025-06-10 15:53:47,901 - [Process 0/1] - INFO - Max ids is 62
+2025-06-10 15:53:47,901 - [Process 0/1] - INFO - Max Length is 36418
+2025-06-10 15:53:47,901 - [Process 0/1] - INFO - Max Length string is 210429
+2025-06-10 15:53:47,901 - [Process 0/1] - INFO - query_max_len tokens is 29
+2025-06-10 15:53:47,901 - [Process 0/1] - INFO - length_context_len tokens is 84123
+2025-06-10 15:53:47,902 - [Process 0/1] - INFO - Finish loading dataset
+2025-06-10 15:53:47,902 - [Process 0/1] - INFO - get_predicted begin
+2025-06-10 15:53:47,903 - [Process 0/1] - INFO - context length string:127304
+2025-06-10 15:53:47,942 - [Process 0/1] - INFO - raw context tokens length: 35435
+2025-06-10 15:53:47,942 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 15:53:47,942 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 15:53:47,942 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 10
+2025-06-10 15:53:47,954 - [Process 0/1] - INFO - after truncation context length string:127304
+2025-06-10 15:53:47,954 - [Process 0/1] - INFO - window_size string: 12730
+2025-06-10 15:53:57,768 - [Process 0/1] - INFO - raw_location: [0]
+2025-06-10 15:53:57,779 - [Process 0/1] - INFO - cache['sum_windows_size']: 3527
+2025-06-10 15:53:57,779 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3527])
+2025-06-10 15:53:57,779 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3527, 128])
+2025-06-10 15:53:57,779 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What is Saltram's living situation?
+
+Answer:
+2025-06-10 15:53:57,780 - [Process 0/1] - INFO - input tokens length: 52
+2025-06-10 15:53:57,780 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3579
+2025-06-10 15:53:57,780 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3579])
+2025-06-10 15:53:57,780 - [Process 0/1] - INFO - input_max_window_size: 3527
+2025-06-10 15:53:57,780 - [Process 0/1] - INFO - sum_windows_size: 3527
+2025-06-10 15:53:57,780 - [Process 0/1] - INFO - interval: 1
+2025-06-10 15:53:58,316 - [Process 0/1] - INFO - context length string:134214
+2025-06-10 15:53:58,347 - [Process 0/1] - INFO - raw context tokens length: 35352
+2025-06-10 15:53:58,347 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 15:53:58,348 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 15:53:58,348 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 10
+2025-06-10 15:53:58,359 - [Process 0/1] - INFO - after truncation context length string:134214
+2025-06-10 15:53:58,359 - [Process 0/1] - INFO - window_size string: 13421
+2025-06-10 15:54:03,724 - [Process 0/1] - INFO - raw_location: [1]
+2025-06-10 15:54:03,733 - [Process 0/1] - INFO - cache['sum_windows_size']: 3530
+2025-06-10 15:54:03,734 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3530])
+2025-06-10 15:54:03,734 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3530, 128])
+2025-06-10 15:54:03,734 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Why does Ann not return Mary's feelings of affection?
+
+Answer:
+2025-06-10 15:54:03,734 - [Process 0/1] - INFO - input tokens length: 54
+2025-06-10 15:54:03,734 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3584
+2025-06-10 15:54:03,734 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3584])
+2025-06-10 15:54:03,734 - [Process 0/1] - INFO - input_max_window_size: 3530
+2025-06-10 15:54:03,734 - [Process 0/1] - INFO - sum_windows_size: 3530
+2025-06-10 15:54:03,734 - [Process 0/1] - INFO - interval: 1
+2025-06-10 15:54:04,158 - [Process 0/1] - INFO - context length string:33711
+2025-06-10 15:54:04,167 - [Process 0/1] - INFO - raw context tokens length: 9745
+2025-06-10 15:54:04,167 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 15:54:04,167 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 15:54:04,167 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 3
+2025-06-10 15:54:04,171 - [Process 0/1] - INFO - after truncation context length string:33711
+2025-06-10 15:54:04,171 - [Process 0/1] - INFO - window_size string: 11237
+2025-06-10 15:54:06,034 - [Process 0/1] - INFO - raw_location: [2]
+2025-06-10 15:54:06,041 - [Process 0/1] - INFO - cache['sum_windows_size']: 3285
+2025-06-10 15:54:06,041 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3285])
+2025-06-10 15:54:06,041 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3285, 128])
+2025-06-10 15:54:06,041 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Where does the witch live?
+
+Answer:
+2025-06-10 15:54:06,042 - [Process 0/1] - INFO - input tokens length: 49
+2025-06-10 15:54:06,042 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3334
+2025-06-10 15:54:06,042 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3334])
+2025-06-10 15:54:06,042 - [Process 0/1] - INFO - input_max_window_size: 3285
+2025-06-10 15:54:06,042 - [Process 0/1] - INFO - sum_windows_size: 3285
+2025-06-10 15:54:06,042 - [Process 0/1] - INFO - interval: 1
+2025-06-10 15:54:06,272 - [Process 0/1] - INFO - context length string:35668
+2025-06-10 15:54:06,280 - [Process 0/1] - INFO - raw context tokens length: 9913
+2025-06-10 15:54:06,280 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 15:54:06,280 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 15:54:06,280 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 3
+2025-06-10 15:54:06,284 - [Process 0/1] - INFO - after truncation context length string:35668
+2025-06-10 15:54:06,284 - [Process 0/1] - INFO - window_size string: 11889
+2025-06-10 15:54:07,825 - [Process 0/1] - INFO - raw_location: [1]
+2025-06-10 15:54:07,832 - [Process 0/1] - INFO - cache['sum_windows_size']: 3398
+2025-06-10 15:54:07,833 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3398])
+2025-06-10 15:54:07,833 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3398, 128])
+2025-06-10 15:54:07,833 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What was the purpose of Crito's visit?
+
+Answer:
+2025-06-10 15:54:07,833 - [Process 0/1] - INFO - input tokens length: 53
+2025-06-10 15:54:07,833 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3451
+2025-06-10 15:54:07,833 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3451])
+2025-06-10 15:54:07,833 - [Process 0/1] - INFO - input_max_window_size: 3398
+2025-06-10 15:54:07,833 - [Process 0/1] - INFO - sum_windows_size: 3398
+2025-06-10 15:54:07,833 - [Process 0/1] - INFO - interval: 1
+2025-06-10 15:54:08,209 - [Process 0/1] - INFO - context length string:150152
+2025-06-10 15:54:08,243 - [Process 0/1] - INFO - raw context tokens length: 41783
+2025-06-10 15:54:08,243 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 15:54:08,243 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 15:54:08,243 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 12
+2025-06-10 15:54:08,257 - [Process 0/1] - INFO - after truncation context length string:150152
+2025-06-10 15:54:08,257 - [Process 0/1] - INFO - window_size string: 12512

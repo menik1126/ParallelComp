@@ -61,12 +61,12 @@ pip install -r requirements.txt
 ```
 
 **Key Dependencies:**
-- `torch==2.0.1` - PyTorch for deep learning
-- `transformers==4.28.1` - Hugging Face transformers library
-- `accelerate==0.18.0` - For multi-GPU training and inference
-- `datasets==2.9.0` - For dataset loading and processing
+- `torch==2.5.1` - PyTorch for deep learning
+- `transformers==4.43.2` - Hugging Face transformers library
+- `accelerate==1.2.1` - For multi-GPU training and inference
+- `datasets==3.6.0` - For dataset loading and processing
 - `numpy`, `pandas` - Data manipulation
-- `sentencepiece==0.1.99` - For tokenization
+- `sentencepiece==0.2.0` - For tokenization
 
 
 ### Quick Start
@@ -74,63 +74,47 @@ pip install -r requirements.txt
 #### Single GPU Evaluation
 
 ```bash
-python run_evaluation.py \
-    --dataset sst2 \
-    --model microsoft/DialoGPT-medium \
-    --n-windows 1 \
-    --subsample-test-set 100 \
-    --output-dir ./results \
-    --prompt_method complex_cot
+bash run_test_longbench_multi_gpu_window8_llama2.sh \
+    --parallel_pattern parallel_comp --gpu_nums 1_0 \
+    --kv_cache_eviction false --capacity 512 \
+    --kv_cache_dynamic false --stage_eviction false \
+    --recent_token 8  \
+    --topk_windows -3 --query_rank true \
+    --query_recent_tokens 0 --reduce_factor 0 \
+    --calibration_stage None --calibration_mode 0 \
+    --special_token true \
+    --model meta-llama/Llama-2-7b-chat-hf
 ```
 
 #### Multi-GPU Evaluation
 
 ```bash
 export CUDA_VISIBLE_DEVICES=0,1,2,3
-accelerate launch --main_process_port 5326 --num_processes 4 --config_file scripts/gpu_4.yaml \
-    run_evaluation_longbench_multi_gpu.py \
-    --dataset narrativeqa \
-    --n-windows 2 \
-    --subsample-test-set 2000 \
-    --model /path/to/llama2chat \
-    --prompt_method complex_cot_pcw_multi_windows \
-    --model_class modeling_llama_with_pcw
+bash run_test_longbench_multi_gpu_window8_llama2.sh \
+    --parallel_pattern parallel_comp --gpu_nums 4 \
+    --kv_cache_eviction false --capacity 512 \
+    --kv_cache_dynamic false --stage_eviction false \
+    --recent_token 8  \
+    --topk_windows -3 --query_rank true \
+    --query_recent_tokens 0 --reduce_factor 0 \
+    --calibration_stage None --calibration_mode 0 \
+    --special_token true \
+    --model meta-llama/Llama-2-7b-chat-hf \
 ```
 
 ### Supported Models
 
-- **GPT-2** family models
-- **LLaMA** family models  
-- **Gemma** models
-- **Qwen2** models
+- **LLaMA** family models
+- **Qwen2.5** models
 
 ### Supported Datasets
 
 #### Long Context Benchmarks
 - **LongBench**: narrativeqa, qasper, multifieldqa_en, hotpotqa, 2wikimqa, musique, gov_report, qmsum, multi_news, trec, triviaqa, samsum, passage_count, passage_retrieval_en, lcc, repobench-p
-- **Standard Benchmarks**: SST-2, GSM8K
-
+- **InfiniteBench**: passkey, number_string,kv_retrieval, math_find, code_debug, longbook_choice_eng, longdialogue_qa_eng
 
 
 ## 📈 Evaluation Scripts
-
-### LongBench Evaluation
-
-Evaluate on LongBench datasets using the provided scripts:
-
-```bash
-# Multi-GPU evaluation 
-bash run_test_longbench_multi_gpu_window8.sh
-
-# Single GPU evaluation  
-bash run_test_longbench_single_gpu_window8.sh
-```
-
-For single GPU:
-
-```bash
-bash run_test_longbench_single_gpu_window8.sh
-```
 
 ### Evaluation Metrics
 
@@ -142,9 +126,6 @@ bash scripts/longbench_metrics.sh --results_dir ./results --new_method your_meth
 
 # For InfiniteBench results  
 bash scripts/infinitebench_metrics.sh --results_dir ./results --new_method your_method_name --switch true
-
-# For GSM8K or other tasks
-bash scripts/evaluate_per_result.sh
 ```
 
 ### GPU Configuration
@@ -161,50 +142,25 @@ accelerate launch --config_file scripts/gpu_8.yaml your_script.py
 
 Available configurations: `gpu_1.yaml`, `gpu_2.yaml`, `gpu_3.yaml`, `gpu_4.yaml`, `gpu_5.yaml`, `gpu_6.yaml`, `gpu_7.yaml`, `gpu_8.yaml`
 
-### Custom Evaluation
-
-```python
-from model_loaders import load_pcw_wrapper
-from experiment_manager import ExperimentManager
-
-# Load model
-model = load_pcw_wrapper(
-    model_name="microsoft/DialoGPT-medium",
-    cache_dir="./cache",
-    right_indentation=False,
-    n_windows=2,
-    prompt_method="complex_cot_pcw"
-)
-
-# Run experiments
-em = ExperimentManager(test_df, train_df, model, labels)
-accuracies = em.run_experiment_across_shots(n_shots=[4, 8], n_runs=3)
-```
-
 ## 🔧 Advanced Configuration
 
 ### Attention Calibration
 
 ParallelComp includes attention calibration strategies to mitigate attention sink issues:
 
-```python
-# Configure attention calibration in your model
-model = load_pcw_wrapper(
-    model_name="your_model",
-    calibration_strategy="attention_bias_reduction", 
-    chunk_eviction=True
-)
-```
-
-### Memory Management
-
-For ultra-long contexts, enable chunk eviction:
+#### Single GPU Evaluation
 
 ```bash
-python run_evaluation.py \
-    --enable-chunk-eviction \
-    --max-memory-usage 0.8 \
-    --parallel-kv-cache
+bash run_test_longbench_multi_gpu_window8_llama2.sh \
+    --parallel_pattern parallel_comp --gpu_nums 1_0 \
+    --kv_cache_eviction false --capacity 512 \
+    --kv_cache_dynamic false --stage_eviction false \
+    --recent_token 8  \
+    --topk_windows -3 --query_rank true \
+    --query_recent_tokens 0 --reduce_factor 0 \
+    --calibration_stage prefill_2_calibration_head_{sink/recent/middle/all}_{layer_i}_{layer_j} --calibration_mode 1 \
+    --special_token true \
+    --model meta-llama/Llama-2-7b-chat-hf \
 ```
 
 ## 🚧 TODO & Roadmap
@@ -224,16 +180,17 @@ python run_evaluation.py \
 
 ```
 ParallelComp/
-├── modeling_*.py              # Model implementations with PCW
 ├── run_evaluation*.py         # Evaluation scripts
+├── model_loader.py           # Load model
 ├── experiment_manager*.py     # Experiment management
 ├── pcw_wrapper*.py           # Parallel Context Window wrapper
-├── datasets_loader.py        # Dataset loading utilities
-├── eval_longbench.py         # LongBench evaluation
-├── metrics.py                # Evaluation metrics
+├── modeling_*.py              # Model implementations with PCW
+├── metrics*.py               # Dataset evaluation
+├── eval_*.py               # Dataset evaluation
 ├── scripts/                  # Bash scripts and configs
-├── longbench_config/         # LongBench configurations
+├── longbench_config/         # LongBench & Infinitebench configurations
 ├── results/                  # Output results
+├── my_utils/                 # Some utils such as logger
 └── requirements.txt          # Dependencies
 ```
 

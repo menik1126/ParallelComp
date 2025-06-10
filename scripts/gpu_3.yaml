@@ -3,7 +3,7 @@ debug: false
 distributed_type: MULTI_GPU
 downcast_bf16: 'no'
 enable_cpu_affinity: false
-gpu_ids: '4,6,7'
+gpu_ids: '0,1,6'
 machine_rank: 0
 main_training_function: main
 mixed_precision: 'no'

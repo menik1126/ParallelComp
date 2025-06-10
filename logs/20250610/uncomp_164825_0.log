@@ -1,0 +1,668 @@
+2025-06-10 16:48:25,635 - [Process 0/1] - INFO - loading datasets finished
+2025-06-10 16:48:25,636 - [Process 0/1] - INFO - context_max_len: 3600
+2025-06-10 16:48:25,636 - [Process 0/1] - INFO - raw_model_max_len: 3950
+2025-06-10 16:48:25,636 - [Process 0/1] - INFO - output_max_len: 128
+2025-06-10 16:48:25,636 - [Process 0/1] - INFO - parallel_pattern: parallel_comp
+2025-06-10 16:49:12,543 - [Process 0/1] - INFO - success load tokenizer
+2025-06-10 16:49:17,958 - [Process 0/1] - INFO - Max ids is 62
+2025-06-10 16:49:17,958 - [Process 0/1] - INFO - Max Length is 36418
+2025-06-10 16:49:17,958 - [Process 0/1] - INFO - Max Length string is 210429
+2025-06-10 16:49:17,958 - [Process 0/1] - INFO - query_max_len tokens is 29
+2025-06-10 16:49:17,958 - [Process 0/1] - INFO - length_context_len tokens is 84123
+2025-06-10 16:49:17,959 - [Process 0/1] - INFO - Finish loading dataset
+2025-06-10 16:49:17,959 - [Process 0/1] - INFO - get_predicted begin
+2025-06-10 16:49:17,960 - [Process 0/1] - INFO - context length string:127304
+2025-06-10 16:49:17,996 - [Process 0/1] - INFO - raw context tokens length: 35435
+2025-06-10 16:49:17,997 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:49:17,997 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:49:17,997 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 10
+2025-06-10 16:49:18,009 - [Process 0/1] - INFO - after truncation context length string:127304
+2025-06-10 16:49:18,009 - [Process 0/1] - INFO - window_size string: 12730
+2025-06-10 16:49:27,798 - [Process 0/1] - INFO - raw_location: [3]
+2025-06-10 16:49:27,809 - [Process 0/1] - INFO - cache['sum_windows_size']: 3493
+2025-06-10 16:49:27,809 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3493])
+2025-06-10 16:49:27,809 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3493, 128])
+2025-06-10 16:49:27,809 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What is Saltram's living situation?
+
+Answer:
+2025-06-10 16:49:27,810 - [Process 0/1] - INFO - input tokens length: 52
+2025-06-10 16:49:27,810 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3545
+2025-06-10 16:49:27,810 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3545])
+2025-06-10 16:49:27,810 - [Process 0/1] - INFO - input_max_window_size: 3493
+2025-06-10 16:49:27,810 - [Process 0/1] - INFO - sum_windows_size: 3493
+2025-06-10 16:49:27,810 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:49:28,590 - [Process 0/1] - INFO - context length string:134214
+2025-06-10 16:49:28,620 - [Process 0/1] - INFO - raw context tokens length: 35352
+2025-06-10 16:49:28,620 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:49:28,620 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:49:28,620 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 10
+2025-06-10 16:49:28,633 - [Process 0/1] - INFO - after truncation context length string:134214
+2025-06-10 16:49:28,633 - [Process 0/1] - INFO - window_size string: 13421
+2025-06-10 16:49:33,990 - [Process 0/1] - INFO - raw_location: [9]
+2025-06-10 16:49:33,999 - [Process 0/1] - INFO - cache['sum_windows_size']: 3672
+2025-06-10 16:49:33,999 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3672])
+2025-06-10 16:49:33,999 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3672, 128])
+2025-06-10 16:49:33,999 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Why does Ann not return Mary's feelings of affection?
+
+Answer:
+2025-06-10 16:49:34,000 - [Process 0/1] - INFO - input tokens length: 54
+2025-06-10 16:49:34,000 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3726
+2025-06-10 16:49:34,000 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3726])
+2025-06-10 16:49:34,000 - [Process 0/1] - INFO - input_max_window_size: 3672
+2025-06-10 16:49:34,000 - [Process 0/1] - INFO - sum_windows_size: 3672
+2025-06-10 16:49:34,000 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:49:34,314 - [Process 0/1] - INFO - context length string:33711
+2025-06-10 16:49:34,322 - [Process 0/1] - INFO - raw context tokens length: 9745
+2025-06-10 16:49:34,323 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:49:34,323 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:49:34,323 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 3
+2025-06-10 16:49:34,326 - [Process 0/1] - INFO - after truncation context length string:33711
+2025-06-10 16:49:34,326 - [Process 0/1] - INFO - window_size string: 11237
+2025-06-10 16:49:35,857 - [Process 0/1] - INFO - raw_location: [0]
+2025-06-10 16:49:35,865 - [Process 0/1] - INFO - cache['sum_windows_size']: 3320
+2025-06-10 16:49:35,865 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3320])
+2025-06-10 16:49:35,865 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3320, 128])
+2025-06-10 16:49:35,865 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Where does the witch live?
+
+Answer:
+2025-06-10 16:49:35,865 - [Process 0/1] - INFO - input tokens length: 49
+2025-06-10 16:49:35,865 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3369
+2025-06-10 16:49:35,865 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3369])
+2025-06-10 16:49:35,865 - [Process 0/1] - INFO - input_max_window_size: 3320
+2025-06-10 16:49:35,865 - [Process 0/1] - INFO - sum_windows_size: 3320
+2025-06-10 16:49:35,866 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:49:35,989 - [Process 0/1] - INFO - context length string:35668
+2025-06-10 16:49:35,997 - [Process 0/1] - INFO - raw context tokens length: 9913
+2025-06-10 16:49:35,997 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:49:35,998 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:49:35,998 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 3
+2025-06-10 16:49:36,001 - [Process 0/1] - INFO - after truncation context length string:35668
+2025-06-10 16:49:36,001 - [Process 0/1] - INFO - window_size string: 11889
+2025-06-10 16:49:37,555 - [Process 0/1] - INFO - raw_location: [0]
+2025-06-10 16:49:37,565 - [Process 0/1] - INFO - cache['sum_windows_size']: 3383
+2025-06-10 16:49:37,565 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3383])
+2025-06-10 16:49:37,565 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3383, 128])
+2025-06-10 16:49:37,565 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What was the purpose of Crito's visit?
+
+Answer:
+2025-06-10 16:49:37,565 - [Process 0/1] - INFO - input tokens length: 53
+2025-06-10 16:49:37,566 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3436
+2025-06-10 16:49:37,566 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3436])
+2025-06-10 16:49:37,566 - [Process 0/1] - INFO - input_max_window_size: 3383
+2025-06-10 16:49:37,566 - [Process 0/1] - INFO - sum_windows_size: 3383
+2025-06-10 16:49:37,566 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:49:37,763 - [Process 0/1] - INFO - context length string:150152
+2025-06-10 16:49:37,797 - [Process 0/1] - INFO - raw context tokens length: 41783
+2025-06-10 16:49:37,797 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:49:37,797 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:49:37,797 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 12
+2025-06-10 16:49:37,810 - [Process 0/1] - INFO - after truncation context length string:150152
+2025-06-10 16:49:37,810 - [Process 0/1] - INFO - window_size string: 12512
+2025-06-10 16:49:45,533 - [Process 0/1] - INFO - raw_location: [0]
+2025-06-10 16:49:45,542 - [Process 0/1] - INFO - cache['sum_windows_size']: 3573
+2025-06-10 16:49:45,542 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3573])
+2025-06-10 16:49:45,542 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3573, 128])
+2025-06-10 16:49:45,542 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Why didn't Baron Henry just kill Otto instead of cutting his hand off?
+
+Answer:
+2025-06-10 16:49:45,542 - [Process 0/1] - INFO - input tokens length: 58
+2025-06-10 16:49:45,542 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3631
+2025-06-10 16:49:45,542 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3631])
+2025-06-10 16:49:45,542 - [Process 0/1] - INFO - input_max_window_size: 3573
+2025-06-10 16:49:45,542 - [Process 0/1] - INFO - sum_windows_size: 3573
+2025-06-10 16:49:45,542 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:49:46,071 - [Process 0/1] - INFO - context length string:55745
+2025-06-10 16:49:46,083 - [Process 0/1] - INFO - raw context tokens length: 15074
+2025-06-10 16:49:46,083 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:49:46,083 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:49:46,083 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 5
+2025-06-10 16:49:46,088 - [Process 0/1] - INFO - after truncation context length string:55745
+2025-06-10 16:49:46,088 - [Process 0/1] - INFO - window_size string: 11149
+2025-06-10 16:49:48,480 - [Process 0/1] - INFO - raw_location: [0]
+2025-06-10 16:49:48,487 - [Process 0/1] - INFO - cache['sum_windows_size']: 3037
+2025-06-10 16:49:48,487 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3037])
+2025-06-10 16:49:48,487 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3037, 128])
+2025-06-10 16:49:48,487 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: How long had Mortimer Trefinnis' sister been dead when the doctor examined the body?
+
+Answer:
+2025-06-10 16:49:48,488 - [Process 0/1] - INFO - input tokens length: 63
+2025-06-10 16:49:48,488 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3100
+2025-06-10 16:49:48,488 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3100])
+2025-06-10 16:49:48,488 - [Process 0/1] - INFO - input_max_window_size: 3037
+2025-06-10 16:49:48,488 - [Process 0/1] - INFO - sum_windows_size: 3037
+2025-06-10 16:49:48,488 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:49:48,784 - [Process 0/1] - INFO - context length string:102175
+2025-06-10 16:49:48,809 - [Process 0/1] - INFO - raw context tokens length: 40194
+2025-06-10 16:49:48,809 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:49:48,809 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:49:48,809 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 12
+2025-06-10 16:49:48,821 - [Process 0/1] - INFO - after truncation context length string:102175
+2025-06-10 16:49:48,821 - [Process 0/1] - INFO - window_size string: 8514
+2025-06-10 16:49:55,015 - [Process 0/1] - INFO - raw_location: [2]
+2025-06-10 16:49:55,023 - [Process 0/1] - INFO - cache['sum_windows_size']: 3496
+2025-06-10 16:49:55,023 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3496])
+2025-06-10 16:49:55,023 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3496, 128])
+2025-06-10 16:49:55,023 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: With whom does the entertainers' manager have an affair?
+
+Answer:
+2025-06-10 16:49:55,024 - [Process 0/1] - INFO - input tokens length: 54
+2025-06-10 16:49:55,024 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3550
+2025-06-10 16:49:55,024 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3550])
+2025-06-10 16:49:55,024 - [Process 0/1] - INFO - input_max_window_size: 3496
+2025-06-10 16:49:55,024 - [Process 0/1] - INFO - sum_windows_size: 3496
+2025-06-10 16:49:55,024 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:49:55,333 - [Process 0/1] - INFO - context length string:153449
+2025-06-10 16:49:55,374 - [Process 0/1] - INFO - raw context tokens length: 64834
+2025-06-10 16:49:55,374 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:49:55,374 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:49:55,374 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 19
+2025-06-10 16:49:55,392 - [Process 0/1] - INFO - after truncation context length string:153449
+2025-06-10 16:49:55,392 - [Process 0/1] - INFO - window_size string: 8076
+2025-06-10 16:50:05,313 - [Process 0/1] - INFO - raw_location: [16]
+2025-06-10 16:50:05,322 - [Process 0/1] - INFO - cache['sum_windows_size']: 3367
+2025-06-10 16:50:05,322 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3367])
+2025-06-10 16:50:05,322 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3367, 128])
+2025-06-10 16:50:05,322 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Who is the first person that falls under Vigo's spell?
+
+Answer:
+2025-06-10 16:50:05,323 - [Process 0/1] - INFO - input tokens length: 56
+2025-06-10 16:50:05,323 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3423
+2025-06-10 16:50:05,323 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3423])
+2025-06-10 16:50:05,323 - [Process 0/1] - INFO - input_max_window_size: 3367
+2025-06-10 16:50:05,323 - [Process 0/1] - INFO - sum_windows_size: 3367
+2025-06-10 16:50:05,323 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:05,447 - [Process 0/1] - INFO - context length string:127304
+2025-06-10 16:50:05,473 - [Process 0/1] - INFO - raw context tokens length: 35435
+2025-06-10 16:50:05,473 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:05,473 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:05,474 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 10
+2025-06-10 16:50:05,485 - [Process 0/1] - INFO - after truncation context length string:127304
+2025-06-10 16:50:05,485 - [Process 0/1] - INFO - window_size string: 12730
+2025-06-10 16:50:10,899 - [Process 0/1] - INFO - raw_location: [1]
+2025-06-10 16:50:10,908 - [Process 0/1] - INFO - cache['sum_windows_size']: 3610
+2025-06-10 16:50:10,908 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3610])
+2025-06-10 16:50:10,908 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3610, 128])
+2025-06-10 16:50:10,908 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What nationality is Ruth Anvoy?
+
+Answer:
+2025-06-10 16:50:10,908 - [Process 0/1] - INFO - input tokens length: 50
+2025-06-10 16:50:10,908 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3660
+2025-06-10 16:50:10,908 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3660])
+2025-06-10 16:50:10,908 - [Process 0/1] - INFO - input_max_window_size: 3610
+2025-06-10 16:50:10,908 - [Process 0/1] - INFO - sum_windows_size: 3610
+2025-06-10 16:50:10,908 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:10,997 - [Process 0/1] - INFO - context length string:33711
+2025-06-10 16:50:11,006 - [Process 0/1] - INFO - raw context tokens length: 9745
+2025-06-10 16:50:11,006 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:11,006 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:11,006 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 3
+2025-06-10 16:50:11,009 - [Process 0/1] - INFO - after truncation context length string:33711
+2025-06-10 16:50:11,009 - [Process 0/1] - INFO - window_size string: 11237
+2025-06-10 16:50:12,558 - [Process 0/1] - INFO - raw_location: [0]
+2025-06-10 16:50:12,566 - [Process 0/1] - INFO - cache['sum_windows_size']: 3320
+2025-06-10 16:50:12,566 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3320])
+2025-06-10 16:50:12,566 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3320, 128])
+2025-06-10 16:50:12,566 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Who did the Witch want to have reveal their own lies?
+
+Answer:
+2025-06-10 16:50:12,567 - [Process 0/1] - INFO - input tokens length: 56
+2025-06-10 16:50:12,567 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3376
+2025-06-10 16:50:12,567 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3376])
+2025-06-10 16:50:12,567 - [Process 0/1] - INFO - input_max_window_size: 3320
+2025-06-10 16:50:12,567 - [Process 0/1] - INFO - sum_windows_size: 3320
+2025-06-10 16:50:12,567 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:13,083 - [Process 0/1] - INFO - context length string:157241
+2025-06-10 16:50:13,116 - [Process 0/1] - INFO - raw context tokens length: 41521
+2025-06-10 16:50:13,116 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:13,116 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:13,116 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 12
+2025-06-10 16:50:13,130 - [Process 0/1] - INFO - after truncation context length string:157241
+2025-06-10 16:50:13,130 - [Process 0/1] - INFO - window_size string: 13103
+2025-06-10 16:50:19,552 - [Process 0/1] - INFO - raw_location: [10]
+2025-06-10 16:50:19,560 - [Process 0/1] - INFO - cache['sum_windows_size']: 3360
+2025-06-10 16:50:19,560 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3360])
+2025-06-10 16:50:19,560 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3360, 128])
+2025-06-10 16:50:19,560 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Why do the bosses of Wilma's gang believe that Anthony Rogers will be useful to them in the current conflict?
+
+Answer:
+2025-06-10 16:50:19,561 - [Process 0/1] - INFO - input tokens length: 69
+2025-06-10 16:50:19,561 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3429
+2025-06-10 16:50:19,561 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3429])
+2025-06-10 16:50:19,561 - [Process 0/1] - INFO - input_max_window_size: 3360
+2025-06-10 16:50:19,561 - [Process 0/1] - INFO - sum_windows_size: 3360
+2025-06-10 16:50:19,561 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:19,976 - [Process 0/1] - INFO - context length string:62287
+2025-06-10 16:50:19,990 - [Process 0/1] - INFO - raw context tokens length: 18519
+2025-06-10 16:50:19,990 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:19,990 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:19,990 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 6
+2025-06-10 16:50:19,996 - [Process 0/1] - INFO - after truncation context length string:62287
+2025-06-10 16:50:19,996 - [Process 0/1] - INFO - window_size string: 10381
+2025-06-10 16:50:22,929 - [Process 0/1] - INFO - raw_location: [3]
+2025-06-10 16:50:22,937 - [Process 0/1] - INFO - cache['sum_windows_size']: 3167
+2025-06-10 16:50:22,937 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3167])
+2025-06-10 16:50:22,937 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3167, 128])
+2025-06-10 16:50:22,937 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Which descriptions of the future world does Soames provide upon his return?
+
+Answer:
+2025-06-10 16:50:22,938 - [Process 0/1] - INFO - input tokens length: 57
+2025-06-10 16:50:22,938 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3224
+2025-06-10 16:50:22,938 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3224])
+2025-06-10 16:50:22,938 - [Process 0/1] - INFO - input_max_window_size: 3167
+2025-06-10 16:50:22,938 - [Process 0/1] - INFO - sum_windows_size: 3167
+2025-06-10 16:50:22,938 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:23,165 - [Process 0/1] - INFO - context length string:44586
+2025-06-10 16:50:23,175 - [Process 0/1] - INFO - raw context tokens length: 12543
+2025-06-10 16:50:23,175 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:23,175 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:23,175 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 4
+2025-06-10 16:50:23,179 - [Process 0/1] - INFO - after truncation context length string:44586
+2025-06-10 16:50:23,179 - [Process 0/1] - INFO - window_size string: 11146
+2025-06-10 16:50:25,144 - [Process 0/1] - INFO - raw_location: [0]
+2025-06-10 16:50:25,151 - [Process 0/1] - INFO - cache['sum_windows_size']: 3218
+2025-06-10 16:50:25,152 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3218])
+2025-06-10 16:50:25,152 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3218, 128])
+2025-06-10 16:50:25,152 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: How long after Madame de Merret dies before people are allowed inter manor?
+
+Answer:
+2025-06-10 16:50:25,152 - [Process 0/1] - INFO - input tokens length: 58
+2025-06-10 16:50:25,152 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3276
+2025-06-10 16:50:25,152 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3276])
+2025-06-10 16:50:25,152 - [Process 0/1] - INFO - input_max_window_size: 3218
+2025-06-10 16:50:25,152 - [Process 0/1] - INFO - sum_windows_size: 3218
+2025-06-10 16:50:25,152 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:25,310 - [Process 0/1] - INFO - context length string:46774
+2025-06-10 16:50:25,320 - [Process 0/1] - INFO - raw context tokens length: 13027
+2025-06-10 16:50:25,320 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:25,320 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:25,320 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 4
+2025-06-10 16:50:25,324 - [Process 0/1] - INFO - after truncation context length string:46774
+2025-06-10 16:50:25,324 - [Process 0/1] - INFO - window_size string: 11693
+2025-06-10 16:50:27,395 - [Process 0/1] - INFO - raw_location: [1]
+2025-06-10 16:50:27,403 - [Process 0/1] - INFO - cache['sum_windows_size']: 3271
+2025-06-10 16:50:27,403 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3271])
+2025-06-10 16:50:27,403 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3271, 128])
+2025-06-10 16:50:27,403 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Who doe the Vervelle couple believe Grassou is the perfect match for?
+
+Answer:
+2025-06-10 16:50:27,404 - [Process 0/1] - INFO - input tokens length: 60
+2025-06-10 16:50:27,404 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3331
+2025-06-10 16:50:27,404 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3331])
+2025-06-10 16:50:27,404 - [Process 0/1] - INFO - input_max_window_size: 3271
+2025-06-10 16:50:27,404 - [Process 0/1] - INFO - sum_windows_size: 3271
+2025-06-10 16:50:27,404 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:27,672 - [Process 0/1] - INFO - context length string:46774
+2025-06-10 16:50:27,683 - [Process 0/1] - INFO - raw context tokens length: 13027
+2025-06-10 16:50:27,683 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:27,683 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:27,683 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 4
+2025-06-10 16:50:27,687 - [Process 0/1] - INFO - after truncation context length string:46774
+2025-06-10 16:50:27,687 - [Process 0/1] - INFO - window_size string: 11693
+2025-06-10 16:50:29,715 - [Process 0/1] - INFO - raw_location: [1]
+2025-06-10 16:50:29,723 - [Process 0/1] - INFO - cache['sum_windows_size']: 3271
+2025-06-10 16:50:29,723 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3271])
+2025-06-10 16:50:29,723 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3271, 128])
+2025-06-10 16:50:29,723 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Who does Vervelle want his daughter to marry?
+
+Answer:
+2025-06-10 16:50:29,723 - [Process 0/1] - INFO - input tokens length: 53
+2025-06-10 16:50:29,724 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3324
+2025-06-10 16:50:29,724 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3324])
+2025-06-10 16:50:29,724 - [Process 0/1] - INFO - input_max_window_size: 3271
+2025-06-10 16:50:29,724 - [Process 0/1] - INFO - sum_windows_size: 3271
+2025-06-10 16:50:29,724 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:29,883 - [Process 0/1] - INFO - context length string:153449
+2025-06-10 16:50:29,923 - [Process 0/1] - INFO - raw context tokens length: 64834
+2025-06-10 16:50:29,923 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:29,923 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:29,923 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 19
+2025-06-10 16:50:29,941 - [Process 0/1] - INFO - after truncation context length string:153449
+2025-06-10 16:50:29,941 - [Process 0/1] - INFO - window_size string: 8076
+2025-06-10 16:50:39,968 - [Process 0/1] - INFO - raw_location: [16]
+2025-06-10 16:50:39,977 - [Process 0/1] - INFO - cache['sum_windows_size']: 3367
+2025-06-10 16:50:39,977 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3367])
+2025-06-10 16:50:39,977 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3367, 128])
+2025-06-10 16:50:39,977 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: How does the slime get into Dana's apartment?
+
+Answer:
+2025-06-10 16:50:39,978 - [Process 0/1] - INFO - input tokens length: 56
+2025-06-10 16:50:39,978 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3423
+2025-06-10 16:50:39,978 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3423])
+2025-06-10 16:50:39,978 - [Process 0/1] - INFO - input_max_window_size: 3367
+2025-06-10 16:50:39,978 - [Process 0/1] - INFO - sum_windows_size: 3367
+2025-06-10 16:50:39,978 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:40,218 - [Process 0/1] - INFO - context length string:79998
+2025-06-10 16:50:40,237 - [Process 0/1] - INFO - raw context tokens length: 27583
+2025-06-10 16:50:40,237 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:40,237 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:40,237 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 8
+2025-06-10 16:50:40,245 - [Process 0/1] - INFO - after truncation context length string:79998
+2025-06-10 16:50:40,245 - [Process 0/1] - INFO - window_size string: 9999
+2025-06-10 16:50:44,535 - [Process 0/1] - INFO - raw_location: [2]
+2025-06-10 16:50:44,545 - [Process 0/1] - INFO - cache['sum_windows_size']: 3474
+2025-06-10 16:50:44,545 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3474])
+2025-06-10 16:50:44,545 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3474, 128])
+2025-06-10 16:50:44,545 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What does Elder Childers argue?
+
+Answer:
+2025-06-10 16:50:44,546 - [Process 0/1] - INFO - input tokens length: 50
+2025-06-10 16:50:44,546 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3524
+2025-06-10 16:50:44,546 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3524])
+2025-06-10 16:50:44,546 - [Process 0/1] - INFO - input_max_window_size: 3474
+2025-06-10 16:50:44,546 - [Process 0/1] - INFO - sum_windows_size: 3474
+2025-06-10 16:50:44,546 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:45,053 - [Process 0/1] - INFO - context length string:157241
+2025-06-10 16:50:45,084 - [Process 0/1] - INFO - raw context tokens length: 41521
+2025-06-10 16:50:45,084 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:45,084 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:45,084 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 12
+2025-06-10 16:50:45,098 - [Process 0/1] - INFO - after truncation context length string:157241
+2025-06-10 16:50:45,098 - [Process 0/1] - INFO - window_size string: 13103
+2025-06-10 16:50:51,602 - [Process 0/1] - INFO - raw_location: [10]
+2025-06-10 16:50:51,611 - [Process 0/1] - INFO - cache['sum_windows_size']: 3360
+2025-06-10 16:50:51,611 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3360])
+2025-06-10 16:50:51,611 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3360, 128])
+2025-06-10 16:50:51,611 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Why do the bosses of Wilma's gang believe that Anthony Rogers will be useful to them in the current conflict?
+
+Answer:
+2025-06-10 16:50:51,612 - [Process 0/1] - INFO - input tokens length: 69
+2025-06-10 16:50:51,612 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3429
+2025-06-10 16:50:51,612 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3429])
+2025-06-10 16:50:51,612 - [Process 0/1] - INFO - input_max_window_size: 3360
+2025-06-10 16:50:51,612 - [Process 0/1] - INFO - sum_windows_size: 3360
+2025-06-10 16:50:51,612 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:52,044 - [Process 0/1] - INFO - context length string:106854
+2025-06-10 16:50:52,071 - [Process 0/1] - INFO - raw context tokens length: 41539
+2025-06-10 16:50:52,071 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:52,071 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:52,071 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 12
+2025-06-10 16:50:52,084 - [Process 0/1] - INFO - after truncation context length string:106854
+2025-06-10 16:50:52,084 - [Process 0/1] - INFO - window_size string: 8904
+2025-06-10 16:50:58,737 - [Process 0/1] - INFO - raw_location: [10]
+2025-06-10 16:50:58,745 - [Process 0/1] - INFO - cache['sum_windows_size']: 3260
+2025-06-10 16:50:58,745 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3260])
+2025-06-10 16:50:58,745 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3260, 128])
+2025-06-10 16:50:58,745 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What does Reiko see in the photograph that her ex-husband takes of her after she has seen the tape?
+
+Answer:
+2025-06-10 16:50:58,746 - [Process 0/1] - INFO - input tokens length: 67
+2025-06-10 16:50:58,746 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3327
+2025-06-10 16:50:58,746 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3327])
+2025-06-10 16:50:58,746 - [Process 0/1] - INFO - input_max_window_size: 3260
+2025-06-10 16:50:58,746 - [Process 0/1] - INFO - sum_windows_size: 3260
+2025-06-10 16:50:58,746 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:50:58,951 - [Process 0/1] - INFO - context length string:35668
+2025-06-10 16:50:58,959 - [Process 0/1] - INFO - raw context tokens length: 9913
+2025-06-10 16:50:58,959 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:50:58,959 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:50:58,959 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 3
+2025-06-10 16:50:58,962 - [Process 0/1] - INFO - after truncation context length string:35668
+2025-06-10 16:50:58,962 - [Process 0/1] - INFO - window_size string: 11889
+2025-06-10 16:51:00,570 - [Process 0/1] - INFO - raw_location: [0]
+2025-06-10 16:51:00,579 - [Process 0/1] - INFO - cache['sum_windows_size']: 3383
+2025-06-10 16:51:00,579 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3383])
+2025-06-10 16:51:00,579 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3383, 128])
+2025-06-10 16:51:00,579 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: How many ethical arguments does Socrates propose?
+
+Answer:
+2025-06-10 16:51:00,579 - [Process 0/1] - INFO - input tokens length: 53
+2025-06-10 16:51:00,579 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3436
+2025-06-10 16:51:00,579 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3436])
+2025-06-10 16:51:00,579 - [Process 0/1] - INFO - input_max_window_size: 3383
+2025-06-10 16:51:00,580 - [Process 0/1] - INFO - sum_windows_size: 3383
+2025-06-10 16:51:00,580 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:51:00,708 - [Process 0/1] - INFO - context length string:55745
+2025-06-10 16:51:00,720 - [Process 0/1] - INFO - raw context tokens length: 15074
+2025-06-10 16:51:00,720 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:51:00,720 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:51:00,720 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 5
+2025-06-10 16:51:00,725 - [Process 0/1] - INFO - after truncation context length string:55745
+2025-06-10 16:51:00,725 - [Process 0/1] - INFO - window_size string: 11149
+2025-06-10 16:51:03,180 - [Process 0/1] - INFO - raw_location: [2]
+2025-06-10 16:51:03,188 - [Process 0/1] - INFO - cache['sum_windows_size']: 3040
+2025-06-10 16:51:03,188 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3040])
+2025-06-10 16:51:03,188 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3040, 128])
+2025-06-10 16:51:03,188 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Why was Mortimer Trefinnis once estranged from his siblings?
+
+Answer:
+2025-06-10 16:51:03,189 - [Process 0/1] - INFO - input tokens length: 59
+2025-06-10 16:51:03,189 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3099
+2025-06-10 16:51:03,189 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3099])
+2025-06-10 16:51:03,189 - [Process 0/1] - INFO - input_max_window_size: 3040
+2025-06-10 16:51:03,189 - [Process 0/1] - INFO - sum_windows_size: 3040
+2025-06-10 16:51:03,189 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:51:03,604 - [Process 0/1] - INFO - context length string:157241
+2025-06-10 16:51:03,638 - [Process 0/1] - INFO - raw context tokens length: 41521
+2025-06-10 16:51:03,638 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:51:03,638 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:51:03,638 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 12
+2025-06-10 16:51:03,651 - [Process 0/1] - INFO - after truncation context length string:157241
+2025-06-10 16:51:03,651 - [Process 0/1] - INFO - window_size string: 13103
+2025-06-10 16:51:10,167 - [Process 0/1] - INFO - raw_location: [10]
+2025-06-10 16:51:10,175 - [Process 0/1] - INFO - cache['sum_windows_size']: 3360
+2025-06-10 16:51:10,175 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3360])
+2025-06-10 16:51:10,175 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3360, 128])
+2025-06-10 16:51:10,175 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What year is it when Anthony Rogers finally disembarks from the coal mine?
+
+Answer:
+2025-06-10 16:51:10,176 - [Process 0/1] - INFO - input tokens length: 59
+2025-06-10 16:51:10,176 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3419
+2025-06-10 16:51:10,176 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3419])
+2025-06-10 16:51:10,176 - [Process 0/1] - INFO - input_max_window_size: 3360
+2025-06-10 16:51:10,176 - [Process 0/1] - INFO - sum_windows_size: 3360
+2025-06-10 16:51:10,176 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:51:10,418 - [Process 0/1] - INFO - context length string:199268
+2025-06-10 16:51:10,464 - [Process 0/1] - INFO - raw context tokens length: 70441
+2025-06-10 16:51:10,464 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:51:10,464 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:51:10,464 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 20
+2025-06-10 16:51:10,485 - [Process 0/1] - INFO - after truncation context length string:199268
+2025-06-10 16:51:10,485 - [Process 0/1] - INFO - window_size string: 9963
+2025-06-10 16:51:21,649 - [Process 0/1] - INFO - raw_location: [8]
+2025-06-10 16:51:21,658 - [Process 0/1] - INFO - cache['sum_windows_size']: 3620
+2025-06-10 16:51:21,658 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3620])
+2025-06-10 16:51:21,658 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3620, 128])
+2025-06-10 16:51:21,658 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Why did Bill run to Texas?
+
+Answer:
+2025-06-10 16:51:21,659 - [Process 0/1] - INFO - input tokens length: 49
+2025-06-10 16:51:21,659 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3669
+2025-06-10 16:51:21,659 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3669])
+2025-06-10 16:51:21,659 - [Process 0/1] - INFO - input_max_window_size: 3620
+2025-06-10 16:51:21,659 - [Process 0/1] - INFO - sum_windows_size: 3620
+2025-06-10 16:51:21,659 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:51:22,020 - [Process 0/1] - INFO - context length string:35668
+2025-06-10 16:51:22,028 - [Process 0/1] - INFO - raw context tokens length: 9913
+2025-06-10 16:51:22,028 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:51:22,028 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:51:22,028 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 3
+2025-06-10 16:51:22,031 - [Process 0/1] - INFO - after truncation context length string:35668
+2025-06-10 16:51:22,031 - [Process 0/1] - INFO - window_size string: 11889
+2025-06-10 16:51:23,642 - [Process 0/1] - INFO - raw_location: [0]
+2025-06-10 16:51:23,650 - [Process 0/1] - INFO - cache['sum_windows_size']: 3383
+2025-06-10 16:51:23,650 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3383])
+2025-06-10 16:51:23,650 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3383, 128])
+2025-06-10 16:51:23,650 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Who does Socrates compare going against the law to?
+
+Answer:
+2025-06-10 16:51:23,651 - [Process 0/1] - INFO - input tokens length: 54
+2025-06-10 16:51:23,651 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3437
+2025-06-10 16:51:23,651 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3437])
+2025-06-10 16:51:23,651 - [Process 0/1] - INFO - input_max_window_size: 3383
+2025-06-10 16:51:23,651 - [Process 0/1] - INFO - sum_windows_size: 3383
+2025-06-10 16:51:23,651 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:51:23,816 - [Process 0/1] - INFO - context length string:127304
+2025-06-10 16:51:23,843 - [Process 0/1] - INFO - raw context tokens length: 35435
+2025-06-10 16:51:23,843 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:51:23,843 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:51:23,843 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 10
+2025-06-10 16:51:23,855 - [Process 0/1] - INFO - after truncation context length string:127304
+2025-06-10 16:51:23,855 - [Process 0/1] - INFO - window_size string: 12730
+2025-06-10 16:51:29,955 - [Process 0/1] - INFO - raw_location: [1]
+2025-06-10 16:51:29,963 - [Process 0/1] - INFO - cache['sum_windows_size']: 3610
+2025-06-10 16:51:29,963 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3610])
+2025-06-10 16:51:29,964 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3610, 128])
+2025-06-10 16:51:29,964 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What relation to Ruth Anvoy is Lady Coxon?
+
+Answer:
+2025-06-10 16:51:29,964 - [Process 0/1] - INFO - input tokens length: 54
+2025-06-10 16:51:29,964 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3664
+2025-06-10 16:51:29,964 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3664])
+2025-06-10 16:51:29,964 - [Process 0/1] - INFO - input_max_window_size: 3610
+2025-06-10 16:51:29,964 - [Process 0/1] - INFO - sum_windows_size: 3610
+2025-06-10 16:51:29,964 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:51:30,096 - [Process 0/1] - INFO - context length string:106854
+2025-06-10 16:51:30,121 - [Process 0/1] - INFO - raw context tokens length: 41539
+2025-06-10 16:51:30,121 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:51:30,121 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:51:30,121 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 12
+2025-06-10 16:51:30,133 - [Process 0/1] - INFO - after truncation context length string:106854
+2025-06-10 16:51:30,133 - [Process 0/1] - INFO - window_size string: 8904
+2025-06-10 16:51:36,700 - [Process 0/1] - INFO - raw_location: [10]
+2025-06-10 16:51:36,709 - [Process 0/1] - INFO - cache['sum_windows_size']: 3260
+2025-06-10 16:51:36,709 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3260])
+2025-06-10 16:51:36,709 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3260, 128])
+2025-06-10 16:51:36,709 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What is Reiko's job?
+
+Answer:
+2025-06-10 16:51:36,709 - [Process 0/1] - INFO - input tokens length: 50
+2025-06-10 16:51:36,710 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3310
+2025-06-10 16:51:36,710 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3310])
+2025-06-10 16:51:36,710 - [Process 0/1] - INFO - input_max_window_size: 3260
+2025-06-10 16:51:36,710 - [Process 0/1] - INFO - sum_windows_size: 3260
+2025-06-10 16:51:36,710 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:51:37,021 - [Process 0/1] - INFO - context length string:35668
+2025-06-10 16:51:37,029 - [Process 0/1] - INFO - raw context tokens length: 9913
+2025-06-10 16:51:37,029 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:51:37,029 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:51:37,029 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 3
+2025-06-10 16:51:37,032 - [Process 0/1] - INFO - after truncation context length string:35668
+2025-06-10 16:51:37,033 - [Process 0/1] - INFO - window_size string: 11889
+2025-06-10 16:51:38,649 - [Process 0/1] - INFO - raw_location: [0]
+2025-06-10 16:51:38,657 - [Process 0/1] - INFO - cache['sum_windows_size']: 3383
+2025-06-10 16:51:38,657 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3383])
+2025-06-10 16:51:38,657 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3383, 128])
+2025-06-10 16:51:38,657 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: Why does Socrates ultimately decide it is unjust to escape?
+
+Answer:
+2025-06-10 16:51:38,658 - [Process 0/1] - INFO - input tokens length: 56
+2025-06-10 16:51:38,658 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3439
+2025-06-10 16:51:38,658 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3439])
+2025-06-10 16:51:38,658 - [Process 0/1] - INFO - input_max_window_size: 3383
+2025-06-10 16:51:38,658 - [Process 0/1] - INFO - sum_windows_size: 3383
+2025-06-10 16:51:38,658 - [Process 0/1] - INFO - interval: 1
+2025-06-10 16:51:39,348 - [Process 0/1] - INFO - context length string:202039
+2025-06-10 16:51:39,397 - [Process 0/1] - INFO - raw context tokens length: 77866
+2025-06-10 16:51:39,398 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:51:39,398 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:51:39,398 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 22
+2025-06-10 16:51:39,419 - [Process 0/1] - INFO - after truncation context length string:202039
+2025-06-10 16:51:39,419 - [Process 0/1] - INFO - window_size string: 9183

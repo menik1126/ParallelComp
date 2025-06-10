@@ -1,7 +1,0 @@
-2024-12-20 17:39:56,085 - [Process 0/1] - INFO - loading datasets finished
-2024-12-20 17:39:56,086 - [Process 0/1] - INFO - model_max_len: 3950
-2024-12-20 17:39:56,086 - [Process 0/1] - INFO - output_max_len: 64
-2024-12-20 17:39:56,104 - [Process 0/1] - INFO - Max Length is 10337
-2024-12-20 17:39:56,104 - [Process 0/1] - INFO - Finish loading dataset
-2024-12-20 17:39:56,105 - [Process 0/1] - INFO - get_predicted begin
-2024-12-20 17:39:56,158 - [Process 0/1] - INFO - len(truncation_prompts):1

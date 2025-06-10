@@ -25,6 +25,9 @@ from torch.nn import CrossEntropyLoss
 from my_utils.logger import Logger
 logger = Logger()
 logger.set_console_level(logging.DEBUG)
+from my_utils.entropy_utils import (
+    get_head_pattern_attn_entropy,
+)
 
 if is_flash_attn_2_available():
     from flash_attn.bert_padding import index_first_axis, pad_input, unpad_input  # noqa
@@ -137,12 +140,12 @@ def apply_rotary_pos_emb_new(q, k, cos_query, sin_query, cos_key,sin_key, positi
     k_embed = (k * cos_key) + (rotate_half(k) * sin_key)
     return q_embed, k_embed
 
-HEAD_NUM = int(os.environ.get("HEAD_NUM", 0))
-BETA = float(os.environ.get("BETA", 0.4))
 THRES = float(os.environ.get("THRES", 0.1))
 RECENT_TOKENS = int(os.environ.get("RECENT_TOKENS", 1))
 
-
+class Manager:
+    last_attn = None
+    pass
 class LlamaFlashAttention2PCW(LlamaFlashAttention2):
     """
     Llama flash attention module. This module inherits from `LlamaAttention` as the weights of the module stays
@@ -151,170 +154,61 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
     """
     def __init__(self, config: LlamaConfig, layer_idx: Optional[int] = None,
                 capacity = 512, n_windows=1, kv_cache_eviction=False,
-                kv_cache_dynamic=False,stage_eviction=False,get_recent_attn=False,
-                key_no_rope=False,draw_pic=0,attn_avg=False,
-                in_eager_mode=False,
+                kv_cache_dynamic=False,stage_eviction=False,
                 calibration_mode=0,calibration_stage=None,
+                head_datas=None,manager=None,
                  ):
         super().__init__(config, layer_idx)
+        # head_datas = None
+        self.window_size = 8
+        if head_datas is not None:
+            self.head_datas = torch.tensor(head_datas)
+            self.head_indices1 = self.head_datas[self.layer_idx]
+            self.bsz = 1
+            num_attention_heads = 32
+            self.recent_indices_generate = [torch.arange(-self.window_size,0,device='cuda').view(1, 1, -1).expand(self.bsz,num_attention_heads//2,-1),torch.arange(-self.window_size,0,device='cuda').view(1, 1, -1).expand(self.bsz,num_attention_heads//2,-1)]
+        self.manager = manager
+        # assert 1==0
         self.capacity = capacity
         self.eviction_len = 0
-        self.window_size = 8
+        
         self.kv_cache_eviction_prefill = kv_cache_eviction
         self.kv_cache_dynamic = kv_cache_dynamic
         self.query_len = self.window_size
         self.n_windows = n_windows
         self.stage_eviction = stage_eviction
-        self.key_no_rope = key_no_rope
-        self.attn_avg = attn_avg
-        self.in_eager_mode = in_eager_mode
         self.kernel_size = 7
-        self.get_recent_attn = get_recent_attn
         self.pooling = 'maxpool'
-        self.draw_pic = draw_pic
         self.calibration_mode = calibration_mode
         self.calibration_stage=calibration_stage
     
-    def atten_process_eval(self, attention_map, index=None):
-        # 核心思想为：把sink位置的注意力分数，均摊1-beta部分到其他位置（按照本身自己的权重分配）
-        beta = BETA
-        threshold = THRES
+    def get_head_type(self, key_states, query_states):
+        attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(key_states.size(-1))
+        mask = torch.full((self.window_size, self.window_size), torch.finfo(attn_weights.dtype).min, device=attn_weights.device)
+        mask_cond = torch.arange(mask.size(-1), device=attn_weights.device)
+        mask.masked_fill_(mask_cond < (mask_cond + 1).view(mask.size(-1), 1), 0)
+        mask = mask.to(attn_weights.device)
+        attention_mask = mask[None, None, :, :]
+        attn_weights[:, :, -self.window_size:, -self.window_size:] += attention_mask
 
-        head_indices = aug_indices_comb_classification[index-2]
-
-        for head_num in head_indices:
-            modified_head = attention_map[0][head_num]
-            device = modified_head.device
-            shape = modified_head.shape[1]
-            # print("torch.sum(modified_head, dim=0).shape:{}".format(torch.sum(modified_head, dim=0).shape))
-            # print("torch.arange(shape,0,-1).to(device).shape:{}".format(torch.arange(shape,0,-1).to(device).shape))
-            
-            # 计算平均注意力大于阈值的部分（寻找注意力sink的位置）
-            indices = torch.nonzero(torch.where(torch.sum(modified_head, dim=0) / torch.arange(shape,0,-1).to(device) > threshold, 1, 0))
-            # print("indices.shape:{}".format(indices.shape))
-            indices = indices[1:]
-            copied_attention_map = copy.deepcopy(modified_head.detach())
-            # 获得权重 sink位置作和*一个系数
-            available_weights = modified_head[:, indices].sum(dim=1) * (1-beta)
-            # 对sink部分进行缩放
-            modified_head[:, indices] *= beta
-            # 掩盖掉 sink部分
-            copied_attention_map[1:, indices] *= 0
-            # 计算剩余部分的权重
-            ratios = copied_attention_map / torch.sum(copied_attention_map,  dim=1, keepdim=True).to(copied_attention_map.dtype)
-            # 对available_weights进一步缩放
-            modified_head = modified_head + available_weights * ratios
-            modified_head[0, 0] = 1
-           
-            attention_map[0][head_num] = modified_head
-
-        return attention_map
-    
-    def atten_process_eval_generate(self, attention_map, index=None):
-        # 核心思想为：把sink位置的注意力分数，均摊1-beta部分到其他位置（按照本身自己的权重分配）
-        beta = BETA
-        threshold = THRES
-
-        head_indices = aug_indices_comb_classification[index-2]
-
-        for head_num in head_indices:
-            # print(f"attention_map before:{attention_map}")
-            # print(f"\ntorch.sum(attention_map):{torch.sum(attention_map)}")
-            # print("attention_map.shape:{}".format(attention_map.shape))
-            modified_head = attention_map[0][head_num]
-            device = modified_head.device
-            shape = modified_head.shape[1]
-            # print("torch.sum(modified_head, dim=0).shape:{}".format(torch.sum(modified_head, dim=0).shape))
-            # print("torch.arange(shape,0,-1).to(device).shape:{}".format(torch.arange(shape,0,-1).to(device).shape))
-            
-            # 计算平均注意力大于阈值的部分（寻找注意力sink的位置）
-            indices = torch.nonzero(torch.where(torch.sum(modified_head, dim=0) / torch.arange(shape,0,-1).to(device) > threshold, 1, 0))
-            indices = indices[1:]
-            copied_attention_map = copy.deepcopy(modified_head.detach())
-            # 获得权重 sink位置作和*一个系数
-            available_weights = modified_head[:, indices].sum(dim=1) * (1-beta)
-            # 对sink部分进行缩放
-            modified_head[:, indices] *= beta
-            # 掩盖掉 sink部分
-            copied_attention_map[1:, indices] *= 0
-            # 计算剩余部分的权重
-            ratios = copied_attention_map / torch.sum(copied_attention_map,  dim=1, keepdim=True).to(copied_attention_map.dtype)
-            # 对available_weights进一步缩放
-            modified_head = modified_head + available_weights * ratios
-            # modified_head[0, 0] = 1
-           
-            attention_map[0][head_num] = modified_head
-            # print(f"attention_map:{attention_map}")
-            # print(f"torch.sum(attention_map):{torch.sum(attention_map)}")
-            # print(f"torch.sum(attention_map).shape:{torch.sum(attention_map).shape}")
+        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+        
+        select_topk = query_states.shape[1]//2
+        svdn = 32 
+        head_pattern = get_head_pattern_attn_entropy(attn_weights,query_states,0,svdn,0,[0,select_topk])
+        svdn = "svd" + str(svdn)
+        filename = f"/home/avnet/xiongjing/UNComp/search/llama31/{svdn}/"
+        os.makedirs(os.path.dirname(filename), exist_ok=True)
+        filename = filename + "head_type_search_layer" + str(self.layer_idx) + ".csv"
+        mode = 'a'
+        with open(filename, mode, newline='') as csvfile:
+            import csv
+            writer = csv.writer(csvfile)
+            writer.writerow(head_pattern.to(torch.int8).tolist())
+        if self.layer_idx == self.config.num_hidden_layers-1:
+            print(self.layer_idx)
             # assert 1==0
-        return attention_map
-    
-    def atten_process_eval_prefill(self, attention_map, layer_idx=None, threshold=0.1, beta=0.4):
-        # 核心思想为：把sink位置的注意力分数，均摊1-beta部分到其他位置（按照本身自己的权重分配）
-        
-        # 每个头都操作
-        for head_num in range(attention_map.shape[1]):
-            modified_head = attention_map[0][head_num]
-            device = modified_head.device
-            shape = modified_head.shape[1]
-            # attn_comparison = torch.sum(modified_head, dim=0) / torch.arange(shape,0,-1).to(device)
-            
-            # 计算平均注意力大于阈值的部分（寻找注意力sink的位置）
-            self.window_size = min(self.window_size, modified_head.shape[0])
-            attn_comparison = torch.sum(modified_head[-self.window_size:,:], dim=0)
-            attn_comparison[:-self.window_size+1] /= self.window_size
-            for i in range(1,self.window_size):
-                attn_comparison[-i] /= i
-            indices = torch.nonzero(torch.where(attn_comparison > threshold, 1, 0))
-            copied_attention_map = copy.deepcopy(modified_head.detach())
-            # 获得权重 sink位置作和*一个系数
-            available_weights = modified_head[:, indices].sum(dim=1) * (1-beta)
-            # 对sink部分进行缩放
-            modified_head[:, indices] *= beta
-            # 掩盖掉 sink部分
-            copied_attention_map[:, indices] *= 0
-            # 计算剩余部分的权重
-            attn_map_sum = torch.sum(copied_attention_map,  dim=1, keepdim=True)
-            small_value= 1e-8
-            attn_map_sum = torch.where(attn_map_sum == 0, small_value, attn_map_sum)
-            ratios = copied_attention_map / attn_map_sum.to(copied_attention_map.dtype)
-            modified_head = modified_head + available_weights * ratios
-            if attention_map.shape[-1] == attention_map.shape[-2]:
-                modified_head[0, 0] = 1
-            
-        return attention_map
-    
-    def atten_process_eval_generate_new(self, attention_map, layer_idx=None, threshold=0.1, beta=0.4):
-        # 核心思想为：把sink位置的注意力分数，均摊1-beta部分到其他位置（按照本身自己的权重分配）
-        # 每个头都操作
-        # 0.3 0.3还可以
-        
-        for head_num in range(attention_map.shape[1]):
-            modified_head = attention_map[0][head_num]
-            device = modified_head.device
-            shape = modified_head.shape[1]
-            # attn_comparison = torch.sum(modified_head, dim=0) / torch.arange(shape,0,-1).to(device)
-            attn_comparison = modified_head[0]
-            # 计算平均注意力大于阈值的部分（寻找注意力sink的位置）
-            indices = torch.nonzero(torch.where( attn_comparison > threshold, 1, 0))
-            # print("indices.shape:{}".format(indices.shape))
-            # indices = indices[1:]
-            copied_attention_map = copy.deepcopy(modified_head.detach())
-            # 获得权重 sink位置作和*一个系数
-            available_weights = modified_head[:, indices].sum(dim=1) * (1-beta)
-            # 对sink部分进行缩放
-            modified_head[:, indices] *= beta
-            # 掩盖掉 sink部分
-            copied_attention_map[:, indices] *= 0
-            # 计算剩余部分的权重
-            ratios = copied_attention_map / torch.sum(copied_attention_map,  dim=1, keepdim=True).to(copied_attention_map.dtype)
-            # 对available_weights进一步缩放
-            modified_head = modified_head + available_weights * ratios
-           
-            attention_map[0][head_num] = modified_head
-        return attention_map
-
+   
     def _update_kv_second_prefill(self,past_key_value, key_states, query_states, value_states, q_len):
         attn_weights = torch.matmul(query_states[..., -self.window_size:, :], key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
         mask = torch.full((self.window_size, self.window_size), torch.finfo(attn_weights.dtype).min, device=attn_weights.device)
@@ -367,53 +261,6 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
         past_key_value.key_cache[self.layer_idx] = key_states_compress
         past_key_value.value_cache[self.layer_idx] = value_states_compress
 
-    def _update_kv_first_prefill(self,past_key_value, key_states, query_states, value_states, q_len):
-        token_prompt_size = self.token_prompt_size
-        
-        attn_weights = torch.matmul(query_states[..., -self.window_size:, :], key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
-        mask = torch.full((self.window_size, self.window_size), torch.finfo(attn_weights.dtype).min, device=attn_weights.device)
-        mask_cond = torch.arange(mask.size(-1), device=attn_weights.device)
-        mask.masked_fill_(mask_cond < (mask_cond + 1).view(mask.size(-1), 1), 0)
-        mask = mask.to(attn_weights.device)
-        attention_mask = mask[None, None, :, :]
-
-        attn_weights[:, :, -self.window_size:, -self.window_size:] += attention_mask
-
-        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
-        attn_weights_sum = attn_weights[:, :, -self.window_size:, token_prompt_size : -self.query_len].sum(dim = -2)
-        # print("attn_weights_sum.shape:{}".format(attn_weights_sum.shape))
-        if self.pooling == 'avgpool':
-            attn_cache = F.avg_pool1d(attn_weights_sum, kernel_size = self.kernel_size, padding=self.kernel_size//2, stride=1)
-        elif self.pooling == 'maxpool':
-            attn_cache = F.max_pool1d(attn_weights_sum, kernel_size = self.kernel_size, padding=self.kernel_size//2, stride=1)
-        else:
-            raise ValueError('Pooling method not supported')
-        
-        #print("self.capacity0:{}".format(self.capacity))
-        #assert 1==0
-        capacity = min(self.capacity, q_len)
-        # logger.info("capacity:{}".format(capacity))
-        top_k = capacity-self.query_len
-        # logger.info("top_k:{}".format(top_k))
-        # logger.info("attn_cache.shape:{}".format(attn_cache.shape))
-        indices = attn_cache.topk(top_k, dim=-1).indices
-        indices = indices.sort(dim=-1).values
-        indices_expanded  = indices.unsqueeze(-1).expand(-1, -1, -1, self.head_dim)  
-        indices_attn = indices.unsqueeze(-2).expand(-1, -1, self.window_size, -1)
-        attn_weights_compress = attn_weights[:, :, -self.window_size:, token_prompt_size:-self.query_len].gather(dim = -1, index = indices_attn)
-        k_past_compress = key_states[:, :, token_prompt_size:-self.query_len, :].gather(dim = 2, index = indices_expanded)
-        v_past_compress = value_states[:, :, token_prompt_size:-self.query_len, :].gather(dim = 2, index = indices_expanded)
-        k_cur = key_states[:, :, -self.query_len:, :]
-        v_cur = value_states[:, :, -self.query_len:, :]
-
-        key_states_compress = torch.cat([k_past_compress, k_cur], dim = 2).contiguous()
-        value_states_compress = torch.cat([v_past_compress, v_cur], dim = 2).contiguous()
-
-        del k_past_compress, k_cur, v_past_compress, v_cur, key_states, value_states, attn_weights_compress
-        torch.cuda.empty_cache()
-        
-        past_key_value.update(key_states_compress, value_states_compress, self.layer_idx,cache_kwargs=None)
-    
     def _update_kv_first_prefill_batches(self,past_key_value, key_states, query_states, value_states, q_len):
         token_prompt_size = self.token_prompt_size
         
@@ -462,8 +309,229 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
         
         past_key_value.update(key_states_compress, value_states_compress, self.layer_idx,cache_kwargs=None)
     
-              
-    def _update_kv_first_prefill_key_no_rope(self,past_key_value, key_states,before_rope_key_states,query_states, value_states, q_len):
+    def update_past_key_value(
+        self,
+        past_key_value,
+        key_states: tuple,
+        value_states: tuple,
+        layer_idx: int,
+        mode: int,
+    ):  
+        # if layer_idx == 0: _seen_tokens没用到
+        #   self._seen_tokens += key_states.shape[-2]
+        
+        if len(past_key_value.key_cache) <= layer_idx:
+            past_key_value.key_cache.append(key_states)
+            past_key_value.value_cache.append(value_states)
+        else:
+            if mode == 1:
+                past_key_value.key_cache[layer_idx] = torch.cat([past_key_value.key_cache[layer_idx], key_states[:,self.head_pattern,:,:]], dim=-2)
+                past_key_value.value_cache[layer_idx] = torch.cat([past_key_value.value_cache[layer_idx], value_states[:,self.head_pattern,:,:]], dim=-2)
+            else:
+                groups_num = len(past_key_value.key_cache[layer_idx])
+                for i in range(groups_num):
+                    past_key_value.key_cache[layer_idx][i] = torch.cat([past_key_value.key_cache[layer_idx][i], key_states[:,self.head_pattern[i],:,:]], dim=-2)
+                    past_key_value.value_cache[layer_idx][i] = torch.cat([past_key_value.value_cache[layer_idx][i], value_states[:,self.head_pattern[i],:,:]], dim=-2)
+        return past_key_value.key_cache[layer_idx], past_key_value.value_cache[layer_idx]
+    
+    def _update_kv_first_prefill_uncomp(self,past_key_value, key_states, query_states, value_states, q_len):
+        token_prompt_size = self.token_prompt_size
+        query_len = self.query_len
+        
+        num_hidden_layers = self.config.num_hidden_layers
+        num_attention_heads = query_states.shape[1]
+        
+        attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(key_states.size(-1))
+        mask = torch.full((self.window_size, self.window_size), torch.finfo(attn_weights.dtype).min, device=attn_weights.device)
+        mask_cond = torch.arange(mask.size(-1), device=attn_weights.device)
+        mask.masked_fill_(mask_cond < (mask_cond + 1).view(mask.size(-1), 1), 0)
+        mask = mask.to(attn_weights.device)
+        attention_mask = mask[None, None, :, :]
+        attn_weights[:, :, -self.window_size:, -self.window_size:] += attention_mask
+
+        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+        
+        bsz, num_heads, q_len, head_dim = query_states.shape
+        max_capacity_prompt = min(self.capacity, q_len)
+        
+        if self.window_size > q_len:
+            self.window_size = q_len
+        if self.window_size > max_capacity_prompt//2:
+            self.window_size = max_capacity_prompt//2
+            self.recent_indices_generate = [torch.arange(-self.window_size,0,device='cuda').view(1, 1, -1).expand(self.bsz,num_attention_heads//2,-1),torch.arange(-self.window_size,0,device='cuda').view(1, 1, -1).expand(self.bsz,self.num_hidden_layers//2,-1)]
+        
+        # max_capacity_prompt = (max_capacity_prompt-query_len) * 3 // 2 
+        # max_capacity_prompts = [max_capacity_prompt//2+query_len,max_capacity_prompt+query_len]
+        new_max_capacity_prompt = max_capacity_prompt - self.query_len
+        max_capacity_prompt_1 = new_max_capacity_prompt-new_max_capacity_prompt//3
+        max_capacity_prompt_2 = new_max_capacity_prompt*2-max_capacity_prompt_1
+        max_capacity_prompts = [max_capacity_prompt_2,max_capacity_prompt_1]
+        
+        if q_len <= max_capacity_prompt:
+            max_capacity_prompts = [q_len,q_len]
+        max_capacity_prompts = [min(prompt, q_len-self.query_len) for prompt in max_capacity_prompts]
+        if self.layer_idx == num_hidden_layers-1:
+            # print("query_len",token_prompt_size)
+            # print("self.capacity",self.capacity)
+            # print("max_capacity_prompt",max_capacity_prompt)
+            print("max_capacity_prompts",max_capacity_prompts)
+        attn_weights = attn_weights
+        attn_weights_sum = attn_weights[:, :, -self.window_size:, :-self.query_len].sum(dim = -2)
+        if self.pooling == 'avgpool':
+            attn_cache = F.avg_pool1d(attn_weights_sum, kernel_size = self.kernel_size, padding=self.kernel_size//2, stride=1)
+        elif self.pooling == 'maxpool':
+            attn_cache = F.max_pool1d(attn_weights_sum, kernel_size = self.kernel_size, padding=self.kernel_size//2, stride=1)
+        else:
+            raise ValueError('Pooling method not supported')
+
+        top_k = max_capacity_prompts[1]
+        indices = attn_cache.topk(top_k, dim=-1).indices
+        indices1 = indices.sort(dim=-1).values
+        for i in range(len(self.recent_indices_generate)):
+            self.recent_indices_generate[i] = torch.arange(-self.query_len,0,device='cuda').view(1, 1, -1).expand(self.bsz,num_attention_heads//2,-1).to(indices1.device)
+            # self.recent_indices_generate[i] = self.recent_indices_generate[i]
+        self.head_indices1 = self.head_indices1.to(indices1.device)
+        recent_indices = self.recent_indices_generate[0]+q_len
+        num_heads = num_attention_heads // 2
+        indices_1 = torch.cat([indices1[:,self.head_indices1[-num_heads:],:],recent_indices],dim=-1)
+        indices_expanded  = indices_1.unsqueeze(-1).expand(-1, -1, -1, head_dim)
+        revise_key_states=key_states[:,self.head_indices1[-num_heads:],:,:].gather(dim = 2, index = indices_expanded)
+        revise_value_states=value_states[:,self.head_indices1[-num_heads:],:,:].gather(dim = 2, index = indices_expanded)
+        
+        max_capacity_prompt_2 = max_capacity_prompts[0]
+        top_k2 = max_capacity_prompt_2
+        indices = attn_cache.topk(top_k2, dim=-1).indices
+        indices_2 = indices.sort(dim=-1).values
+        indices_2 = torch.cat([indices_2[:,self.head_indices1[:num_heads],:],recent_indices],dim=-1)
+        indices_expanded_2  = indices_2.unsqueeze(-1).expand(-1, -1, -1, head_dim)
+        revise_value_states_2 = value_states[:,self.head_indices1[:num_heads],:,:].gather(dim=2,index=indices_expanded_2)
+        revise_key_states_2 = key_states[:,self.head_indices1[:num_heads],:,:].gather(dim=2, index=indices_expanded_2)
+        key1 = revise_key_states
+        key2 = revise_key_states_2
+        value1 = revise_value_states
+        value2 = revise_value_states_2
+        revise_key_states = [key1, key2]
+        revise_value_states = [value1, value2]
+        self.head_pattern = [self.head_indices1[-num_heads:], self.head_indices1[:num_heads]]
+
+        del key_states, value_states,attn_weights_sum
+        torch.cuda.empty_cache()
+        self.update_past_key_value(past_key_value, revise_key_states, revise_value_states, self.layer_idx, mode=1)
+         
+    def _update_kv_first_prefill_batches_h2o(self,past_key_value, key_states, query_states, value_states, q_len):
+        attn_weights = torch.matmul(query_states, key_states.transpose(2, 3)) / math.sqrt(key_states.size(-1))
+        mask = torch.full((self.window_size, self.window_size), torch.finfo(attn_weights.dtype).min, device=attn_weights.device)
+        mask_cond = torch.arange(mask.size(-1), device=attn_weights.device)
+        mask.masked_fill_(mask_cond < (mask_cond + 1).view(mask.size(-1), 1), 0)
+        mask = mask.to(attn_weights.device)
+        attention_mask = mask[None, None, :, :]
+        attn_weights[:, :, -self.window_size:, -self.window_size:] += attention_mask
+
+        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+        attn_weights_sum = attn_weights[:, :, :, : -self.window_size].sum(dim = -2)
+        
+        bsz, num_heads, q_len, head_dim = query_states.shape
+        capacity = min(self.capacity, q_len)
+        recent_size = self.recent_size = capacity*508//512
+        hh_size = self.hh_size = capacity*4//512
+        if hh_size==0:
+            hh_size = self.hh_size = 1
+            recent_size = self.recent_size = capacity - hh_size
+        if q_len <= recent_size+hh_size:
+            recent_size = self.recent_size = q_len - hh_size
+        self.cache_size = recent_size + hh_size
+        attn_weights_sum = attn_weights.sum(0).sum(1)
+        select_hh_scores = attn_weights_sum[:, :q_len - recent_size]
+        _, keep_topk = torch.topk(select_hh_scores, hh_size, dim=-1)
+        keep_topk = keep_topk.sort().values 
+        keep_recent = torch.arange(q_len - recent_size, q_len, device=keep_topk.device).repeat(keep_topk.shape[0], 1)
+        keep_idx = torch.cat([keep_topk, keep_recent], dim=-1)
+        mask = torch.zeros(attn_weights_sum.shape, dtype=torch.bool).to(attn_weights.device)
+        mask = mask.scatter(-1, keep_idx, 1)
+        key_states_compress = key_states.squeeze(0)[mask].view(bsz, num_heads, -1, head_dim)
+        value_states_compress = value_states.squeeze(0)[mask].view(bsz, num_heads, -1, head_dim)
+        del key_states, value_states,attn_weights_sum
+        torch.cuda.empty_cache()
+        
+        past_key_value.update(key_states_compress, value_states_compress, self.layer_idx,cache_kwargs=None)
+    
+    def _update_kv_first_prefill_batches_streamingllm(self,past_key_value, key_states, query_states, value_states, q_len):
+        bsz, num_heads, q_len, head_dim = query_states.shape
+        max_capacity_prompt = min(self.capacity, q_len)
+        self.window_size = max_capacity_prompt // 7
+        
+        indices = torch.tensor(range(max_capacity_prompt - self.window_size), dtype=torch.int64).to(key_states.device)
+        indices = indices.unsqueeze(0).unsqueeze(0).unsqueeze(-1).repeat(bsz, num_heads, 1, head_dim)
+
+        k_past_compress = key_states[:, :, :-self.window_size, :].gather(dim = 2, index = indices)
+        v_past_compress = value_states[:, :, :-self.window_size, :].gather(dim = 2, index = indices)
+        k_cur = key_states[:, :, -self.window_size:, :]
+        v_cur = value_states[:, :, -self.window_size:, :]
+        key_states_compress = torch.cat([k_past_compress, k_cur], dim = 2)
+        value_states_compress = torch.cat([v_past_compress, v_cur], dim = 2)
+    
+        del k_past_compress, k_cur, v_past_compress, v_cur, key_states, value_states
+        torch.cuda.empty_cache()
+        
+        past_key_value.update(key_states_compress, value_states_compress, self.layer_idx,cache_kwargs=None)
+    
+    def _update_kv_first_prefill_batches_pyramidkv(self,past_key_value, key_states, query_states, value_states, q_len):
+        bsz, num_heads, q_len, head_dim = query_states.shape
+        capacity = min(self.capacity, q_len)
+        self.beta = 20
+        my_max = int(capacity * 1.5)
+        min_num = capacity // self.beta
+        max_num = my_max - min_num
+        if max_num >= q_len:
+            max_num = q_len
+            min_num = my_max - max_num
+        steps = (max_num - min_num) // self.config.num_hidden_layers
+        max_capacity_prompt = min_num + (self.config.num_hidden_layers-self.layer_idx) * steps
+        if q_len < max_capacity_prompt:
+            max_capacity_prompt = q_len
+        if max_capacity_prompt < self.window_size:
+            max_capacity_prompt = self.window_size
+        self.cache_size = max_capacity_prompt
+        attn_weights = torch.matmul(query_states[..., -self.window_size:, :], key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
+        # print("attn_weights.shape",attn_weights.shape)
+        mask = torch.full((self.window_size, self.window_size), torch.finfo(attn_weights.dtype).min, device=attn_weights.device)
+        mask_cond = torch.arange(mask.size(-1), device=attn_weights.device)
+        mask.masked_fill_(mask_cond < (mask_cond + 1).view(mask.size(-1), 1), 0)
+        mask = mask.to(attn_weights.device)
+        attention_mask = mask[None, None, :, :]
+
+        attn_weights[:, :, -self.window_size:, -self.window_size:] += attention_mask
+
+        attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
+        attn_weights_sum = attn_weights[:, :, -self.window_size:, :-self.window_size].sum(dim = -2)
+        if self.pooling == 'avgpool':
+            attn_cache = F.avg_pool1d(attn_weights_sum, kernel_size = self.kernel_size, padding=self.kernel_size//2, stride=1)
+        elif self.pooling == 'maxpool':
+            attn_cache = F.max_pool1d(attn_weights_sum, kernel_size = self.kernel_size, padding=self.kernel_size//2, stride=1)
+        else:
+            raise ValueError('Pooling method not supported')
+        top_k = max_capacity_prompt - self.window_size
+        indices = attn_cache.topk(top_k, dim=-1).indices
+        indices = indices.sort(dim=-1).values
+        indices_expanded  = indices.unsqueeze(-1).expand(-1, -1, -1, head_dim)
+        indices_attn = indices.unsqueeze(-2).expand(-1, -1, self.window_size, -1)
+        attn_weights_compress = attn_weights[:, :, -self.window_size:, :-self.window_size].gather(dim = -1, index = indices_attn)
+        k_past_compress = key_states[:, :, :-self.window_size, :].gather(dim = 2, index = indices_expanded)
+        v_past_compress = value_states[:, :, :-self.window_size, :].gather(dim = 2, index = indices_expanded)
+        k_cur = key_states[:, :, -self.window_size:, :]
+        v_cur = value_states[:, :, -self.window_size:, :]
+        key_states_compress = torch.cat([k_past_compress, k_cur], dim = 2)
+        value_states_compress = torch.cat([v_past_compress, v_cur], dim = 2)
+       
+        del k_past_compress, k_cur, v_past_compress, v_cur, key_states, value_states, attn_weights_compress
+        torch.cuda.empty_cache()
+        
+        past_key_value.update(key_states_compress, value_states_compress, self.layer_idx,cache_kwargs=None)
+    
+    def _update_kv_first_prefill_batches_snapkv(self,past_key_value, key_states, query_states, value_states, q_len):
+        bsz, num_heads, q_len, head_dim = query_states.shape
+        capacity = min(self.capacity, q_len)
+        
         attn_weights = torch.matmul(query_states[..., -self.window_size:, :], key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
         mask = torch.full((self.window_size, self.window_size), torch.finfo(attn_weights.dtype).min, device=attn_weights.device)
         mask_cond = torch.arange(mask.size(-1), device=attn_weights.device)
@@ -474,45 +542,36 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
         attn_weights[:, :, -self.window_size:, -self.window_size:] += attention_mask
 
         attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
-        attn_weights_sum = attn_weights[:, :, -self.window_size:, : -self.query_len].sum(dim = -2)
-        # print("attn_weights_sum.shape:{}".format(attn_weights_sum.shape))
+        attn_weights_sum = attn_weights[:, :, -self.window_size:, :-self.window_size].sum(dim = -2)
         if self.pooling == 'avgpool':
             attn_cache = F.avg_pool1d(attn_weights_sum, kernel_size = self.kernel_size, padding=self.kernel_size//2, stride=1)
         elif self.pooling == 'maxpool':
             attn_cache = F.max_pool1d(attn_weights_sum, kernel_size = self.kernel_size, padding=self.kernel_size//2, stride=1)
         else:
             raise ValueError('Pooling method not supported')
-        
-        #print("self.capacity0:{}".format(self.capacity))
-        #assert 1==0
-        capacity = min(self.capacity, q_len)
-        # logger.info("capacity:{}".format(capacity))
-        top_k = capacity-self.query_len
+        top_k = capacity - self.window_size
         indices = attn_cache.topk(top_k, dim=-1).indices
         indices = indices.sort(dim=-1).values
-        indices_expanded  = indices.unsqueeze(-1).expand(-1, -1, -1, self.head_dim)  
+        indices_expanded  = indices.unsqueeze(-1).expand(-1, -1, -1, head_dim)
         indices_attn = indices.unsqueeze(-2).expand(-1, -1, self.window_size, -1)
-        attn_weights_compress = attn_weights[:, :, -self.window_size:, :-self.query_len].gather(dim = -1, index = indices_attn)
-        k_past_compress = before_rope_key_states[:, :, :-self.query_len, :].gather(dim = 2, index = indices_expanded)
-        v_past_compress = value_states[:, :, :-self.query_len, :].gather(dim = 2, index = indices_expanded)
-        k_cur = before_rope_key_states[:, :, -self.query_len:, :]
-        v_cur = value_states[:, :, -self.query_len:, :]
-
-        key_states_compress = torch.cat([k_past_compress, k_cur], dim = 2).contiguous()
-        value_states_compress = torch.cat([v_past_compress, v_cur], dim = 2).contiguous()
-
+        attn_weights_compress = attn_weights[:, :, -self.window_size:, :-self.window_size].gather(dim = -1, index = indices_attn)
+        k_past_compress = key_states[:, :, :-self.window_size, :].gather(dim = 2, index = indices_expanded)
+        v_past_compress = value_states[:, :, :-self.window_size, :].gather(dim = 2, index = indices_expanded)
+        k_cur = key_states[:, :, -self.window_size:, :]
+        v_cur = value_states[:, :, -self.window_size:, :]
+        key_states_compress = torch.cat([k_past_compress, k_cur], dim = 2)
+        value_states_compress = torch.cat([v_past_compress, v_cur], dim = 2)
+       
         del k_past_compress, k_cur, v_past_compress, v_cur, key_states, value_states, attn_weights_compress
         torch.cuda.empty_cache()
         
         past_key_value.update(key_states_compress, value_states_compress, self.layer_idx,cache_kwargs=None)
         
     def _update_kv_input(self, attn_weights, kv_seq_len):
-        # 更新capacity的长度为 拼接后的+input
         self.new_capacity = attn_weights.shape[-1]
-        # 重新确定window_size
         self.window_size = min(self.window_size,kv_seq_len)
         self.attn_weights = attn_weights[:,:,-self.window_size:,:]
-        
+    
     def _update_kv_generate(self, attn_weights, past_key_value,key_states,value_states,layer_idx):
         _,_,_,head_dim = key_states.shape
         attn_weights_dynamic = self.attn_weights
@@ -587,7 +646,6 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
     def eviction_tokens(self,key_states, value_states, attn_weights,layer_idx,threshold, recent_tokens,calibration_stage):
         parts = calibration_stage.split('_')
         last_two_numbers = list(map(int, parts[-2:]))
-        # print("last_two_numbers:{}".format(last_two_numbers))
         if last_two_numbers[0] <= layer_idx <= last_two_numbers[1]:
             attn_sum = attn_weights[:,:,-recent_tokens:,:].sum(0).sum(0).sum(0) / (attn_weights.shape[1]*recent_tokens)
             if torch.sum(attn_weights[:,:,-recent_tokens:,:]) != 32*recent_tokens:
@@ -610,6 +668,7 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
     def eviction_tokens_head(self,key_states, value_states, attn_weights,layer_idx,threshold, recent_tokens,calibration_stage,pattern):
         parts = calibration_stage.split('_')
         last_two_numbers = list(map(int, parts[-2:]))
+        # print("last_two_numbers",last_two_numbers)
         if last_two_numbers[0] <= layer_idx <= last_two_numbers[1]:
             if recent_tokens == 0:
                 recent_tokens = attn_weights.shape[-2]
@@ -618,27 +677,26 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
             for i in range(attn_sum.shape[0]):
                 indices = torch.nonzero(torch.where( attn_sum[i] > threshold, 1, 0)).squeeze(-1)
                 # 小于100的部分进行驱逐
-                if pattern == "recent":  # 驱逐recent,保留sink
-                    filtered_indices = indices[indices > attn_sum.shape[1]-200]
-                elif pattern == "sink": # 驱逐sink,保留recent
-                    filtered_indices = indices[indices < 200]
-                elif pattern =="middle" : # 驱逐middel
-                    indices_temp = indices[indices < attn_sum.shape[1]-200] 
-                    filtered_indices = indices_temp[ indices_temp > 200]
-                elif pattern == "all": # 全部驱逐
+                if pattern == "recent":  # evict recent
+                    filtered_indices = indices[indices > attn_sum.shape[1]-100]
+                elif pattern == "sink": # evict sink
+                    filtered_indices = indices[indices < 100]
+                elif pattern =="middle" : # evict middel
+                    indices_temp = indices[indices < attn_sum.shape[1]-100] 
+                    filtered_indices = indices_temp[ indices_temp > 100]
+                elif pattern == "all": # evict all
                     filtered_indices = indices
-                elif pattern == "recent_sink":
-                    indices_recent = indices[indices > attn_sum.shape[1]-200] 
-                    indices_sink = indices[ indices < 200]
+                elif pattern == "recent_sink": # evict recent and sink
+                    indices_recent = indices[indices > attn_sum.shape[1]-100] 
+                    indices_sink = indices[ indices < 100]
                     filtered_indices = torch.cat([indices_recent,indices_sink],dim=-1)
                 all_indices.append(filtered_indices)
             len_indices = [indices.shape[0] for indices in all_indices]
             max_len = max(len_indices)
             len_supplement_indices = [max_len - len_index for len_index in len_indices]
-            # 给每个head补充的部分
+            
             for i in range(attn_sum.shape[0]):
                 attn_now = attn_sum[i] 
-                # N长度的token
                 supplement_indices = attn_now.topk(len_supplement_indices[i], dim=-1,largest=False ).indices
                 all_indices[i] = torch.cat([all_indices[i],supplement_indices],dim=-1)
             all_indices = torch.stack(all_indices)
@@ -654,11 +712,9 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
             new_value_states = value_states
         return new_key_states, new_value_states
     
-    
     def eviction_tokens_first_prefill_head(self,key_states, value_states, attn_weights,layer_idx,threshold, recent_tokens,calibration_stage,pattern):
         token_prompt_size = self.token_prompt_size
         query_len = self.query_len
-        # 不关注query和开始符号部分（保留下来）
         parts = calibration_stage.split('_')
         last_two_numbers = list(map(int, parts[-2:]))
         if last_two_numbers[0] <= layer_idx <= last_two_numbers[1]:
@@ -669,27 +725,24 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
             for i in range(attn_sum.shape[0]):
                 indices = torch.nonzero(torch.where( attn_sum[i] > threshold, 1, 0)).squeeze(-1)
                 indices += token_prompt_size
-                # 小于100的部分进行驱逐
-                if pattern == "recent":  # 驱逐recent,保留sink
-                    filtered_indices = indices[indices > attn_sum.shape[1]-200]
-                elif pattern == "sink": # 驱逐sink,保留recent
-                    filtered_indices = indices[indices < 200]
-                elif pattern =="middle" : # 驱逐middel
-                    indices_temp = indices[indices < attn_sum.shape[1]-200] 
-                    filtered_indices = indices_temp[ indices_temp > 200]
-                elif pattern == "all": # 全部驱逐
+                if pattern == "recent":  # evict recent
+                    filtered_indices = indices[indices > attn_sum.shape[1]-100]
+                elif pattern == "sink": # evict sink
+                    filtered_indices = indices[indices < 100]
+                elif pattern =="middle" : # evict middle
+                    indices_temp = indices[indices < attn_sum.shape[1]-100] 
+                    filtered_indices = indices_temp[ indices_temp > 100]
+                elif pattern == "all": #  evict all
                     filtered_indices = indices
                 all_indices.append(filtered_indices)
             len_indices = [indices.shape[0] for indices in all_indices]
             max_len = max(len_indices)
-            
             self.eviction_len = max_len
             
             len_supplement_indices = [max_len - len_index for len_index in len_indices]
-            # 给每个head补充的部分
+            
             for i in range(attn_sum.shape[0]):
                 attn_now = attn_sum[i] 
-                # N长度的token
                 supplement_indices = attn_now.topk(len_supplement_indices[i], dim=-1,largest=False ).indices
                 supplement_indices += token_prompt_size
                 all_indices[i] = torch.cat([all_indices[i],supplement_indices],dim=-1)
@@ -705,7 +758,6 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
             new_key_states = key_states
             new_value_states = value_states
         return new_key_states, new_value_states
-    
     
     def forward(
         self,
@@ -724,24 +776,50 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
                 "make sure to use `sdpa` in the mean time, and open an issue at https://github.com/huggingface/transformers"
             )
         raw_len_past_key_value = len(past_key_value) 
-        # print("raw_len_past_key_value:{}".format(raw_len_past_key_value))
+        self.revise = False
+        if "uncomp_stage" in self.calibration_stage and raw_len_past_key_value!=self.config.num_hidden_layers:
+            manager = self.manager
+            num_hidden_layers = self.config.num_hidden_layers
+            if self.layer_idx != 0 :
+                self.revise = True
+                if "long" in self.calibration_stage:
+                    min_len = 4000
+                else:
+                    min_len = 1000
+                if "8192" in self.calibration_stage:
+                    max_len = 8192-100
+                else:
+                    max_len = 4096-100            
+                steps = (max_len-min_len)//(num_hidden_layers-1)
+                keep_seq_len = min_len+steps*(num_hidden_layers-1-self.layer_idx)
+                attn_sum = manager.last_attn
+                
+                if keep_seq_len > hidden_states.shape[-2]:
+                    keep_seq_len = hidden_states.shape[-2]
+                indices = attn_sum.topk(keep_seq_len,dim=-1).indices
+                indices = indices.sort(dim=-1).values
+                self.select_indices = indices
+                cos_revise = manager.last_position_embeddings[0].gather(-2,indices.unsqueeze(0).unsqueeze(-1).expand(-1,-1,position_embeddings[0].shape[-1]))
+                sin_revise = manager.last_position_embeddings[1].gather(-2,indices.unsqueeze(0).unsqueeze(-1).expand(-1,-1,position_embeddings[1].shape[-1]))
+                position_embeddings = (cos_revise,sin_revise)
+                hidden_states = hidden_states.gather(-2,indices.unsqueeze(-1).unsqueeze(0).expand(hidden_states.size(0),-1,hidden_states.size(-1)))
+            manager.last_position_embeddings = position_embeddings
+            
         bsz, q_len, _ = hidden_states.size()
         output_attentions = False
-        # 第一次prefill
+        # first prefill
         if raw_len_past_key_value!=self.config.num_hidden_layers:
-            stage = 0 #"first_prefill"
-        # 第二次prefill
+            stage = 0 
+        # second prefill
         elif raw_len_past_key_value==self.config.num_hidden_layers and q_len != 1:
-            stage = 1 #"second_prefill"
+            stage = 1 
         # generate
         elif raw_len_past_key_value==self.config.num_hidden_layers and q_len == 1:
-            stage = 2 #"generate"
+            stage = 2 
         query_states = self.q_proj(hidden_states)
         key_states = self.k_proj(hidden_states)
         value_states = self.v_proj(hidden_states)
-        # Flash attention requires the input to have the shape
-        # batch_size x seq_length x head_dim x hidden_dim
-        # therefore we just need to keep the original shape
+        
         query_states = query_states.view(bsz, q_len, self.num_heads, self.head_dim).transpose(1, 2)
         before_rope_key_states = key_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
         value_states = value_states.view(bsz, q_len, self.num_key_value_heads, self.head_dim).transpose(1, 2)
@@ -757,99 +835,73 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
             cos, sin = self.rotary_emb(value_states, position_ids)
         else:
             cos, sin = position_embeddings
-        if self.key_no_rope and  \
-            raw_len_past_key_value==self.config.num_hidden_layers and q_len != 1: # 第二次prefill
-            # 第一次更新，加载所有的key_states为添加位置编码前的key_states
-            cache_kwargs = {"sin": sin, "cos": cos, "cache_position": cache_position}
-            key_states, value_states = past_key_value.update(before_rope_key_states, value_states, self.layer_idx, cache_kwargs)
-            query_states, key_states = apply_rotary_pos_emb_new(query_states, key_states, cos[:,-q_len:,:], sin[:,-q_len:,:],cos,sin)
-        else:
-            query_states, key_states = apply_rotary_pos_emb(query_states, before_rope_key_states, cos, sin)
+        
+        query_states, key_states = apply_rotary_pos_emb(query_states, before_rope_key_states, cos, sin)
         key_states = repeat_kv(key_states, self.num_key_value_groups)
         value_states = repeat_kv(value_states, self.num_key_value_groups)
           
         if past_key_value is not None:
             # sin and cos are specific to RoPE models; cache_position needed for the static cache
             cache_kwargs = {"sin": sin, "cos": cos, "cache_position": cache_position}
-            if raw_len_past_key_value == self.config.num_hidden_layers: # 第二次prefill和generate
-                if self.key_no_rope and q_len != 1: # 第二次prefill
-                    # 更新为添加了位置编码信息的key_states  
-                    past_key_value.key_cache[self.layer_idx] = key_states
+            if raw_len_past_key_value == self.config.num_hidden_layers: # second prefill & generate
+                if isinstance(past_key_value[0][0], list):
+                    key_states, value_states = self.update_past_key_value(past_key_value,key_states, value_states, self.layer_idx,0)
                 else:
                     key_states, value_states = past_key_value.update(key_states, value_states, self.layer_idx, cache_kwargs)
+            else:
+                if self.calibration_stage == "search":
+                    self.get_head_type(key_states,query_states)
             raw_query_states = query_states
             raw_key_states = key_states
             raw_value_states = value_states
 
-        # 驱逐模式
+        # calibration
         threshold = THRES
-        beta= BETA
-        # recent_tokens = self.window_size
         recent_tokens = RECENT_TOKENS
         if recent_tokens == 0:
             self.window_size = q_len
-        # attn_avg
-        if self.in_eager_mode:
-            # print("haha")
-            attn_weights = torch.matmul(query_states, raw_key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
-            
-            # 对注意力分数进行修正
-            if attention_mask is not None:  # no matter the length, we just slice it
-                causal_mask = attention_mask[:, :, :, : raw_key_states.shape[-2]]
-                attn_weights = attn_weights + causal_mask
-            # print("attention_mask[:,:,-50:,-50:]",attention_mask[:,:,-50:,-50:])
-            attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
-            
-            
-            if self.calibration_mode == 1:
-                #第一次prefill驱逐
-                if self.calibration_stage == "prefill_2" and stage==1: 
-                    raw_key_states,raw_value_states = self.eviction_tokens(raw_key_states,raw_value_states, 
-                                                                           attn_weights, self.layer_idx,
-                                                                           threshold, recent_tokens)
-                    past_key_value.key_cache[self.layer_idx] = raw_key_states
-                    past_key_value.value_cache[self.layer_idx] = raw_value_states
-                elif self.calibration_stage == "prefill_1" and stage == 0:
-                    raw_key_states,raw_value_states = self.eviction_tokens_first_prefill(raw_key_states,raw_value_states, 
-                                                                           attn_weights, self.layer_idx,
-                                                                           threshold, recent_tokens)
-            elif self.calibration_mode == 2 or self.calibration_mode==22: #校准模式
-                # 第一次preifll
-                if self.attn_avg and stage == 1:
-                    if stage == 0 or stage == 1:
-                        ##############BEGIN:MODIFICATION##############
-                        if 3 in range(2, 31):
-                            attn_weights = self.atten_process_eval(attn_weights, index=2)
-                        ##############END:MODIFICATION##############
-                    elif stage == 2:
-                        if 3 in range(2, 31):
-                            attn_weights = self.atten_process_eval_generate(attn_weights, index=2)
-                else:
-                    if self.calibration_stage == "prefill_2" and stage == 1:
-                        attn_weights = self.atten_process_eval_prefill(attn_weights,self.layer_idx,threshold,beta)
-                    elif self.calibration_stage == "prefill_1" and stage == 0:
-                        attn_weights = self.atten_process_eval_prefill(attn_weights,self.layer_idx,threshold,beta)
-                    elif self.calibration_stage == "generate" and stage == 2:
-                        attn_weights = self.atten_process_eval_generate_new(attn_weights,self.layer_idx,threshold,beta)
-                    elif self.calibration_stage == "prefill_12" and (stage == 0 or stage ==1):
-                        attn_weights = self.atten_process_eval_prefill(attn_weights,self.layer_idx,threshold,beta)
-                    elif self.calibration_stage == "prefill_123" and (stage == 0 or stage ==1 or stage == 2):
-                        if stage == 2:
-                            attn_weights = self.atten_process_eval_generate_new(attn_weights,self.layer_idx,threshold,beta)
-                        else:
-                            attn_weights = self.atten_process_eval_prefill(attn_weights,self.layer_idx,threshold,beta)
-                    
-                attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)
-                attn_output = torch.matmul(attn_weights, raw_value_states)
-                attn_output = attn_output.transpose(1, 2)
-            else:
-                attn_weights = nn.functional.dropout(attn_weights, p=self.attention_dropout, training=self.training)
-                attn_output = torch.matmul(attn_weights, raw_value_states)
-                attn_output = attn_output.transpose(1, 2)
-                pass
+        # TODO: These transpose are quite inefficient but Flash Attention requires the layout [batch_size, sequence_length, num_heads, head_dim]. We would need to refactor the KV cache
+        # to be able to avoid many of these transpose/reshape/view.
+        
+        if raw_len_past_key_value == self.config.num_hidden_layers and isinstance(past_key_value[0][0], list):
+            attn_outputs = []
+            for i, (key_state,value_state) in enumerate(zip(key_states,value_states)):
+                query_state = query_states[:,self.head_pattern[i],:,:].transpose(1, 2)
+                key_state = key_state.transpose(1, 2)
+                value_state = value_state.transpose(1, 2)
+
+                dropout_rate = self.attention_dropout if self.training else 0.0
+                
+                input_dtype = query_state.dtype
+                if input_dtype == torch.float32:
+                    if torch.is_autocast_enabled():
+                        target_dtype = torch.get_autocast_gpu_dtype()
+                    # Handle the case where the model is quantized
+                    elif hasattr(self.config, "_pre_quantization_dtype"):
+                        target_dtype = self.config._pre_quantization_dtype
+                    else:
+                        target_dtype = self.q_proj.weight.dtype
+
+                    query_state = query_state.to(target_dtype)
+                    key_state = key_state.to(target_dtype)
+                    value_state = value_state.to(target_dtype)
+                attn_output = _flash_attention_forward(
+                    query_state,
+                    key_state,
+                    value_state,
+                    attention_mask,
+                    q_len,
+                    dropout=dropout_rate,
+                    sliding_window=getattr(self, "sliding_window", None),
+                    use_top_left_mask=self._flash_attn_uses_top_left_mask,
+                    is_causal=self.is_causal,
+                )
+                attn_outputs.append(attn_output)    
+            attn_output = torch.cat(attn_outputs,dim=2)
+            for i in range(len(key_states)):
+                if len(self.head_pattern[i]) != 0:
+                    attn_output[:,:,self.head_pattern[i],:] = attn_outputs[i]
         else:
-            # TODO: These transpose are quite inefficient but Flash Attention requires the layout [batch_size, sequence_length, num_heads, head_dim]. We would need to refactor the KV cache
-            # to be able to avoid many of these transpose/reshape/view.
             if self.calibration_mode != 0:
                 attn_weights = torch.matmul(query_states[:,:,-recent_tokens:,:], raw_key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
                 if attention_mask is not None:  # no matter the length, we just slice it
@@ -857,19 +909,19 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
                     attn_weights = attn_weights + causal_mask
                 attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(query_states.dtype)
             
-            if self.calibration_mode == 1 or self.calibration_mode == 11 or self.calibration_mode == 111:
-                #第二次prefill驱逐
+            if self.calibration_mode == 1:
+                # second prefill calibration
                 if "prefill_2" in self.calibration_stage and stage==1: 
                     if "head" in self.calibration_stage:
-                        if "head1" in self.calibration_stage:
+                        if "head_recent" in self.calibration_stage:
                             pattern = "recent"
-                        elif "head2" in self.calibration_stage:
+                        elif "head_sink" in self.calibration_stage:
                             pattern = "sink"
-                        elif "head3" in self.calibration_stage:
+                        elif "head_middle" in self.calibration_stage:
                             pattern = "middle"
-                        elif "head4" in self.calibration_stage:
+                        elif "head_all" in self.calibration_stage:
                             pattern = "all"
-                        elif "head5" in self.calibration_stage:
+                        elif "head_recent_sink" in self.calibration_stage:
                             pattern = "recent_sink"
                         raw_key_states,raw_value_states = self.eviction_tokens_head(raw_key_states,raw_value_states, 
                                                                            attn_weights, self.layer_idx,
@@ -879,49 +931,38 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
                         raw_key_states,raw_value_states = self.eviction_tokens(raw_key_states,raw_value_states, 
                                                                            attn_weights, self.layer_idx,
                                                                            threshold, recent_tokens, self.calibration_stage)                
-                    # 更新past_key_value
-                    # if "prefill_2_eviction" in self.calibration_stage:
-                    # 保留校正后的key value（与attn一致）
                     past_key_value.key_cache[self.layer_idx] = raw_key_states
                     past_key_value.value_cache[self.layer_idx] = raw_value_states
-                    # 校准，而不是驱逐token
+                    # calibration
                     if "prefill_2_calibration" in self.calibration_stage:
                         key_states = raw_key_states
                         value_states = raw_value_states
-                        # print("I am in calibration")
 
                 elif "prefill_1" in self.calibration_stage  and stage == 0:
                     if "head" in self.calibration_stage:
-                        if "head1" in self.calibration_stage:
+                        if "head_recent" in self.calibration_stage:
                             pattern = "recent"
-                        elif "head2" in self.calibration_stage:
+                        elif "head_sink" in self.calibration_stage:
                             pattern = "sink"
-                        elif "head3" in self.calibration_stage:
+                        elif "head_middle" in self.calibration_stage:
                             pattern = "middle"
-                        elif "head4" in self.calibration_stage:
+                        elif "head_all" in self.calibration_stage:
                             pattern = "all"
                             
                         raw_key_states,raw_value_states = self.eviction_tokens_first_prefill_head(raw_key_states,raw_value_states, 
                                                                            attn_weights, self.layer_idx,
                                                                            threshold, recent_tokens, self.calibration_stage,
                                                                            pattern = pattern)
-                    # 只做矫正，不驱逐(仍然会影响第二次prefill和generate)
+                    
                     if "prefill_1_calibration" in self.calibration_stage:
                         key_states = raw_key_states
                         value_states = raw_value_states
-                
-                
+            
             query_states = query_states.transpose(1, 2)
             key_states = key_states.transpose(1, 2)
             value_states = value_states.transpose(1, 2)
 
             dropout_rate = self.attention_dropout if self.training else 0.0
-
-            # In PEFT, usually we cast the layer norms in float32 for training stability reasons
-            # therefore the input hidden states gets silently casted in float32. Hence, we need
-            # cast them back in the correct dtype just to be sure everything works as expected.
-            # This might slowdown training & inference so it is recommended to not cast the LayerNorms
-            # in fp32. (LlamaRMSNorm handles it correctly)
 
             input_dtype = query_states.dtype
             if input_dtype == torch.float32:
@@ -955,94 +996,39 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
                 is_causal=self.is_causal,
             )
         
-        if self.draw_pic!= 0:
-            self.get_draw_attn = self.draw_attn(raw_query_states,raw_key_states)
-            import json
-            if self.draw_pic == 1:
-                names = "first_prefill/datas"
-            elif self.draw_pic == 2:
-                names = "second_prefill/datas"
-                names = "first_prefill_compression/datas"
-                names = "first_prefill_new/datas"
-            elif self.draw_pic == 3:
-                names = "generate/datas"
-            elif self.draw_pic == 4:
-                names = "eviction_all/datas"
-            elif self.draw_pic == 5:
-                names = "new/generate_after_kv_compression/datas"
-            #交换顺序
-            pattern = "0327/narrativeqa/"
-            # pattern = ""
-            output_path = "/home/avnet/xiongjing/sjh/parallel_window/draw_picture/"+ pattern + names + "/"
-            os.makedirs(output_path, exist_ok=True)
-            output_datapath = os.path.join(output_path,
-                                           f"layer_{self.layer_idx}.json"
-                                           )
-            # logger.info(f"output_datapath: {output_datapath}")
-            # logger.info(f"self.get_draw_attn.shape: {self.get_draw_attn.shape}")
-            # 第一次prefill
-            if self.draw_pic == 1 and raw_len_past_key_value!=self.config.num_hidden_layers:
-                
-                tensor_list = self.get_draw_attn.tolist()
-                with open(output_datapath, "w") as json_file:
-                    json.dump(tensor_list, json_file)
-                if self.layer_idx == self.config.num_hidden_layers - 1:
-                    logger.info(f"output_datapath: {output_datapath}")
-                    assert 1==0
-                pass
-            # 第二次prefill
-            elif self.draw_pic == 2 and raw_len_past_key_value==self.config.num_hidden_layers and q_len != 1:
-                tensor_list = self.get_draw_attn.tolist()
-                with open(output_datapath, "w") as json_file:
-                    json.dump(tensor_list, json_file)
-                if self.layer_idx == self.config.num_hidden_layers - 1:
-                    logger.info(f"output_datapath: {output_datapath}")
-                    assert 1==0
-                pass
-            # generate
-            elif ( self.draw_pic == 3 or self.draw_pic == 5 )and raw_len_past_key_value==self.config.num_hidden_layers and q_len == 1:
-                tensor_list = self.get_draw_attn.tolist()
-                with open(output_datapath, "w") as json_file:
-                    json.dump(tensor_list, json_file)
-                if self.layer_idx == self.config.num_hidden_layers - 1:
-                    logger.info(f"output_datapath: {output_datapath}")
-                    assert 1==0
-                # assert 1==0
-                pass
-            # 第二次prefill驱逐
-            elif self.draw_pic == 4 and raw_len_past_key_value==self.config.num_hidden_layers and q_len != 1:
-                tensor_list = self.get_draw_attn.tolist()
-                with open(output_datapath, "w") as json_file:
-                    json.dump(tensor_list, json_file)
-                if self.layer_idx == self.config.num_hidden_layers - 1:
-                    logger.info(f"output_datapath: {output_datapath}")
-                    assert 1==0
-                pass
             
         if past_key_value is not None: 
             # sin and cos are specific to RoPE models; cache_position needed for the static cache
             cache_kwargs = {"sin": sin, "cos": cos, "cache_position": cache_position}
             if raw_len_past_key_value!=self.config.num_hidden_layers: # 第一次prefill
-                if self.key_no_rope: # 保留不带位置编码信息的key
-                    self.recent_attn=self.get_attn(raw_query_states, raw_key_states)
-                    if self.kv_cache_eviction_prefill and not self.stage_eviction:
-                        self._update_kv_first_prefill_key_no_rope(past_key_value,raw_key_states, before_rope_key_states,raw_query_states,raw_value_states, q_len)
+                self.recent_attn=self.get_attn(raw_query_states, raw_key_states)
+                if self.kv_cache_eviction_prefill and not self.stage_eviction:
+                    # print(raw_len_past_key_value)
+                    new_q_len = raw_key_states.shape[-2]
+                    if "h2o" in self.calibration_stage:
+                        self._update_kv_first_prefill_batches_h2o(past_key_value,raw_key_states, raw_query_states,raw_value_states, new_q_len)
+                    elif "streamingllm" in self.calibration_stage:
+                        self._update_kv_first_prefill_batches_streamingllm(past_key_value,raw_key_states, raw_query_states,raw_value_states, new_q_len)
+                    elif "snapkv" in self.calibration_stage:
+                        self._update_kv_first_prefill_batches_snapkv(past_key_value,raw_key_states, raw_query_states,raw_value_states, new_q_len)
+                    elif "pyramidkv" in self.calibration_stage:
+                        self._update_kv_first_prefill_batches_pyramidkv(past_key_value,raw_key_states, raw_query_states,raw_value_states, new_q_len)
+                    elif "uncomp" in self.calibration_stage:
+                        self._update_kv_first_prefill_uncomp(past_key_value,raw_key_states, raw_query_states,raw_value_states, new_q_len)
                     else:
-                        past_key_value.update(before_rope_key_states, raw_value_states, self.layer_idx, cache_kwargs)
-                else:
-                    self.recent_attn=self.get_attn(raw_query_states, raw_key_states)
-                    if self.kv_cache_eviction_prefill and not self.stage_eviction:
-                        # print(raw_len_past_key_value)
-                        new_q_len = raw_key_states.shape[-2]
                         self._update_kv_first_prefill_batches(past_key_value,raw_key_states, raw_query_states,raw_value_states, new_q_len)
-                    else:
-                        past_key_value.update(raw_key_states, raw_value_states, self.layer_idx, cache_kwargs)
+                else:
+                    past_key_value.update(raw_key_states, raw_value_states, self.layer_idx, cache_kwargs)
             else:  # 第二次prefill和generate
                 if self.stage_eviction:
                     if kv_seq_len != 1: # 第二次prefill 且驱逐
                         # 更新self.window
                         self.window_size = min(self.window_size,kv_seq_len)
-                        self._update_kv_second_prefill(past_key_value,raw_key_states, raw_query_states,raw_value_states, past_key_value.key_cache[0].shape[2])
+                        
+                        if "h2o" in self.calibration_stage:
+                            self._update_kv_second_prefill_h2o(past_key_value,raw_key_states, raw_query_states,raw_value_states, past_key_value.key_cache[0].shape[2])
+                        else:
+                            self._update_kv_second_prefill(past_key_value,raw_key_states, raw_query_states,raw_value_states, past_key_value.key_cache[0].shape[2])
                     else:
                         if self.kv_cache_dynamic:
                             attn_weights = torch.matmul(raw_query_states, raw_key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
@@ -1066,16 +1052,23 @@ class LlamaFlashAttention2PCW(LlamaFlashAttention2):
                         else:
                             self._update_kv_generate(attn_weights,past_key_value,raw_key_states,raw_value_states,self.layer_idx)
         
+        if raw_len_past_key_value != self.config.num_hidden_layers and "uncomp_stage" in self.calibration_stage:
+            attn_weights = torch.matmul(raw_query_states[..., -self.window_size:, :], raw_key_states.transpose(2, 3)) / math.sqrt(self.head_dim)
+            mask = torch.full((self.window_size, self.window_size), torch.finfo(attn_weights.dtype).min, device=attn_weights.device)
+            mask_cond = torch.arange(mask.size(-1), device=attn_weights.device)
+            mask.masked_fill_(mask_cond < (mask_cond + 1).view(mask.size(-1), 1), 0)
+            mask = mask.to(attn_weights.device)
+            attention_mask = mask[None, None, :, :]
+            attn_weights[:, :, -self.window_size:, -self.window_size:] += attention_mask
+
+            attn_weights = nn.functional.softmax(attn_weights, dim=-1, dtype=torch.float32).to(raw_query_states.dtype)
+            manager.last_attn = attn_weights.sum(0).sum(0)[-8:].sum(0)
+        
         attn_output = attn_output.reshape(bsz, q_len, -1).contiguous()
         attn_output = self.o_proj(attn_output)
 
         if not output_attentions:
-            attn_weights = None
-
-        # print("attn_output.shape:{}".format(attn_output.shape))
-        # print("attn_weights.shape:{}".format(attn_weights.shape))
-        # print("past_key_value.shape:{}".format(past_key_value.shape))
-        
+            attn_weights = None        
         return attn_output, attn_weights, past_key_value
 
 class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
@@ -1085,16 +1078,15 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
     def __init__(self, config: LlamaConfig, 
                  capacity = 512, n_windows=1, kv_cache_eviction=False,
                  kv_cache_dynamic=False,stage_eviction=False,
-                 get_recent_attn = False,key_no_rope=False,
-                 draw_pic=0,attn_avg=False,in_eager_mode=False,
                  parallel_pattern=None,
                  calibration_mode=0,calibration_stage=None,
+                 head_datas=None,
                  ):
         super(LlamaForCausalLM, self).__init__(config)
         # super().__init__(config)
         self.capacity =capacity
+        self.manager = Manager()
         self.n_windows = n_windows
-        self.key_no_rope=key_no_rope
         self.parallel_pattern = parallel_pattern
         self.kv_cache_dynamic = kv_cache_dynamic
         # 确定config更改与否
@@ -1105,13 +1097,10 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
                                    kv_cache_eviction=kv_cache_eviction,
                                    kv_cache_dynamic=kv_cache_dynamic,
                                    stage_eviction=stage_eviction,
-                                   draw_pic=draw_pic,
                                    calibration_mode=calibration_mode,
                                    calibration_stage=calibration_stage,
-                                   in_eager_mode=in_eager_mode,
-                                   attn_avg=attn_avg,
-                                   get_recent_attn=get_recent_attn,
-                                   key_no_rope=key_no_rope,
+                                   manager=self.manager,
+                                   head_datas=head_datas,
                                    )
         self.vocab_size = config.vocab_size
         self.lm_head = nn.Linear(config.hidden_size, config.vocab_size, bias=False)
@@ -1187,17 +1176,11 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
         # logits = logits.float()
 
         loss = None
-        # 计算ppl
         if "ppl" in self.parallel_pattern and "default" not in self.parallel_pattern and labels is not None:
-            # print("loss is:{}".format(loss))
             ppl = torch.exp(loss)
             print("ppl is:{}".format(ppl))
             assert 1==0
-        else:
-            label = None
         if labels is not None:
-            # print("labels is not None")
-            # Shift so that tokens < n predict n
             shift_logits = logits[..., :-1, :].contiguous()
             shift_labels = labels[..., 1:].contiguous()
             # Flatten the tokens
@@ -1212,8 +1195,6 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
             output = (logits,) + outputs[1:]
             return (loss,) + output if loss is not None else output
 
-        
-        
         return CausalLMOutputWithPast(
             loss=loss,
             logits=logits,
@@ -1230,26 +1211,19 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
         max_window_size: Optional[int] = 0,
         sum_windows_size: Optional[int] = 0,
         interval:Optional[float] = 1.0,
-        interval_shift:Optional[int] = 0,
-        position_dict:Optional[Dict] = None,
         use_cache: Optional[bool] = None,
         **kwargs,
     ):  
-        # only last token for inputs_ids if past_key_values is defined in kwargs
-        # new_length = input_ids.shape[-1]
         raw_input_ids = input_ids
         if past_key_values:
             input_ids = input_ids[:, -1:]
         attention_mask = kwargs.get("attention_mask")
-        # 对于anchor类型，传入的是去掉了query部分长度的
-        # 
         
         position_ids = kwargs.get("position_ids", None)
         if attention_mask is not None and position_ids is None:
-            # create PCW's position_ids on the fly 修改的
             position_ids = generate_pcw_position_ids(attention_mask, max_window_size, past_key_values,
-                                                     sum_windows_size, windows_key_values,interval,interval_shift,
-                                                     self.key_no_rope,position_dict)
+                                                     sum_windows_size, windows_key_values,interval
+                                                     )
             if position_ids.shape[-1] != 1:
                 cache_position = torch.arange(sum_windows_size,sum_windows_size+raw_input_ids.shape[-1],device=position_ids.device)
             else:
@@ -1258,8 +1232,6 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
             cache_position = kwargs.get("cache_position")
             if past_key_values:
                 position_ids = torch.tensor(self.max_pos).unsqueeze(0).unsqueeze(0).to(cache_position.device)
-                # print("position_ids:{}".format(position_ids))
-                # print("cache_position:{}".format(cache_position))
                 self.max_pos = self.max_pos+1
             else:
                 self.max_pos = max_window_size
@@ -1272,9 +1244,7 @@ class LlamaForCausalLMPCW(LlamaForCausalLM, ABC):
             print("ok")
             past_key_values = windows_key_values
             past_key_values = DynamicCache.from_legacy_cache(past_key_values)
-            # print("past_key_values[0][0].shape:{}".format(past_key_values[0][0].shape))
-            # print("len(past_key_values):{}".format(len(past_key_values)))
-
+            
         return {
             "input_ids": input_ids,
             "past_key_values": past_key_values,
@@ -1291,14 +1261,10 @@ class LlamaModelPCW(LlamaModel, ABC):
     def __init__(self, config: LlamaConfig, 
               capacity = 512, n_windows=1, kv_cache_eviction=False,
                  kv_cache_dynamic=False,stage_eviction=False,
-                 get_recent_attn=False,key_no_rope=False,
-                 draw_pic=0,attn_avg=False,in_eager_mode=False,
                  calibration_mode=0,calibration_stage=None,
+                 head_datas=None,manager=None,
                  ):
         super(LlamaModel, self).__init__(config)
-        # super().__init__(config)
-        # print("init LlamaModelPCW")
-        # raw code
         self.padding_idx = config.pad_token_id
         self.vocab_size = config.vocab_size
         self.embed_tokens = nn.Embedding(config.vocab_size, config.hidden_size, self.padding_idx)
@@ -1306,58 +1272,97 @@ class LlamaModelPCW(LlamaModel, ABC):
             [LlamaDecoderLayerPCW(config, layer_idx, 
                                   capacity = capacity, n_windows=n_windows,
                                   kv_cache_eviction=kv_cache_eviction,
+                                  head_datas=head_datas,
                                     kv_cache_dynamic=kv_cache_dynamic,
                                     stage_eviction=stage_eviction,
-                                    draw_pic=draw_pic,
                                     calibration_mode=calibration_mode,
+                                    manager=manager,
                                     calibration_stage=calibration_stage,
-                                    in_eager_mode=in_eager_mode,
-                                    attn_avg=attn_avg,
-                                    get_recent_attn=get_recent_attn,
-                                    key_no_rope=key_no_rope,
                                   ) for layer_idx in range(config.num_hidden_layers)]
         )
         self.norm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
         self.rotary_emb = LlamaRotaryEmbedding(config=config)
         self.gradient_checkpointing = False
-        # # Initialize weights and apply final processing
         self.post_init()
         
 LLAMA_ATTENTION_CLASSES = {
     "eager": LlamaFlashAttention2PCW,
     "flash_attention_2": LlamaFlashAttention2PCW,
-    # "sdpa": LlamaSdpaAttentionPCW,
 }
 
 class LlamaDecoderLayerPCW(LlamaDecoderLayer):
     def __init__(self, config: LlamaConfig, layer_idx: Optional[int] = None,
                  capacity = 512, n_windows=1, kv_cache_eviction=False,
                  kv_cache_dynamic=False,stage_eviction=False,
-                 get_recent_attn=False,key_no_rope=False,
-                 draw_pic=0,attn_avg=False,in_eager_mode=False,
                  calibration_mode=0,calibration_stage=None,
+                 head_datas=None, manager=None,
                  ):
         super(LlamaDecoderLayer, self).__init__()
-        # print("init LlamaDecoderLayerPCW")
-        # overriding attention:
-        # print("config._attn_implementation:{}".format(config._attn_implementation))
-        
-        # raw code 
-        
+        self.config = config
+        self.manager = manager
         self.hidden_size = config.hidden_size
         self.self_attn = LLAMA_ATTENTION_CLASSES[config._attn_implementation](config=config, layer_idx=layer_idx,
                                            capacity = capacity, n_windows=n_windows, 
                                            kv_cache_eviction=kv_cache_eviction,
                                            kv_cache_dynamic=kv_cache_dynamic,
                                            stage_eviction=stage_eviction,
-                                           draw_pic=draw_pic,
-                                           get_recent_attn=get_recent_attn,
                                            calibration_mode=calibration_mode,
                                            calibration_stage=calibration_stage,
-                                           attn_avg=attn_avg,
-                                           in_eager_mode=in_eager_mode,
-                                           key_no_rope=key_no_rope,
+                                           manager=manager,
+                                           head_datas=head_datas,
                                            )
         self.mlp = LlamaMLP(config)
         self.input_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
         self.post_attention_layernorm = LlamaRMSNorm(config.hidden_size, eps=config.rms_norm_eps)
+    def forward(
+        self,
+        hidden_states: torch.Tensor,
+        attention_mask: Optional[torch.Tensor] = None,
+        position_ids: Optional[torch.LongTensor] = None,
+        past_key_value: Optional[Cache] = None,
+        output_attentions: Optional[bool] = False,
+        use_cache: Optional[bool] = False,
+        cache_position: Optional[torch.LongTensor] = None,
+        position_embeddings: Optional[Tuple[torch.Tensor, torch.Tensor]] = None,  # will become mandatory in v4.45
+        **kwargs,
+    ) -> Tuple[torch.FloatTensor, Optional[Tuple[torch.FloatTensor, torch.FloatTensor]]]:
+        num_hidden_layers = self.config.num_hidden_layers
+        residual = hidden_states
+
+        hidden_states = self.input_layernorm(hidden_states)
+
+        # Self Attention
+        hidden_states, self_attn_weights, present_key_value = self.self_attn(
+            hidden_states=hidden_states,
+            attention_mask=attention_mask,
+            position_ids=position_ids,
+            past_key_value=past_key_value,
+            output_attentions=output_attentions,
+            use_cache=use_cache,
+            cache_position=cache_position,
+            position_embeddings=position_embeddings,
+            **kwargs,
+        )
+        manager = self.manager
+        if manager.last_attn!=None and self.self_attn.revise:
+            indices = self.self_attn.select_indices
+            residual = residual.gather(-2,indices.unsqueeze(-1).unsqueeze(0).expand(residual.size(0),-1,residual.size(-1)))
+            if self.self_attn.layer_idx == (num_hidden_layers-1):
+                manager.last_attn = None
+        hidden_states = residual + hidden_states
+
+        # Fully Connected
+        residual = hidden_states
+        hidden_states = self.post_attention_layernorm(hidden_states)
+        hidden_states = self.mlp(hidden_states)
+        hidden_states = residual + hidden_states
+
+        outputs = (hidden_states,)
+
+        if output_attentions:
+            outputs += (self_attn_weights,)
+
+        if use_cache:
+            outputs += (present_key_value,)
+
+        return outputs

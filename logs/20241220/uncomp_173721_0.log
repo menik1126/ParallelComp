@@ -1,7 +1,0 @@
-2024-12-20 17:38:21,917 - [Process 0/1] - INFO - loading datasets finished
-2024-12-20 17:38:21,918 - [Process 0/1] - INFO - model_max_len: 3950
-2024-12-20 17:38:21,918 - [Process 0/1] - INFO - output_max_len: 64
-2024-12-20 17:38:21,936 - [Process 0/1] - INFO - Max Length is 10337
-2024-12-20 17:38:21,936 - [Process 0/1] - INFO - Finish loading dataset
-2024-12-20 17:38:21,936 - [Process 0/1] - INFO - get_predicted begin
-2024-12-20 17:38:25,694 - [Process 0/1] - INFO - tokenized_inputs_attention_mask.shape is :torch.Size([1, 2])

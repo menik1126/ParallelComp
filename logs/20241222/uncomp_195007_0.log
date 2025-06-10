@@ -1,7 +1,0 @@
-2024-12-22 19:51:11,299 - [Process 0/5] - INFO - loading datasets finished
-2024-12-22 19:51:11,300 - [Process 0/5] - INFO - model_max_len: 3950
-2024-12-22 19:51:11,300 - [Process 0/5] - INFO - output_max_len: 64
-2024-12-22 19:51:11,300 - [Process 0/5] - INFO - parallel_pattern: every_window_no_query_input_query
-2024-12-22 19:51:11,371 - [Process 0/5] - INFO - Max Length is 18754
-2024-12-22 19:51:11,372 - [Process 0/5] - INFO - Finish loading dataset
-2024-12-22 19:51:11,372 - [Process 0/5] - INFO - get_predicted begin

@@ -33,5 +33,5 @@
     "math_find": "\n\n{input}",
     "code_run": "\n\nPlease give me the exact number of the return value of {func_call}. Your response should end with the sentence 'The return value is:'.",  
     "longbook_choice_eng": "\n\nQuestion: {input}\n\nOnly one of the following options is correct, tell me the answer using one single letter (A, B, C, or D). Don't say anything else.\nA. {OPTION_A}\nB. {OPTION_B}\nC. {OPTION_C}\nD. {OPTION_D}\nThe answer with option contents is: ",  
-    "code_debug": "\n\nWhich funtion has deliberate error?\nA. {OPTION_A}\nB. {OPTION_B}\nC. {OPTION_C}\nD. {OPTION_D}\n\nYou should first find the functions in the options, repeat the contents, then inspect through code, at last give me your answer for the function that has the deliberate and obvious error in option A, B, C, or D.\nThe obvious error is in function: "    
+    "code_debug": "\n\nWhich funtion has deliberate error?\nA. {OPTION_A}\nB. {OPTION_B}\nC. {OPTION_C}\nD. {OPTION_D}\n\nYou should first find the functions in the options, repeat the contents, then inspect through code, at last give me your answer for the function that has the deliberate and obvious error in option A, B, C, or D.\nThe answer is: "    
 }

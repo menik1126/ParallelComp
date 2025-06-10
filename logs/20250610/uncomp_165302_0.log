@@ -1,0 +1,37 @@
+2025-06-10 16:53:02,822 - [Process 0/1] - INFO - loading datasets finished
+2025-06-10 16:53:02,822 - [Process 0/1] - INFO - context_max_len: 3600
+2025-06-10 16:53:02,822 - [Process 0/1] - INFO - raw_model_max_len: 3950
+2025-06-10 16:53:02,822 - [Process 0/1] - INFO - output_max_len: 128
+2025-06-10 16:53:02,822 - [Process 0/1] - INFO - parallel_pattern: parallel_comp
+2025-06-10 16:53:51,056 - [Process 0/1] - INFO - success load tokenizer
+2025-06-10 16:53:56,497 - [Process 0/1] - INFO - Max ids is 62
+2025-06-10 16:53:56,497 - [Process 0/1] - INFO - Max Length is 36418
+2025-06-10 16:53:56,498 - [Process 0/1] - INFO - Max Length string is 210429
+2025-06-10 16:53:56,498 - [Process 0/1] - INFO - query_max_len tokens is 29
+2025-06-10 16:53:56,498 - [Process 0/1] - INFO - length_context_len tokens is 84123
+2025-06-10 16:53:56,498 - [Process 0/1] - INFO - Finish loading dataset
+2025-06-10 16:53:56,498 - [Process 0/1] - INFO - get_predicted begin
+2025-06-10 16:53:56,499 - [Process 0/1] - INFO - context length string:127304
+2025-06-10 16:53:56,538 - [Process 0/1] - INFO - raw context tokens length: 35435
+2025-06-10 16:53:56,538 - [Process 0/1] - INFO - critical_length: 9223372036854775807
+2025-06-10 16:53:56,539 - [Process 0/1] - INFO - self.context_max_len: 3600
+2025-06-10 16:53:56,539 - [Process 0/1] - INFO - adaptive_n_windows in critical_length: 10
+2025-06-10 16:53:56,551 - [Process 0/1] - INFO - after truncation context length string:127304
+2025-06-10 16:53:56,551 - [Process 0/1] - INFO - window_size string: 12730
+2025-06-10 16:54:06,390 - [Process 0/1] - INFO - raw_location: [3]
+2025-06-10 16:54:06,401 - [Process 0/1] - INFO - cache['sum_windows_size']: 3493
+2025-06-10 16:54:06,401 - [Process 0/1] - INFO - past_attention_mask.shape: torch.Size([1, 3493])
+2025-06-10 16:54:06,401 - [Process 0/1] - INFO - cache['past_key_values'][0][0].shape: torch.Size([1, 32, 3493, 128])
+2025-06-10 16:54:06,401 - [Process 0/1] - INFO - input is: 
+
+Now, answer the question based on the story asconcisely as you can, using a single phrase if possible. Do not provide any explanation.
+
+Question: What is Saltram's living situation?
+
+Answer:
+2025-06-10 16:54:06,402 - [Process 0/1] - INFO - input tokens length: 52
+2025-06-10 16:54:06,402 - [Process 0/1] - INFO - A window: after truncation generate all tokens length: 3545
+2025-06-10 16:54:06,402 - [Process 0/1] - INFO - combined_attention_mask.shape: torch.Size([1, 3545])
+2025-06-10 16:54:06,402 - [Process 0/1] - INFO - input_max_window_size: 3493
+2025-06-10 16:54:06,402 - [Process 0/1] - INFO - sum_windows_size: 3493
+2025-06-10 16:54:06,402 - [Process 0/1] - INFO - interval: 1
