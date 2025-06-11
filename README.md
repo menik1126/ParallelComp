@@ -180,18 +180,37 @@ bash run_test_longbench_multi_gpu_window8_llama.sh \
 
 ```
 ParallelComp/
-├── run_evaluation*.py         # Evaluation scripts
-├── model_loader.py           # Load model
-├── experiment_manager*.py     # Experiment management
-├── pcw_wrapper*.py           # Parallel Context Window wrapper
-├── modeling_*.py              # Model implementations with PCW
-├── metrics*.py               # Dataset evaluation
-├── eval_*.py               # Dataset evaluation
-├── scripts/                  # Bash scripts and configs
-├── longbench_config/         # LongBench & Infinitebench configurations
-├── results/                  # Output results
-├── my_utils/                 # Some utils such as logger
-└── requirements.txt          # Dependencies
+├── run_evaluation_multi_gpu.py                              # Multi-GPU evaluation script
+├── model_loaders.py                                         # Model loading utilities
+├── experiment_manager.py                                    # Experiment management
+├── pcw_wrapper.py                                          # Parallel Context Window wrapper
+├── modeling_llama_with_pcw_kv_cache_FlashAttention_longbench.py   # Llama model implementation with PCW
+├── modeling_qwen2_with_pcw_kv_cache_FlashAttention_longbench.py   # Qwen2 model implementation with PCW
+├── metrics.py                                              # Evaluation metrics
+├── eval_longbench.py                                       # LongBench dataset evaluation
+├── eval_infinitebench.py                                   # InfiniteBench dataset evaluation
+├── utils.py                                                # General utilities
+├── constants.py                                            # Project constants
+├── run_test_longbench_multi_gpu_window8_llama.sh          # Llama evaluation script
+├── run_test_longbench_multi_gpu_window8_qwen.sh           # Qwen evaluation script
+├── scripts/                                                # GPU configuration files
+│   ├── gpu_*.yaml                                         # GPU configuration files
+│   ├── longbench_metrics.sh                               # LongBench metrics script
+│   └── infinitebench_metrics.sh                           # InfiniteBench metrics script
+├── longbench_config/                                       # LongBench configurations
+│   ├── dataset2*.json                                     # Dataset configuration files
+│   ├── model2maxlen*.json                                  # Model configuration files
+│   └── past/                                              # Historical configurations
+├── datasets/                                               # Dataset storage
+│   ├── LongBench/                                         # LongBench dataset
+│   └── gsm8k/                                             # GSM8K dataset
+├── my_utils/                                               # Utilities
+│   ├── logger.py                                          # Logging utilities
+│   ├── entropy_utils.py                                   # Entropy calculation utilities
+│   ├── cache_revise.py                                    # Cache revision utilities
+│   └── priorityqueue.py                                   # Priority queue implementation
+├── requirements.txt                                        # Python dependencies
+└── requirements.in                                         # Dependency source file
 ```
 
 ## 📊 Results
