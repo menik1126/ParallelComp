@@ -51,24 +51,6 @@ pip install -r requirements.txt
 
 ## 📊 Usage
 
-### Prerequisites & Dependencies
-
-Before running any evaluation scripts, make sure you have installed all required dependencies:
-
-```bash
-# Install dependencies from requirements.txt
-pip install -r requirements.txt
-```
-
-**Key Dependencies:**
-- `torch==2.5.1` - PyTorch for deep learning
-- `transformers==4.43.2` - Hugging Face transformers library
-- `accelerate==1.2.1` - For multi-GPU training and inference
-- `datasets==3.6.0` - For dataset loading and processing
-- `numpy`, `pandas` - Data manipulation
-- `sentencepiece==0.2.0` - For tokenization
-
-
 ### Quick Start
 
 #### Single GPU Evaluation
