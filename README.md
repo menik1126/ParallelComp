@@ -25,9 +25,10 @@ This repository contains the official implementation of **ParallelComp**, a nove
 
 ### Requirements
 
-- Python 3.8+
-- PyTorch 2.0.1
+- Python 3.9+
+- PyTorch 2.5.1
 - CUDA compatible GPU(s)
+- Transformers 4.43.2
 - 80GB A100 GPU memory for ultra-long contexts
 
 ### Setup
@@ -82,6 +83,21 @@ bash run_test_longbench_multi_gpu_window8_llama.sh \
     --calibration_stage None --calibration_mode 0 \
     --special_token true \
     --model meta-llama/Llama-2-7b-chat-hf \
+```
+
+#### Batch Evaluation
+
+```bash
+bash run_test_longbench_multi_gpu_window8_llama.sh \
+    --parallel_pattern parallel_comp --gpu_nums 1_0 \
+    --kv_cache_eviction false --capacity 512 \
+    --kv_cache_dynamic false --stage_eviction false \
+    --recent_token 8  \
+    --topk_windows -3 --query_rank true \
+    --query_recent_tokens 0 --reduce_factor 0 \
+    --calibration_stage None --calibration_mode 0 \
+    --special_token true \
+    --model meta-llama/Llama-2-7b-chat-hf
 ```
 
 ### Supported Models
