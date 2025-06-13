@@ -89,7 +89,7 @@ bash run_test_longbench_multi_gpu_window8_llama.sh \
 
 ```bash
 bash run_test_longbench_multi_gpu_window8_llama.sh \
-    --parallel_pattern parallel_comp --gpu_nums 1_0 \
+    --parallel_pattern parallel_comp_batches --gpu_nums 1_0 \
     --kv_cache_eviction false --capacity 512 \
     --kv_cache_dynamic false --stage_eviction false \
     --recent_token 8  \
