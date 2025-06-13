@@ -3,6 +3,7 @@ from transformers import AutoConfig, LlamaTokenizer, GPT2Tokenizer, PreTrainedTo
 
 from accelerate import Accelerator
 from pcw_wrapper import PCWModelWrapper
+from pcw_wrapper_batches import PCWModelWrapperBatches
 from typing import Optional
 from transformers.models.llama.modeling_llama import LlamaForCausalLM,LlamaRotaryEmbedding,LlamaConfig
 import torch
@@ -114,8 +115,11 @@ def load_pcw_wrapper(model_name: str, cache_dir: str = None, n_windows: int = 1,
     # if not multi_gpus:
     #     model = model.to(device)
     
-   
-    return PCWModelWrapper(model, tokenizer, device, context_window_size,
+    if "batches" in parallel_pattern:
+        PCW = PCWModelWrapperBatches
+    else:
+        PCW = PCWModelWrapper
+    return PCW(model, tokenizer, device, context_window_size,
                            # base parameters
                            n_windows=n_windows, 
                            model_name=model_name,

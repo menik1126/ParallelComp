@@ -13,7 +13,7 @@ from transformers.cache_utils import Cache,DynamicCache
 from transformers.utils import is_flash_attn_2_available, is_flash_attn_greater_or_equal
 from pcw_wrapper import generate_pcw_position_ids
 from transformers.modeling_flash_attention_utils import _upad_input, flash_attn_varlen_func, flash_attn_func
-# from my_utils.augment_index import aug_indices_comb_classification
+from my_utils.augment_index import aug_indices_comb_classification
 from transformers.modeling_outputs import (
     CausalLMOutputWithPast,
 )

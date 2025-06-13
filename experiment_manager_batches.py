@@ -11,7 +11,6 @@ import pandas as pd
 from tqdm import tqdm
 import json
 from pcw_wrapper import PCWModelWrapper
-from pcw_wrapper_batches import PCWModelWrapperBatches
 
 
 from accelerate.utils import gather_object
